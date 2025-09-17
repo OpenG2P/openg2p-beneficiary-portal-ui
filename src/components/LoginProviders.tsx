@@ -18,7 +18,15 @@ export default function LoginProviders() {
             .then((res) => res.json())
             .then((resJson: { loginProviders: LoginProvider[] }) => {
                 const providers = resJson.loginProviders.map((x) => {
-                    if (typeof x.displayName !== "string") {
+                    if (typeof x.displayName === "string") {
+                        try {
+                            const parsed = JSON.parse(x.displayName);
+                            const displayNameLocale = Object.keys(parsed)[0];
+                            x.displayName = parsed[displayNameLocale] || "";
+                        } catch (e) {
+                            x.displayName = x.displayName;
+                        }
+                    } else {
                         const displayNameLocale = Object.keys(x.displayName)[0];
                         x.displayName = x.displayName[displayNameLocale] || "";
                     }

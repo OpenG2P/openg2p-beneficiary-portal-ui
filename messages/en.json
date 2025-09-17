@@ -24,15 +24,15 @@
     "profilePage": {
         "title": "My Profile",
         "personalInfo": "Personal Information",
-        "givenName": "Given Name",
-        "additionalName": "Additional Name",
-        "familyName": "Family Name",
+        "name": "Name",
+        "individualId": "Individual Id",
         "contactInfo": "Contact Information",
         "email": "Email",
         "phone": "Phone",
         "demographics": "Demographic Details",
         "gender": "Gender",
         "birthdate": "Birthdate",
-        "home": "Home"
+        "home": "Home",
+        "address": "Address"
     }
 }

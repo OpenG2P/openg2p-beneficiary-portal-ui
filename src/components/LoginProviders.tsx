@@ -18,15 +18,7 @@ export default function LoginProviders() {
             .then((res) => res.json())
             .then((resJson: { loginProviders: LoginProvider[] }) => {
                 const providers = resJson.loginProviders.map((x) => {
-                    if (typeof x.displayName === "string") {
-                        try {
-                            const parsed = JSON.parse(x.displayName);
-                            const displayNameLocale = Object.keys(parsed)[0];
-                            x.displayName = parsed[displayNameLocale] || "";
-                        } catch (e) {
-                            x.displayName = x.displayName;
-                        }
-                    } else {
+                    if (typeof x.displayName !== "string") {
                         const displayNameLocale = Object.keys(x.displayName)[0];
                         x.displayName = x.displayName[displayNameLocale] || "";
                     }
@@ -43,7 +35,7 @@ export default function LoginProviders() {
                 <div key={x.id} className="mb-2">
                     <a
                         href={prefixBaseApiPath(
-                            `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${prefixBasePath("/")}`
+                            `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${prefixBasePath("/dashboard")}`
                         )}
                         className="block w-full py-2 rounded-md text-lg bg-black text-white font-semibold text-center hover:bg-gray-950 transition cursor-pointer"
                     >

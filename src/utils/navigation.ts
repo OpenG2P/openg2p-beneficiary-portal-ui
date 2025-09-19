@@ -7,7 +7,7 @@ export const getMenuItems = (locale: string): MenuItem[] => [
     { name: "Dashboard", href: `/${locale}/dashboard` },
     { name: "My Programs", href: `/${locale}/programs` },
     { name: "Total Benefits", href: `/${locale}/benefits` },
-    { name: "Bank Accounts", href: `/${locale}/accounts` },
+    { name: "Bank Account", href: `/${locale}/accounts` },
     { name: "My Registries", href: `/${locale}/registries` },
     { name: "Applicable Schemes", href: `/${locale}/schemes` },
     { name: "Notifications", href: `/${locale}/notifications` },

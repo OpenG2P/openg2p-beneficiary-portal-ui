@@ -32,7 +32,7 @@ export default function UpdateRegistryForm({ registry, onClose }: UpdateRegistry
     return (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg shadow-xl w-[600px] p-8 relative opacity-100">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-1">
                     <h2 className="text-xl font-bold text-gray-800">Update Registry</h2>
                     <button
                         onClick={onClose}
@@ -47,6 +47,7 @@ export default function UpdateRegistryForm({ registry, onClose }: UpdateRegistry
                         />
                     </button>
                 </div>
+                <div className="border-b-4 border-gray-200 mb-4"></div>
 
                 <div className="space-y-4">
                     <div>

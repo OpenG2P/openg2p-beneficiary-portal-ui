@@ -6,12 +6,12 @@ export interface Profile {
     sub?: string;
     name?: string;
     gender?: string;
-    address?: any;
     birthdate?: string;
     birth_place?: string;
     email?: string;
     phone_number?: string;
-    individual_id?: string
+    provider_unique_id?: string;
+    provider_unique_id_type?: string;
     picture?: string;
     notification_preference?: string;
 }

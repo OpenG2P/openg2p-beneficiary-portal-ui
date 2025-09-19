@@ -16,6 +16,7 @@ import UpdateFaBox from "./UpdateFaBox";
 import LanguageDropdown from "./LanguageDropdown";
 import NotFoundClient from "./NotFound";
 import ProfileDropdown from "./ProfileDropdown";
+import ApplySchemeForm from "./ApplySchemeForm";
 
 export {
     Header,
@@ -35,5 +36,6 @@ export {
     UpdateFaBox,
     LanguageDropdown,
     NotFoundClient,
-    ProfileDropdown
+    ProfileDropdown,
+    ApplySchemeForm
 };

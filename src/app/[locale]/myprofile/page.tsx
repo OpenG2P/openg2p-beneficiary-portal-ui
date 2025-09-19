@@ -1,14 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import { AuthUtil } from "@/components";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/context/global";
 import { prefixBasePath } from "@/utils/path";
 
 export default function MyProfile() {
-    const lang = useLocale();
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
     const t = useTranslations();
@@ -47,8 +44,11 @@ export default function MyProfile() {
                             <span className="font-medium">{t("profilePage.name")}:</span>
                             <span>{profile?.name || "-"}</span>
 
-                            <span className="font-medium">{t("profilePage.individualId")}:</span>
-                            <span>{profile?.individual_id || "-"}</span>
+                            <span className="font-medium">ID Type:</span>
+                            <span>{profile?.provider_unique_id_type || "-"}</span>
+
+                            <span className="font-medium">User Unique ID:</span>
+                            <span>{profile?.provider_unique_id || "-"}</span>
                         </div>
                     </div>
 
@@ -63,12 +63,6 @@ export default function MyProfile() {
                             <span className="font-medium">{t("profilePage.phone")}:</span>
                             <span>{profile?.phone_number || "-"}</span>
 
-                            <span className="font-medium">{t("profilePage.address")}:</span>
-                            <span>
-                                {profile?.address
-                                    ? `${profile.address.street_address}, ${profile.address.locality}, ${profile.address.region}, ${profile.address.country}, ${profile.address.postal_code}`
-                                    : "-"}
-                            </span>
                         </div>
                     </div>
 

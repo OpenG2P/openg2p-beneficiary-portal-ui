@@ -24,15 +24,15 @@
     "profilePage": {
         "title": "Aking Profile",
         "personalInfo": "Personal na Impormasyon",
-        "givenName": "Pangalan",
-        "additionalName": "Karagdagang Pangalan",
-        "familyName": "Apelyido",
+        "name": "Pangalan",
+        "individualId": "Indibidwal na ID",
         "contactInfo": "Impormasyon sa Pakikipag-ugnayan",
         "email": "Email",
         "phone": "Telepono",
         "demographics": "Mga Detalyeng Demograpiko",
         "gender": "Kasarian",
         "birthdate": "Araw ng Kapanganakan",
-        "home": "Home"
+        "home": "Home",
+        "address": "Tirahan"
     }
 }

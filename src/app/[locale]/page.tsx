@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { prefixBasePath } from "@/utils/path";
+import { prefixBasePath } from '@/shared';
 
 
 export default function HomePage() {

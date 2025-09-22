@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { Header, Sidebar } from "@/components";
+import { Header, Sidebar } from '@/components';
 
 export default function ProgramsLayout({ children }: { children: ReactNode }) {
     const router = useRouter();

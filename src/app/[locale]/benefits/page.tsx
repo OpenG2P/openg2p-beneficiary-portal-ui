@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
-import { benefitsData, Benefit, getTotalAwaitedFunds, getTotalReceivedFunds } from "@/utils/benefits";
-import { AuthUtil, Pagination, TransferHistory } from "@/components";
+import { benefitsData, Benefit, getTotalAwaitedFunds, getTotalReceivedFunds } from '@/features/disbursement';
+import { AuthUtil } from '@/features/auth';
+import { Pagination } from '@/components';
+import { TransferHistory } from '@/features/disbursement';
 import { useLocale } from "next-intl";
 
 export default function BenefitsPage() {

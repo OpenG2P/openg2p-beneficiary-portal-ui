@@ -1,8 +1,10 @@
 "use client";
 import { Suspense } from "react";
 import Image from "next/image";
-import { AuthUtil, Loading, UpdateFaBox } from "@/components";
-import { prefixBasePath } from "@/utils/path";
+import { AuthUtil } from '@/features/auth';
+import { Loading } from '@/components';
+import { UpdateFaBox } from '@/features/accountmapping';
+import { prefixBasePath } from '@/shared';
 import { useLocale } from "next-intl";
 
 export default function AccountsUpdatePage() {

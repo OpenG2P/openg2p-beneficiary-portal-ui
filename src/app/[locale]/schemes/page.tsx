@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthUtil } from "@/components";
+import { AuthUtil } from '@/features/auth';
 import { useLocale } from "next-intl";
 import { useState } from "react";
 

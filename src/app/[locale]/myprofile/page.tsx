@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { AuthUtil } from "@/components";
+import { AuthUtil } from '@/features/auth';
 import { useAuth } from "@/context/global";
-import { prefixBasePath } from "@/utils/path";
+import { prefixBasePath } from '@/shared';
 
 export default function MyProfile() {
     const lang = useLocale();

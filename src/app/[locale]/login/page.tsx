@@ -1,7 +1,7 @@
 "use client";
-import { LoginForm } from "@/components";
+import { LoginForm } from '@/features/auth';
 import { useLocale } from "next-intl";
-import { AuthUtil } from "@/components";
+import { AuthUtil } from '@/features/auth';
 
 export default function LoginPage() {
     const lang = useLocale();

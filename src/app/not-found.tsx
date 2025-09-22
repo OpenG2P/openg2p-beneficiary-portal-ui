@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { prefixBasePath } from "@/utils/path";
-import { NotFoundClient } from "@/components";
+import { prefixBasePath } from '@/shared';
+import { NotFound as NotFoundComponent } from '@/components';
 
 export const metadata: Metadata = {
     title: "Page Not Found - Beneficiary Portal",
@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
-    return <NotFoundClient />;
+    return <NotFoundComponent />;
 }

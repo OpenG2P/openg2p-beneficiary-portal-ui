@@ -1,6 +1,7 @@
 "use client";
 
-import { AuthUtil, Programs } from "@/components";
+import { AuthUtil } from '@/features/auth';
+import { Programs } from '@/features/program';
 import { useLocale } from "next-intl";
 
 export default function ProgramsPage() {

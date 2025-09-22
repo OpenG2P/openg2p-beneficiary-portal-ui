@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
-import { UpdateRegistryForm, Pagination, AuthUtil } from "@/components";
+import { UpdateRegistryForm } from '@/features/registry';
+import { Pagination } from '@/components';
+import { AuthUtil } from '@/features/auth';
 import { useLocale } from "next-intl";
 
 export interface Registry {

@@ -2,8 +2,10 @@
 
 import { Suspense } from "react";
 import Image from "next/image";
-import { Loading, GetFaBox, AuthUtil } from "@/components";
-import { prefixBasePath } from "@/utils/path";
+import { Loading } from '@/components';
+import { GetFaBox } from '@/features/accountmapping';
+import { AuthUtil } from '@/features/auth';
+import { prefixBasePath } from '@/shared';
 import { useLocale } from "next-intl";
 
 export default function AccountsPage() {

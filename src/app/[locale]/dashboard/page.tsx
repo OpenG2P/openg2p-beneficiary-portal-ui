@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Programs, TotalBenefitsCard } from "@/components";
-import { AuthUtil } from "@/components/Auth";
-import { prefixBasePath } from "@/utils/path";
-
-import { benefitsData } from "@/utils/benefits";
+import { Programs } from '@/features/program';
+import { TotalBenefitsCard } from '@/features/disbursement';
+import { AuthUtil } from "@/features/auth";
+import { prefixBasePath } from "@/shared";
+import { benefitsData } from '@/features/disbursement';
 import { useLocale } from "next-intl";
 
 

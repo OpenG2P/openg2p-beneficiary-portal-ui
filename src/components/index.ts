@@ -17,6 +17,7 @@ import LanguageDropdown from "./LanguageDropdown";
 import NotFoundClient from "./NotFound";
 import ProfileDropdown from "./ProfileDropdown";
 import ApplySchemeForm from "./ApplySchemeForm";
+import FileComplaint from "./FileCompaint";
 
 export {
     Header,
@@ -37,5 +38,6 @@ export {
     LanguageDropdown,
     NotFoundClient,
     ProfileDropdown,
-    ApplySchemeForm
+    ApplySchemeForm,
+    FileComplaint
 };

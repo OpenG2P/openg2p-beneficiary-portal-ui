@@ -6,6 +6,8 @@ import { ProgramStatus, Program } from "@/features/program/types/program";
 
 import { Pagination, ViewAll } from '@/components/shared';
 
+import { usePagination } from "@/shared/hooks/usePagination";
+
 const programsData: Program[] = [
     { name: "Social Safety Net Program", status: "Apply", id: "1010101010", appliedDate: "2025-09-01 10:30 AM" },
     { name: "Pension Yojana", status: "Applied", id: "2025202501", appliedDate: "2025-08-15 09:10 AM" },
@@ -33,14 +35,9 @@ export default function Programs({ preview = false }: { preview?: boolean }) {
     const applied = programsData.filter((p) => p.status === "Applied").length;
     const enrolled = programsData.filter((p) => p.status === "Enrolled").length;
 
-    const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = preview ? 6 : 8;
-    const totalPages = Math.ceil(programsData.length / itemsPerPage);
 
-    const displayedPrograms = programsData.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(programsData, itemsPerPage);
 
     const getStatusBadge = (status: ProgramStatus, program: Program) => {
         const baseClasses =
@@ -111,7 +108,7 @@ export default function Programs({ preview = false }: { preview?: boolean }) {
                     </thead>
 
                     <tbody>
-                        {displayedPrograms.map((program, index) => (
+                        {currentItems.map((program, index) => (
                             <tr
                                 key={index}
                                 className="hover:bg-gray-50 transition-colors duration-150 border-b-3 border-gray-300"

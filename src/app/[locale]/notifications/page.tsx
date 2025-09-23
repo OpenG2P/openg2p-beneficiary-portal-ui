@@ -8,6 +8,9 @@ import { NotificationCard } from "@/features/notification/components";
 
 import { Notification } from "@/features/notification/types";
 
+import { usePagination } from "@/shared/hooks/usePagination";
+
+
 
 const myNotifications: Notification[] = [
     {
@@ -72,14 +75,7 @@ export default function NotificationsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4;
-    const totalPages = Math.ceil(myNotifications.length / itemsPerPage);
-
-    const currentNotifications = myNotifications.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(myNotifications, 4);
 
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
@@ -94,7 +90,7 @@ export default function NotificationsPage() {
                 </div>
 
                 <div className="grid gap-4 px-4">
-                    {currentNotifications.map((notification) => (
+                    {currentItems.map((notification) => (
                         <NotificationCard key={notification.id} notification={notification} />
                     ))}
 

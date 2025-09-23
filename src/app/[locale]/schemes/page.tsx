@@ -9,6 +9,8 @@ import { ApplySchemeForm } from '@/features/scheme/components';
 
 import { Scheme } from "@/features/scheme/types/scheme";
 
+import { usePagination } from "@/shared/hooks/usePagination";
+
 const schemes: Scheme[] = [
     {
         id: 1042504101,
@@ -131,13 +133,7 @@ export default function SchemePage() {
     const [openForm, setOpenForm] = useState(false);
     const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
-    const totalPages = Math.ceil(schemes.length / itemsPerPage);
-    const currentSchemes = schemes.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(schemes, 8);
 
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
@@ -166,7 +162,7 @@ export default function SchemePage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentSchemes.map((scheme) => (
+                            {currentItems.map((scheme) => (
                                 <tr
                                     key={scheme.id}
                                     className="hover:bg-gray-50 transition-colors duration-150 border-b-3 border-gray-300"

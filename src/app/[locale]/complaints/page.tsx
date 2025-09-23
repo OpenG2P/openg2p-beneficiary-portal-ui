@@ -6,6 +6,8 @@ import { FileComplaintForm } from "@/features/complaint/components";
 
 import { Complaint } from "@/features/complaint/types/complaint";
 
+import { usePagination } from "@/shared/hooks/usePagination";
+
 const myComplaints: Complaint[] = [
     {
         id: "1",
@@ -52,16 +54,9 @@ const myComplaints: Complaint[] = [
 ];
 
 export default function ComplaintsPage() {
-    const [currentPage, setCurrentPage] = useState(1);
     const [showModal, setShowModal] = useState(false);
 
-    const itemsPerPage = 3;
-    const totalPages = Math.ceil(myComplaints.length / itemsPerPage);
-
-    const currentComplaints = myComplaints.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(myComplaints, 3);
 
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
@@ -84,7 +79,7 @@ export default function ComplaintsPage() {
 
 
                 <div className="grid gap-4 px-4">
-                    {currentComplaints.map((complaint) => (
+                    {currentItems.map((complaint) => (
                         <div
                             key={complaint.id}
                             className="border rounded-lg p-4 shadow-sm bg-white"

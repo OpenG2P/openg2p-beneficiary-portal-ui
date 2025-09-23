@@ -11,6 +11,8 @@ import { TransferHistory } from '@/features/disbursement/components';
 
 import { Benefit } from "@/features/disbursement/types/benefit";
 
+import { usePagination } from "@/shared/hooks/usePagination";
+
 
 export default function BenefitsPage() {
     const lang = useLocale();
@@ -19,14 +21,7 @@ export default function BenefitsPage() {
     const [selectedBenefit, setSelectedBenefit] = useState<Benefit | null>(null);
     const [showTransferHistory, setShowTransferHistory] = useState(false);
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
-    const totalPages = Math.ceil(benefitsData.length / itemsPerPage);
-
-    const currentBenefits = benefitsData.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(benefitsData, 8);
 
     const [searchText, setSearchText] = useState("");
     const [filterText, setFilterText] = useState("");
@@ -98,7 +93,7 @@ export default function BenefitsPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentBenefits.map((benefit, index) => (
+                            {currentItems.map((benefit, index) => (
                                 <tr key={index} className="hover:bg-gray-50 transition-colors duration-150 border-b-3 border-gray-300">
                                     <td className="py-4 text-gray-900 font-medium">{benefit.programName}</td>
                                     <td className="py-4 font-mono text-gray-900 text-sm">{benefit.entitlementRefNumber}</td>

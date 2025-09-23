@@ -8,6 +8,8 @@ import { AuthUtil } from '@/features/auth/components';
 
 import { Registry } from "@/features/registry/types";
 
+import { usePagination } from "@/shared/hooks/usePagination";
+
 const myRegistries: Registry[] = [
     { name: "My Healthcare Registry", id: "12938475639", date: "15/08/2025", action: "Request for Update" },
     { name: "My Employment Registry", id: "84756392013", date: "05/08/2025", action: "Request for Update" },
@@ -34,13 +36,7 @@ export default function RegistriesPage() {
     const [openForm, setOpenForm] = useState(false);
     const [selectedRegistry, setSelectedRegistry] = useState<Registry | null>(null);
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
-    const totalPages = Math.ceil(myRegistries.length / itemsPerPage);
-    const currentRegistries = myRegistries.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(myRegistries, 8);
 
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
@@ -65,7 +61,7 @@ export default function RegistriesPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentRegistries.map((registry, index) => (
+                            {currentItems.map((registry, index) => (
                                 <tr
                                     key={index}
                                     className="hover:bg-gray-50 transition-colors duration-150 border-b-3 border-gray-300"

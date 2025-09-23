@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useLocale } from "next-intl";
 
 import { AuthUtil } from "@/features/auth/components";
@@ -9,6 +8,7 @@ import { Programs } from '@/features/program/components';
 import { TotalBenefitsCard } from '@/features/disbursement/components';
 import { SchemeCarousel } from "@/features/scheme/components";
 import { NotificationCard } from "@/features/notification/components";
+import { ViewAll } from '@/components/shared';
 
 import { prefixBasePath } from "@/shared/utils/path";
 import { benefitsData } from '@/features/disbursement/utils/benefits';
@@ -77,7 +77,6 @@ export default function Dashboard() {
                         <TotalBenefitsCard
                             totalAmount={totalAwaitedFunds}
                             receivedAmount={totalReceivedFunds}
-                            link="/benefits"
                         />
                     </div>
 
@@ -105,24 +104,8 @@ export default function Dashboard() {
                                 <p className="font-medium text-black">xxxx xxxx xxxx 1234</p>
                             </div>
                         </div>
-
-                        <div className="flex justify-start mt-4">
-                            <Link
-                                href="/accounts"
-                                className="flex items-center text-black font-bold text-sm sm:text-base"
-                            >
-                                Edit Account Details
-                                <Image
-                                    src={prefixBasePath("/right_arrow.png")}
-                                    alt="arrow"
-                                    width={12}
-                                    height={12}
-                                    className="ml-1.5"
-                                />
-                            </Link>
-                        </div>
+                        <ViewAll href="/accounts" label="Edit Account Details" />
                     </div>
-
                 </div>
             </div>
 
@@ -145,22 +128,7 @@ export default function Dashboard() {
                             </div>
                         ))}
                     </div>
-
-                    <div className="flex justify-start mt-4">
-                        <Link
-                            href="/registries"
-                            className="flex items-center text-black font-bold text-sm sm:text-base"
-                        >
-                            View All
-                            <Image
-                                src={prefixBasePath("/right_arrow.png")}
-                                alt="arrow"
-                                width={12}
-                                height={12}
-                                className="ml-1.5"
-                            />
-                        </Link>
-                    </div>
+                    <ViewAll href="/registries" label="View All" />
                 </div>
 
                 <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1">
@@ -184,21 +152,7 @@ export default function Dashboard() {
                         ))}
                     </div>
 
-                    <div className="flex justify-start mt-4">
-                        <Link
-                            href="/notifications"
-                            className="flex items-center text-black font-bold text-sm sm:text-base"
-                        >
-                            View More
-                            <Image
-                                src={prefixBasePath("/right_arrow.png")}
-                                alt="arrow"
-                                width={12}
-                                height={12}
-                                className="ml-1.5"
-                            />
-                        </Link>
-                    </div>
+                    <ViewAll href="/notifications" label="View More" />
                 </div>
             </div>
         </div>

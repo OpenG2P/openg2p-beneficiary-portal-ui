@@ -1,13 +1,10 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 
 import ApplyProgramForm from '@/features/program/components/ApplyProgramForm';
 import { ProgramStatus, Program } from "@/features/program/types/program";
 
-import { Pagination } from '@/components/shared';
-import { prefixBasePath } from '@/shared/utils/path';
+import { Pagination, ViewAll } from '@/components/shared';
 
 const programsData: Program[] = [
     { name: "Social Safety Net Program", status: "Apply", id: "1010101010", appliedDate: "2025-09-01 10:30 AM" },
@@ -142,21 +139,7 @@ export default function Programs({ preview = false }: { preview?: boolean }) {
             </div>
 
             {preview ? (
-                <div className="flex justify-start py-3">
-                    <Link
-                        href="/programs"
-                        className="flex items-center text-black font-bold text-md"
-                    >
-                        View All
-                        <Image
-                            src={prefixBasePath("/right_arrow.png")}
-                            alt="arrow"
-                            width={12}
-                            height={12}
-                            className="ml-1.5 mt-0.45"
-                        />
-                    </Link>
-                </div>
+                <ViewAll href="/programs" label="View All" />
             ) : (
                 <Pagination
                     currentPage={currentPage}

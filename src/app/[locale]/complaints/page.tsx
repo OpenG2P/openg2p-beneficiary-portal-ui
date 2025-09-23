@@ -15,6 +15,7 @@ const myComplaints: Complaint[] = [
         status: "Open",
         subject: "Healthcare Service Issue",
         description: "Delay in updating medical records in the healthcare registry.",
+        date: "2025-09-20 10:30 AM",
     },
     {
         id: "2",
@@ -22,6 +23,7 @@ const myComplaints: Complaint[] = [
         status: "Closed",
         subject: "Employment Registry Error",
         description: "Incorrect designation shown in the employment registry.",
+        date: "2025-09-18 02:15 PM",
     },
     {
         id: "3",
@@ -29,6 +31,7 @@ const myComplaints: Complaint[] = [
         status: "In Progress",
         subject: "Housing Registry Complaint",
         description: "Unable to apply for the new housing scheme online.",
+        date: "2025-09-19 09:45 AM",
     },
     {
         id: "4",
@@ -36,6 +39,7 @@ const myComplaints: Complaint[] = [
         status: "Open",
         subject: "Education Registry",
         description: "My degree verification request is still pending.",
+        date: "2025-09-17 11:00 AM",
     },
     {
         id: "5",
@@ -43,6 +47,7 @@ const myComplaints: Complaint[] = [
         status: "Closed",
         subject: "Pension Registry",
         description: "Mismatch in my pension account details after update.",
+        date: "2025-09-16 03:20 PM",
     },
     {
         id: "6",
@@ -50,8 +55,10 @@ const myComplaints: Complaint[] = [
         status: "Open",
         subject: "Food Security Registry",
         description: "Ration card details not reflecting after verification.",
+        date: "2025-09-15 08:50 AM",
     },
 ];
+
 
 export default function ComplaintsPage() {
     const [showModal, setShowModal] = useState(false);
@@ -105,10 +112,14 @@ export default function ComplaintsPage() {
                                 </button>
                             </div>
 
-
-                            <h3 className="text-base font-semibold text-gray-900">
-                                {complaint.subject}
-                            </h3>
+                            <div className="flex justify-start items-center gap-4">
+                                <h3 className="text-lg font-semibold text-gray-900">
+                                    Subject: {complaint.subject}
+                                </h3>
+                                <span className="text-lg text-gray-500">
+                                    {complaint.date}
+                                </span>
+                            </div>
 
                             <p className="text-sm text-gray-700 mt-2">{complaint.description}</p>
                         </div>

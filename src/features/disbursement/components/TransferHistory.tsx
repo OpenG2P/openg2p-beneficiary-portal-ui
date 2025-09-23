@@ -1,10 +1,9 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-
-import { prefixBasePath } from '@/shared/utils/path';
+import React from "react"
 
 import { Benefit } from "@/features/disbursement/types/benefit";
+
+import Modal from "@/components/ui/Modal";
 
 interface TransferHistoryProps {
     benefit: Benefit;
@@ -24,62 +23,41 @@ const TransferHistory = ({ benefit, onClose }: TransferHistoryProps) => {
     ];
 
     return (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-xl w-[800px] h-[600px] p-8 relative flex flex-col">
-                <div className="flex justify-between items-center mb-1">
-                    <h2 className="text-xl font-bold text-gray-800">
-                        {benefit.programName} Transfer History
-                    </h2>
-                    <button
-                        onClick={onClose}
-                        className="cursor-pointer"
-                    >
-                        <Image
-                            src={prefixBasePath("/x.png")}
-                            alt="Close"
-                            width={20}
-                            height={20}
-                            priority
-                        />
-                    </button>
-                </div>
-                <div className="border-b-4 border-gray-200 mb-4"></div>
-
-                <div className="flex-1 overflow-y-auto">
-                    <table className="w-full text-left border-collapse">
-                        <thead className="text-gray-700 border-b border-gray-300 bg-gray-50">
-                            <tr>
-                                <th className="px-4 py-3 text-sm font-semibold">Transfer ID</th>
-                                <th className="px-4 py-3 text-sm font-semibold">Received Fund</th>
-                                <th className="px-4 py-3 text-sm font-semibold">Reference Number</th>
-                                <th className="px-4 py-3 text-sm font-semibold">Date of Approval</th>
-                                <th className="px-4 py-3 text-sm font-semibold">Date of Receipt</th>
+        <Modal title={`${benefit.programName} Transfer History`} onClose={onClose} width="800px" height="600px">
+            <div className="flex-1 overflow-y-auto">
+                <table className="w-full text-left border-collapse">
+                    <thead className="text-gray-700 border-b border-gray-300 bg-gray-50">
+                        <tr>
+                            <th className="px-4 py-3 text-sm font-semibold">Transfer ID</th>
+                            <th className="px-4 py-3 text-sm font-semibold">Received Fund</th>
+                            <th className="px-4 py-3 text-sm font-semibold">Reference Number</th>
+                            <th className="px-4 py-3 text-sm font-semibold">Date of Approval</th>
+                            <th className="px-4 py-3 text-sm font-semibold">Date of Receipt</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                        {transferHistory.map((transfer, index) => (
+                            <tr key={index} className="hover:bg-gray-50">
+                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.transferId}</td>
+                                <td className="px-4 py-3 text-sm text-gray-900 font-semibold">{transfer.receivedFund.toLocaleString()}</td>
+                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.refNum}</td>
+                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.dateApproved}</td>
+                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.dateReceived}</td>
                             </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200">
-                            {transferHistory.map((transfer, index) => (
-                                <tr key={index} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 text-sm text-gray-900">{transfer.transferId}</td>
-                                    <td className="px-4 py-3 text-sm text-gray-900 font-semibold">{transfer.receivedFund.toLocaleString()}</td>
-                                    <td className="px-4 py-3 text-sm text-gray-900">{transfer.refNum}</td>
-                                    <td className="px-4 py-3 text-sm text-gray-900">{transfer.dateApproved}</td>
-                                    <td className="px-4 py-3 text-sm text-gray-900">{transfer.dateReceived}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className="flex justify-start gap-4 mt-6">
-                    <button
-                        onClick={onClose}
-                        className="px-5 py-2 bg-[#D9D9D9] text-black rounded-md cursor-pointer"
-                    >
-                        Back
-                    </button>
-                </div>
+                        ))}
+                    </tbody>
+                </table>
             </div>
-        </div>
+
+            <div className="flex justify-start gap-4 mt-6">
+                <button
+                    onClick={onClose}
+                    className="px-5 py-2 bg-[#D9D9D9] text-black rounded-md cursor-pointer"
+                >
+                    Back
+                </button>
+            </div>
+        </Modal>
     );
 };
 

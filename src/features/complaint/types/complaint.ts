@@ -6,4 +6,5 @@ export interface Complaint {
     status: ComplaintStatus;
     subject: string;
     description: string;
+    date: string;
 }

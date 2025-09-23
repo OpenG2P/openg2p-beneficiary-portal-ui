@@ -3,7 +3,7 @@ import { Benefit } from "@/features/disbursement/types/benefit";
 
 export const benefitsData: Benefit[] = [
     {
-        programName: "openg2p-safety-net-program",
+        programName: "Openg2p-Safety-Net-Program",
         entitlementRefNumber: "983789327978",
         awaitedFunds: 45000,
         receivedFunds: 30000,

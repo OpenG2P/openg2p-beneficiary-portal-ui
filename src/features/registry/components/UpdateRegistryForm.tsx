@@ -1,14 +1,9 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { prefixBasePath } from '@/shared';
 
-export interface Registry {
-    name: string;
-    id: string;
-    date: string;
-    action: string;
-}
+import { prefixBasePath } from '@/shared/utils/path';
+import { Registry } from "@/features/registry/types/registry";
 
 interface UpdateRegistryFormProps {
     registry: Registry;

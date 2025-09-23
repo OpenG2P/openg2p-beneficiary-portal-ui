@@ -1,10 +1,5 @@
-export interface Benefit {
-    programName: string;
-    entitlementRefNumber: string;
-    awaitedFunds: number;
-    receivedFunds: number;
-    dateApproved: string;
-}
+import { Benefit } from "@/features/disbursement/types/benefit";
+
 
 export const benefitsData: Benefit[] = [
     {

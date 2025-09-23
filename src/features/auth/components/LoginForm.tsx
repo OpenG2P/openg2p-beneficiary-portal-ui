@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { SyntheticEvent } from "react";
-import { LoginProviders } from '@/features/auth';
 import { useTranslations } from "next-intl";
-import { prefixBasePath } from '@/shared';
 
+import LoginProviders from '@/features/auth/components/LoginProviders';
+
+import { prefixBasePath } from '@/shared/utils/path';
 
 export default function LoginForm() {
     const t = useTranslations("loginPage");

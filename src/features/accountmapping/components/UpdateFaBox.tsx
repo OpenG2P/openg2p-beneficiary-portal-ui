@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { prefixBaseApiPath, prefixBasePath } from '@/shared';
-import { linkFa } from '@/features/accounts/utils/link';
-import { updateFa } from '@/features/accounts/utils/update';
-import { FormLevel, FormLevelValue, KeyValue } from '@/shared/types/dfsp-levels';
+
+import { linkFa } from '@/features/accountmapping/utils/link';
+import { updateFa } from '@/features/accountmapping/utils/update';
+
+import { prefixBaseApiPath } from '@/shared/utils/path';
+import { FormLevel, FormLevelValue, KeyValue, LinkOrUpdate } from '@/features/accountmapping/types/dfsp-levels';
 
 const dummyLevels: FormLevel[] = [
     {
@@ -108,19 +110,6 @@ type State = {
     levels: FormLevel[];
 };
 
-export interface LinkOrUpdate {
-    strategy_id?: number | null;
-    fa_type?: string;
-    bank_name?: string;
-    bank_code?: string;
-    branch_name?: string;
-    branch_code?: string;
-    account_number?: string;
-    wallet_provider_name?: string;
-    wallet_provider_code?: string;
-    mobile_number?: string;
-    email_address?: string;
-}
 
 export default function UpdateFaBox() {
 

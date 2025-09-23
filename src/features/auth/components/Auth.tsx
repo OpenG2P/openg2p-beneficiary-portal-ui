@@ -1,10 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/context/global";
-import { prefixBaseApiPath } from '@/shared';
 
-export function AuthUtil(params: { successRedirectUrl?: string; failedRedirectUrl?: string }) {
+import { useAuth } from "@/context/global";
+import { prefixBaseApiPath } from '@/shared/utils/path';
+
+export default function AuthUtil(params: { successRedirectUrl?: string; failedRedirectUrl?: string }) {
     const auth = useAuth();
     const { push } = useRouter();
     const [isCheckingAuth, setIsCheckingAuth] = useState(false);

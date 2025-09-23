@@ -1,5 +1,5 @@
-import { LinkOrUpdate } from '@/features/accountmapping';
-import { prefixBaseApiPath } from "@/shared";
+import { LinkOrUpdate } from '@/features/accountmapping/types/dfsp-levels';
+import { prefixBaseApiPath } from "@/shared/utils/path";
 
 export function linkFa(levelValues: LinkOrUpdate) {
     const requestBody = {

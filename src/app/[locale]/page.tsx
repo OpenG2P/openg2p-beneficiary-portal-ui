@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { prefixBasePath } from '@/shared';
+
+import { prefixBasePath } from '@/shared/utils/path';
 
 
 export default function HomePage() {
@@ -37,11 +38,14 @@ export default function HomePage() {
                     priority
                     className="rounded-xl shadow-md mb-6"
                 />
-                <div className="max-w-[739px]">
-                    <p className="text-3xl font-bold text-black mb-2 w-full">
+                <div className="max-w-[739px] mb-2">
+                    <p className="text-3xl font-bold text-black w-full">
                         {t("welcome")}
                     </p>
-                    <p className="text-lg text-black mb-4 w-full whitespace-pre-line">
+                </div>
+
+                <div className="max-w-[600px] mb-4">
+                    <p className="text-lg text-black w-full text-center leading-relaxed">
                         {t("description")}
                     </p>
                 </div>

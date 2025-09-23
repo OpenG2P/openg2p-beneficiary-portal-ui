@@ -1,4 +1,4 @@
-import { prefixBaseApiPath } from "@/shared";
+import { prefixBaseApiPath } from "@/shared/utils/path";
 
 export function unlinkFa() {
     fetch(prefixBaseApiPath("/unlink"), {

@@ -5,8 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
-import { Loading } from '@/components';
-import { prefixBasePath } from '@/shared';
+
+import { Loading } from '@/components/shared';
+import { prefixBasePath } from '@/shared/utils/path';
 
 export default function GetFaBox() {
     const router = useRouter();

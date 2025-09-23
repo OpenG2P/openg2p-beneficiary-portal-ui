@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
-import { prefixBasePath } from '@/shared';
-import { LanguageDropdown, ProfileDropdown } from '@/components';
+
+import { prefixBasePath } from '@/shared/utils/path';
+import { LanguageDropdown, ProfileDropdown } from '@/components/layout';
 
 export default function Header() {
     return (
@@ -19,6 +20,12 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-4">
+                <button
+                    className="text-lg text-black hover:underline"
+                    onClick={() => alert("Redirect to Help page")}
+                >
+                    Help
+                </button>
                 <LanguageDropdown />
                 <button className="relative">
                     <Image

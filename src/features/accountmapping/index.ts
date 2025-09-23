@@ -8,4 +8,4 @@ export { updateFa } from './utils/update';
 export { unlinkFa } from './utils/unlink';
 
 // Types
-export type { LinkOrUpdate } from './types';
+export type { FormLevel, FormLevelValue, KeyValue, LinkOrUpdate } from './types';

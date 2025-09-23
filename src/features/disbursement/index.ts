@@ -6,4 +6,4 @@ export { default as TransferHistory } from './components/TransferHistory';
 export { benefitsData, getTotalAwaitedFunds, getTotalReceivedFunds } from './utils/benefits';
 
 // Types
-export type { Benefit } from './utils/benefits';
+export type { Benefit } from './types';

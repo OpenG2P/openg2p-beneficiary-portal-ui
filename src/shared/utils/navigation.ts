@@ -1,7 +1,4 @@
-export type MenuItem = {
-    name: string;
-    href: string;
-};
+import { MenuItem } from "@/shared/types/menuitem";
 
 export const getMenuItems = (locale: string): MenuItem[] => [
     { name: "Dashboard", href: `/${locale}/dashboard` },

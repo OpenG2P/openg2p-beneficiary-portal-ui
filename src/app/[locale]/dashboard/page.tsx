@@ -2,18 +2,49 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Programs } from '@/features/program';
-import { TotalBenefitsCard } from '@/features/disbursement';
-import { AuthUtil } from "@/features/auth";
-import { prefixBasePath } from "@/shared";
-import { benefitsData } from '@/features/disbursement';
 import { useLocale } from "next-intl";
 
+import { AuthUtil } from "@/features/auth/components";
+import { Programs } from '@/features/program/components';
+import { TotalBenefitsCard } from '@/features/disbursement/components';
+import { SchemeCarousel } from "@/features/scheme/components";
+import { NotificationCard } from "@/features/notification/components";
+
+import { prefixBasePath } from "@/shared/utils/path";
+import { benefitsData } from '@/features/disbursement/utils/benefits';
+
+import { Notification } from "@/features/notification/types/notification";
 
 const previewRegistries = [
     { name: "My Healthcare Registry" },
     { name: "My Employment Registry" },
     { name: "My Housing Registry" },
+    { name: "My Housing Registry" },
+    { name: "My Housing Registry" },
+];
+
+const dashboardNotifications: Notification[] = [
+    {
+        id: "1",
+        title: "Healthcare Registry Update",
+        description:
+            "Your healthcare registry has been successfully updated with the latest medical records.",
+        image: "/logo.png",
+    },
+    {
+        id: "2",
+        title: "Employment Registry Alert",
+        description:
+            "Please review the changes to your employment registry details.",
+        image: "/logo.png",
+    },
+    {
+        id: "3",
+        title: "Employment Registry Alert",
+        description:
+            "Please review the changes to your employment registry details.",
+        image: "/logo.png",
+    },
 ];
 
 export default function Dashboard() {
@@ -133,58 +164,40 @@ export default function Dashboard() {
                 </div>
 
                 <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-                        Potential Application Scheme
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                        Potential Applicable Schemes
                     </h3>
-                    <div className="space-y-2 sm:space-y-3">
-                        <div className="p-2 sm:p-3 border-l-4 border-green-500 bg-green-50">
-                            <p className="font-semibold text-green-800 text-sm sm:text-base">
-                                Agriculture Subsidy
-                            </p>
-                            <p className="text-xs sm:text-sm text-green-600">
-                                Eligible • Apply Now
-                            </p>
-                        </div>
-                        <div className="p-2 sm:p-3 border-l-4 border-blue-500 bg-blue-50">
-                            <p className="font-semibold text-blue-800 text-sm sm:text-base">
-                                Education Grant
-                            </p>
-                            <p className="text-xs sm:text-sm text-blue-600">
-                                Pending Documents
-                            </p>
-                        </div>
-                    </div>
+                    <div className="border-b-4 border-gray-200 mb-4"></div>
+
+                    <SchemeCarousel />
                 </div>
 
                 <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-                        Notifications
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
+                        Notifications / Broadcast
                     </h3>
-                    <div className="space-y-2 sm:space-y-3">
-                        <div className="flex items-start space-x-2 sm:space-x-3 p-2 sm:p-3 bg-blue-50 rounded-lg">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <div className="min-w-0 flex-1">
-                                <p className="text-xs sm:text-sm font-medium text-gray-800">
-                                    Payment Received
-                                </p>
-                                <p className="text-xs text-gray-600">
-                                    ₹2,000 credited in PM-KISAN
-                                </p>
-                                <p className="text-xs text-gray-400">2 hours ago</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start space-x-2 sm:space-x-3 p-2 sm:p-3 bg-yellow-50 rounded-lg">
-                            <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <div className="min-w-0 flex-1">
-                                <p className="text-xs sm:text-sm font-medium text-gray-800">
-                                    Document Required
-                                </p>
-                                <p className="text-xs text-gray-600">
-                                    Submit income proof for subsidy
-                                </p>
-                                <p className="text-xs text-gray-400">1 day ago</p>
-                            </div>
-                        </div>
+                    <div className="border-b-4 border-gray-200 mb-4"></div>
+
+                    <div className="space-y-2">
+                        {dashboardNotifications.map((n) => (
+                            <NotificationCard key={n.id} notification={n} compact />
+                        ))}
+                    </div>
+
+                    <div className="flex justify-start mt-4">
+                        <Link
+                            href="/notifications"
+                            className="flex items-center text-black font-bold text-sm sm:text-base"
+                        >
+                            View More
+                            <Image
+                                src={prefixBasePath("/right_arrow.png")}
+                                alt="arrow"
+                                width={12}
+                                height={12}
+                                className="ml-1.5"
+                            />
+                        </Link>
                     </div>
                 </div>
             </div>

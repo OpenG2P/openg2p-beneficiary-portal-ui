@@ -1,15 +1,21 @@
 "use client";
 import { useState } from "react";
-import { benefitsData, Benefit, getTotalAwaitedFunds, getTotalReceivedFunds } from '@/features/disbursement';
-import { AuthUtil } from '@/features/auth';
-import { Pagination } from '@/components';
-import { TransferHistory } from '@/features/disbursement';
 import { useLocale } from "next-intl";
+
+import { prefixBasePath } from '@/shared/utils/path';
+import { benefitsData, getTotalAwaitedFunds, getTotalReceivedFunds } from '@/features/disbursement/utils/benefits';
+
+import { AuthUtil } from '@/features/auth/components';
+import { Pagination } from '@/components/shared';
+import { TransferHistory } from '@/features/disbursement/components';
+
+import { Benefit } from "@/features/disbursement/types/benefit";
+
 
 export default function BenefitsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
-    
+
     const [selectedBenefit, setSelectedBenefit] = useState<Benefit | null>(null);
     const [showTransferHistory, setShowTransferHistory] = useState(false);
 
@@ -20,6 +26,14 @@ export default function BenefitsPage() {
     const currentBenefits = benefitsData.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
+    );
+
+    const [searchText, setSearchText] = useState("");
+    const [filterText, setFilterText] = useState("");
+
+    const filteredBenefits = benefitsData.filter((benefit) =>
+        benefit.programName.toLowerCase().includes(searchText.toLowerCase()) &&
+        benefit.entitlementRefNumber.toLowerCase().includes(filterText.toLowerCase())
     );
 
     const handleTransferHistoryClick = (benefit: Benefit) => {
@@ -34,41 +48,49 @@ export default function BenefitsPage() {
             </div>
 
             <div className="bg-white rounded-lg overflow-hidden border border-black/20 p-4">
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50">
-                    <table className="w-full text-sm font-medium text-gray-700 table-fixed">
-                        <tbody className="bg-white">
-                            <tr>
-                                <td colSpan={1} className="px-4 py-2">
-                                    <h2 className="text-base font-semibold text-gray-800">
-                                        Benefits (Transfer History)
-                                    </h2>
-                                </td>
-                                <td colSpan={5} className="py-2">
-                                    <div className="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-2 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-28 mt-0 mr-4">
-                                        <span className="text-gray-600 text-sm sm:text-base">
-                                            Total Amount: <span className="font-bold text-black">{getTotalAwaitedFunds().toFixed(2)} $</span>
-                                        </span>
-                                        <span className="text-gray-600 text-sm sm:text-base">
-                                            Awaited Fund: <span className="font-bold text-black">{(getTotalAwaitedFunds() - getTotalReceivedFunds()).toFixed(2)} $</span>
-                                        </span>
-                                        <span className="text-gray-600 text-sm sm:text-base">
-                                            Received Fund: <span className="font-bold text-black">{getTotalReceivedFunds().toFixed(2)} $</span>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className="mx-4 border-t-4 border-gray-300"></div>
-
                 <div className="overflow-x-auto px-4">
                     <table className="w-full text-left border-collapse min-w-[800px]">
                         <thead className="border-b-3 border-gray-200">
+                            <tr className="border-b-4 border-gray-300">
+                                <th className="py-4 text-lg font-semibold text-black tracking-wider">Benefits (Transfer History)</th>
+                                <th className="py-4 text-sm font-semibold text-gray-700 tracking-wider">Total Amount: {getTotalAwaitedFunds().toFixed(2)} $</th>
+                                <th className="py-4 text-sm font-semibold text-gray-700 tracking-wider">Awaited Fund: {(getTotalAwaitedFunds() - getTotalReceivedFunds()).toFixed(2)} $</th>
+                                <th className="py-4 text-sm font-semibold text-gray-700 tracking-wider">Received Fund: {getTotalReceivedFunds().toFixed(2)} $</th>
+                            </tr>
+                            <tr className="border-b-3 border-gray-300">
+                                <th colSpan={6}>
+                                    <div className="flex justify-end gap-4 p-2">
+                                        <div className="relative w-50">
+                                            <input
+                                                type="text"
+                                                placeholder="Filter"
+                                                value={filterText}
+                                                onChange={(e) => setFilterText(e.target.value)}
+                                                className="w-full p-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                            />
+                                            <span className="absolute right-3 top-1/2 -translate-y-1/2">
+                                                <img src={prefixBasePath("/filter.png")} alt="Filter" className="w-4 h-4 cursor-pointer" />
+                                            </span>
+                                        </div>
+
+                                        <div className="relative w-50">
+                                            <input
+                                                type="text"
+                                                placeholder="Search"
+                                                value={searchText}
+                                                onChange={(e) => setSearchText(e.target.value)}
+                                                className="w-full p-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                            />
+                                            <span className="absolute right-3 top-1/2 -translate-y-1/2">
+                                                <img src={prefixBasePath("/search.png")} alt="Search" className="w-4 h-4 cursor-pointer" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
                             <tr>
                                 <th className="py-4 text-sm font-semibold text-black tracking-wider">Program Name</th>
-                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Entitlement Reference Number</th>
+                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Beneficiary ID</th>
                                 <th className="py-4 text-sm font-semibold text-black tracking-wider">Awaited Funds ($)</th>
                                 <th className="py-4 text-sm font-semibold text-black tracking-wider">Received Funds ($)</th>
                                 <th className="py-4 text-sm font-semibold text-black tracking-wider">Date Approved</th>

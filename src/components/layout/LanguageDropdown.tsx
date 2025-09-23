@@ -4,7 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { prefixBasePath } from '@/shared';
+
+import { prefixBasePath } from '@/shared/utils/path';
 import { getSupportedLocales } from '@/shared/utils/lang';
 
 export default function LanguageDropdown() {
@@ -45,7 +46,7 @@ export default function LanguageDropdown() {
                     height={20}
                     className="rounded-sm w-5 h-5"
                 />
-                <span className="capitalize">{currentLocale}</span>
+                <span className="capitalize text-lg">{currentLocale}</span>
                 <svg
                     className={`w-4 h-4 text-gray-600 transition-transform ${open ? 'rotate-180' : ''}`}
                     fill="none"

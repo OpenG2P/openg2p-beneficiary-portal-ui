@@ -5,8 +5,9 @@ import { getMessages } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@/commons/globals.css";
+
 import { GlobalContextProvider } from "@/context/global";
-import { prefixBasePath } from '@/shared';
+import { prefixBasePath } from '@/shared/utils/path';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",

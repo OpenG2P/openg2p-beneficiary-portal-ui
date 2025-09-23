@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { prefixBasePath } from '@/shared';
+
+import { prefixBasePath } from '@/shared/utils/path';
 
 interface TotalBenefitsCardProps {
     totalAmount: number;

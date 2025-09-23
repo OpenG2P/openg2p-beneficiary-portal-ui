@@ -1,7 +1,8 @@
 "use client";
 
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { Profile } from '@/shared/types';
+
+import { Profile } from '@/shared/types/profile';
 
 interface GlobalContextType {
     formState: boolean;

@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
+
 import { getMenuItems, getRouteToIndex } from '@/shared/utils/navigation';
-import { prefixBasePath } from '@/shared';
+import { prefixBasePath } from '@/shared/utils/path';
 
 
 interface SidebarProps {
@@ -24,7 +25,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
     const activeItem =
         Object.entries(routeToIndex).find(([href]) =>
             pathname.startsWith(href)
-        )?.[1] ?? 0;
+        )?.[1];
 
     const handleItemClick = (index: number, href: string) => {
         if (onItemClick) {

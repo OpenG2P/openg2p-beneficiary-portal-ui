@@ -2,19 +2,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ApplyProgramForm } from '@/features/program';
-import { Pagination } from '@/components';
-import { prefixBasePath } from '@/shared';
 
+import ApplyProgramForm from '@/features/program/components/ApplyProgramForm';
+import { ProgramStatus, Program } from "@/features/program/types/program";
 
-type ProgramStatus = "Apply" | "Applied" | "Pending" | "Enrolled";
-
-interface Program {
-    name: string;
-    status: ProgramStatus;
-    id: string;
-    appliedDate: string;
-}
+import { Pagination } from '@/components/shared';
+import { prefixBasePath } from '@/shared/utils/path';
 
 const programsData: Program[] = [
     { name: "Social Safety Net Program", status: "Apply", id: "1010101010", appliedDate: "2025-09-01 10:30 AM" },
@@ -93,30 +86,30 @@ export default function Programs({ preview = false }: { preview?: boolean }) {
 
                     <thead className="border-b-4 border-gray-300">
                         <tr>
-                            <th className="py-2 text-xl font-semibold text-gray-800 text-left">
-                                My Programs
+                            <th className="py-2 text-xl font-semibold text-gray-900 text-left">
+                                All Programs
                             </th>
-                            <th className="py-2 px-1 text-gray-600 font-normal text-left">
+                            <th className="py-2 px-1 text-gray-900 font-normal text-left">
                                 Total Programs:{" "}
                                 <span className="font-bold text-black">{total}</span>
                             </th>
-                            <th className="py-2 text-gray-600 font-normal text-left">
+                            <th className="py-2 text-gray-900 font-normal text-left">
                                 Applied:{" "}
                                 <span className="font-bold text-black">{applied}</span>
                             </th>
-                            <th className="py-2 text-gray-600 font-normal text-left">
+                            <th className="py-2 text-gray-900 font-normal text-left">
                                 Enrolled:{" "}
                                 <span className="font-bold text-black">{enrolled}</span>
                             </th>
                         </tr>
                     </thead>
 
-                    <thead className="text-gray-700 border-b-3 border-gray-200">
+                    <thead className="text-gray-900 border-b-3 border-gray-200">
                         <tr>
-                            <th className="py-3 text-sm font-semibold">Program Name</th>
-                            <th className="py-3 px-2 text-sm font-semibold">Application Status</th>
-                            <th className="py-3 text-sm font-semibold">Application ID</th>
-                            <th className="py-3 text-sm font-semibold">Applied Date</th>
+                            <th className="py-3 text-sm font-bold">Program Name</th>
+                            <th className="py-3 px-2 text-sm font-bold">Application Status</th>
+                            <th className="py-3 text-sm font-bold">Application ID</th>
+                            <th className="py-3 text-sm font-bold">Applied Date</th>
                         </tr>
                     </thead>
 
@@ -133,12 +126,14 @@ export default function Programs({ preview = false }: { preview?: boolean }) {
                                     {getStatusBadge(program.status, program)}
                                 </td>
                                 <td className="py-3 font-mono text-gray-700 text-sm">
-                                    {program.id}
+                                    {program.status === "Apply" ? "--" : program.id}
                                 </td>
                                 <td className="py-3 text-gray-600 text-sm">
-                                    {preview
-                                        ? program.appliedDate.split(" ")[0]
-                                        : program.appliedDate}
+                                    {program.status === "Apply"
+                                        ? "--"
+                                        : preview
+                                            ? program.appliedDate.split(" ")[0]
+                                            : program.appliedDate}
                                 </td>
                             </tr>
                         ))}

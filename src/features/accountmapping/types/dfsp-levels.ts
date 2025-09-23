@@ -27,7 +27,7 @@ export type KeyValue = {
 };
 
 export type LinkOrUpdate = {
-    strategy_id?: 0;
+    strategy_id?: number | null;
     fa_type?: string;
     bank_name?: string;
     bank_code?: string;

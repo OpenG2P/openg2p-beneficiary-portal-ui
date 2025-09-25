@@ -44,7 +44,7 @@ export default function ProfileDropdown() {
         <div ref={dropdownRef} className="relative inline-block text-left">
             <button
                 onClick={toggleDropdown}
-                className="flex items-center gap-2 px-3 py-1 bg-[#D9D9D9] text-sm font-medium text-gray-800 rounded-md transition"
+                className="flex items-center gap-2 px-3 py-1 bg-white text-sm font-medium text-gray-800 rounded-md transition"
             >
                 <span className="text-lg">{`Hi, ${profile?.name || "User"}`}</span>
                 <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-gray-300">

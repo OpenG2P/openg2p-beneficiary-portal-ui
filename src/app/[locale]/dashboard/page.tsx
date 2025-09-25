@@ -69,18 +69,18 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div className="xl:col-span-2">
-                    <Programs preview />
+                    <Programs preview title="My Programs" />
                 </div>
 
                 <div className="flex flex-col gap-4 sm:gap-6 h-full">
-                    <div className="flex-1">
+                    <div className="flex-1 rounded-xl shadow-xl">
                         <TotalBenefitsCard
                             totalAmount={totalAwaitedFunds}
                             receivedAmount={totalReceivedFunds}
                         />
                     </div>
 
-                    <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 transition-shadow duration-300">
+                    <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 shadow-xl">
                         <div className="flex items-center justify-between mb-0.5">
                             <h3 className="text-lg sm:text-xl font-bold text-gray-800">
                                 Bank Accounts
@@ -110,7 +110,7 @@ export default function Dashboard() {
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
-                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1">
+                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1 shadow-xl">
                     <h3 className="text-xl sm:text-xl font-bold text-gray-800 mb-1">
                         My Registries
                     </h3>
@@ -131,7 +131,7 @@ export default function Dashboard() {
                     <ViewAll href="/registries" label="View All" />
                 </div>
 
-                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1">
+                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1 shadow-xl">
                     <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
                         Potential Applicable Schemes
                     </h3>
@@ -140,7 +140,7 @@ export default function Dashboard() {
                     <SchemeCarousel />
                 </div>
 
-                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1">
+                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1 shadow-xl">
                     <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
                         Notifications / Broadcast
                     </h3>

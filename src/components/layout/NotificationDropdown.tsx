@@ -1,0 +1,101 @@
+"use client";
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { prefixBasePath } from "@/shared/utils/path";
+import { Notification } from "@/features/notification/types/notification";
+import { ViewAll } from '@/components/shared';
+
+
+interface NotificationDropdownProps {
+    notifications: Notification[];
+    unreadCount?: number;
+}
+
+export default function NotificationDropdown({
+    notifications,
+    unreadCount = 0,
+}: NotificationDropdownProps) {
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    return (
+        <div className="relative" ref={dropdownRef}>
+            <button
+                onClick={() => setOpen((prev) => !prev)}
+                className="relative p-1"
+            >
+                <Image
+                    src={prefixBasePath("/notification.png")}
+                    alt="Notifications"
+                    width={24}
+                    height={24}
+                />
+                {unreadCount > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs w-2 h-2 flex items-center justify-center rounded-full">
+                        {/* {unreadCount} */}
+                    </span>
+                )}
+            </button>
+
+            {open && (
+                <div
+                    className="absolute -right-16.5 top-10 mt-3 w-[340px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 flex flex-col"
+                >
+                    <div className="absolute -top-2.5 right-[70px] w-5 h-5 bg-white border-l border-t border-gray-200 rotate-45"></div>
+
+                    <div className="px-4 py-2 text-lg font-semibold text-[#ED7C22]">
+                        Notifications
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
+                        {notifications.slice(0, 4).map((n) => (
+                            <div key={n.id} className="flex gap-3 p-3 items-start">
+                                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
+                                    <Image
+                                        src={prefixBasePath("/logo.png")}
+                                        alt="Notification Icon"
+                                        width={20}
+                                        height={20}
+                                    />
+                                </div>
+
+                                <div className="flex-1">
+                                    <h3 className="text-sm font-semibold text-gray-900">
+                                        {n.title}
+                                    </h3>
+                                    <p className="text-xs text-gray-600 mt-0.5 line-clamp-2">
+                                        {n.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* <div className="p-2 border-t border-gray-200 text-center">
+                        <button className="flex items-center justify-center gap-1 text-[#ED7C22] hover:underline text-sm font-medium w-full">
+                            View All Notifications →
+                        </button>
+                    </div> */}
+                    <div className="mt-auto p-2">
+                        <ViewAll href="/notifications" label="View All Notifications" />
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}

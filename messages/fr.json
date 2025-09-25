@@ -13,7 +13,7 @@
         "portalName": "Portail des bénéficiaires",
         "emailOrPhone": "Email ou Téléphone",
         "password": "Mot de passe",
-        "resetPassword": "Mot de passe oublié ?",
+        "resetPassword": "Mot de passe oublié",
         "login": "SE CONNECTER",
         "loginWithNationalID": "SE CONNECTER AVEC L'ID NATIONAL"
     },

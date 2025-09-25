@@ -13,7 +13,7 @@
         "portalName": "Beneficiary Portal",
         "emailOrPhone": "Email or Phone",
         "password": "Password",
-        "resetPassword": "Reset Password?",
+        "resetPassword": "Reset Password",
         "login": "LOGIN",
         "loginWithNationalID": "LOGIN WITH NATIONAL ID"
     },

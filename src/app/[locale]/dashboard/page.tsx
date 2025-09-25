@@ -8,6 +8,8 @@ import { Programs } from '@/features/program/components';
 import { TotalBenefitsCard } from '@/features/disbursement/components';
 import { SchemeCarousel } from "@/features/scheme/components";
 import { NotificationCard } from "@/features/notification/components";
+import { RegistryCard } from "@/features/registry/components";
+
 import { ViewAll } from '@/components/shared';
 
 import { prefixBasePath } from "@/shared/utils/path";
@@ -110,49 +112,32 @@ export default function Dashboard() {
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
-                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1 shadow-xl">
-                    <h3 className="text-xl sm:text-xl font-bold text-gray-800 mb-1">
-                        My Registries
-                    </h3>
-
-                    <div className="border-b-4 border-gray-300 mb-3"></div>
-
-                    <div className="space-y-3 sm:space-y-4">
-                        {previewRegistries.map((registry, idx) => (
-                            <div key={idx} className="flex items-center justify-between py-2 border-b-3 border-gray-300">
-                                <div className="min-w-0 flex-1">
-                                    <p className="font-medium text-gray-800 text-sm sm:text-base truncate">
-                                        {registry.name}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                <RegistryCard registries={previewRegistries} />
+                <SchemeCarousel />
+                <div className="bg-white rounded-xl border border-black/20 flex-1 shadow-xl">
+                    <div className="flex items-center justify-between h-16 px-6">
+                        <h3 className="text-xl sm:text-xl font-bold text-gray-800">
+                            Notifications / Broadcast
+                        </h3>
+                        <button className="p-1 rounded-full hover:bg-gray-200">
+                            <Image
+                                src={prefixBasePath("/menu-dots.png")}
+                                alt="menu"
+                                width={18}
+                                height={18}
+                            />
+                        </button>
                     </div>
-                    <ViewAll href="/registries" label="View All" />
-                </div>
 
-                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1 shadow-xl">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
-                        Potential Applicable Schemes
-                    </h3>
-                    <div className="border-b-4 border-gray-200 mb-4"></div>
-
-                    <SchemeCarousel />
-                </div>
-
-                <div className="bg-white rounded-xl p-4 sm:p-6 border border-black/20 flex-1 shadow-xl">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
-                        Notifications / Broadcast
-                    </h3>
-                    <div className="border-b-4 border-gray-200 mb-4"></div>
-
-                    <div className="space-y-2">
-                        {dashboardNotifications.map((n) => (
+                    <div className="space-y-2 px-4 sm:px-6 py-2 max-h-[350px] overflow-y-auto">
+                        {dashboardNotifications.map((n, idx) => (
                             <NotificationCard key={n.id} notification={n} compact />
                         ))}
                     </div>
 
-                    <ViewAll href="/notifications" label="View More" />
+                    <div className="px-4 sm:px-6 py-3">
+                        <ViewAll href="/notifications" label="View More" />
+                    </div>
                 </div>
             </div>
         </div>

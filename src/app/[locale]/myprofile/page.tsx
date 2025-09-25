@@ -15,7 +15,7 @@ export default function MyProfile() {
     const { profile } = useAuth();
     const t = useTranslations();
 
-    const avatarSrc = profile?.picture || prefixBasePath("/user.png");
+    const avatarSrc = profile?.picture || prefixBasePath("/user1.png");
 
     return (
         <div className="min-h-screen bg-gray-50 px-4 sm:px-10 py-6">

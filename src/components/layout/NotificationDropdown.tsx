@@ -85,12 +85,6 @@ export default function NotificationDropdown({
                             </div>
                         ))}
                     </div>
-
-                    {/* <div className="p-2 border-t border-gray-200 text-center">
-                        <button className="flex items-center justify-center gap-1 text-[#ED7C22] hover:underline text-sm font-medium w-full">
-                            View All Notifications →
-                        </button>
-                    </div> */}
                     <div className="mt-auto p-2">
                         <ViewAll href="/notifications" label="View All Notifications" />
                     </div>

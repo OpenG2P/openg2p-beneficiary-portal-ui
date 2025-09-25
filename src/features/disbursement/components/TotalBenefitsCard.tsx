@@ -13,7 +13,6 @@ export default function TotalBenefitsCard({ totalAmount, receivedAmount }: Total
     return (
         <div className="rounded-xl shadow-xl overflow-hidden bg-gradient-to-b from-[#FCBE00] to-[#ED7C22] p-4 sm:p-6 flex flex-col justify-between h-full text-white">
 
-            {/* Top row: title + service dropdown */}
             <div className="flex justify-between items-center mb-3">
                 <h3 className="text-xl font-bold text-black m-0">
                     Total Benefit Amount
@@ -33,9 +32,7 @@ export default function TotalBenefitsCard({ totalAmount, receivedAmount }: Total
                 </div>
             </div>
 
-            {/* Bottom row: amount + view button + image */}
             <div className="flex justify-between items-end">
-                {/* Left side */}
                 <div className="flex flex-col flex-1 pr-4">
                     <div className="text-2xl text-black font-bold mb-1">
                         {receivedAmount.toLocaleString()} $
@@ -46,7 +43,6 @@ export default function TotalBenefitsCard({ totalAmount, receivedAmount }: Total
                     <ViewAll href="/benefits" label="View Amount Details" />
                 </div>
 
-                {/* Right side: image */}
                 <div className="flex items-end pr-10">
                     <Image
                         src={prefixBasePath("/dollar.png")}

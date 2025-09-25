@@ -38,7 +38,7 @@ export default function ProfileDropdown() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const avatarSrc = profile?.picture || prefixBasePath("/user.png");
+    const avatarSrc = profile?.picture || prefixBasePath("/user1.png");
 
     return (
         <div ref={dropdownRef} className="relative inline-block text-left">
@@ -51,8 +51,8 @@ export default function ProfileDropdown() {
                     <Image
                         src={avatarSrc}
                         alt="User Avatar"
-                        width={32}
-                        height={32}
+                        width={38}
+                        height={38}
                         className="object-cover"
                     />
                 </div>

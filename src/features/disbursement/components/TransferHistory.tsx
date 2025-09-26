@@ -10,7 +10,7 @@ interface TransferHistoryProps {
     onClose: () => void;
 }
 
-const TransferHistory = ({ benefit, onClose }: TransferHistoryProps) => {
+export default function TransferHistory({ benefit, onClose }: TransferHistoryProps) {
     const transferHistory = [
         { transferId: "2389009856", receivedFund: 300.0, refNum: "3456677800", dateApproved: "25-06-2025", dateReceived: "27-06-2025" },
         { transferId: "2389009857", receivedFund: 500.0, refNum: "3456677801", dateApproved: "01-07-2025", dateReceived: "03-07-2025" },
@@ -46,7 +46,7 @@ const TransferHistory = ({ benefit, onClose }: TransferHistoryProps) => {
                             <th className="px-4 py-4 text-base">Date of Receipt</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200">
+                    <tbody className="divide-y">
                         {transferHistory.map((transfer, index) => (
                             <tr
                                 key={index}
@@ -69,7 +69,7 @@ const TransferHistory = ({ benefit, onClose }: TransferHistoryProps) => {
             <div className="flex justify-start gap-4 mt-16">
                 <button
                     onClick={onClose}
-                    className="px-10 py-2 bg-black text-white text-md rounded-full cursor-pointer"
+                    className="px-10 py-2 bg-black text-white text-xl rounded-full cursor-pointer"
                 >
                     BACK
                 </button>
@@ -78,4 +78,3 @@ const TransferHistory = ({ benefit, onClose }: TransferHistoryProps) => {
     );
 };
 
-export default TransferHistory;

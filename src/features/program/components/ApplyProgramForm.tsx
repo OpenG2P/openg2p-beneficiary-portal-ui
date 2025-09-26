@@ -15,7 +15,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
             onClose={onClose}
             width="800px"
             height="600px"
-            sidebarWidth="25%"
+            sidebarWidth="30%"
             sidebarImage="/apply_program.png"
         >
             <div className="space-y-8">
@@ -27,7 +27,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                         type="text"
                         value={program.name}
                         disabled
-                        className="mt-1 block w-full text-gray-600 rounded-md bg-gray-100 p-2"
+                        className="mt-1 block w-full text-gray-600 rounded-md bg-gray-100 py-2 px-4"
                     />
                 </div>
                 <div>
@@ -39,7 +39,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                     </label>
                     <select
                         id="workerRegistered"
-                        className="block w-full p-2 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 focus:outline-none"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 focus:outline-none"
                     >
                         <option value="">Select</option>
                         <option value="yes">Yes</option>
@@ -55,7 +55,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                     </label>
                     <select
                         id="stateWelfareMember"
-                        className="block w-full p-2 mt-1 text-sm text-gray-600  rounded-md bg-gray-100 focus:outline-none"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600  rounded-md bg-gray-100 focus:outline-none"
                     >
                         <option value="">Select</option>
                         <option value="yes">Yes</option>
@@ -68,7 +68,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                     </label>
                     <input
                         type="date"
-                        className="mt-1 block w-full text-gray-600  rounded-md bg-gray-100 p-2 focus:outline-none"
+                        className="mt-1 block w-full text-gray-600  rounded-md bg-gray-100 py-2 px-4 focus:outline-none"
                     />
                 </div>
             </div>

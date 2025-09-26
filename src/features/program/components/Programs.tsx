@@ -164,9 +164,9 @@ export default function Programs({ programs, preview = false, title = "All Progr
                                 <td className="px-6 py-3 font-mono text-gray-700 text-sm w-full">
                                     {program.status === "Apply" ? "--" : program.id}
                                 </td>
-                                <td className="px-6 py-3 text-gray-600 text-sm w-full">
+                                <td className="px-6 py-3 text-gray-700 text-sm w-full">
                                     {program.status === "Apply"
-                                        ? "--"
+                                        ? "---"
                                         : preview
                                             ? program.appliedDate.split(" ")[0]
                                             : program.appliedDate}

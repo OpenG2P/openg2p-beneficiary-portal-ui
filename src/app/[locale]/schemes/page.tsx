@@ -2,9 +2,12 @@
 
 import { useLocale } from "next-intl";
 import { useState } from "react";
+import Image from "next/image";
+
+import { prefixBasePath } from '@/shared/utils/path';
 
 import { AuthUtil } from '@/features/auth/components';
-import { Pagination } from '@/components/shared';
+import { Pagination, SearchInput } from '@/components/shared';
 import { ApplySchemeForm } from '@/features/program/components';
 
 import { Scheme } from "@/features/program/types/scheme";
@@ -148,51 +151,62 @@ export default function SchemePage() {
 
     const [openForm, setOpenForm] = useState(false);
     const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(schemes, 8);
 
     return (
-        <div className="px-10 py-4 min-h-screen bg-gray-50">
+        <div className="px-4 sm:px-10 py-4 min-h-screen bg-white">
             <div className="mb-4">
-                <h1 className="text-2xl font-bold text-gray-800">
-                    Potential Applicable Schemes
-                </h1>
+                <h1 className="text-2xl font-bold text-gray-800">Applicable Schemes</h1>
             </div>
-
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20 p-4">
-                <div className="mb-2 px-4">
-                    <span className="text-lg font-semibold text-black">
-                        Applicable Schemes
-                    </span>
-                    <div className="border-b-4 border-gray-200 mt-1"></div>
+            <div className="bg-white shadow-xl rounded-lg overflow-hidden border border-black/20">
+                <div className="flex justify-between items-center px-6 py-4">
+                    <span className="text-lg font-semibold text-[#ED7C22]">List of Schemes</span>
+                    <div className="w-23/100">
+                        <SearchInput
+                            value={searchQuery}
+                            onChange={setSearchQuery}
+                            placeholder="Search"
+                            className="w-50"
+                            bgColor="bg-gray-100"
+                            onIconClick={() => console.log("Search triggered:", searchQuery)}
+                        />
+                    </div>
                 </div>
 
-                <div className="overflow-x-auto px-4">
-                    <table className="w-full text-left border-collapse min-w-[700px]">
-                        <thead className="border-b-3 border-gray-200">
+                <div className="overflow-x-auto">
+                    <table className="w-full table-fixed border-collapse min-w-[700px]">
+                        <thead className="bg-gray-100">
                             <tr>
-                                <th className="pt-4 pb-2 text-sm font-semibold text-black">Name of the Schemes</th>
-                                <th className="pt-4 pb-2 text-sm font-semibold text-black">Schemes ID</th>
-                                <th className="pt-4 pb-2 text-sm font-semibold text-black">Date</th>
-                                <th className="pt-4 pb-2 text-sm font-semibold text-black">Action</th>
+                                <th className="text-black text-left py-4 px-6">Name of the Schemes</th>
+                                <th className="text-black text-left py-4 px-6">Schemes ID</th>
+                                <th className="text-black text-left py-4 px-6">
+                                    Date
+                                    <Image
+                                        src={prefixBasePath("/updown_arrow.png")}
+                                        alt="Sort"
+                                        width={20}
+                                        height={20}
+                                        className="inline-block cursor-pointer opacity-40"
+                                    />
+                                </th>
+                                <th className="text-black text-left py-4 px-6">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {currentItems.map((scheme) => (
-                                <tr
-                                    key={scheme.id}
-                                    className="hover:bg-gray-50 transition-colors duration-150 border-b-3 border-gray-300"
-                                >
-                                    <td className="py-3 text-gray-900 font-medium">{scheme.title}</td>
-                                    <td className="py-3 font-mono text-gray-900 text-sm">{scheme.id}</td>
-                                    <td className="py-3 text-gray-900 text-sm">{scheme.date}</td>
-                                    <td className="py-3">
+                            {currentItems.map((scheme, index) => (
+                                <tr key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-100"}`}>
+                                    <td className="px-6 py-4 text-gray-900 font-medium">{scheme.title}</td>
+                                    <td className="px-6 py-4 font-mono text-gray-900 text-sm">{scheme.id}</td>
+                                    <td className="px-6 py-4 text-gray-900 text-sm">{scheme.date}</td>
+                                    <td className="px-6 py-4 ">
                                         <span
                                             onClick={() => {
                                                 setSelectedScheme(scheme);
                                                 setOpenForm(true);
                                             }}
-                                            className="text-black text-sm font-medium underline cursor-pointer hover:text-blue-600 transition-colors"
+                                            className="px-2 py-1 text-sm text-[#3399FF] bg-[#3399FF1F] rounded-full font-medium cursor-pointer"
                                         >
                                             {scheme.action}
                                         </span>
@@ -201,7 +215,9 @@ export default function SchemePage() {
                             ))}
                         </tbody>
                     </table>
+                </div>
 
+                <div className="px-6 py-2">
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}

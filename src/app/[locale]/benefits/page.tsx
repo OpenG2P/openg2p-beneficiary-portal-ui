@@ -156,7 +156,7 @@ export default function BenefitsPage() {
     };
 
     return (
-        <div className="px-10 py-4 min-h-screen bg-gray-50">
+        <div className="px-10 py-4 min-h-screen bg-white">
             <div className="mb-2">
                 <h1 className="text-xl font-bold text-black">Total Benefits</h1>
             </div>

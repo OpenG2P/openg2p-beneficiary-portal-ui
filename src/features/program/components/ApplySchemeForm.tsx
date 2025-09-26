@@ -19,11 +19,17 @@ export default function ApplySchemeForm({ schemeName, date, description, onClose
     };
 
     return (
-        <Modal title={schemeName} onClose={onClose} width="800px" height="600px">
+        <Modal
+            title={<span className="text-[#ED7C22] text-2xl">{schemeName}</span>}
+            onClose={onClose}
+            width="800px"
+            height="600px"
+            sidebarWidth="10%"
+        >
             <div>
                 <div className="relative w-full h-[120px] mb-4">
                     <Image
-                        src={prefixBasePath("/schemes.png")}
+                        src={prefixBasePath("/scheme_new.png")}
                         alt="Scheme"
                         fill
                         style={{ objectFit: "contain", objectPosition: "left" }}
@@ -32,7 +38,7 @@ export default function ApplySchemeForm({ schemeName, date, description, onClose
                 </div>
 
 
-                <div className="w-full text-black font-bold text-sm mb-4 text-left">
+                <div className="w-full text-[#3399FF] font-bold text-sm mb-4 text-left">
                     Date: {date}
                 </div>
 
@@ -42,18 +48,17 @@ export default function ApplySchemeForm({ schemeName, date, description, onClose
                 </p>
             </div>
 
-            <div className="flex justify-start gap-4 w-full">
+            <div className="flex justify-start gap-4 w-full mt-16">
                 <button
                     onClick={onClose}
-                    className="px-5 py-2 bg-gray-300 text-black rounded-md cursor-pointer"
+                    className="px-8 py-1 bg-gray-100 text-black rounded-[20px] cursor-pointer"
                 >
-                    Cancel
+                    CANCEL
                 </button>
                 <button
-                    onClick={handleApply}
-                    className="px-5 py-2 bg-black text-white rounded-md cursor-pointer"
+                    className="px-8 py-1 bg-black text-white rounded-[20px] cursor-pointer"
                 >
-                    Apply
+                    APPLY
                 </button>
             </div>
         </Modal>

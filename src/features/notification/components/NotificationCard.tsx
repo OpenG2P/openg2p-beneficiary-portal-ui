@@ -37,7 +37,7 @@ export default function NotificationCard({ notifications }: NotificationCardProp
                         key={n.id}
                         className={`${idx % 2 === 0 ? "bg-gray-100" : ""}`}
                     >
-                        <div className="flex gap-3 px-3 py-2">
+                        <div className="flex gap-3 px-6 py-2">
                             <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
                                 <Image
                                     src={prefixBasePath("/logo.png")}

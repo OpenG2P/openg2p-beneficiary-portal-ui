@@ -1,0 +1,69 @@
+import React from 'react';
+import Image from "next/image";
+import { ViewAll } from '@/components/shared';
+import { prefixBasePath } from "@/shared/utils/path";
+
+interface BankAccount {
+    name: string;
+    number: string;
+}
+
+interface BankCardProps {
+    account: BankAccount;
+}
+
+export default function BankCard({ account }: BankCardProps) {
+    return (
+        <div className="flex flex-col text-white">
+            <div className="rounded-xl shadow-xl overflow-hidden relative">
+                <div className="bg-[#ffcb30] px-6 pt-6 pb-2 flex justify-between items-end">
+                    <div>
+                        <h3 className="text-lg font-bold text-black">
+                            Bank Accounts
+                        </h3>
+                        <p className="text-sm text-white">
+                            Current linked account
+                        </p>
+                    </div>
+
+                    <div className="pb-1 pr-10">
+                        <Image
+                            src={prefixBasePath("/spar_card.png")}
+                            alt="SPAR Card"
+                            width={81}
+                            height={22}
+                            className="object-contain"
+                        />
+                    </div>
+                </div>
+
+                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-6 py-4 relative">
+                    <div className="mb-6">
+                        <div className="text-xl font-bold text-black mb-2">
+                            {account.name}
+                        </div>
+                        <div className="text-lg font-medium text-black">
+                            {account.number}
+                        </div>
+                    </div>
+
+                    <ViewAll
+                        href="/accounts"
+                        label="Edit Account Details"
+                        bgColor="bg-white/40"
+                    />
+
+                    <div className="absolute right-12 bottom-0 opacity-20">
+                        <Image
+                            src={prefixBasePath("/bank_user.png")}
+                            alt="User"
+                            width={108}
+                            height={102}
+                            className="object-contain"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

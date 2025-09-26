@@ -31,7 +31,7 @@ export default function SchemeCard({ schemes }: SchemeCardProps) {
             </div>
 
             <div className="relative w-full bg-gray-100">
-                <div className="flex flex-col items-start w-full px-6 py-4">
+                <div className="flex flex-col items-start w-full px-8 py-4">
                     <div className="relative w-[120px] h-[130px] mb-3">
                         <Image
                             src={prefixBasePath(schemes[currentIndex].image)}

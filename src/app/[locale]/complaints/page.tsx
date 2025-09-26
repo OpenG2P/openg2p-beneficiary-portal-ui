@@ -2,9 +2,9 @@
 import { useState } from "react";
 
 import { Pagination } from "@/components/shared";
-import { FileComplaintForm } from "@/features/complaint/components";
+import { FileComplaintForm } from "@/features/grievance/components";
 
-import { Complaint } from "@/features/complaint/types/complaint";
+import { Complaint } from "@/features/grievance/types/complaint";
 
 import { usePagination } from "@/shared/hooks/usePagination";
 

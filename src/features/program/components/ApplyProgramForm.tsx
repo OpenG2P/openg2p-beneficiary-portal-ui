@@ -10,63 +10,82 @@ interface ApplyProgramFormProps {
 
 export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormProps) {
     return (
-        <Modal title="Apply Program" onClose={onClose} width="800px" height="500px">
-
-            <div className="space-y-5">
+        <Modal
+            title={<span className="text-[#ED7C22] text-2xl">Apply Program</span>}
+            onClose={onClose}
+            width="800px"
+            height="600px"
+            sidebarWidth="25%"
+            sidebarImage="/apply_program.png"
+        >
+            <div className="space-y-8">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-bold text-black">
                         Program Name
                     </label>
                     <input
                         type="text"
                         value={program.name}
                         disabled
-                        className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
+                        className="mt-1 block w-full text-gray-600 rounded-md bg-gray-100 p-2"
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label
+                        htmlFor="workerRegistered"
+                        className="block text-sm font-bold text-black"
+                    >
                         Whether Worker Registered
                     </label>
-                    <input
-                        type="text"
-                        className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
-                    />
+                    <select
+                        id="workerRegistered"
+                        className="block w-full p-2 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 focus:outline-none"
+                    >
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label
+                        htmlFor="stateWelfareMember"
+                        className="block text-sm font-bold text-black"
+                    >
                         Whether Member of any State Welfare Board
                     </label>
-                    <input
-                        type="text"
-                        className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
-                    />
+                    <select
+                        id="stateWelfareMember"
+                        className="block w-full p-2 mt-1 text-sm text-gray-600  rounded-md bg-gray-100 focus:outline-none"
+                    >
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-bold text-black">
                         Registration Date
                     </label>
                     <input
                         type="date"
-                        className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
+                        className="mt-1 block w-full text-gray-600  rounded-md bg-gray-100 p-2 focus:outline-none"
                     />
                 </div>
             </div>
 
-            <div className="flex justify-start gap-4 w-full mt-4">
+            <div className="flex justify-start gap-4 w-full mt-16">
                 <button
                     onClick={onClose}
-                    className="px-5 py-2 bg-[#D9D9D9] text-black rounded-md cursor-pointer"
+                    className="px-8 py-1 bg-gray-100 text-black rounded-[20px] cursor-pointer"
                 >
-                    Cancel
+                    CANCEL
                 </button>
                 <button
-                    className="px-5 py-2 bg-black text-white rounded-md cursor-pointer"
+                    className="px-8 py-1 bg-black text-white rounded-[20px] cursor-pointer"
                 >
-                    Apply
+                    APPLY
                 </button>
             </div>
         </Modal>
     );
 }
-

@@ -40,7 +40,7 @@ export default function NotificationCard({ notifications }: NotificationCardProp
                         <div className="flex gap-3 px-6 py-2">
                             <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
                                 <Image
-                                    src={prefixBasePath("/logo.png")}
+                                    src={prefixBasePath("/notification_img.png")}
                                     alt="Notification Icon"
                                     width={20}
                                     height={20}

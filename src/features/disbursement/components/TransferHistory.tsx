@@ -23,38 +23,55 @@ const TransferHistory = ({ benefit, onClose }: TransferHistoryProps) => {
     ];
 
     return (
-        <Modal title={`${benefit.programName} Transfer History`} onClose={onClose} width="800px" height="600px">
+        <Modal
+            title={
+                <span>
+                    <span className="text-[#ED7C22] text-2xl">Openg2p Safety Program</span>{" "}
+                    <span className="text-[#3399FF] text-md">Transfer History</span>
+                </span>
+            }
+            onClose={onClose}
+            width="900px"
+            height="600px"
+            sidebarWidth="10%"
+        >
             <div className="flex-1 overflow-y-auto">
                 <table className="w-full text-left border-collapse">
-                    <thead className="text-gray-700 border-b border-gray-300 bg-gray-50">
+                    <thead className="text-black bg-gray-100">
                         <tr>
-                            <th className="px-4 py-3 text-sm font-semibold">Transfer ID</th>
-                            <th className="px-4 py-3 text-sm font-semibold">Received Fund</th>
-                            <th className="px-4 py-3 text-sm font-semibold">Reference Number</th>
-                            <th className="px-4 py-3 text-sm font-semibold">Date of Approval</th>
-                            <th className="px-4 py-3 text-sm font-semibold">Date of Receipt</th>
+                            <th className="px-4 py-4 text-base">Transfer ID</th>
+                            <th className="px-4 py-4 text-base">Received Fund</th>
+                            <th className="px-4 py-4 text-base">Reference Number</th>
+                            <th className="px-4 py-4 text-base">Date of Approval</th>
+                            <th className="px-4 py-4 text-base">Date of Receipt</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                         {transferHistory.map((transfer, index) => (
-                            <tr key={index} className="hover:bg-gray-50">
-                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.transferId}</td>
-                                <td className="px-4 py-3 text-sm text-gray-900 font-semibold">{transfer.receivedFund.toLocaleString()}</td>
-                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.refNum}</td>
-                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.dateApproved}</td>
-                                <td className="px-4 py-3 text-sm text-gray-900">{transfer.dateReceived}</td>
+                            <tr
+                                key={index}
+                                className={`transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                                    }`}
+                            >
+                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.transferId}</td>
+                                <td className="px-4 py-2 text-sm text-black font-semibold">
+                                    <span className="text-[#00B765] font-bold">{transfer.receivedFund.toFixed(2)}</span> $
+                                </td>
+                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.refNum}</td>
+                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.dateApproved}</td>
+                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.dateReceived}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
 
-            <div className="flex justify-start gap-4 mt-6">
+            <div className="flex justify-start gap-4 mt-16">
                 <button
                     onClick={onClose}
-                    className="px-5 py-2 bg-[#D9D9D9] text-black rounded-md cursor-pointer"
+                    className="px-10 py-2 bg-black text-white text-md rounded-full cursor-pointer"
                 >
-                    Back
+                    BACK
                 </button>
             </div>
         </Modal>

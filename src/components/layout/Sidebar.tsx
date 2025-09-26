@@ -49,8 +49,6 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                             alt="Menu"
                             width={24}
                             height={24}
-                            priority
-                            style={{ objectFit: "contain" }}
                         />
                     </button>
                 ) : (
@@ -66,7 +64,6 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                                 width={20}
                                 height={20}
                                 priority
-                                style={{ objectFit: "contain" }}
                             />
                         </button>
                     </div>
@@ -87,7 +84,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                                 alt={item.name}
                                 width={30}
                                 height={30}
-                                style={{ objectFit: "contain" }}
+                                className="w-auto h-auto"
                             />
                         </div>
 

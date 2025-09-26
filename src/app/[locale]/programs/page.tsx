@@ -8,7 +8,7 @@ import { Program } from "@/features/program/types/program";
 
 const programsData: Program[] = [
     { name: "Social Safety Net Program", status: "Applied", id: "1010101010", appliedDate: "2025-09-01 10:30 AM" },
-    { name: "Pension Yojana", status: "Applied", id: "2025202501", appliedDate: "2025-08-15 09:10 AM" },
+    { name: "Pension Yojana", status: "Apply", id: "2025202501", appliedDate: "2025-08-15 09:10 AM" },
     { name: "PM-KISAN Farmer Support", status: "Enrolled", id: "3030303030", appliedDate: "2025-08-10 02:15 PM" },
     { name: "Ayushman Bharat Health Scheme", status: "Applied", id: "4040404040", appliedDate: "2025-08-20 11:45 AM" },
     { name: "Pradhan Mantri Awas Yojana", status: "Enrolled", id: "6060606060", appliedDate: "2025-07-25 03:30 PM" },

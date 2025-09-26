@@ -71,7 +71,7 @@ export default function NotificationDropdown({
                                 <div className="flex gap-3 p-3 w-full">
                                     <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
                                         <Image
-                                            src={prefixBasePath("/logo.png")}
+                                            src={prefixBasePath("/notification_img.png")}
                                             alt="Notification Icon"
                                             width={20}
                                             height={20}

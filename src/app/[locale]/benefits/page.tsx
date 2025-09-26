@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { useLocale } from "next-intl";
 
 import { prefixBasePath } from '@/shared/utils/path';
 import { AuthUtil } from '@/features/auth/components';
-import { Pagination } from '@/components/shared';
+import { Pagination, SearchInput, FilterInput, DateInput } from '@/components/shared';
 import { TransferHistory } from '@/features/disbursement/components';
 
 import { Benefit } from "@/features/disbursement/types/benefit";
@@ -13,7 +14,7 @@ import { usePagination } from "@/shared/hooks/usePagination";
 
 export const benefitsData: Benefit[] = [
     {
-        programName: "Openg2p-Safety-Net-Program",
+        programName: "Openg2p Safety Program",
         entitlementRefNumber: "983789327978",
         awaitedFunds: 45000,
         receivedFunds: 30000,
@@ -136,13 +137,9 @@ export default function BenefitsPage() {
 
     const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(benefitsData, 8);
 
-    const [searchText, setSearchText] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
     const [filterText, setFilterText] = useState("");
-
-    const filteredBenefits = benefitsData.filter((benefit) =>
-        benefit.programName.toLowerCase().includes(searchText.toLowerCase()) &&
-        benefit.entitlementRefNumber.toLowerCase().includes(filterText.toLowerCase())
-    );
+    const [dateText, setDateText] = useState("");
 
     const totalAwaitedFunds = benefitsData.reduce(
         (sum, b) => sum + b.awaitedFunds,
@@ -161,71 +158,123 @@ export default function BenefitsPage() {
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
             <div className="mb-2">
-                <h1 className="text-2xl font-bold text-gray-800">Total Benefits</h1>
+                <h1 className="text-xl font-bold text-black">Total Benefits</h1>
             </div>
-
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20 p-4">
-                <div className="overflow-x-auto px-4">
+            <div className="bg-white rounded-xl shadow-xl w-full border border-black/20 overflow-hidden">
+                <div className="overflow-x-auto w-full">
                     <table className="w-full text-left border-collapse min-w-[800px]">
-                        <thead className="border-b-3 border-gray-200">
-                            <tr className="border-b-4 border-gray-300">
-                                <th className="py-4 text-lg font-semibold text-black tracking-wider">Benefits (Transfer History)</th>
-                                <th className="py-4 text-sm font-semibold text-gray-700 tracking-wider">Total Amount: {totalAwaitedFunds} $</th>
-                                <th className="py-4 text-sm font-semibold text-gray-700 tracking-wider">Awaited Fund: {totalAwaitedFunds - totalReceivedFunds} $</th>
-                                <th className="py-4 text-sm font-semibold text-gray-700 tracking-wider">Received Fund: {totalReceivedFunds} $</th>
+                        <thead>
+                            <tr>
+                                <th className="px-6 py-4 text-xl font-semibold text-[#ED7C22] text-left flex items-center gap-4">
+                                    Benefits
+                                    <div className="bg-gray-100 text-black px-3 py-1 rounded-full flex items-center gap-2 text-sm font-semibold shadow-sm cursor-pointer hover:bg-gray-100 transition-colors">
+                                        <span>Services</span>
+                                        <svg
+                                            className="w-4 h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M19 9l-7 7-7-7"
+                                            />
+                                        </svg>
+                                    </div>
+                                </th>
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Total Amount: <span className="font-bold text-[#3399FF]">{totalAwaitedFunds}</span> $
+                                </th>
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Awaited Fund: <span className="font-bold text-[#ED7C22]">{totalAwaitedFunds - totalReceivedFunds}</span> $
+                                </th>
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Received Fund: <span className="font-bold text-[#00B765]">{totalReceivedFunds}</span> $
+                                </th>
                             </tr>
-                            <tr className="border-b-3 border-gray-300">
-                                <th colSpan={6}>
-                                    <div className="flex justify-end gap-4 p-2">
-                                        <div className="relative w-50">
-                                            <input
-                                                type="text"
-                                                placeholder="Filter"
-                                                value={filterText}
-                                                onChange={(e) => setFilterText(e.target.value)}
-                                                className="w-full p-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
-                                            />
-                                            <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                                                <img src={prefixBasePath("/filter.png")} alt="Filter" className="w-4 h-4 cursor-pointer" />
-                                            </span>
-                                        </div>
 
-                                        <div className="relative w-50">
-                                            <input
-                                                type="text"
-                                                placeholder="Search"
-                                                value={searchText}
-                                                onChange={(e) => setSearchText(e.target.value)}
-                                                className="w-full p-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
-                                            />
-                                            <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                                                <img src={prefixBasePath("/search.png")} alt="Search" className="w-4 h-4 cursor-pointer" />
-                                            </span>
-                                        </div>
+                            <tr className="bg-gray-100">
+                                <th colSpan={6}>
+                                    <div className="flex justify-center gap-20 p-2">
+                                        <FilterInput
+                                            value={filterText}
+                                            onChange={setFilterText}
+                                            placeholder="Filter"
+                                            className="w-50"
+                                            bgColor="bg-white"
+                                            onIconClick={() => console.log("Filter clicked")}
+                                        />
+                                        <DateInput
+                                            value={dateText}
+                                            onChange={setDateText}
+                                            placeholder="Date"
+                                            className="w-50"
+                                            bgColor="bg-white"
+                                            onIconClick={() => console.log("Date clicked")}
+                                        />
+                                        <SearchInput
+                                            value={searchQuery}
+                                            onChange={setSearchQuery}
+                                            placeholder="Search"
+                                            className="w-50"
+                                            bgColor="bg-white"
+                                            onIconClick={() => console.log("Search triggered:", searchQuery)}
+                                        />
                                     </div>
                                 </th>
                             </tr>
+
                             <tr>
-                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Program Name</th>
-                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Beneficiary ID</th>
-                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Awaited Funds ($)</th>
-                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Received Funds ($)</th>
-                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Date Approved</th>
-                                <th className="py-4 text-sm font-semibold text-black tracking-wider">Action</th>
+                                <th className="px-6 py-3 text-sm font-bold text-black">
+                                    Program Name
+                                    <Image
+                                        src={prefixBasePath("/updown_arrow.png")}
+                                        alt="Sort"
+                                        width={20}
+                                        height={20}
+                                        className="inline-block cursor-pointer opacity-40"
+                                    />
+                                </th>
+                                <th className="px-6 py-3 text-sm font-bold text-black">Beneficiary ID</th>
+                                <th className="px-6 py-3 text-sm font-bold text-black">Awaited Funds ($)</th>
+                                <th className="px-6 py-3 text-sm font-bold text-black">Received Funds ($)</th>
+                                <th className="px-6 py-3 text-sm font-bold text-black">
+                                    Date Approved
+                                    <Image
+                                        src={prefixBasePath("/updown_arrow.png")}
+                                        alt="Sort"
+                                        width={20}
+                                        height={20}
+                                        className="inline-block cursor-pointer opacity-40"
+                                    />
+                                </th>
+                                <th className="px-6 py-3 text-sm font-bold text-black">Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             {currentItems.map((benefit, index) => (
-                                <tr key={index} className="hover:bg-gray-50 transition-colors duration-150 border-b-3 border-gray-300">
-                                    <td className="py-4 text-gray-900 font-medium">{benefit.programName}</td>
-                                    <td className="py-4 font-mono text-gray-900 text-sm">{benefit.entitlementRefNumber}</td>
-                                    <td className="py-4 text-black">{benefit.awaitedFunds.toFixed(2)}</td>
-                                    <td className="py-4 text-black">{benefit.receivedFunds.toFixed(2)}</td>
-                                    <td className="py-4 text-black text-sm">{benefit.dateApproved}</td>
-                                    <td className="py-4">
+                                <tr
+                                    key={index}
+                                    className={`transition-colors duration-150 ${index % 2 === 1 ? "bg-white" : "bg-gray-100"
+                                        }`}
+                                >
+                                    <td className="px-6 py-4 text-black font-medium">{benefit.programName}</td>
+                                    <td className="px-6 py-4 font-mono text-gray-900 text-sm">{benefit.entitlementRefNumber}</td>
+                                    <td className="px-6 py-4 text-black">
+                                        <span className="text-[#ED7C22] font-bold">{benefit.awaitedFunds.toFixed(2)}</span> $
+                                    </td>
+                                    <td className="px-6 py-4 text-black">
+                                        <span className="text-[#00B765] font-bold">{benefit.receivedFunds.toFixed(2)}</span> $
+                                    </td>
+
+                                    <td className="px-6 py-4 text-black text-sm">{benefit.dateApproved}</td>
+                                    <td className="px-6 py-4">
                                         <span
                                             onClick={() => handleTransferHistoryClick(benefit)}
-                                            className="text-black text-sm font-medium underline cursor-pointer hover:text-blue-600 transition-colors"
+                                            className="px-2 py-1 text-sm text-[#3399FF] bg-[#3399FF1F] rounded-full font-medium cursor-pointer"
                                         >
                                             Transfer History
                                         </span>
@@ -234,21 +283,22 @@ export default function BenefitsPage() {
                             ))}
                         </tbody>
                     </table>
+                </div>
 
+                <div className="px-6 py-2">
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onPageChange={setCurrentPage}
                     />
                 </div>
+                {showTransferHistory && selectedBenefit && (
+                    <TransferHistory
+                        benefit={selectedBenefit}
+                        onClose={() => setShowTransferHistory(false)}
+                    />
+                )}
             </div>
-
-            {showTransferHistory && selectedBenefit && (
-                <TransferHistory
-                    benefit={selectedBenefit}
-                    onClose={() => setShowTransferHistory(false)}
-                />
-            )}
         </div>
     );
 }

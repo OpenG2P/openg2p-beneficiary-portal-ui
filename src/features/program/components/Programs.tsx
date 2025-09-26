@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 import ApplyProgramForm from '@/features/program/components/ApplyProgramForm';
 import { ProgramStatus, Program } from "@/features/program/types/program";
 
-import { Pagination, ViewAll } from '@/components/shared';
+import { Pagination, ViewAll, SearchInput } from '@/components/shared';
 import { usePagination } from "@/shared/hooks/usePagination";
+import { prefixBasePath } from "@/shared/utils/path"
 
 interface ProgramsProps {
     programs: Program[];
@@ -24,8 +26,10 @@ export default function Programs({ programs, preview = false, title = "All Progr
     const itemsPerPage = preview ? 6 : 8;
     const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(programs, itemsPerPage);
 
+    const [searchQuery, setSearchQuery] = useState("");
+
     const getStatusBadge = (status: ProgramStatus, program: Program) => {
-        const baseClasses = "inline-flex px-2 py-1 text-sm font-medium rounded-full cursor-pointer";
+        const baseClasses = "inline-flex px-2 py-1 text-sm rounded-full cursor-pointer";
 
         switch (status) {
             case "Apply":
@@ -35,35 +39,29 @@ export default function Programs({ programs, preview = false, title = "All Progr
                             setSelectedProgram(program);
                             setOpenForm(true);
                         }}
-                        className={`${baseClasses} font-bold`}
-                        style={{ color: "#3399FF", backgroundColor: "rgba(51, 153, 255, 0.12)" }}
+                        className={`${baseClasses} font-bold text-[#3399FF] bg-[#3399FF1F]`}
                     >
                         Apply
                     </span>
                 );
             case "Applied":
                 return (
-                    <span
-                        className={`${baseClasses} font-medium text-[#ED7C22]`}
-                        style={{ backgroundColor: "rgba(237, 124, 34, 0.12)" }}
-                    >
+                    <span className={`${baseClasses} font-medium text-[#ED7C22] bg-[#ED7C221F]`}>
                         Applied
                     </span>
                 );
             case "Enrolled":
                 return (
-                    <span
-                        className={`${baseClasses} font-medium text-[#00B765]`}
-                        style={{ backgroundColor: "rgba(0, 183, 101, 0.12)" }}
-                    >
+                    <span className={`${baseClasses} font-medium text-[#00B765] bg-[#00B7651F]`}>
                         Enrolled
                     </span>
                 );
             case "Pending":
-                return <span className={`${baseClasses} text-gray-500`}>Pending</span>;
+                return <span className={`${baseClasses} text-gray-500 bg-gray-100`}>Pending</span>;
             default:
-                return <span className={`${baseClasses} text-gray-500`}>Unknown</span>;
+                return <span className={`${baseClasses} text-gray-500 bg-gray-100`}>Unknown</span>;
         }
+
     };
 
     return (
@@ -71,35 +69,87 @@ export default function Programs({ programs, preview = false, title = "All Progr
             <div className="overflow-x-auto w-full">
                 <table className="w-full text-left border-collapse table-fixed">
                     <colgroup>
-                        <col style={{ width: "33.33%" }} />
+                        <col style={{ width: "30%" }} />
                         <col style={{ width: "25%" }} />
                         <col style={{ width: "25%" }} />
-                        <col style={{ width: "16.67%" }} />
+                        <col style={{ width: "20%" }} />
                     </colgroup>
 
-                    <thead>
-                        <tr>
-                            <th className="px-6 py-4 text-xl font-semibold text-[#ED7C22] text-left">
-                                {title}
-                            </th>
-                            <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                Total: <span className="font-bold text-black">{total}</span>
-                            </th>
-                            <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                Applied: <span className="font-bold text-[#ED7C22]">{applied}</span>
-                            </th>
-                            <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                Enrolled: <span className="font-bold text-[#00B765]">{enrolled}</span>
-                            </th>
-                        </tr>
-                    </thead>
+                    {preview ? (
+                        <thead>
+                            <tr>
+                                <th className="px-6 py-4 text-xl font-semibold text-[#ED7C22] text-left">
+                                    {title}
+                                </th>
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Total: <span className="font-bold text-black">{total}</span>
+                                </th>
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Applied: <span className="font-bold text-[#ED7C22]">{applied}</span>
+                                </th>
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Enrolled: <span className="font-bold text-[#00B765]">{enrolled}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                    ) : (
+                        <thead>
+                            <tr className="relative">
+                                <th className="px-6 py-4 text-left relative">
+                                    <span className="text-xl font-semibold text-[#ED7C22]">{title}</span>
+
+                                    <span
+                                        className="absolute left-3/5 mt-1 text-md font-light text-black"
+                                    >
+                                        Total: <span className={`font-bold ${!preview ? "text-[#3399FF]" : "text-black"}`}>{total}</span>
+                                    </span>
+                                </th>
+
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Applied: <span className="font-bold text-[#ED7C22]">{applied}</span>
+                                </th>
+
+                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
+                                    Enrolled: <span className="font-bold text-[#00B765]">{enrolled}</span>
+                                </th>
+
+                                <th className="px-3 py-4 text-left relative">
+                                    <SearchInput
+                                        value={searchQuery}
+                                        onChange={setSearchQuery}
+                                        placeholder="Search"
+                                        className="w-50"
+                                        onIconClick={() => console.log("Search triggered:", searchQuery)}
+                                    />
+                                </th>
+                            </tr>
+                        </thead>
+                    )}
 
                     <thead className="text-gray-900 bg-gray-100">
                         <tr>
                             <th className="px-6 py-3 text-sm font-bold w-full">Program Name</th>
-                            <th className="px-6 py-3 text-sm font-bold w-full">Application Status</th>
+                            <th className="px-6 py-3 text-sm font-bold w-full flex items-center">
+                                Application Status
+                                <Image
+                                    src={prefixBasePath("/updown_arrow.png")}
+                                    alt="Sort"
+                                    width={20}
+                                    height={20}
+                                    className="inline-block cursor-pointer opacity-40"
+                                />
+                            </th>
                             <th className="px-6 py-3 text-sm font-bold w-full">Application ID</th>
-                            <th className="px-6 py-3 text-sm font-bold w-full">Applied Date</th>
+                            <th className="px-6 py-3 text-sm font-bold w-full flex items-center">
+                                {preview ? "Applied Date" : "Applied Date & Time"}
+                                <Image
+                                    src={prefixBasePath("/updown_arrow.png")}
+                                    alt="Sort"
+                                    width={20}
+                                    height={20}
+                                    className="inline-block cursor-pointer opacity-40"
+                                />
+                            </th>
                         </tr>
                     </thead>
 

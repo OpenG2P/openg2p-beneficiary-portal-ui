@@ -36,8 +36,8 @@ export default function SchemeCard({ schemes }: SchemeCardProps) {
                         <Image
                             src={prefixBasePath(schemes[currentIndex].image)}
                             alt={schemes[currentIndex].title}
-                            fill
-                            style={{ objectFit: "contain" }}
+                            width={120}
+                            height={130}
                             className="rounded-md"
                         />
                     </div>

@@ -4,9 +4,8 @@ import Image from "next/image";
 import { useLocale } from "next-intl";
 
 import { AuthUtil } from "@/features/auth/components";
-import { Programs } from '@/features/program/components';
+import { Programs, SchemeCarousel } from '@/features/program/components';
 import { TotalBenefitsCard } from '@/features/disbursement/components';
-import { SchemeCarousel } from "@/features/scheme/components";
 import { NotificationCard } from "@/features/notification/components";
 import { RegistryCard } from "@/features/registry/components";
 

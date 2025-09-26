@@ -5,9 +5,9 @@ import { useState } from "react";
 
 import { AuthUtil } from '@/features/auth/components';
 import { Pagination } from '@/components/shared';
-import { ApplySchemeForm } from '@/features/scheme/components';
+import { ApplySchemeForm } from '@/features/program/components';
 
-import { Scheme } from "@/features/scheme/types/scheme";
+import { Scheme } from "@/features/program/types/scheme";
 
 import { usePagination } from "@/shared/hooks/usePagination";
 

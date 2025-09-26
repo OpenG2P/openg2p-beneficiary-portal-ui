@@ -8,14 +8,15 @@ import { prefixBasePath } from "@/shared/utils/path";
 interface ViewAllProps {
     href: string;
     label?: string;
+    bgColor?: string;
 }
 
-export default function ViewAll({ href, label = "View All" }: ViewAllProps) {
+export default function ViewAll({ href, label = "View All", bgColor }: ViewAllProps) {
     return (
         <div className="flex justify-start mt-4">
             <Link
                 href={href}
-                className="flex items-center text-black font-bold text-sm sm:text-base"
+                className={`flex items-center text-black font-semibold text-base ${bgColor ? bgColor : ""} px-3 py-1 rounded-[15px]`}
             >
                 {label}
                 <Image

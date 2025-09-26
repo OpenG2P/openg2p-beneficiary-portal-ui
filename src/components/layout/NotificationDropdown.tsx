@@ -37,7 +37,7 @@ export default function NotificationDropdown({
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setOpen((prev) => !prev)}
-                className="relative p-1"
+                className="relative p-1 cursor-pointer"
             >
                 <Image
                     src={prefixBasePath("/notification.png")}
@@ -58,35 +58,45 @@ export default function NotificationDropdown({
                 >
                     <div className="absolute -top-2.5 right-[70px] w-5 h-5 bg-white border-l border-t border-gray-200 rotate-45"></div>
 
-                    <div className="px-4 py-2 text-lg font-semibold text-[#ED7C22]">
+                    <div className="px-6 pb-2 pt-3 text-lg font-semibold text-[#ED7C22]">
                         Notifications
                     </div>
 
                     <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
-                        {notifications.slice(0, 4).map((n) => (
-                            <div key={n.id} className="flex gap-3 p-3 items-start">
-                                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
-                                    <Image
-                                        src={prefixBasePath("/logo.png")}
-                                        alt="Notification Icon"
-                                        width={20}
-                                        height={20}
-                                    />
-                                </div>
+                        {notifications.slice(0, 4).map((n, index) => (
+                            <div
+                                key={n.id}
+                                className={`px-2 flex items-start ${index % 2 === 0 ? "bg-gray-100" : ""}`}
+                            >
+                                <div className="flex gap-3 p-3 w-full">
+                                    <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
+                                        <Image
+                                            src={prefixBasePath("/logo.png")}
+                                            alt="Notification Icon"
+                                            width={20}
+                                            height={20}
+                                        />
+                                    </div>
 
-                                <div className="flex-1">
-                                    <h3 className="text-sm font-semibold text-gray-900">
-                                        {n.title}
-                                    </h3>
-                                    <p className="text-xs text-gray-600 mt-0.5 line-clamp-2">
-                                        {n.description}
-                                    </p>
+                                    <div className="flex-1">
+                                        <h3 className="text-sm font-semibold text-gray-900">{n.title}</h3>
+                                        <p className="text-xs text-gray-600 mt-0.5 line-clamp-2">
+                                            {n.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="mt-auto p-2">
-                        <ViewAll href="/notifications" label="View All Notifications" />
+
+                    <div className="border-b-12 border-gray-100"></div>
+
+                    <div className="mt-auto pb-4 px-6">
+                        <ViewAll
+                            href="/notifications"
+                            label="View All Notifications"
+                            bgColor="bg-gray-100"
+                        />
                     </div>
                 </div>
             )}

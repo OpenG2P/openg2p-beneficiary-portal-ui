@@ -47,7 +47,11 @@ export default function RegistryCard({ registries, viewAllHref = "/registries" }
             </div>
 
             <div className="px-4 m-3">
-                <ViewAll href={viewAllHref} label="View All" />
+                <ViewAll
+                    href={viewAllHref}
+                    label="View All"
+                    bgColor="bg-gray-100"
+                />
             </div>
         </div>
     );

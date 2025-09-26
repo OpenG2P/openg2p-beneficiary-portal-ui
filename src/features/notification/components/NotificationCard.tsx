@@ -1,47 +1,66 @@
 "use client";
 
+import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
-import { Notification } from "@/features/notification/types/notification";
+import { ViewAll } from "@/components/shared";
 
-interface NotificationProps {
-    notification: Notification;
-    compact?: boolean;
+interface Notification {
+    id: string;
+    title: string;
+    description: string;
 }
 
-export default function NotificationCard({ notification, compact = false }: NotificationProps) {
+interface NotificationCardProps {
+    notifications: Notification[];
+}
+
+export default function NotificationCard({ notifications }: NotificationCardProps) {
     return (
-        <div
-            className={`flex items-start gap-3 border rounded-lg p-3 bg-gray-50 ${!compact ? "shadow-sm bg-white" : ""
-                }`}
-        >
-            <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16">
-                <img
-                    src={prefixBasePath(notification.image)}
-                    alt={notification.title}
-                    className="w-full h-full object-contain rounded-md border bg-white"
-                />
+        <div className="bg-white rounded-xl border border-black/20 flex-1 shadow-xl">
+            <div className="flex items-center justify-between h-16 px-6">
+                <h3 className="text-xl sm:text-xl font-bold text-gray-800">
+                    Notifications / Broadcast
+                </h3>
+                <button className="p-1 rounded-full hover:bg-gray-200">
+                    <Image
+                        src={prefixBasePath("/menu-dots.png")}
+                        alt="menu"
+                        width={18}
+                        height={18}
+                    />
+                </button>
             </div>
 
-            <div className="flex-1 min-w-0">
-                <h3
-                    className={`${compact ? "text-sm sm:text-base" : "text-lg"
-                        } font-semibold text-gray-900 truncate`}
-                >
-                    {notification.title}
-                </h3>
+            <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
+                {notifications.map((n, idx) => (
+                    <div
+                        key={n.id}
+                        className={`${idx % 2 === 0 ? "bg-gray-100" : ""}`}
+                    >
+                        <div className="flex gap-3 px-3 py-2">
+                            <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
+                                <Image
+                                    src={prefixBasePath("/logo.png")}
+                                    alt="Notification Icon"
+                                    width={20}
+                                    height={20}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="text-sm font-semibold text-gray-900">{n.title}</h3>
+                                <p className="text-xs text-gray-600 mt-0.5 line-clamp-2">{n.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
-                {notification.date && (
-                    <span className="text-xs sm:text-sm text-gray-500 block mt-0.5">
-                        {notification.date}
-                    </span>
-                )}
-
-                <p
-                    className={`${compact ? "text-xs sm:text-sm line-clamp-2" : "text-sm"
-                        } text-gray-700 mt-1`}
-                >
-                    {notification.description}
-                </p>
+            <div className="px-4 m-3">
+                <ViewAll
+                    href="/notifications"
+                    label="View More"
+                    bgColor="bg-gray-100"
+                />
             </div>
         </div>
     );

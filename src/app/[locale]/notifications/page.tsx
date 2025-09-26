@@ -1,16 +1,10 @@
 "use client";
-import { useState } from "react";
 import { useLocale } from "next-intl";
-
-import { Pagination } from "@/components/shared";
-import { AuthUtil } from '@/features/auth/components';
-import { NotificationCard } from "@/features/notification/components";
-
-import { Notification } from "@/features/notification/types";
-
 import { usePagination } from "@/shared/hooks/usePagination";
-
-
+import { AuthUtil } from '@/features/auth/components';
+import { prefixBasePath } from "@/shared/utils/path";
+import { Pagination } from "@/components/shared";
+import { Notification } from "@/features/notification/types";
 
 const myNotifications: Notification[] = [
     {
@@ -83,17 +77,44 @@ export default function NotificationsPage() {
                 <h1 className="text-lg text-black font-bold">Notifications / Broadcast</h1>
             </div>
 
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20 p-4">
-                <div className="mb-4 px-4">
+            <div className="bg-white rounded-lg overflow-hidden border border-black/20">
+                <div className="mb-4 px-6 pt-4">
                     <span className="text-lg font-semibold text-black">All Notifications</span>
-                    <div className="border-b-4 border-gray-200 mt-1"></div>
                 </div>
 
-                <div className="grid gap-4 px-4">
-                    {currentItems.map((notification) => (
-                        <NotificationCard key={notification.id} notification={notification} />
+                <div className="flex flex-col divide-y divide-gray-200 max-h-[500px] overflow-y-auto">
+                    {currentItems.map((notification, idx) => (
+                        <div
+                            key={notification.id}
+                            className={`${idx % 2 === 0 ? "bg-gray-100" : "bg-white"} w-full`}
+                        >
+                            <div className="flex gap-3 px-6 py-3">
+                                <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16">
+                                    <img
+                                        src={prefixBasePath(notification.image)}
+                                        alt={notification.title}
+                                        className="w-full h-full object-contain rounded-md border bg-white"
+                                    />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <h3 className="text-sm sm:text-base font-semibold text-gray-900 truncate">
+                                        {notification.title}
+                                    </h3>
+                                    {notification.date && (
+                                        <span className="text-xs sm:text-sm text-gray-500 block mt-0.5">
+                                            {notification.date}
+                                        </span>
+                                    )}
+                                    <p className="text-xs sm:text-sm text-gray-700 mt-1 line-clamp-2">
+                                        {notification.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     ))}
+                </div>
 
+                <div className="px-6 py-3">
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}

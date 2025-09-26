@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useLocale } from "next-intl";
 
 import { AuthUtil } from "@/features/auth/components";
-import { Programs, SchemeCarousel } from '@/features/program/components';
+import { Programs, SchemeCard } from '@/features/program/components';
 import { TotalBenefitsCard } from '@/features/disbursement/components';
 import { NotificationCard } from "@/features/notification/components";
 import { RegistryCard } from "@/features/registry/components";
@@ -15,13 +15,45 @@ import { prefixBasePath } from "@/shared/utils/path";
 import { benefitsData } from '@/features/disbursement/utils/benefits';
 
 import { Notification } from "@/features/notification/types/notification";
+import { Scheme } from "@/features/program/types";
+import { Registry } from "@/features/registry/types";
 
-const previewRegistries = [
-    { name: "My Healthcare Registry" },
-    { name: "My Employment Registry" },
-    { name: "My Housing Registry" },
-    { name: "My Housing Registry" },
-    { name: "My Housing Registry" },
+const previewRegistries: Registry[] = [
+    { name: "My Healthcare Registry", id: "12938475639", date: "15/08/2025", action: "Request for Update" },
+    { name: "My Employment Registry", id: "84756392013", date: "05/08/2025", action: "Request for Update" },
+    { name: "My Housing Registry", id: "56473829102", date: "22/07/2025", action: "Request for Update" },
+    { name: "My Education Registry", id: "93847561029", date: "10/07/2025", action: "Request for Update" },
+    { name: "My Pension Registry", id: "38475619283", date: "28/06/2025", action: "Request for Update" },
+];
+
+const dashboardSchemes: Scheme[] = [
+    {
+        id: 1,
+        title: "Agriculture Subsidy",
+        date: "01/05/2025",
+        action: "Apply",
+        description:
+            "Eligible for agricultural input support to improve productivity and sustainability. This includes subsidies on seeds, fertilizers, machinery, and irrigation equipment to help farmers boost crop yield while reducing costs.",
+        image: "/scheme_card.png",
+    },
+    {
+        id: 2,
+        title: "Education Grant",
+        date: "01/05/2025",
+        action: "Apply",
+        description:
+            "Supports students with financial grants for tuition, books, and resources. The grant also covers skill development programs, training workshops, and online courses to enhance career opportunities.",
+        image: "/scheme_card.png",
+    },
+    {
+        id: 3,
+        title: "Healthcare Support",
+        date: "01/05/2025",
+        action: "Apply",
+        description:
+            "Offers assistance for consultations, medications, and hospital care. The scheme covers preventive health checkups, vaccination drives, and emergency treatments for low-income households.",
+        image: "/scheme_card.png",
+    },
 ];
 
 const dashboardNotifications: Notification[] = [
@@ -29,7 +61,7 @@ const dashboardNotifications: Notification[] = [
         id: "1",
         title: "Healthcare Registry Update",
         description:
-            "Your healthcare registry has been successfully updated with the latest medical records.",
+            "Your healthcare registry has been successfully updated with the.",
         image: "/logo.png",
     },
     {
@@ -41,6 +73,20 @@ const dashboardNotifications: Notification[] = [
     },
     {
         id: "3",
+        title: "Employment Registry Alert",
+        description:
+            "Please review the changes to your employment registry details.",
+        image: "/logo.png",
+    },
+    {
+        id: "4",
+        title: "Employment Registry Alert",
+        description:
+            "Please review the changes to your employment registry details.",
+        image: "/logo.png",
+    },
+    {
+        id: "5",
         title: "Employment Registry Alert",
         description:
             "Please review the changes to your employment registry details.",
@@ -112,32 +158,8 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
                 <RegistryCard registries={previewRegistries} />
-                <SchemeCarousel />
-                <div className="bg-white rounded-xl border border-black/20 flex-1 shadow-xl">
-                    <div className="flex items-center justify-between h-16 px-6">
-                        <h3 className="text-xl sm:text-xl font-bold text-gray-800">
-                            Notifications / Broadcast
-                        </h3>
-                        <button className="p-1 rounded-full hover:bg-gray-200">
-                            <Image
-                                src={prefixBasePath("/menu-dots.png")}
-                                alt="menu"
-                                width={18}
-                                height={18}
-                            />
-                        </button>
-                    </div>
-
-                    <div className="space-y-2 px-4 sm:px-6 py-2 max-h-[350px] overflow-y-auto">
-                        {dashboardNotifications.map((n, idx) => (
-                            <NotificationCard key={n.id} notification={n} compact />
-                        ))}
-                    </div>
-
-                    <div className="px-4 sm:px-6 py-3">
-                        <ViewAll href="/notifications" label="View More" />
-                    </div>
-                </div>
+                <SchemeCard schemes={dashboardSchemes} />
+                <NotificationCard notifications={dashboardNotifications} />
             </div>
         </div>
     );

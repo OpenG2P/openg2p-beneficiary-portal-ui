@@ -4,4 +4,5 @@ export interface Scheme {
     date: string;
     action: string;
     description: string;
+    image: string;
 }

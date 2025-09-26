@@ -41,7 +41,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
             <div className="flex items-center justify-center h-16">
                 {!expanded ? (
                     <button
-                        className="p-2 rounded-lg transition-colors cursor-pointer"
+                        className="px-2 rounded-lg transition-colors cursor-pointer"
                         onClick={() => setExpanded(true)}
                     >
                         <Image
@@ -57,7 +57,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                     <div className="flex items-center justify-between w-full px-4">
                         <span className="font-semibold text-gray-800">Menu</span>
                         <button
-                            className="p-1 rounded transition-colors cursor-pointer"
+                            className="px-1 rounded transition-colors cursor-pointer"
                             onClick={() => setExpanded(false)}
                         >
                             <Image
@@ -73,12 +73,12 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                 )}
             </div>
 
-            <div className="py-4">
+            <div className="pb-4">
                 {menuItems.map((item, idx) => (
                     <Link
                         key={idx}
                         href={item.href}
-                        className="flex items-center text-black text-xl cursor-pointer transition-all duration-200 mx-2 mr-1 my-3 rounded-lg "
+                        className="flex items-center text-black text-xl cursor-pointer transition-all duration-200 mx-2 mr-1 mb-3 rounded-lg "
                         onClick={() => handleItemClick(idx, item.href)}
                     >
                         <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">

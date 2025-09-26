@@ -62,7 +62,7 @@ export default function Header() {
 
             <div className="flex items-center gap-6">
                 <button
-                    className="text-lg text-black hover:underline"
+                    className="text-lg text-black cursor-pointer"
                     onClick={() => alert("Redirect to Help page")}
                 >
                     Help?

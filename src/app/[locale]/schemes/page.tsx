@@ -14,6 +14,7 @@ import { usePagination } from "@/shared/hooks/usePagination";
 const schemes: Scheme[] = [
     {
         id: 1042504101,
+        image: "/scheme_card.png",
         title: "OpenG2P Social Safety Net Program",
         date: "15/08/2025",
         action: "Apply",
@@ -21,6 +22,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504102,
+        image: "/scheme_card.png",
         title: "Healthcare Support Program",
         date: "05/08/2025",
         action: "Apply",
@@ -28,6 +30,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504103,
+        image: "/scheme_card.png",
         title: "Education Grant Scheme",
         date: "22/07/2025",
         action: "Apply",
@@ -35,6 +38,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504104,
+        image: "/scheme_card.png",
         title: "Housing Assistance Program",
         date: "10/07/2025",
         action: "Apply",
@@ -42,6 +46,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504105,
+        image: "/scheme_card.png",
         title: "Pension Support Scheme",
         date: "28/06/2025",
         action: "Apply",
@@ -49,6 +54,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504106,
+        image: "/scheme_card.png",
         title: "Food Security Program",
         date: "15/06/2025",
         action: "Apply",
@@ -56,6 +62,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504107,
+        image: "/scheme_card.png",
         title: "Skill Development Scheme",
         date: "05/06/2025",
         action: "Apply",
@@ -63,6 +70,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504108,
+        image: "/scheme_card.png",
         title: "Social Welfare Program",
         date: "25/05/2025",
         action: "Apply",
@@ -70,6 +78,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504109,
+        image: "/scheme_card.png",
         title: "Transportation Subsidy Scheme",
         date: "20/05/2025",
         action: "Apply",
@@ -77,6 +86,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504110,
+        image: "/scheme_card.png",
         title: "Energy Subsidy Program",
         date: "15/05/2025",
         action: "Apply",
@@ -84,6 +94,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504111,
+        image: "/scheme_card.png",
         title: "Housing Development Grant",
         date: "10/05/2025",
         action: "Apply",
@@ -91,6 +102,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504112,
+        image: "/scheme_card.png",
         title: "Education Aid Program",
         date: "05/05/2025",
         action: "Apply",
@@ -98,6 +110,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504113,
+        image: "/scheme_card.png",
         title: "Pension Relief Scheme",
         date: "01/05/2025",
         action: "Apply",
@@ -105,6 +118,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504114,
+        image: "/scheme_card.png",
         title: "Food Aid Scheme",
         date: "25/04/2025",
         action: "Apply",
@@ -112,6 +126,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504115,
+        image: "/scheme_card.png",
         title: "Skill Training Program",
         date: "15/04/2025",
         action: "Apply",
@@ -119,6 +134,7 @@ const schemes: Scheme[] = [
     },
     {
         id: 1042504116,
+        image: "/scheme_card.png",
         title: "Social Welfare Support Program",
         date: "05/04/2025",
         action: "Apply",

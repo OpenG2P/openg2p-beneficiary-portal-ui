@@ -43,7 +43,7 @@ export default function LanguageDropdown() {
         <div ref={dropdownRef} className="relative inline-block text-left">
             <button
                 onClick={() => setOpen(!open)}
-                className="flex items-center gap-2 px-3 py-1 bg-white text-sm font-medium text-gray-800 transition w-full"
+                className="flex items-center gap-2 px-3 py-1 bg-white text-sm font-medium text-gray-800 transition w-full cursor-pointer"
             >
                 <Image
                     src={prefixBasePath(localeMap[currentLocale].flag)}
@@ -69,7 +69,7 @@ export default function LanguageDropdown() {
                             <li key={locale}>
                                 <button
                                     onClick={() => handleLocaleChange(locale)}
-                                    className={`flex items-center gap-2 px-3 py-1 text-sm w-full text-left transition-colors duration-150 ${currentLocale === locale
+                                    className={`flex items-center gap-2 px-3 py-1 cursor-pointer text-sm w-full text-left transition-colors duration-150 ${currentLocale === locale
                                         ? 'bg-gray-200 text-black font-medium'
                                         : 'text-gray-700'
                                         }`}

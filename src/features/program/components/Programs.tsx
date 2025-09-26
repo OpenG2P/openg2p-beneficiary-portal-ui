@@ -156,18 +156,23 @@ export default function Programs({ preview = false, title = "All Programs" }: Pr
                 </table>
             </div>
 
-            <div className="px-2 m-4">
+            <div className="m-4">
                 {preview ? (
-                    <ViewAll href="/programs" label="View All Programs" />
-                ) : (
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={setCurrentPage}
+                    <ViewAll
+                        href="/programs"
+                        label="View All Programs"
+                        bgColor="bg-gray-100"
                     />
+                ) : (
+                    <div className="px-2">
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
+                    </div>
                 )}
             </div>
-
 
             {openForm && selectedProgram && (
                 <ApplyProgramForm

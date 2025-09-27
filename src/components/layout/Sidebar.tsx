@@ -35,8 +35,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
 
     return (
         <div
-            className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[300px]" : "w-[60px]"
-                } z-10`}
+            className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[300px]" : "w-[60px]"} z-10`}
         >
             <div className="flex items-center justify-center h-16">
                 {!expanded ? (
@@ -75,22 +74,23 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                     <Link
                         key={idx}
                         href={item.href}
-                        className="flex items-center text-black text-xl cursor-pointer transition-all duration-200 mx-2 mr-1 mb-3 rounded-lg "
+                        className="flex items-center text-black text-xl cursor-pointer transition-all duration-200 pl-1.5 mb-3 rounded-lg "
                         onClick={() => handleItemClick(idx, item.href)}
                     >
                         <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
-                            <Image
-                                src={prefixBasePath(item.icon)}
-                                alt={item.name}
-                                width={30}
-                                height={30}
-                                className="w-auto h-auto"
-                            />
+                            <div className="bg-center bg-cover bg-[url('/selfservice/background.png')]">
+                                <Image
+                                    src={prefixBasePath(item.icon)}
+                                    alt={item.name}
+                                    width={30}
+                                    height={30}
+                                    className="w-auto h-auto"
+                                />
+                            </div>
                         </div>
 
                         <span
-                            className={`transition-all duration-300 ease-in-out whitespace-nowrap overflow-hidden ${expanded ? "opacity-100 max-w-full ml-2" : "opacity-0 max-w-0 ml-0"
-                                }`}
+                            className={`transition-all duration-300 ease-in-out whitespace-nowrap overflow-hidden ${expanded ? "opacity-100 max-w-full ml-2" : "opacity-0 max-w-0 ml-0"}`}
                         >
                             {item.name}
                         </span>

@@ -27,23 +27,35 @@ export default function TransferHistory({ benefit, onClose }: TransferHistoryPro
             title={
                 <span>
                     <span className="text-[#ED7C22] text-2xl">Openg2p Safety Program</span>{" "}
-                    <span className="text-[#3399FF] text-md">Transfer History</span>
+                    <span className="text-[#3399FF] text-lg">Transfer History</span>
                 </span>
             }
             onClose={onClose}
             width="900px"
-            height="600px"
-            sidebarWidth="10%"
+            height="580px"
+            sidebarWidth="9%"
+            paddingXClass="px-12"
         >
+
             <div className="flex-1 overflow-y-auto">
                 <table className="w-full text-left border-collapse">
                     <thead className="text-black bg-gray-100">
                         <tr>
-                            <th className="px-4 py-4 text-base">Transfer ID</th>
-                            <th className="px-4 py-4 text-base">Received Fund</th>
-                            <th className="px-4 py-4 text-base">Reference Number</th>
-                            <th className="px-4 py-4 text-base">Date of Approval</th>
-                            <th className="px-4 py-4 text-base">Date of Receipt</th>
+                            <th className="text-sm">
+                                <div className="pl-12 py-4">Transfer ID</div>
+                            </th>
+                            <th className="text-sm">
+                                <div className="pl-12 py-4">Received Fund</div>
+                            </th>
+                            <th className="text-sm">
+                                <div className="pl-12 py-4">Reference Number</div>
+                            </th>
+                            <th className="text-sm">
+                                <div className="pl-12 py-4">Date of Approval</div>
+                            </th>
+                            <th className="text-sm">
+                                <div className="px-12 py-4">Date of Receipt</div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody className="divide-y">
@@ -53,23 +65,34 @@ export default function TransferHistory({ benefit, onClose }: TransferHistoryPro
                                 className={`transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-gray-100"
                                     }`}
                             >
-                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.transferId}</td>
-                                <td className="px-4 py-2 text-sm text-black font-semibold">
-                                    <span className="text-[#00B765] font-bold">{transfer.receivedFund.toFixed(2)}</span> $
+                                <td className="text-sm text-gray-900">
+                                    <div className="pl-12 py-2">{transfer.transferId}</div>
                                 </td>
-                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.refNum}</td>
-                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.dateApproved}</td>
-                                <td className="px-4 py-2 text-sm text-gray-900">{transfer.dateReceived}</td>
+                                <td className="text-sm text-black font-semibold">
+                                    <div className="pl-12 py-2">
+                                        <span className="text-[#00B765] font-bold">{transfer.receivedFund.toFixed(2)}</span> $
+                                    </div>
+                                </td>
+                                <td className="text-sm text-gray-900">
+                                    <div className="pl-12 py-2">{transfer.refNum}</div>
+                                </td>
+                                <td className="text-sm text-gray-900">
+                                    <div className="pl-12 py-2">{transfer.dateApproved}</div>
+                                </td>
+                                <td className="text-sm text-gray-900">
+                                    <div className="px-12 py-2">{transfer.dateReceived}</div>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
 
-            <div className="flex justify-start gap-4 mt-16">
+
+            <div className="flex justify-start gap-4 w-full my-10 px-12">
                 <button
                     onClick={onClose}
-                    className="px-10 py-2 bg-black text-white text-xl rounded-full cursor-pointer"
+                    className="px-8 py-2 bg-black text-white text-xl rounded-full cursor-pointer"
                 >
                     BACK
                 </button>

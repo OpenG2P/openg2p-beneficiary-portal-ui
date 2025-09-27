@@ -26,7 +26,7 @@ export default function ApplySchemeForm({ schemeName, date, description, onClose
             height="600px"
             sidebarWidth="10%"
         >
-            <div>
+            <div className="px-10">
                 <div className="relative w-full h-[120px] mb-4">
                     <Image
                         src={prefixBasePath("/scheme_new.png")}
@@ -48,15 +48,15 @@ export default function ApplySchemeForm({ schemeName, date, description, onClose
                 </p>
             </div>
 
-            <div className="flex justify-start gap-4 w-full mt-16">
+            <div className="flex justify-start gap-4 w-full my-10 px-10">
                 <button
                     onClick={onClose}
-                    className="px-8 py-1 bg-gray-100 text-black rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] cursor-pointer"
                 >
                     CANCEL
                 </button>
                 <button
-                    className="px-8 py-1 bg-black text-white rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-black text-white rounded-[20px] cursor-pointer"
                 >
                     APPLY
                 </button>

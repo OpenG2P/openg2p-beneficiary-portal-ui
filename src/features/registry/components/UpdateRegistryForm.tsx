@@ -28,11 +28,11 @@ export default function UpdateRegistryForm({ registry, onClose }: UpdateRegistry
             title={<span className="text-[#ED7C22] text-2xl">Update Registry</span>}
             onClose={onClose}
             width="800px"
-            height="600px"
-            sidebarWidth="30%"
+            height="580px"
+            sidebarWidth="25%"
             sidebarImage="/apply_program.png"
         >
-            <div className="space-y-8">
+            <div className="space-y-9 px-10">
                 <div>
                     <label className="block text-sm font-bold text-black">Program Name</label>
                     <input
@@ -71,15 +71,15 @@ export default function UpdateRegistryForm({ registry, onClose }: UpdateRegistry
                 </div>
             </div>
 
-            <div className="flex justify-start gap-4 w-full mt-16">
+            <div className="flex justify-start gap-4 w-full my-10 px-10">
                 <button
                     onClick={onClose}
-                    className="px-8 py-1 bg-gray-100 text-black rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] cursor-pointer"
                 >
                     CANCEL
                 </button>
                 <button
-                    className="px-8 py-1 bg-black text-white rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-black text-white rounded-[20px] cursor-pointer"
                 >
                     SAVE
                 </button>

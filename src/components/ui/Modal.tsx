@@ -11,6 +11,7 @@ interface ModalProps {
     height?: string;
     sidebarWidth?: string;
     sidebarImage?: string;
+    paddingXClass?: string;
 }
 
 export default function Modal({
@@ -21,6 +22,7 @@ export default function Modal({
     height = "500px",
     sidebarWidth = "25%",
     sidebarImage,
+    paddingXClass = "px-10",
 }: ModalProps) {
     return (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
@@ -36,16 +38,16 @@ export default function Modal({
                         <Image
                             src={prefixBasePath(sidebarImage)}
                             alt="Sidebar"
-                            width={150}
-                            height={150}
+                            width={122}
+                            height={120}
                             className="object-contain"
                             priority
                         />
                     )}
                 </div>
 
-                <div className="flex-1 flex flex-col p-8 relative">
-                    <div className="flex justify-between items-center mb-6">
+                <div className="flex-1 flex flex-col relative">
+                    <div className={`flex justify-between items-center pt-8 mb-6 ${paddingXClass}`}>
                         <h2 className="text-xl font-bold text-gray-800">{title}</h2>
                         <button onClick={onClose} className="cursor-pointer">
                             <Image

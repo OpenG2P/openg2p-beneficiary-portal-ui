@@ -14,11 +14,11 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
             title={<span className="text-[#ED7C22] text-2xl">Apply Program</span>}
             onClose={onClose}
             width="800px"
-            height="600px"
-            sidebarWidth="30%"
+            height="580px"
+            sidebarWidth="25%"
             sidebarImage="/apply_program.png"
         >
-            <div className="space-y-8">
+            <div className="space-y-9 px-10">
                 <div>
                     <label className="block text-sm font-bold text-black">
                         Program Name
@@ -39,7 +39,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                     </label>
                     <select
                         id="workerRegistered"
-                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 focus:outline-none"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 appearance-none pr-10 bg-[url('/selfservice/arrowdown.png')] bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] focus:outline-none cursor-pointer"
                     >
                         <option value="">Select</option>
                         <option value="yes">Yes</option>
@@ -55,7 +55,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                     </label>
                     <select
                         id="stateWelfareMember"
-                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600  rounded-md bg-gray-100 focus:outline-none"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 appearance-none bg-[url('/selfservice/arrowdown.png')] bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] focus:outline-none cursor-pointer"
                     >
                         <option value="">Select</option>
                         <option value="yes">Yes</option>
@@ -67,21 +67,21 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                         Registration Date
                     </label>
                     <input
-                        type="date"
-                        className="mt-1 block w-full text-gray-600  rounded-md bg-gray-100 py-2 px-4 focus:outline-none"
+                        type="text"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 appearance-none bg-[url('/selfservice/arrowdown.png')] bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] focus:outline-none cursor-pointer"
                     />
                 </div>
             </div>
 
-            <div className="flex justify-start gap-4 w-full mt-16">
+            <div className="flex justify-start gap-4 w-full my-10 px-10">
                 <button
                     onClick={onClose}
-                    className="px-8 py-1 bg-gray-100 text-black rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] cursor-pointer"
                 >
                     CANCEL
                 </button>
                 <button
-                    className="px-8 py-1 bg-black text-white rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-black text-white rounded-[20px] cursor-pointer"
                 >
                     APPLY
                 </button>

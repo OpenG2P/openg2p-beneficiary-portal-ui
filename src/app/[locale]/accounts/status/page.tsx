@@ -3,11 +3,12 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Suspense } from "react";
 import Link from "next/link";
-import { AuthUtil } from '@/features/auth';
-import { Loading } from '@/components';
-import { prefixBasePath } from '@/shared';
 import { useLocale } from "next-intl";
 
+import { prefixBasePath } from '@/shared/utils/path';
+
+import { AuthUtil } from '@/features/auth/components';
+import { Loading } from '@/components/shared';
 
 export default function AccountsStatusPage() {
     const lang = useLocale();

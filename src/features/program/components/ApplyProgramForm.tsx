@@ -1,15 +1,7 @@
 "use client";
-import Image from "next/image";
-import { prefixBasePath } from '@/shared';
 
-type ProgramStatus = "Apply" | "Applied" | "Pending" | "Enrolled";
-
-interface Program {
-    name: string;
-    status: ProgramStatus;
-    id: string;
-    appliedDate: string;
-}
+import { Program } from "@/features/program/types/program";
+import Modal from "@/components/ui/Modal";
 
 interface ApplyProgramFormProps {
     program: Program;
@@ -18,79 +10,82 @@ interface ApplyProgramFormProps {
 
 export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormProps) {
     return (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg w-[800px] h-[600px] p-8 relative opacity-100">
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-xl font-bold text-gray-800">Apply Program</h2>
-                    <button
-                        onClick={onClose}
-                        className="cursor-pointer"
-                    >
-                        <Image
-                            src={prefixBasePath("/x.png")}
-                            alt="Close"
-                            width={20}
-                            height={20}
-                            priority
-                        />
-                    </button>
+        <Modal
+            title={<span className="text-[#ED7C22] text-2xl">Apply Program</span>}
+            onClose={onClose}
+            width="800px"
+            height="580px"
+            sidebarWidth="25%"
+            sidebarImage="/apply_program.png"
+        >
+            <div className="space-y-9 px-10">
+                <div>
+                    <label className="block text-sm font-bold text-black">
+                        Program Name
+                    </label>
+                    <input
+                        type="text"
+                        value={program.name}
+                        disabled
+                        className="mt-1 block w-full text-gray-600 rounded-md bg-gray-100 py-2 px-4"
+                    />
                 </div>
-
-                <div className="space-y-5">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            Program Name
-                        </label>
-                        <input
-                            type="text"
-                            value={program.name}
-                            disabled
-                            className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            Whether Worker Registered
-                        </label>
-                        <input
-                            type="text"
-                            className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            Whether Member of any State Welfare Board
-                        </label>
-                        <input
-                            type="text"
-                            className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            Registration Date
-                        </label>
-                        <input
-                            type="date"
-                            className="mt-1 block w-full text-black rounded-md bg-[#D9D9D9] p-2"
-                        />
-                    </div>
+                <div>
+                    <label
+                        htmlFor="workerRegistered"
+                        className="block text-sm font-bold text-black"
+                    >
+                        Whether Worker Registered
+                    </label>
+                    <select
+                        id="workerRegistered"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 appearance-none pr-10 bg-[url('/selfservice/arrowdown.png')] bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] focus:outline-none cursor-pointer"
+                    >
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
                 </div>
-                <div className="flex justify-start gap-4 mt-8">
-                    <button
-                        onClick={onClose}
-                        className="px-5 py-2 bg-[#D9D9D9] text-black rounded-md cursor-pointer"
+                <div>
+                    <label
+                        htmlFor="stateWelfareMember"
+                        className="block text-sm font-bold text-black"
                     >
-                        Cancel
-                    </button>
-                    <button
-                        className="px-5 py-2 bg-black text-white rounded-md cursor-pointer"
+                        Whether Member of any State Welfare Board
+                    </label>
+                    <select
+                        id="stateWelfareMember"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 appearance-none bg-[url('/selfservice/arrowdown.png')] bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] focus:outline-none cursor-pointer"
                     >
-                        Apply
-                    </button>
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <label className="block text-sm font-bold text-black">
+                        Registration Date
+                    </label>
+                    <input
+                        type="text"
+                        className="block w-full py-2 px-4 mt-1 text-sm text-gray-600 rounded-md bg-gray-100 appearance-none bg-[url('/selfservice/arrowdown.png')] bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] focus:outline-none cursor-pointer"
+                    />
                 </div>
             </div>
-        </div>
+
+            <div className="flex justify-start gap-4 w-full my-10 px-10">
+                <button
+                    onClick={onClose}
+                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] cursor-pointer"
+                >
+                    CANCEL
+                </button>
+                <button
+                    className="px-8 py-2 bg-black text-white rounded-[20px] cursor-pointer"
+                >
+                    APPLY
+                </button>
+            </div>
+        </Modal>
     );
 }
-

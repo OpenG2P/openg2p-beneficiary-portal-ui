@@ -5,8 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+
 import { useAuth } from "@/context/global";
-import { prefixBasePath, prefixBaseApiPath } from '@/shared';
+import { prefixBasePath, prefixBaseApiPath } from "@/shared/utils/path";
 
 export default function ProfileDropdown() {
     const [open, setOpen] = useState(false);
@@ -37,48 +38,56 @@ export default function ProfileDropdown() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const avatarSrc = profile?.picture || prefixBasePath("/user.png");
+    const avatarSrc = profile?.picture || prefixBasePath("/user1.png");
 
     return (
-        <div ref={dropdownRef} className="relative inline-block text-left">
+        <div ref={dropdownRef} className="relative">
+            {/* Trigger */}
             <button
                 onClick={toggleDropdown}
-                className="flex items-center gap-2 px-3 py-1 bg-[#D9D9D9] text-sm font-medium text-gray-800 rounded-md transition"
+                className="flex items-center gap-2 px-3 py-1 bg-white text-sm font-medium text-gray-800 rounded-md transition cursor-pointer"
             >
-                <span className="text-lg">{`Hi, ${profile?.given_name || "User"}`}</span>
-                <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-gray-300">
+                <span className="text-lg">{`Hi, ${profile?.name || "User"}`}</span>
+                <div className="w-8 h-8 rounded-full overflow-hidden shadow-xl border-2 border-gray-300">
                     <Image
                         src={avatarSrc}
                         alt="User Avatar"
-                        width={32}
-                        height={32}
+                        width={38}
+                        height={38}
                         className="object-cover"
                     />
                 </div>
-                <svg
-                    className={`w-3 h-3 text-gray-600 transition-transform ${open ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
             </button>
 
             {open && (
-                <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-50 animate-fadeIn origin-top-right">
-                    <div className="py-1">
+                <div className="absolute right-0 top-10 mt-3 w-35 bg-white border border-gray-200 rounded-lg shadow-xl z-50 flex flex-col">
+                    <div className="absolute -top-2.5 right-9 w-5 h-5 bg-white border-l border-t border-gray-200 rotate-45"></div>
+
+                    <div className="flex flex-col">
                         <Link
                             href={`/${lang}/myprofile`}
                             onClick={() => setOpen(false)}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
+                            className="flex items-center gap-x-2 px-4 py-4 text-sm text-black font-bold"
                         >
+                            <Image
+                                src={prefixBasePath("/user_dropdown.png")}
+                                alt="My Profile"
+                                width={13}
+                                height={15}
+                            />
                             {t("profileDropdown.myProfile")}
                         </Link>
+
                         <button
                             onClick={logoutHandler}
-                            className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 transition"
+                            className="flex items-center gap-x-2 px-4 pb-4 text-sm text-black font-bold"
                         >
+                            <Image
+                                src={prefixBasePath("/logout.png")}
+                                alt="Logout"
+                                width={18}
+                                height={18}
+                            />
                             {t("profileDropdown.logout")}
                         </button>
                     </div>

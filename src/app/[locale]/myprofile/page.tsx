@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { AuthUtil } from '@/features/auth';
+
+import { prefixBasePath } from '@/shared/utils/path';
 import { useAuth } from "@/context/global";
-import { prefixBasePath } from '@/shared';
+
+import { AuthUtil } from '@/features/auth/components';
 
 export default function MyProfile() {
     const lang = useLocale();
@@ -13,7 +15,7 @@ export default function MyProfile() {
     const { profile } = useAuth();
     const t = useTranslations();
 
-    const avatarSrc = profile?.picture ? profile.picture : prefixBasePath("/user.png");
+    const avatarSrc = profile?.picture || prefixBasePath("/user1.png");
 
     return (
         <div className="min-h-screen bg-gray-50 px-4 sm:px-10 py-6">
@@ -30,7 +32,7 @@ export default function MyProfile() {
                     </div>
                     <div className="text-center md:text-left">
                         <h1 className="text-2xl font-bold text-gray-900">
-                            {profile?.given_name || "User"}
+                            {profile?.name || "User"}
                         </h1>
                         {profile?.email && (
                             <p className="text-gray-500 mt-1">{profile.email}</p>
@@ -44,14 +46,14 @@ export default function MyProfile() {
                             {t("profilePage.personalInfo")}
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-600">
-                            <span className="font-medium">{t("profilePage.givenName")}:</span>
-                            <span>{profile?.given_name || "-"}</span>
+                            <span className="font-medium">{t("profilePage.name")}:</span>
+                            <span>{profile?.name || "-"}</span>
 
-                            <span className="font-medium">{t("profilePage.additionalName")}:</span>
-                            <span>{profile?.addl_name || "-"}</span>
+                            <span className="font-medium">{t("profilePage.providerIdType")}:</span>
+                            <span>{profile?.provider_unique_id_type || "-"}</span>
 
-                            <span className="font-medium">{t("profilePage.familyName")}:</span>
-                            <span>{profile?.family_name || "-"}</span>
+                            <span className="font-medium">{t("profilePage.providerUniqueId")}:</span>
+                            <span>{profile?.provider_unique_id || "-"}</span>
                         </div>
                     </div>
 
@@ -64,7 +66,8 @@ export default function MyProfile() {
                             <span>{profile?.email || "-"}</span>
 
                             <span className="font-medium">{t("profilePage.phone")}:</span>
-                            <span>{profile?.phone_numbers?.map((p) => p.phone_no).join(", ") || "-"}</span>
+                            <span>{profile?.phone_number || "-"}</span>
+
                         </div>
                     </div>
 

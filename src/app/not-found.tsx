@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { prefixBasePath } from '@/shared';
-import { NotFound as NotFoundComponent } from '@/components';
+import { NotFound as NotFoundComponent } from '@/components/shared';
+import { prefixBasePath } from '@/shared/utils/path';
 
 export const metadata: Metadata = {
     title: "Page Not Found - Beneficiary Portal",

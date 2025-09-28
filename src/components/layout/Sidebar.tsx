@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
+
 import { getMenuItems, getRouteToIndex } from '@/shared/utils/navigation';
-import { prefixBasePath } from '@/shared';
+import { prefixBasePath } from '@/shared/utils/path';
 
 
 interface SidebarProps {
@@ -24,7 +25,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
     const activeItem =
         Object.entries(routeToIndex).find(([href]) =>
             pathname.startsWith(href)
-        )?.[1] ?? 0;
+        )?.[1];
 
     const handleItemClick = (index: number, href: string) => {
         if (onItemClick) {
@@ -34,13 +35,12 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
 
     return (
         <div
-            className={`bg-[#D9D9D9] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[250px]" : "w-[60px]"
-                } z-10`}
+            className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[300px]" : "w-[60px]"} z-10`}
         >
-            <div className="flex items-center justify-center h-16 border-b border-gray-200">
+            <div className="flex items-center justify-center h-16">
                 {!expanded ? (
                     <button
-                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
+                        className="px-2 rounded-lg transition-colors cursor-pointer"
                         onClick={() => setExpanded(true)}
                     >
                         <Image
@@ -48,15 +48,13 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                             alt="Menu"
                             width={24}
                             height={24}
-                            priority
-                            style={{ objectFit: "contain" }}
                         />
                     </button>
                 ) : (
                     <div className="flex items-center justify-between w-full px-4">
                         <span className="font-semibold text-gray-800">Menu</span>
                         <button
-                            className="p-1 hover:bg-gray-100 rounded transition-colors cursor-pointer"
+                            className="px-1 rounded transition-colors cursor-pointer"
                             onClick={() => setExpanded(false)}
                         >
                             <Image
@@ -65,33 +63,34 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                                 width={20}
                                 height={20}
                                 priority
-                                style={{ objectFit: "contain" }}
                             />
                         </button>
                     </div>
                 )}
             </div>
 
-            <div className="py-4">
+            <div className="pb-4">
                 {menuItems.map((item, idx) => (
                     <Link
                         key={idx}
                         href={item.href}
-                        className={`flex items-center cursor-pointer transition-all duration-200 mx-2 mr-1 my-3 rounded-lg ${activeItem === idx
-                            ? "bg-gray-100 text-black font-bold"
-                            : "text-black hover:bg-gray-100 hover:text-gray-900"
-                            }`}
+                        className="flex items-center text-black text-xl cursor-pointer transition-all duration-200 pl-1.5 mb-3 rounded-lg "
                         onClick={() => handleItemClick(idx, item.href)}
                     >
                         <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
-                            <div className="bg-gray-400 rounded-full w-8 h-8 p-1"></div>
+                            <div className="bg-center bg-cover bg-[url('/selfservice/background.png')]">
+                                <Image
+                                    src={prefixBasePath(item.icon)}
+                                    alt={item.name}
+                                    width={30}
+                                    height={30}
+                                    className="w-auto h-auto"
+                                />
+                            </div>
                         </div>
 
                         <span
-                            className={`transition-all duration-300 ease-in-out whitespace-nowrap overflow-hidden ${expanded
-                                ? "opacity-100 max-w-full ml-2"
-                                : "opacity-0 max-w-0 ml-0"
-                                }`}
+                            className={`transition-all duration-300 ease-in-out whitespace-nowrap overflow-hidden ${expanded ? "opacity-100 max-w-full ml-2" : "opacity-0 max-w-0 ml-0"}`}
                         >
                             {item.name}
                         </span>

@@ -1,14 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import { prefixBaseApiPath, prefixBasePath } from '@/shared';
 
-type LoginProvider = {
-    id: number;
-    name: string;
-    type: string;
-    displayName: string | any;
-    displayIconUrl: string;
-};
+import { prefixBaseApiPath, prefixBasePath } from '@/shared/utils/path';
+import { LoginProvider } from "@/features/auth/types/loginprovider";
 
 export default function LoginProviders() {
     const [loginProviders, setLoginProviders] = useState<LoginProvider[]>([]);
@@ -35,9 +29,9 @@ export default function LoginProviders() {
                 <div key={x.id} className="mb-2">
                     <a
                         href={prefixBaseApiPath(
-                            `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${prefixBasePath("/")}`
+                            `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${prefixBasePath("/dashboard")}`
                         )}
-                        className="block w-full py-2 rounded-md text-lg bg-black text-white font-semibold text-center hover:bg-gray-950 transition cursor-pointer"
+                        className="block w-full py-2 rounded-[30px] text-lg bg-black text-white font-semibold text-center hover:bg-gray-950 transition cursor-pointer"
                     >
                         {x.displayName}
                     </a>

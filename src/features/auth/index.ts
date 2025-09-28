@@ -1,7 +1,7 @@
 // Components
 export { default as LoginForm } from './components/LoginForm';
 export { default as LoginProviders } from './components/LoginProviders';
-export { AuthUtil } from './components/Auth';
+export { default as AuthUtil } from './components/Auth';
 
 // Hooks
 export { useAuth } from './hooks/useAuth';
@@ -10,4 +10,4 @@ export { useAuth } from './hooks/useAuth';
 export { authService } from './services/authService';
 
 // Types
-export type { UserProfile, LoginCredentials, LoginResponse, AuthState, AuthContextType } from './types';
+export type { UserProfile, LoginCredentials, LoginResponse, AuthState, AuthContextType, LoginProvider } from './types';

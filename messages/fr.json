@@ -11,28 +11,27 @@
     },
     "loginPage": {
         "portalName": "Portail des bénéficiaires",
-        "emailOrPhone": "Email ou téléphone",
+        "emailOrPhone": "Email ou Téléphone",
         "password": "Mot de passe",
-        "resetPassword": "Réinitialiser le mot de passe ?",
-        "login": "CONNEXION",
-        "loginWithNationalID": "SE CONNECTER AVEC NUMÉRO NATIONAL"
+        "resetPassword": "Mot de passe oublié",
+        "login": "SE CONNECTER",
+        "loginWithNationalID": "SE CONNECTER AVEC L'ID NATIONAL"
     },
     "profileDropdown": {
-        "myProfile": "Mon profil",
+        "myProfile": "Mon Profil",
         "logout": "Se déconnecter"
     },
     "profilePage": {
-        "title": "Mon profil",
+        "title": "Mon Profil",
         "personalInfo": "Informations personnelles",
-        "givenName": "Prénom",
-        "additionalName": "Deuxième prénom",
-        "familyName": "Nom de famille",
+        "name": "Nom",
+        "providerIdType": "Type d'identifiant fournisseur",
+        "providerUniqueId": "Identifiant unique du fournisseur",
         "contactInfo": "Informations de contact",
         "email": "Email",
         "phone": "Téléphone",
-        "demographics": "Détails démographiques",
+        "demographics": "Données démographiques",
         "gender": "Sexe",
-        "birthdate": "Date de naissance",
-        "home": "Accueil"
+        "birthdate": "Date de naissance"
     }
 }

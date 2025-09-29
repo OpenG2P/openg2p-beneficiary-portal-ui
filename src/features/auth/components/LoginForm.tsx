@@ -19,7 +19,7 @@ export default function LoginForm() {
     return (
         <div className="w-[420px] h-[540px] bg-[linear-gradient(180deg,#FEF1C1_0%,#FCBE00_100%)] rounded-[20px] shadow-lg flex flex-col items-center p-6">
             <Image
-                src={prefixBasePath("/login1.png")}
+                src={prefixBasePath("/openg2p_logo.png")}
                 alt={t("portalName")}
                 width={80}
                 height={80}
@@ -27,11 +27,11 @@ export default function LoginForm() {
                 className="mb-4"
             />
 
-            <p className="text-2xl font-semibold text-black mb-6">{t("portalName")}</p>
+            <p className="text-[30px] font-medium text-black mb-6">{t("portalName")}</p>
 
             <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 px-8">
                 <div className="flex flex-col">
-                    <label className="mb-1 text-md font-medium text-black">
+                    <label className="mb-1 text-[16px] font-medium text-black">
                         {t("emailOrPhone")}
                     </label>
                     <input
@@ -42,7 +42,7 @@ export default function LoginForm() {
                 </div>
 
                 <div className="flex flex-col">
-                    <label className="mb-1 text-md font-medium text-black">{t("password")}</label>
+                    <label className="mb-1 text-[16px] font-medium text-black">{t("password")}</label>
                     <input
                         type="password"
                         placeholder="enter your password"
@@ -51,7 +51,7 @@ export default function LoginForm() {
                     <div className="flex justify-end mt-1">
                         <a
                             href="/reset-password"
-                            className="text-sm text-gray-500 hover:text-black font-bold"
+                            className="text-[14px] text-gray-500 hover:text-black font-bold"
                         >
                             {t("resetPassword")}
                         </a>
@@ -60,7 +60,7 @@ export default function LoginForm() {
 
                 <button
                     type="submit"
-                    className="mt-2 w-full bg-black text-lg text-white py-2 rounded-[30px] font-semibold hover:bg-gray-950 transition cursor-pointer"
+                    className="mt-2 w-full bg-black text-[16px] text-white py-2 rounded-[20px] font-semibold hover:bg-gray-950 transition cursor-pointer"
                 >
                     {t("login")}
                 </button>

@@ -23,7 +23,7 @@ export default function NotificationCard({ notifications }: NotificationCardProp
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
                     <Image
-                        src={prefixBasePath("/menu-dots.png")}
+                        src={prefixBasePath("/more.png")}
                         alt="menu"
                         width={18}
                         height={18}

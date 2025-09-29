@@ -35,7 +35,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
 
     return (
         <div
-            className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[300px]" : "w-[60px]"} z-10`}
+            className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[250px]" : "w-[60px]"} z-10`}
         >
             <div className="flex items-center justify-center h-16">
                 {!expanded ? (
@@ -44,7 +44,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                         onClick={() => setExpanded(true)}
                     >
                         <Image
-                            src={prefixBasePath("/bar.png")}
+                            src={prefixBasePath("/menu.png")}
                             alt="Menu"
                             width={24}
                             height={24}
@@ -58,7 +58,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                             onClick={() => setExpanded(false)}
                         >
                             <Image
-                                src={prefixBasePath("/x.png")}
+                                src={prefixBasePath("/close.png")}
                                 alt="Close"
                                 width={20}
                                 height={20}
@@ -74,19 +74,17 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                     <Link
                         key={idx}
                         href={item.href}
-                        className="flex items-center text-black text-xl cursor-pointer transition-all duration-200 pl-1.5 mb-3 rounded-lg "
+                        className="flex items-center text-black text-[16px] font-medium cursor-pointer transition-all duration-200 pl-1.5 mb-3 rounded-lg "
                         onClick={() => handleItemClick(idx, item.href)}
                     >
                         <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
-                            <div className="bg-center bg-cover bg-[url('/selfservice/background.png')]">
-                                <Image
-                                    src={prefixBasePath(item.icon)}
-                                    alt={item.name}
-                                    width={30}
-                                    height={30}
-                                    className="w-auto h-auto"
-                                />
-                            </div>
+                            <Image
+                                src={prefixBasePath(item.icon)}
+                                alt={item.name}
+                                width={30}
+                                height={30}
+                                className="w-auto h-auto"
+                            />
                         </div>
 
                         <span

@@ -8,58 +8,60 @@ import { prefixBasePath } from '@/shared/utils/path';
 export default function LoginPage() {
     const lang = useLocale();
     return (
-        <div className="relative min-h-screen bg-white items-center justify-center overflow-hidden">
+        <div className="relative h-screen bg-white flex items-center justify-center overflow-hidden">
             <AuthUtil successRedirectUrl={`/${lang}/dashboard`} />
 
-            <div className="absolute z-10 top-[130px] left-[650px]">
-                <LoginForm />
+            <div className="relative w-full max-w-[1600px] h-full max-h-[800px] mx-auto px-4">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                    <LoginForm />
+                </div>
+
+                <div className="absolute inset-0 -translate-x-[3%]">
+                    <Image
+                        src={prefixBasePath("/02_login.png")}
+                        alt="Decoration"
+                        width={200}
+                        height={200}
+                        className="absolute top-[25.38%] left-[22.5%] w-[12.5%] h-auto rounded-xl shadow-lg"
+                    />
+                    <Image
+                        src={prefixBasePath("/04_login.png")}
+                        alt="Decoration"
+                        width={110}
+                        height={115}
+                        className="absolute top-[42%] left-[13.75%] w-[6.88%] h-auto rounded-xl shadow-lg"
+                    />
+                    <Image
+                        src={prefixBasePath("/05_login.png")}
+                        alt="Decoration"
+                        width={260}
+                        height={159}
+                        className="absolute top-[53.38%] left-[21.25%] w-[16.25%] h-auto rounded-xl shadow-lg"
+                    />
+
+                    <Image
+                        src={prefixBasePath("/01_login.png")}
+                        alt="Decoration"
+                        width={200}
+                        height={210}
+                        className="absolute top-[24.13%] left-[70%] w-[12.5%] h-auto rounded-xl shadow-lg"
+                    />
+                    <Image
+                        src={prefixBasePath("/03_login.png")}
+                        alt="Decoration"
+                        width={120}
+                        height={120}
+                        className="absolute top-[40.13%] left-[83.75%] w-[7.5%] h-auto rounded-xl shadow-lg"
+                    />
+                    <Image
+                        src={prefixBasePath("/06_login.png")}
+                        alt="Decoration"
+                        width={260}
+                        height={150}
+                        className="absolute top-[54.5%] left-[73.13%] w-[16.25%] h-auto rounded-xl shadow-lg"
+                    />
+                </div>
             </div>
-
-            {/* Left side images - exact positioning */}
-            <Image
-                src={prefixBasePath("/left_top.png")}
-                alt="Decoration"
-                width={200}
-                height={200}
-                className="absolute top-[203px] left-[360px] rounded-xl shadow-lg"
-            />
-            <Image
-                src={prefixBasePath("/left_mid.png")}
-                alt="Decoration"
-                width={110}
-                height={115}
-                className="absolute top-[336px] left-[220px] rounded-xl shadow-lg"
-            />
-            <Image
-                src={prefixBasePath("/left_bottom.png")}
-                alt="Decoration"
-                width={260}
-                height={159}
-                className="absolute top-[427px] left-[340px] rounded-xl shadow-lg"
-            />
-
-            {/* Right side images - exact positioning */}
-            <Image
-                src={prefixBasePath("/right_top.png")}
-                alt="Decoration"
-                width={200}
-                height={210}
-                className="absolute top-[193px] left-[1120px] rounded-xl shadow-lg"
-            />
-            <Image
-                src={prefixBasePath("/right_mid.png")}
-                alt="Decoration"
-                width={120}
-                height={120}
-                className="absolute top-[321px] left-[1340px] rounded-xl shadow-lg"
-            />
-            <Image
-                src={prefixBasePath("/right_bottom.png")}
-                alt="Decoration"
-                width={260}
-                height={150}
-                className="absolute top-[436px] left-[1170px] rounded-xl shadow-lg"
-            />
         </div>
     );
 }

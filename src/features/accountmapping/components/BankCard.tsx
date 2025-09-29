@@ -55,7 +55,7 @@ export default function BankCard({ account }: BankCardProps) {
 
                     <div className="absolute right-12 bottom-0 opacity-20">
                         <Image
-                            src={prefixBasePath("/bank_user.png")}
+                            src={prefixBasePath("/account_01.png")}
                             alt="User"
                             width={108}
                             height={102}

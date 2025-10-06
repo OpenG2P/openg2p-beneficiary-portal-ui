@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import { prefixBasePath } from '@/shared/utils/path';
-import { LanguageDropdown, ProfileDropdown, NotificationDropdown } from '@/components/layout';
+import { LanguageDropdown, ProfileDropdown, NotificationDropdown, DepartmentDropdown } from '@/components/layout';
 
 import { Notification } from "@/features/notification/types/notification";
 
@@ -58,6 +58,7 @@ export default function Header() {
                 <span className="text-[20px] font-semibold text-black">
                     Beneficiary Portal
                 </span>
+                <DepartmentDropdown />
             </div>
 
             <div className="flex items-center gap-6">

@@ -62,10 +62,16 @@ export default function Header() {
 
             <div className="flex items-center gap-6">
                 <button
-                    className="text-lg text-black cursor-pointer"
+                    // className="text-lg text-black cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => console.log("Redirect to Help page")}
                 >
-                    Help?
+                    {/* <span className="text-[14px] font-[400px] text-black"> */}
+                    <span className="text-lg font-[400px] text-black">
+                        Help?
+                    </span>
+                    {/* Help? */}
+
                 </button>
                 <LanguageDropdown />
                 <NotificationDropdown notifications={notifications} unreadCount={3} />

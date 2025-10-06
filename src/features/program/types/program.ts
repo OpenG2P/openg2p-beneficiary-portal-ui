@@ -7,7 +7,7 @@ export interface Program {
     appliedDate: string;
     description?: string;
     eligibility?: string[];
-    benefits?: string[];
+    benefits: string[];
     requirements?: string[];
     deadline?: string;
     category?: string;

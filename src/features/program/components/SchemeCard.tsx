@@ -16,13 +16,13 @@ export default function SchemeCard({ schemes }: SchemeCardProps) {
 
     return (
         <div className="bg-white rounded-xl border border-black/20 flex-1 shadow-xl">
-            <div className="flex items-center justify-between h-16 px-6">
+            <div className="flex items-center justify-between h-16 px-8">
                 <h3 className="text-xl sm:text-xl font-bold text-gray-800">
                     Potential Applicable Schemes
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
                     <Image
-                        src={prefixBasePath("/menu-dots.png")}
+                        src={prefixBasePath("/more.png")}
                         alt="menu"
                         width={18}
                         height={18}
@@ -50,7 +50,7 @@ export default function SchemeCard({ schemes }: SchemeCardProps) {
                 </div>
             </div>
 
-            <div className="flex justify-between items-center w-full px-2 m-4 max-w-sm">
+            <div className="flex justify-between items-center w-full px-4 m-4 max-w-sm">
                 <button className="px-3 py-1 bg-gray-100 text-black rounded-[20px] flex items-center text-base font-semibold cursor-pointer">
                     Check Your Eligibility
                     <Image

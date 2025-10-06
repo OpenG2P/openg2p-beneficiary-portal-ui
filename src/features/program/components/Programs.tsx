@@ -69,10 +69,10 @@ export default function Programs({ programs, preview = false, title = "All Progr
             <div className="overflow-x-auto w-full">
                 <table className="w-full text-left border-collapse table-fixed">
                     <colgroup>
-                        <col style={{ width: "30%" }} />
-                        <col style={{ width: "25%" }} />
-                        <col style={{ width: "25%" }} />
-                        <col style={{ width: "20%" }} />
+                        <col className="w-3/10" />
+                        <col className="w-2.5/10" />
+                        <col className="w-2.5/10" />
+                        <col className="w-2/10" />
                     </colgroup>
 
                     {preview ? (

@@ -1,14 +1,14 @@
 import { MenuItem } from "@/shared/types/menuitem";
 
 export const getMenuItems = (locale: string): MenuItem[] => [
-    { name: "Dashboard", href: `/${locale}/dashboard`, icon: "/dashboard.png" },
-    { name: "My Programs", href: `/${locale}/programs`, icon: "/programs.png" },
-    { name: "Total Benefits", href: `/${locale}/benefits`, icon: "/benefits.png" },
-    { name: "Bank Accounts", href: `/${locale}/accounts`, icon: "/account.png" },
-    { name: "My Registries", href: `/${locale}/registries`, icon: "/registries.png" },
-    { name: "Applicable Schemes", href: `/${locale}/schemes`, icon: "/scheme.png" },
-    { name: "Notifications", href: `/${locale}/notifications`, icon: "/notifications.png" },
-    { name: "Complaints", href: `/${locale}/complaints`, icon: "/complaints.png" },
+    { name: "Dashboard", href: `/${locale}/dashboard`, icon: "/leftmenu_dashboard_01.png" },
+    { name: "My Programs", href: `/${locale}/programs`, icon: "/leftmenu_programs_02.png" },
+    { name: "Total Benefits", href: `/${locale}/benefits`, icon: "/leftmenu_benefits_03.png" },
+    { name: "Bank Accounts", href: `/${locale}/accounts`, icon: "/leftmenu_bankaccount_04.png" },
+    { name: "My Registries", href: `/${locale}/registries`, icon: "/leftmenu_registries_05.png" },
+    { name: "Applicable Schemes", href: `/${locale}/schemes`, icon: "/leftmenu_schemes_06.png" },
+    { name: "Notifications", href: `/${locale}/notifications`, icon: "/leftmenu_notifications_07.png" },
+    { name: "Complaints", href: `/${locale}/complaints`, icon: "/leftmenu_complaints_08.png" },
 ];
 
 export const getRouteToIndex = (locale: string): Record<string, number> =>

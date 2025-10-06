@@ -26,105 +26,93 @@ export default function HomePage() {
             router.push(`/${locale}/login`);
         }
     };
+
     return (
-        <main
-            className="relative min-h-screen w-full overflow-hidden"
-            style={{
-                background: 'linear-gradient(114.12deg, #000000 0%, #202020 70.19%, #939292 100%)'
-            }}
-        >
-            <div className="absolute inset-0">
-                <div className="absolute top-[320px] left-[557px]">
-                    <Image
-                        src={prefixBasePath("/top_left.png")}
-                        alt="Decoration"
-                        width={185}
-                        height={156}
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
+        <main className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-black via-[#202020] to-[#939292]">
+            <div className="relative w-full max-w-[1440px] h-full max-h-[900px] mx-auto px-4">
+                <div className="absolute top-[5.44%] left-[31.74%] w-[61.81%] h-[77%]">
+                    <div className="absolute top-[39.1%] left-[11.24%] w-[20.79%]">
+                        <Image
+                            src={prefixBasePath("/02_landing.png")}
+                            alt="Decoration"
+                            width={185}
+                            height={156}
+                            className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        />
+                    </div>
+
+                    <div className="absolute top-[66.09%] left-[35.39%] w-[15.17%]">
+                        <Image
+                            src={prefixBasePath("/05_landing.png")}
+                            alt="Decoration"
+                            width={135}
+                            height={145}
+                            className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        />
+                    </div>
+
+                    <div className="absolute top-[67.97%] left-0 w-[30.9%]">
+                        <Image
+                            src={prefixBasePath("/06_landing.png")}
+                            alt="Decoration"
+                            width={275}
+                            height={181}
+                            className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        />
+                    </div>
+
+                    <div className="absolute top-0 left-[36.52%] w-[41.57%]">
+                        <Image
+                            src={prefixBasePath("/01_landing.png")}
+                            alt="Decoration"
+                            width={370}
+                            height={353}
+                            className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        />
+                    </div>
+
+                    <div className="absolute top-[26.41%] left-[82.58%] w-[15.17%]">
+                        <Image
+                            src={prefixBasePath("/04_landing.png")}
+                            alt="Decoration"
+                            width={135}
+                            height={130}
+                            className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        />
+                    </div>
+
+                    <div className="absolute top-[53.54%] left-[55.06%] w-[30.9%]">
+                        <Image
+                            src={prefixBasePath("/03_landing.png")}
+                            alt="Decoration"
+                            width={275}
+                            height={197}
+                            className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        />
+                    </div>
+
+                    <div className="absolute top-[83.41%] left-[87.08%] w-[12.92%]">
+                        <Image
+                            src={prefixBasePath("/07_landing.png")}
+                            alt="Logo"
+                            width={115}
+                            height={115}
+                            className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        />
+                    </div>
                 </div>
 
-                <div className="absolute top-[507px] left-[772px]">
-                    <Image
-                        src={prefixBasePath("/bottom_mid.png")}
-                        alt="Decoration"
-                        width={135}
-                        height={145}
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
-                </div>
-
-                <div className="absolute top-[520px] left-[457px]">
-                    <Image
-                        src={prefixBasePath("/bottom_left.png")}
-                        alt="Decoration"
-                        width={275}
-                        height={181}
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
-                </div>
-
-                <div className="absolute top-[49px] left-[782px]">
-                    <Image
-                        src={prefixBasePath("/top_mid.png")}
-                        alt="Decoration"
-                        width={370}
-                        height={353}
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
-                </div>
-
-                <div className="absolute top-[232px] left-[1192px]">
-                    <Image
-                        src={prefixBasePath("/top_right.png")}
-                        alt="Decoration"
-                        width={135}
-                        height={130}
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
-                </div>
-
-                <div className="absolute top-[420px] left-[947px]">
-                    <Image
-                        src={prefixBasePath("/bottom_right.png")}
-                        alt="Decoration"
-                        width={275}
-                        height={197}
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
-                </div>
-
-                <div className="absolute top-[627px] left-[1232px]">
-                    <Image
-                        src={prefixBasePath("/logo_1.png")}
-                        alt="Logo"
-                        width={115}
-                        height={115}
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
-                </div>
-            </div>
-
-            <div className="relative z-10 flex flex-col justify-center min-h-screen">
-                <div
-                    className="absolute"
-                    style={{
-                        top: '252px',
-                        left: '100px',
-                        width: '504px',
-                        height: '208px'
-                    }}
-                >
+                <div className="absolute top-[28%] left-[6.94%] w-[35%]">
                     <div className="mb-6">
-                        <h1 className="text-white text-5xl font-bold leading-tight">
+                        <h1 className="text-white leading-[100%] text-[50px]">
                             Welcome to OpenG2P<br />
-                            <span className="text-[#ED7C22] text-4xl">Beneficiary Portal</span>
+                            <span className="text-[#ED7C22] text-[50px]">Beneficiary Portal</span>
                         </h1>
                     </div>
 
                     <button
                         onClick={handleGetStarted}
-                        className="bg-white text-black py-2 px-4 rounded-[30px] font-semibold text-lg flex items-center justify-center gap-2 cursor-pointer"
+                        className="bg-white text-black text-[20px] py-2 px-6 rounded-[30px] font-medium flex items-center justify-center gap-2 cursor-pointer"
                     >
                         GET STARTED
                         <Image
@@ -134,10 +122,8 @@ export default function HomePage() {
                             height={18}
                         />
                     </button>
-
                 </div>
             </div>
-
         </main>
     );
 }

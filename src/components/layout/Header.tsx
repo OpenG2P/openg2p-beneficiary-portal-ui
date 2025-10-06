@@ -50,22 +50,28 @@ export default function Header() {
         <header className="w-full bg-white flex items-center justify-between px-3 py-3 fixed top-0 left-0 right-0 z-20 h-[70px] border-b border-gray-300 shadow-md">
             <div className="flex items-center gap-3">
                 <Image
-                    src={prefixBasePath("/logo.png")}
-                    alt="Logo"
+                    src={prefixBasePath("/openg2p_logo.png")}
+                    alt="Openg2p Logo"
                     width={40}
                     height={40}
                 />
-                <span className="text-xl font-semibold text-gray-800">
+                <span className="text-[20px] font-semibold text-black">
                     Beneficiary Portal
                 </span>
             </div>
 
             <div className="flex items-center gap-6">
                 <button
-                    className="text-lg text-black cursor-pointer"
-                    onClick={() => alert("Redirect to Help page")}
+                    // className="text-lg text-black cursor-pointer"
+                    className="cursor-pointer"
+                    onClick={() => console.log("Redirect to Help page")}
                 >
-                    Help?
+                    {/* <span className="text-[14px] font-[400px] text-black"> */}
+                    <span className="text-lg font-[400px] text-black">
+                        Help?
+                    </span>
+                    {/* Help? */}
+
                 </button>
                 <LanguageDropdown />
                 <NotificationDropdown notifications={notifications} unreadCount={3} />

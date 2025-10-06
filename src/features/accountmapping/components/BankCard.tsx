@@ -16,14 +16,11 @@ export default function BankCard({ account }: BankCardProps) {
     return (
         <div className="flex flex-col text-white">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
-                <div className="bg-[#ffcb30] px-6 pt-6 pb-2 flex justify-between items-end">
+                <div className="bg-[#ffcb30] px-8 pt-8 pb-2 flex justify-between items-end">
                     <div>
                         <h3 className="text-lg font-bold text-black">
-                            Bank Accounts
+                            Account/Wallet
                         </h3>
-                        <p className="text-sm text-white">
-                            Current linked account
-                        </p>
                     </div>
 
                     <div className="pb-1 pr-10">
@@ -37,7 +34,7 @@ export default function BankCard({ account }: BankCardProps) {
                     </div>
                 </div>
 
-                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-6 py-4 relative">
+                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-8 pt-6 pb-7 relative">
                     <div className="mb-6">
                         <div className="text-xl font-bold text-black mb-2">
                             {account.name}
@@ -55,7 +52,7 @@ export default function BankCard({ account }: BankCardProps) {
 
                     <div className="absolute right-12 bottom-0 opacity-20">
                         <Image
-                            src={prefixBasePath("/bank_user.png")}
+                            src={prefixBasePath("/account_01.png")}
                             alt="User"
                             width={108}
                             height={102}

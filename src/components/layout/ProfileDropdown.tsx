@@ -38,7 +38,7 @@ export default function ProfileDropdown() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const avatarSrc = profile?.picture || prefixBasePath("/user1.png");
+    const avatarSrc = profile?.picture || prefixBasePath("/user_image.png");
 
     return (
         <div ref={dropdownRef} className="relative">

@@ -17,7 +17,7 @@ export default function DepartmentDropdown() {
     };
 
     return (
-        <div className="relative w-32 select-none text-sm">
+        <div className="relative w-34 select-none text-sm">
             <div
                 className="flex justify-between items-center bg-[#F5F5F5] rounded-[15px] px-3 py-1 cursor-pointer"
                 onClick={toggleDropdown}

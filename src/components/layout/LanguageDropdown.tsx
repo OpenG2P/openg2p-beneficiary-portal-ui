@@ -51,15 +51,14 @@ export default function LanguageDropdown() {
                     width={27}
                     height={18}
                 />
-                <span className="capitalize text-lg">{localeMap[currentLocale].name}</span>
-                <svg
-                    className={`w-4 h-4 text-black transition-transform ${open ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <span className="text-[16px] font-400 text-black">{localeMap[currentLocale].name}</span>
+                <Image
+                    src={prefixBasePath("/arrow_02.png")}
+                    alt="Dropdown"
+                    width={14}
+                    height={14}
+                    className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+                />
             </button>
 
             {open && (
@@ -80,7 +79,7 @@ export default function LanguageDropdown() {
                                         width={27}
                                         height={18}
                                     />
-                                    <span className="capitalize">{localeMap[locale].name}</span>
+                                    <span className="text-[16px] font-400 text-black">{localeMap[locale].name}</span>
                                 </button>
                             </li>
                         ))}

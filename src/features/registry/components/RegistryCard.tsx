@@ -16,7 +16,7 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
     return (
         <div className="bg-white rounded-xl border border-black/20 flex-1 shadow-xl">
             <div className="flex items-center justify-between h-16 px-8">
-                <h3 className="text-xl sm:text-xl font-bold text-gray-800">
+                <h3 className="text-[20px] font-[600] text-black">
                     My Registries
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
@@ -33,11 +33,11 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
                 {registries.map((registry, idx) => (
                     <div
                         key={idx}
-                        className={`relative ${idx % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
+                        className={`relative ${idx % 2 === 0 ? "bg-[#F5F5F5]" : "bg-white"}`}
                     >
                         <div className="flex items-center justify-start py-4 px-8">
                             <span className="w-2.5 h-2.5 rounded-full bg-gray-400 mr-3 flex-shrink-0"></span>
-                            <p className="font-medium text-gray-800 text-sm sm:text-base truncate">
+                            <p className="font-[400] text-black text-[16px]">
                                 {registry.name}
                             </p>
                         </div>
@@ -49,7 +49,7 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
                 <ViewAll
                     href="/registries"
                     label="View all Registries"
-                    bgColor="bg-gray-100"
+                    bgColor="bg-[#F5F5F5]"
                 />
             </div>
         </div>

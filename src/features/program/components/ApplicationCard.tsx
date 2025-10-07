@@ -43,7 +43,7 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
     return (
         <div className="bg-white rounded-xl border border-black/20 flex-1 shadow-xl">
             <div className="flex items-center justify-between h-16 px-8">
-                <h3 className="text-xl sm:text-xl font-bold text-gray-800">
+                <h3 className="text-[20px] font-[600] text-black">
                     My Applications
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
@@ -56,7 +56,7 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                 </button>
             </div>
 
-            <div className="flex px-8 py-4 bg-gray-100 font-semibold text-black text-sm sm:text-base">
+            <div className="flex px-8 py-4 bg-[#F5F5F5] font-[700] text-black text-[16px]">
                 <span className="flex-1">Name</span>
                 <span className="min-w-[90px]">Status</span>
             </div>
@@ -67,11 +67,11 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                     return (
                         <div
                             key={idx}
-                            className={`flex items-center px-8 py-3 ${idx % 2 === 0 ? "bg-white" : "bg-gray-100"}`}
+                            className={`flex items-center px-8 py-3 ${idx % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
                         >
-                            <p className="flex-1 truncate font-medium text-gray-800">{app.name}</p>
+                            <p className="flex-1 truncate font-[400] text-black">{app.name}</p>
                             <p
-                                className={`min-w-[90px] text-center font-medium rounded-full px-1 py-1 ${bgClass} ${textClass}`}
+                                className={`min-w-[90px] text-center font-[400] rounded-full px-1 py-1 ${bgClass} ${textClass}`}
                             >
                                 {app.status}
                             </p>
@@ -84,7 +84,7 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                 <ViewAll
                     href="/applications"
                     label="View all Applications"
-                    bgColor="bg-gray-100"
+                    bgColor="bg-[#F5F5F5]"
                 />
             </div>
         </div>

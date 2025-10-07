@@ -18,7 +18,7 @@ export default function BankCard({ account }: BankCardProps) {
             <div className="rounded-xl shadow-xl overflow-hidden relative">
                 <div className="bg-[#ffcb30] px-8 pt-8 pb-2 flex justify-between items-end">
                     <div>
-                        <h3 className="text-lg font-bold text-black">
+                        <h3 className="text-[20px] font-[600] text-black">
                             Account/Wallet
                         </h3>
                     </div>
@@ -36,17 +36,17 @@ export default function BankCard({ account }: BankCardProps) {
 
                 <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-8 pt-6 pb-7 relative">
                     <div className="mb-6">
-                        <div className="text-xl font-bold text-black mb-2">
+                        <div className="text-[16px] font-[600] text-black mb-2">
                             {account.name}
                         </div>
-                        <div className="text-lg font-medium text-black">
+                        <div className="text-[16px] font-[600] text-black">
                             {account.number}
                         </div>
                     </div>
 
                     <ViewAll
                         href="/accounts"
-                        label="Edit Account Details"
+                        label="View Account Details"
                         bgColor="bg-white/40"
                     />
 

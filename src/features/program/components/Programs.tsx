@@ -6,6 +6,9 @@ import { SearchInput, Pagination } from "@/components/shared";
 import { ApplyProgramForm, ProgramDetails } from "@/features/program/components";
 import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
+
 
 interface ProgramsProps {
     programs: Program[];
@@ -32,11 +35,14 @@ const getBenefitClasses = (benefit: string) => {
 };
 
 export default function Programs({ programs, showMyPrograms, activeTab, setActiveTab }: ProgramsProps) {
+    const lang = useLocale();
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [openForm, setOpenForm] = useState(false);
     const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
     const [openDetails, setOpenDetails] = useState(false);
+    const router = useRouter();
+
 
 
     const itemsPerPage = 8;
@@ -69,10 +75,7 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
         }
         return (
             <button
-                onClick={() => {
-                    setSelectedProgram(program);
-                    setOpenForm(true);
-                }}
+                onClick={() => router.push(`/${lang}/programs/apply/${program.id}`)}
                 className="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold hover:bg-gray-800 transition"
             >
                 Apply

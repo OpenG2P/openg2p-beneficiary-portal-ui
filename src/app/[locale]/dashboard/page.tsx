@@ -53,12 +53,13 @@ export const programsData: Program[] = [
 
 const bankAccount = { name: "John Smith", number: "xxxx xxxx xxxx 1234" };
 
+
 const previewRegistries: Registry[] = [
-    { name: "My Healthcare Registry", id: "12938475639", date: "15/08/2025", action: "Request for Update" },
-    { name: "My Employment Registry", id: "84756392013", date: "05/08/2025", action: "Request for Update" },
-    { name: "My Housing Registry", id: "56473829102", date: "22/07/2025", action: "Request for Update" },
-    { name: "My Education Registry", id: "93847561029", date: "10/07/2025", action: "Request for Update" },
-    { name: "My Pension Registry", id: "38475619283", date: "28/06/2025", action: "Request for Update" },
+    { name: "Healthcare Registry", id: "12938475639", date: "15/08/2025", action: "Apply", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
+    { name: "Employment Registry", id: "84756392013", date: "05/08/2025", action: "Applied", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
+    { name: "Housing Registry", id: "56473829102", date: "22/07/2025", action: "Apply", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
+    { name: "Education Registry", id: "93847561029", date: "10/07/2025", action: "Apply", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
+    { name: "Pension Registry", id: "38475619283", date: "28/06/2025", action: "Apply", description: "Records pension plans and disbursement details." },
 ];
 
 const dashboardApplications: Application[] = [

@@ -8,6 +8,7 @@ export default function RegistryActionDropdown({ registry, onSelect }: { registr
     const [open, setOpen] = useState(false);
 
     const options = [
+        "View Details",
         "Request For Address Change",
         "Request For Change Phone Number",
         "Request For Location Change",

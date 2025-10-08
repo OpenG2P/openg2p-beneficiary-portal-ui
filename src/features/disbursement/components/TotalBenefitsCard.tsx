@@ -19,7 +19,7 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
         <div className="flex flex-col text-white">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
                 <div className="bg-[#ffcb30] px-8 pt-8 pb-2 flex justify-between items-end">
-                    <h3 className="text-lg font-bold text-black">
+                    <h3 className="text-[20px] font-[600] text-black">
                         Benefits Received till date
                     </h3>
                 </div>
@@ -35,7 +35,7 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                         />
                     </div>
 
-                    <div className="flex justify-center gap-15 relative">
+                    <div className="flex justify-center gap-14 relative">
                         {benefits.map((b, index) => (
                             <div
                                 key={index}
@@ -52,7 +52,7 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                                 </div>
 
                                 <div className="text-[20px] text-white font-[700]">{b.value}</div>
-                                <div className="text-[14px] text-black font-[700]">{b.label}</div>
+                                <div className="text-[14px] text-black font-[500]">{b.label}</div>
                             </div>
                         ))}
                     </div>

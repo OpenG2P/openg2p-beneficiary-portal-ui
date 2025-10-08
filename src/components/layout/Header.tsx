@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import { prefixBasePath } from '@/shared/utils/path';
-import { LanguageDropdown, ProfileDropdown, NotificationDropdown } from '@/components/layout';
+import { LanguageDropdown, ProfileDropdown, NotificationDropdown, DepartmentDropdown } from '@/components/layout';
 
 import { Notification } from "@/features/notification/types/notification";
 
@@ -47,7 +47,7 @@ export const notifications: Notification[] = [
 
 export default function Header() {
     return (
-        <header className="w-full bg-white flex items-center justify-between px-3 py-3 fixed top-0 left-0 right-0 z-20 h-[70px] border-b border-gray-300 shadow-md">
+        <header className="w-full bg-white flex items-center justify-between px-3 py-3 fixed top-0 left-0 right-0 z-20 h-[70px] border-b border-gray-300 shadow-[0px_4px_10px_0px_#00000026]">
             <div className="flex items-center gap-3">
                 <Image
                     src={prefixBasePath("/openg2p_logo.png")}
@@ -55,23 +55,20 @@ export default function Header() {
                     width={40}
                     height={40}
                 />
-                <span className="text-[20px] font-semibold text-black">
+                <span className="text-[20px] font-[500] text-black">
                     Beneficiary Portal
                 </span>
+                <DepartmentDropdown />
             </div>
 
             <div className="flex items-center gap-6">
                 <button
-                    // className="text-lg text-black cursor-pointer"
                     className="cursor-pointer"
                     onClick={() => console.log("Redirect to Help page")}
                 >
-                    {/* <span className="text-[14px] font-[400px] text-black"> */}
-                    <span className="text-lg font-[400px] text-black">
+                    <span className="text-[16px] font-[400] text-black">
                         Help?
                     </span>
-                    {/* Help? */}
-
                 </button>
                 <LanguageDropdown />
                 <NotificationDropdown notifications={notifications} unreadCount={3} />

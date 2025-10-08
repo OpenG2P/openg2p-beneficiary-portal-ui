@@ -51,7 +51,7 @@ export default function Modal({
                         <h2 className="text-xl font-bold text-gray-800">{title}</h2>
                         <button onClick={onClose} className="cursor-pointer">
                             <Image
-                                src={prefixBasePath("/x.png")}
+                                src={prefixBasePath("/close.png")}
                                 alt="Close"
                                 width={20}
                                 height={20}

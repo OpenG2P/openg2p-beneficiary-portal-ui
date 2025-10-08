@@ -34,7 +34,7 @@ export default function BankCard({ account }: BankCardProps) {
                     </div>
                 </div>
 
-                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-8 pt-6 pb-7 relative">
+                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-8 pt-6 pb-8 relative">
                     <div className="mb-6">
                         <div className="text-[16px] font-[600] text-black mb-2">
                             {account.name}

@@ -1,190 +1,191 @@
 "use client";
+
 import { useState } from "react";
+import { Program } from "@/features/program/types/program";
+import { SearchInput, Pagination } from "@/components/shared";
+import ApplyProgramForm from "@/features/program/components/ApplyProgramForm";
+import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
-
-import ApplyProgramForm from '@/features/program/components/ApplyProgramForm';
-import { ProgramStatus, Program } from "@/features/program/types/program";
-
-import { Pagination, ViewAll, SearchInput } from '@/components/shared';
-import { usePagination } from "@/shared/hooks/usePagination";
-import { prefixBasePath } from "@/shared/utils/path"
 
 interface ProgramsProps {
     programs: Program[];
-    preview?: boolean;
-    title?: string;
+    showMyPrograms: boolean;
+    activeTab: "all" | "my";
+    setActiveTab: (tab: "all" | "my") => void;
 }
 
-export default function Programs({ programs, preview = false, title = "All Programs" }: ProgramsProps) {
+const getBenefitClasses = (benefit: string) => {
+    switch (benefit.toLowerCase()) {
+        case "money":
+            return { bg: "bg-[rgba(0,183,101,0.2)]", text: "text-[#00B765]" };
+        case "rice":
+            return { bg: "bg-[rgba(237,124,34,0.2)]", text: "text-[#ED7C22]" };
+        case "oil":
+            return { bg: "bg-[rgba(51,153,255,0.2)]", text: "text-[#3399FF]" };
+        case "books":
+            return { bg: "bg-[rgba(252,190,0,0.2)]", text: "text-[#FCBE00]" };
+        case "home":
+            return { bg: "bg-[rgba(165,84,236,0.2)]", text: "text-[#A554EC]" };
+        default:
+            return { bg: "bg-gray-100", text: "text-gray-800" };
+    }
+};
+
+export default function Programs({ programs, showMyPrograms, activeTab, setActiveTab }: ProgramsProps) {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
     const [openForm, setOpenForm] = useState(false);
     const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
 
-    const total = programs.length;
-    const applied = programs.filter((p) => p.status === "Applied").length;
-    const enrolled = programs.filter((p) => p.status === "Enrolled").length;
+    const itemsPerPage = 8;
 
-    const itemsPerPage = preview ? 6 : 8;
-    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(programs, itemsPerPage);
+    const filteredPrograms = programs.filter((p) =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
-    const [searchQuery, setSearchQuery] = useState("");
+    const totalPages = Math.ceil(filteredPrograms.length / itemsPerPage);
+    const currentItems = filteredPrograms.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
-    const getStatusBadge = (status: ProgramStatus, program: Program) => {
-        const baseClasses = "inline-flex px-2 py-1 text-sm rounded-full cursor-pointer";
+    const getBenefitBadge = (benefit: string) => {
+        const { bg, text } = getBenefitClasses(benefit);
+        return (
+            <span
+                key={benefit}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
+            >
+                {benefit}
+            </span>
+        );
+    };
 
-        switch (status) {
-            case "Apply":
-                return (
-                    <span
-                        onClick={() => {
-                            setSelectedProgram(program);
-                            setOpenForm(true);
-                        }}
-                        className={`${baseClasses} font-bold text-[#3399FF] bg-[#3399FF1F]`}
-                    >
-                        Apply
-                    </span>
-                );
-            case "Applied":
-                return (
-                    <span className={`${baseClasses} font-medium text-[#ED7C22] bg-[#ED7C221F]`}>
-                        Applied
-                    </span>
-                );
-            case "Enrolled":
-                return (
-                    <span className={`${baseClasses} font-medium text-[#00B765] bg-[#00B7651F]`}>
-                        Enrolled
-                    </span>
-                );
-            case "Pending":
-                return <span className={`${baseClasses} text-gray-500 bg-gray-100`}>Pending</span>;
-            default:
-                return <span className={`${baseClasses} text-gray-500 bg-gray-100`}>Unknown</span>;
+    const getActionButton = (status: string, program: Program) => {
+        if (status === "Applied") {
+            return <span className="px-1 py-1 text-[#3399FF] font-medium cursor-default">Applied</span>;
         }
-
+        return (
+            <button
+                onClick={() => {
+                    setSelectedProgram(program);
+                    setOpenForm(true);
+                }}
+                className="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold hover:bg-gray-800 transition"
+            >
+                Apply
+            </button>
+        );
     };
 
     return (
-        <div className="bg-white rounded-xl shadow-xl w-full border border-black/20">
-            <div className="overflow-x-auto w-full">
-                <table className="w-full text-left border-collapse table-fixed">
-                    <colgroup>
-                        <col className="w-3/10" />
-                        <col className="w-2.5/10" />
-                        <col className="w-2.5/10" />
-                        <col className="w-2/10" />
-                    </colgroup>
+        <div className="bg-white rounded-2xl shadow-md w-full border border-gray-200">
+            <div className="flex items-center justify-between px-8 pt-8 pb-4 gap-4 flex-wrap">
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => setActiveTab("all")}
+                        className={`px-6 py-2 text-[16px] font-[600] rounded-t-xl ${activeTab === "all" ? "bg-[#ED7C22] text-white" : "bg-[#F5F5F5] text-black/50"
+                            }`}
+                    >
+                        All Programs
+                    </button>
+                    <button
+                        onClick={() => setActiveTab("my")}
+                        className={`px-6 py-2 text-[16px] font-[600] rounded-t-xl ${activeTab === "my" ? "bg-[#ED7C22] text-white" : "bg-[#F5F5F5] text-black/50"
+                            }`}
+                    >
+                        My Programs
+                    </button>
+                </div>
 
-                    {preview ? (
-                        <thead>
-                            <tr>
-                                <th className="px-6 py-4 text-xl font-semibold text-[#ED7C22] text-left">
-                                    {title}
-                                </th>
-                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                    Total: <span className="font-bold text-black">{total}</span>
-                                </th>
-                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                    Applied: <span className="font-bold text-[#ED7C22]">{applied}</span>
-                                </th>
-                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                    Enrolled: <span className="font-bold text-[#00B765]">{enrolled}</span>
-                                </th>
-                            </tr>
-                        </thead>
-                    ) : (
-                        <thead>
-                            <tr className="relative">
-                                <th className="px-6 py-4 text-left relative">
-                                    <span className="text-xl font-semibold text-[#ED7C22]">{title}</span>
+                <SearchInput
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                    placeholder="Search programs"
+                    className="w-[200px]"
+                />
+            </div>
 
-                                    <span
-                                        className="absolute left-3/5 mt-1 text-md font-light text-black"
-                                    >
-                                        Total: <span className={`font-bold ${!preview ? "text-[#3399FF]" : "text-black"}`}>{total}</span>
-                                    </span>
-                                </th>
-
-                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                    Applied: <span className="font-bold text-[#ED7C22]">{applied}</span>
-                                </th>
-
-                                <th className="px-6 py-4 text-gray-900 font-normal text-left">
-                                    Enrolled: <span className="font-bold text-[#00B765]">{enrolled}</span>
-                                </th>
-
-                                <th className="px-3 py-4 text-left relative">
-                                    <SearchInput
-                                        value={searchQuery}
-                                        onChange={setSearchQuery}
-                                        placeholder="Search"
-                                        className="w-50"
-                                        onIconClick={() => console.log("Search triggered:", searchQuery)}
-                                    />
-                                </th>
-                            </tr>
-                        </thead>
-                    )}
-
-                    <thead className="text-gray-900 bg-gray-100">
+            <div className="overflow-x-auto">
+                <table className="min-w-full border-collapse">
+                    <thead className="bg-[#F5F5F5] text-black text-[16px] font-[700]">
                         <tr>
-                            <th className="px-6 py-3 text-sm font-bold w-full">Program Name</th>
-                            <th className="px-6 py-3 text-sm font-bold w-full flex items-center">
-                                Application Status
-                                <Image
-                                    src={prefixBasePath("/updown_arrow.png")}
-                                    alt="Sort"
-                                    width={20}
-                                    height={20}
-                                    className="inline-block cursor-pointer opacity-40"
-                                />
+                            <th className="px-8 py-3 text-left">Program Name</th>
+                            <th className="px-8 py-3 text-left">
+                                <div className="flex items-center gap-0.5">
+                                    Benefits
+                                    <Image
+                                        src={prefixBasePath("/updown_arrow.png")}
+                                        alt="Sort"
+                                        width={20}
+                                        height={20}
+                                        className="cursor-pointer opacity-40"
+                                    />
+                                </div>
                             </th>
-                            <th className="px-6 py-3 text-sm font-bold w-full">Application ID</th>
-                            <th className="px-6 py-3 text-sm font-bold w-full flex items-center">
-                                {preview ? "Applied Date" : "Applied Date & Time"}
-                                <Image
-                                    src={prefixBasePath("/updown_arrow.png")}
-                                    alt="Sort"
-                                    width={20}
-                                    height={20}
-                                    className="inline-block cursor-pointer opacity-40"
-                                />
-                            </th>
+                            {showMyPrograms ? (
+                                <>
+                                    <th className="px-8 py-3 text-left">
+                                        <div className="flex items-center gap-0.5">
+                                            Enrollment Date
+                                            <Image
+                                                src={prefixBasePath("/updown_arrow.png")}
+                                                alt="Sort"
+                                                width={20}
+                                                height={20}
+                                                className="cursor-pointer opacity-40"
+                                            />
+                                        </div>
+                                    </th>
+                                    <th className="px-8 py-3 text-left">
+                                        View
+                                    </th>
+                                </>
+                            ) : (
+                                <th className="px-8 py-3 text-left">Action</th>
+                            )}
                         </tr>
                     </thead>
-
                     <tbody>
-                        {currentItems.map((program, index) => (
+                        {currentItems.map((p, idx) => (
                             <tr
-                                key={index}
-                                className={`transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-gray-100"}`}
+                                key={p.id}
+                                className={`text-sm ${idx % 2 === 0 ? "bg-white" : "bg-black/5"}`}
                             >
-                                <td className="px-6 py-3 text-gray-900 font-medium w-full">{program.name}</td>
-                                <td className="px-6 py-3 w-full">{getStatusBadge(program.status, program)}</td>
-                                <td className="px-6 py-3 font-mono text-gray-700 text-sm w-full">
-                                    {program.status === "Apply" ? "--" : program.id}
+                                <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.name}</td>
+                                <td className="px-7 py-3 flex flex-wrap gap-2">
+                                    {p.benefits.map(getBenefitBadge)}
                                 </td>
-                                <td className="px-6 py-3 text-gray-700 text-sm w-full">
-                                    {program.status === "Apply"
-                                        ? "---"
-                                        : preview
-                                            ? program.appliedDate.split(" ")[0]
-                                            : program.appliedDate}
-                                </td>
+                                {showMyPrograms ? (
+                                    <>
+                                        <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.appliedDate}</td>
+                                        <td className="px-7 py-3 text-[16px] font-[400] text-black">
+                                            <button className="text-[#3399FF] bg-white border border-gray-200 px-3 py-1 rounded-full font-[500] shadow-sm hover:bg-[#3399FF]/10 transition">
+                                                View Details
+                                            </button>
+                                        </td>
+                                    </>
+                                ) : (
+                                    <td className="px-8 py-3">{getActionButton(p.status, p)}</td>
+                                )}
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
 
-            <div className="m-4">
-                {preview ? (
-                    <ViewAll href="/programs" label="View All Programs" bgColor="bg-gray-100" />
-                ) : (
-                    <div className="px-2">
-                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-                    </div>
-                )}
+            <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+                <div className="text-gray-600">
+                    Showing{" "}
+                    {Math.min((currentPage - 1) * itemsPerPage + 1, filteredPrograms.length)}–
+                    {Math.min(currentPage * itemsPerPage, filteredPrograms.length)} of{" "}
+                    {filteredPrograms.length}
+                </div>
             </div>
 
             {openForm && selectedProgram && (

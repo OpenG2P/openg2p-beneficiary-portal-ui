@@ -90,20 +90,6 @@ const dashboardNotifications: Notification[] = [
             "Please review the changes to your employment registry details.",
         image: "/logo.png",
     },
-    {
-        id: "4",
-        title: "Employment Registry Alert",
-        description:
-            "Please review the changes to your employment registry details.",
-        image: "/logo.png",
-    },
-    {
-        id: "5",
-        title: "Employment Registry Alert",
-        description:
-            "Please review the changes to your employment registry details.",
-        image: "/logo.png",
-    },
 ];
 
 const benefits = [

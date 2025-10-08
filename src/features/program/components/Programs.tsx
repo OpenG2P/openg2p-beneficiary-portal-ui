@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Program } from "@/features/program/types/program";
 import { SearchInput, Pagination } from "@/components/shared";
-import ApplyProgramForm from "@/features/program/components/ApplyProgramForm";
+import { ApplyProgramForm, ProgramDetails } from "@/features/program/components";
 import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
 
@@ -36,6 +36,8 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
     const [currentPage, setCurrentPage] = useState(1);
     const [openForm, setOpenForm] = useState(false);
     const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
+    const [openDetails, setOpenDetails] = useState(false);
+
 
     const itemsPerPage = 8;
 
@@ -80,7 +82,7 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
 
     return (
         <div className="bg-white rounded-2xl shadow-md w-full border border-gray-200">
-            <div className="flex items-center justify-between px-8 pt-8 pb-4 gap-4 flex-wrap">
+            <div className="flex items-center justify-between px-8 pt-8 gap-4 flex-wrap">
                 <div className="flex gap-2">
                     <button
                         onClick={() => setActiveTab("all")}
@@ -97,15 +99,15 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
                         My Programs
                     </button>
                 </div>
-
-                <SearchInput
-                    value={searchQuery}
-                    onChange={setSearchQuery}
-                    placeholder="Search programs"
-                    className="w-[200px]"
-                />
+                <div className="flex justify-center pb-4">
+                    <SearchInput
+                        value={searchQuery}
+                        onChange={setSearchQuery}
+                        placeholder="Search programs"
+                        className="w-[200px]"
+                    />
+                </div>
             </div>
-
             <div className="overflow-x-auto">
                 <table className="min-w-full border-collapse">
                     <thead className="bg-[#F5F5F5] text-black text-[16px] font-[700]">
@@ -159,8 +161,14 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
                                 {showMyPrograms ? (
                                     <>
                                         <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.appliedDate}</td>
-                                        <td className="px-7 py-3 text-[16px] font-[400] text-black">
-                                            <button className="text-[#3399FF] bg-white border border-gray-200 px-3 py-1 rounded-full font-[500] shadow-sm hover:bg-[#3399FF]/10 transition">
+                                        <td className="px-7 py-2 text-[16px] font-[400] text-black">
+                                            <button
+                                                className="text-[#3399FF] bg-white border border-gray-200 px-3 py-1 rounded-full font-[500] shadow-sm hover:bg-[#3399FF]/10 transition"
+                                                onClick={() => {
+                                                    setSelectedProgram(p);
+                                                    setOpenDetails(true);
+                                                }}
+                                            >
                                                 View Details
                                             </button>
                                         </td>
@@ -189,8 +197,18 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
             </div>
 
             {openForm && selectedProgram && (
-                <ApplyProgramForm program={selectedProgram} onClose={() => setOpenForm(false)} />
+                <ApplyProgramForm
+                    program={selectedProgram}
+                    onClose={() => setOpenForm(false)} />
             )}
+
+            {openDetails && selectedProgram && (
+                <ProgramDetails
+                    program={selectedProgram}
+                    onClose={() => setOpenDetails(false)}
+                />
+            )}
+
         </div>
     );
 }

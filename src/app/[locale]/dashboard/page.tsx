@@ -105,24 +105,24 @@ export default function Dashboard() {
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     return (
-        <div className="px-10 py-4 min-h-screen bg-white">
+        <div className="pl-[50px] py-4 min-h-screen bg-white">
             <h1 className="text-[18px] font-[600] text-gray-800 mb-2">
                 Dashboard
             </h1>
 
 
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-                <div className="xl:col-span-2">
+            <div className="grid grid-cols-1 xl:grid-cols-3">
+                <div className="xl:col-span-2 pr-[50px] pb-[50px]">
                     <ProgramTable programs={programsData} />
                 </div>
 
-                <div className="flex flex-col gap-4 sm:gap-6 h-full">
+                <div className="flex flex-col gap-4 sm:gap-6 h-full pb-[50px] pr-[50px]">
                     <TotalBenefitsCard benefits={benefits} />
                     <BankCard account={bankAccount} />
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-3 ">
                 <RegistryCard registries={previewRegistries} />
                 <ApplicationCard applications={dashboardApplications} />
                 <NotificationCard notifications={dashboardNotifications} />

@@ -1,10 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useLocale } from "next-intl";
 
 import { prefixBaseApiPath, prefixBasePath } from '@/shared/utils/path';
 import { LoginProvider } from "@/features/auth/types/loginprovider";
 
 export default function LoginProviders() {
+    const locale = useLocale();
     const [loginProviders, setLoginProviders] = useState<LoginProvider[]>([]);
 
     useEffect(() => {
@@ -29,7 +31,7 @@ export default function LoginProviders() {
                 <div key={x.id} className="mb-2">
                     <a
                         href={prefixBaseApiPath(
-                            `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${prefixBasePath("/dashboard")}`
+                            `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${encodeURIComponent(window.location.origin + prefixBasePath(`/${locale}/dashboard`))}`
                         )}
                         className="block w-full py-2 rounded-[20px] text-[16px] bg-black text-white font-semibold text-center hover:bg-gray-950 transition cursor-pointer"
                     >

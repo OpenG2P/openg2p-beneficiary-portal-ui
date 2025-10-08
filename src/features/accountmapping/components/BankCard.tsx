@@ -14,16 +14,16 @@ interface BankCardProps {
 
 export default function BankCard({ account }: BankCardProps) {
     return (
-        <div className="flex flex-col text-white">
+        <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
-                <div className="bg-[#ffcb30] px-8 pt-8 pb-2 flex justify-between items-end">
+                <div className="bg-[#ffcb30] px-8 pt-[30px] pb-[7px] flex justify-between items-end">
                     <div>
-                        <h3 className="text-[20px] font-[600] text-black">
+                        <h3 className="text-[20px]/[23px] font-[600] text-black">
                             Account/Wallet
                         </h3>
                     </div>
 
-                    <div className="pb-1 pr-10">
+                    <div className="pr-10">
                         <Image
                             src={prefixBasePath("/spar_card.png")}
                             alt="SPAR Card"
@@ -34,12 +34,12 @@ export default function BankCard({ account }: BankCardProps) {
                     </div>
                 </div>
 
-                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-8 pt-6 pb-8 relative">
-                    <div className="mb-6">
-                        <div className="text-[16px] font-[600] text-black mb-2">
+                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22]  pt-[39px] pb-[18px] relative">
+                    <div className=" px-[30px] pb-[12px]">
+                        <div className="text-[16px]/[19px] font-[600] text-black">
                             {account.name}
                         </div>
-                        <div className="text-[16px] font-[600] text-black">
+                        <div className="text-[16px]/[19px] font-[600] text-black">
                             {account.number}
                         </div>
                     </div>
@@ -50,7 +50,7 @@ export default function BankCard({ account }: BankCardProps) {
                         bgColor="bg-white/40"
                     />
 
-                    <div className="absolute right-12 bottom-0 opacity-20">
+                    <div className="absolute right-12 bottom-0 opacity-20 " >
                         <Image
                             src={prefixBasePath("/account_01.png")}
                             alt="User"

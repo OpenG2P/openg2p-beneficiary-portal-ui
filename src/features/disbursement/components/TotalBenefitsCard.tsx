@@ -16,15 +16,15 @@ interface TotalBenefitsCardProps {
 
 export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) {
     return (
-        <div className="flex flex-col text-white">
+        <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
-                <div className="bg-[#ffcb30] px-8 pt-8 pb-2 flex justify-between items-end">
-                    <h3 className="text-[20px] font-[600] text-black">
+                <div className="bg-[#ffcb30] px-8 pt-[30px] pb-[7px] flex justify-between items-end">
+                    <h3 className="text-[20px]/[23px] font-[600] text-black">
                         Benefits Received till date
                     </h3>
                 </div>
 
-                <div className="relative bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] px-8 py-4 overflow-hidden">
+                <div className="relative bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] pt-4  pb-[18px] overflow-hidden">
                     <div className="absolute right-16 bottom-0 opacity-20 pointer-events-none select-none">
                         <Image
                             src={prefixBasePath("/dollar.png")}
@@ -35,11 +35,12 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                         />
                     </div>
 
-                    <div className="flex justify-center gap-14 relative">
+                    <div className="flex justify-center flex-wrap gap-14 -mx-7  relative">
                         {benefits.map((b, index) => (
+                            
                             <div
                                 key={index}
-                                className="flex flex-col items-center text-center min-w-[70px]"
+                                className=" flex flex-col items-center text-center min-w-[70px]"
                             >
                                 <div className="w-[34px] h-[34px] rounded-full bg-[#FFFFFF80] flex items-center justify-center">
                                     <Image
@@ -51,8 +52,8 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                                     />
                                 </div>
 
-                                <div className="text-[20px] text-white font-[700]">{b.value}</div>
-                                <div className="text-[14px] text-black font-[500]">{b.label}</div>
+                                <div className="text-[20px]/[23px] text-white font-[700]">{b.value}</div>
+                                <div className="text-[14px]/[16px] text-black font-[500]">{b.label}</div>
                             </div>
                         ))}
                     </div>

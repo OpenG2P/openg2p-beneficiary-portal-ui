@@ -1,6 +1,7 @@
 "use client";
 
 import Modal from "@/components/ui/Modal";
+import { getStatusClasses } from "@/app/[locale]/applications/page"
 export interface Application {
     applicationName: string;
     applicationId: string;
@@ -14,6 +15,7 @@ interface ApplicationDetailsProps {
 }
 
 export default function ApplicationDetails({ application, onClose }: ApplicationDetailsProps) {
+    const statusClasses = getStatusClasses(application.status);
     return (
         <Modal
             title={<span className="text-[#ED7C22] text-[24px]">Application Details</span>}
@@ -43,7 +45,11 @@ export default function ApplicationDetails({ application, onClose }: Application
                     <div>
                         <label className="text-[16px] text-black/50 font-[600]">
                             Status:
-                            <span className="ml-2 text-[16px] text-black font-[600]">{application.status}</span>
+                            <span
+                                className={`ml-2 px-2 py-1 rounded-full text-sm font-semibold ${statusClasses.bg} ${statusClasses.text}`}
+                            >
+                                {application.status}
+                            </span>
                         </label>
 
                     </div>

@@ -120,9 +120,10 @@ export default function Dashboard() {
 
     return (
         <div className="px-10 py-4 min-h-screen bg-white">
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
+            <h1 className="text-[18px] font-[600] text-gray-800 mb-2">
                 Dashboard
             </h1>
+
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div className="xl:col-span-2">

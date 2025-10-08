@@ -58,7 +58,7 @@ export default function NotificationDropdown({
                 >
                     <div className="absolute -top-2.5 right-[70px] w-5 h-5 bg-white border-l border-t border-gray-200 rotate-45"></div>
 
-                    <div className="px-6 pb-2 pt-3 text-lg font-semibold text-[#ED7C22]">
+                    <div className="px-6 pb-2 pt-3 text-[18px] font-[500] text-[#ED7C22]">
                         Notifications
                     </div>
 
@@ -66,7 +66,7 @@ export default function NotificationDropdown({
                         {notifications.slice(0, 4).map((n, index) => (
                             <div
                                 key={n.id}
-                                className={`px-2 flex items-start ${index % 2 === 0 ? "bg-gray-100" : ""}`}
+                                className={`px-2 flex items-start ${index % 2 === 0 ? "bg-[#F5F5F5]" : ""}`}
                             >
                                 <div className="flex gap-3 p-3 w-full">
                                     <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
@@ -79,8 +79,8 @@ export default function NotificationDropdown({
                                     </div>
 
                                     <div className="flex-1">
-                                        <h3 className="text-sm font-semibold text-gray-900">{n.title}</h3>
-                                        <p className="text-xs text-gray-600 mt-0.5 line-clamp-2">
+                                        <h3 className="text-[16px] font-[500] text-black">{n.title}</h3>
+                                        <p className="text-[13px] font-[400] text-black/60 mt-0.5 line-clamp-2">
                                             {n.description}
                                         </p>
                                     </div>
@@ -95,7 +95,7 @@ export default function NotificationDropdown({
                         <ViewAll
                             href="/notifications"
                             label="View All Notifications"
-                            bgColor="bg-gray-100"
+                            bgColor="bg-[#F5F5F5]"
                         />
                     </div>
                 </div>

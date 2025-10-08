@@ -46,13 +46,13 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
     return (
         <div className="bg-white rounded-xl shadow-xl w-full border border-gray-200 overflow-hidden">
             <div className="flex justify-between items-center px-8 py-4">
-                <h2 className="text-2xl font-[600] text-[#ED7C22]">My Programs</h2>
+                <h2 className="text-[20px] font-[600] text-[#ED7C22]">My Programs</h2>
                 <button className="hover:bg-gray-100 rounded-full transition">
                     <Image
                         src={prefixBasePath("/more.png")}
                         alt="More"
-                        width={20}
-                        height={20}
+                        width={18}
+                        height={18}
                         className="object-contain"
                     />
                 </button>
@@ -66,10 +66,10 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                         <col className="w-4/10" />
                     </colgroup>
 
-                    <thead className="bg-gray-100">
+                    <thead className="bg-[#F5F5F5]">
                         <tr>
-                            <th className="px-8 py-4 text-[14px] font-[700] text-black">Program Name</th>
-                            <th className="px-8 py-4 text-[14px] font-[700] text-black">
+                            <th className="px-8 py-4 text-[16px] font-[700] text-black">Program Name</th>
+                            <th className="px-8 py-4 text-[16px] font-[700] text-black">
                                 <div className="flex items-center gap-0.5">
                                     Enrollment Date
                                     <Image
@@ -81,7 +81,7 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                                     />
                                 </div>
                             </th>
-                            <th className="px-8 py-4 text-[14px] font-[700] text-black">
+                            <th className="px-8 py-4 text-[16px] font-[700] text-black">
                                 <div className="flex items-center gap-0.5">
                                     Benefits
                                     <Image
@@ -98,10 +98,10 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
 
                     <tbody>
                         {programs.map((program, index) => (
-                            <tr key={program.id} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-100"}`}>
-                                <td className="px-8 py-4 text-gray-900 font-medium">{program.name}</td>
-                                <td className="px-8 py-4 text-gray-700 text-sm">{program.appliedDate}</td>
-                                <td className="px-8 py-4 text-gray-700 text-sm flex flex-wrap gap-2">
+                            <tr key={program.id} className={`${index % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}>
+                                <td className="px-8 py-4 text-[16px] font-[400] text-black">{program.name}</td>
+                                <td className="px-8 py-4 text-[16px] font-[400] text-black">{program.appliedDate}</td>
+                                <td className="px-8 py-4 text-[16px] font-[400] flex flex-wrap gap-2">
                                     {(program.benefits || []).map((benefit, idx) => {
                                         const { bgClass, textClass } = getBenefitClasses(benefit);
                                         return (
@@ -118,11 +118,11 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                         ))}
                     </tbody>
                 </table>
-                <div className="h-3 bg-gray-100 w-full"></div>
+                <div className="h-3 bg-[#F5F5F5] w-full"></div>
             </div>
 
             <div className="px-8 pb-4">
-                <ViewAll href="/programs" label="View all Programs" bgColor="bg-gray-100" />
+                <ViewAll href="/programs" label="View all Programs" bgColor="bg-[#F5F5F5]" />
             </div>
         </div>
     );

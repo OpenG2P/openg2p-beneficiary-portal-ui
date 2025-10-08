@@ -18,8 +18,8 @@ export default function NotificationCard({ notifications }: NotificationCardProp
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1  mb-[50px] mr-[50px]" >
             <div className="flex items-center justify-between h-16 px-8">
-                <h3 className="text-xl sm:text-xl font-bold text-gray-800">
-                    Notifications
+                <h3 className="text-[20px] font-[600] text-black">
+                    Latest News
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
                     <Image
@@ -35,9 +35,9 @@ export default function NotificationCard({ notifications }: NotificationCardProp
                 {notifications.map((n, idx) => (
                     <div
                         key={n.id}
-                        className={`${idx % 2 === 0 ? "bg-gray-100" : ""}`}
+                        className={`${idx % 2 === 0 ? "bg-[#F5F5F5]" : ""}`}
                     >
-                        <div className="flex gap-3 px-8 py-2">
+                        <div className="flex gap-4 px-8 py-3">
                             <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
                                 <Image
                                     src={prefixBasePath("/notification_img.png")}
@@ -47,8 +47,8 @@ export default function NotificationCard({ notifications }: NotificationCardProp
                                 />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-sm font-semibold text-gray-900">{n.title}</h3>
-                                <p className="text-xs text-gray-600 mt-0.5 line-clamp-2">{n.description}</p>
+                                <h3 className="text-[16px] font-[600] text-black">{n.title}</h3>
+                                <p className="text-[14px] font-[400] text-black/50 mt-0.5 line-clamp-2">{n.description}</p>
                             </div>
                         </div>
                     </div>

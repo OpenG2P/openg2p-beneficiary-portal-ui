@@ -3,4 +3,5 @@ export interface Registry {
     id: string;
     date: string;
     action: string;
+    description: string
 }

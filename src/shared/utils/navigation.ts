@@ -6,7 +6,7 @@ export const getMenuItems = (locale: string): MenuItem[] => [
     { name: "Total Benefits", href: `/${locale}/benefits`, icon: "/leftmenu_benefits_03.png" },
     { name: "Bank Accounts", href: `/${locale}/accounts`, icon: "/leftmenu_bankaccount_04.png" },
     { name: "My Registries", href: `/${locale}/registries`, icon: "/leftmenu_registries_05.png" },
-    { name: "Applicable Schemes", href: `/${locale}/schemes`, icon: "/leftmenu_schemes_06.png" },
+    { name: "Applications", href: `/${locale}/applications`, icon: "/leftmenu_schemes_06.png" },
     { name: "Notifications", href: `/${locale}/notifications`, icon: "/leftmenu_notifications_07.png" },
     { name: "Complaints", href: `/${locale}/complaints`, icon: "/leftmenu_complaints_08.png" },
 ];

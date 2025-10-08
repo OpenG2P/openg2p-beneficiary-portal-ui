@@ -1,9 +1,10 @@
 "use client";
+import { useState } from "react";
 import { useLocale } from "next-intl";
 import { usePagination } from "@/shared/hooks/usePagination";
 import { AuthUtil } from '@/features/auth/components';
 import { prefixBasePath } from "@/shared/utils/path";
-import { Pagination } from "@/components/shared";
+import { Pagination, SearchInput } from "@/components/shared";
 import { Notification } from "@/features/notification/types";
 
 const myNotifications: Notification[] = [
@@ -65,21 +66,37 @@ const myNotifications: Notification[] = [
     },
 ];
 
+
 export default function NotificationsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(myNotifications, 4);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const filteredNotifications = myNotifications.filter(n =>
+        n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        n.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(filteredNotifications, 5);
 
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
-            <div className="mb-4">
-                <h1 className="text-lg text-black font-bold">Notifications / Broadcast</h1>
+            <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <h1 className="text-lg text-black font-bold">Notifications</h1>
             </div>
 
             <div className="bg-white rounded-lg overflow-hidden border border-black/20">
-                <div className="mb-4 px-6 pt-4">
-                    <span className="text-lg font-semibold text-black">All Notifications</span>
+                <div className="mb-4 px-6 pt-4 flex items-center justify-between">
+                    <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">
+                        All Notifications
+                    </h2>
+                    <SearchInput
+                        value={searchQuery}
+                        onChange={setSearchQuery}
+                        placeholder="Search"
+                        className="w-[200px]"
+                    />
                 </div>
 
                 <div className="flex flex-col divide-y divide-gray-200 max-h-[500px] overflow-y-auto">
@@ -114,12 +131,17 @@ export default function NotificationsPage() {
                     ))}
                 </div>
 
-                <div className="px-6 py-3">
+                <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onPageChange={setCurrentPage}
                     />
+                    <div className="text-gray-600">
+                        Showing{" "}
+                        {Math.min((currentPage - 1) * 5 + 1, filteredNotifications.length)}–
+                        {Math.min(currentPage * 5, filteredNotifications.length)} of {filteredNotifications.length} notifications
+                    </div>
                 </div>
             </div>
         </div>

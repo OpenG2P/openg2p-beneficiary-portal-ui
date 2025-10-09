@@ -27,11 +27,12 @@ export interface ReceivedBenefit {
     biometricVerified: boolean;
     verificationType: string;
 }
+
 export const receivedBenefitsData: ReceivedBenefit[] = [
     {
-        programName: "OpenG2P Safety Program",
-        benefitCode: "Money",
-        quantity: "4500.00 $",
+        programName: "Social Registry Upgrade",
+        benefitCode: "Information Access",
+        quantity: "1 Record",
         dateReceived: "24/09/2025",
         agent: { name: "John Doe", address: "123 Main St, City A" },
         deliveryDateTime: "24/09/2025 10:30 AM",
@@ -42,9 +43,9 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Fingerprint",
     },
     {
-        programName: "OpenG2P Safety Program",
-        benefitCode: "Gas",
-        quantity: "10 Kg",
+        programName: "Income Tax Assistance",
+        benefitCode: "Money",
+        quantity: "4500.00 $",
         dateReceived: "24/09/2025",
         agent: { name: "Alice Smith", address: "456 Market Rd, City B" },
         deliveryDateTime: "24/09/2025 11:00 AM",
@@ -55,9 +56,9 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Fingerprint",
     },
     {
-        programName: "OpenG2P Food Support",
-        benefitCode: "Rice",
-        quantity: "50 Kg",
+        programName: "Caste Certificate Facilitation",
+        benefitCode: "Documentation",
+        quantity: "1 Certificate",
         dateReceived: "24/09/2025",
         agent: { name: "Bob Johnson", address: "789 Lake View, City C" },
         deliveryDateTime: "24/09/2025 09:15 AM",
@@ -68,9 +69,9 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Fingerprint",
     },
     {
-        programName: "OpenG2P Education Aid",
-        benefitCode: "Books",
-        quantity: "20 No.",
+        programName: "Electricity Subsidy Program",
+        benefitCode: "Money",
+        quantity: "5000.00 $",
         dateReceived: "24/09/2025",
         agent: { name: "Charlie Lee", address: "321 Hill St, City D" },
         deliveryDateTime: "24/09/2025 02:30 PM",
@@ -81,9 +82,9 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Face",
     },
     {
-        programName: "OpenG2P Gas Relief",
-        benefitCode: "Gas",
-        quantity: "10 Kg",
+        programName: "Voter Registry Update",
+        benefitCode: "Verification",
+        quantity: "1 Record",
         dateReceived: "25/09/2025",
         agent: { name: "Diana Prince", address: "654 River Rd, City E" },
         deliveryDateTime: "25/09/2025 10:00 AM",
@@ -94,9 +95,9 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Fingerprint",
     },
     {
-        programName: "OpenG2P Cash Assistance",
-        benefitCode: "Money",
-        quantity: "5000.00 $",
+        programName: "Unemployment Registry Support",
+        benefitCode: "Guidance",
+        quantity: "1 Session",
         dateReceived: "25/09/2025",
         agent: { name: "Evan White", address: "987 Sunset Blvd, City F" },
         deliveryDateTime: "25/09/2025 01:00 PM",
@@ -107,9 +108,9 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Fingerprint",
     },
     {
-        programName: "OpenG2P Food Support",
-        benefitCode: "Rice",
-        quantity: "60 Kg",
+        programName: "Disability Registry Program",
+        benefitCode: "Support",
+        quantity: "1 Package",
         dateReceived: "25/09/2025",
         agent: { name: "Fiona Green", address: "159 Ocean St, City G" },
         deliveryDateTime: "25/09/2025 03:30 PM",
@@ -120,9 +121,9 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Fingerprint",
     },
     {
-        programName: "OpenG2P Education Aid",
+        programName: "Adult Literacy Drive",
         benefitCode: "Books",
-        quantity: "30 No.",
+        quantity: "20 No.",
         dateReceived: "25/09/2025",
         agent: { name: "George Brown", address: "753 Pine Rd, City H" },
         deliveryDateTime: "25/09/2025 04:00 PM",
@@ -133,6 +134,7 @@ export const receivedBenefitsData: ReceivedBenefit[] = [
         verificationType: "Fingerprint",
     },
 ];
+
 
 
 export default function BenefitsPage() {

@@ -7,88 +7,51 @@ import { prefixBasePath } from "@/shared/utils/path";
 import { Pagination, SearchInput } from "@/components/shared";
 import { Notification } from "@/features/notification/types";
 
-const myNotifications: Notification[] = [
+const newsData: Notification[] = [
     {
         id: "1",
-        title: "Healthcare Registry Update",
-        description: "Your healthcare registry has been successfully updated with the latest medical records.",
+        title: "Healthcare Registry Expansion Announced",
+        description: "The Ministry of Health has expanded the Healthcare Registry to include additional wellness programs and vaccination records. Citizens can now update their profiles to access new benefits.",
         date: "20/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "2",
-        title: "Employment Registry Alert",
-        description: "Please review the recent changes to your employment registry details for accuracy.",
-        date: "18/09/2025 02:15 PM",
+        title: "Employment Opportunities Portal Integrated",
+        description: "The Employment Registry now connects directly to the National Job Portal, enabling registered users to apply for verified government and private job openings.",
+        date: "18/09/2025 09:45 AM",
         image: "/logo.png",
     },
     {
         id: "3",
-        title: "Housing Registry Notification",
-        description: "A new housing scheme has been added to your housing registry profile. Check your eligibility.",
-        date: "15/09/2025 09:45 AM",
+        title: "Affordable Housing Scheme Launched",
+        description: "A new low-cost housing program has been launched under the Housing Registry. Eligible applicants can now apply online through their registry dashboard.",
+        date: "15/09/2025 02:10 PM",
         image: "/logo.png",
     },
     {
         id: "4",
-        title: "Education Registry Update",
-        description: "Your education qualifications have been successfully verified and updated in the registry.",
+        title: "Education Registry Now Supports Scholarships",
+        description: "Students registered under the Education Registry can now apply for government-funded scholarships and educational grants using their registry ID.",
         date: "12/09/2025 11:00 AM",
         image: "/logo.png",
     },
     {
         id: "5",
-        title: "Pension Registry Reminder",
-        description: "Please update your pension account details before the due date to avoid delays in disbursement.",
-        date: "10/09/2025 03:20 PM",
+        title: "Social Welfare Benefits Updated",
+        description: "The Social Welfare Registry has revised benefit eligibility for the 2025 cycle. Ensure your profile is updated to continue receiving support.",
+        date: "10/09/2025 04:20 PM",
         image: "/logo.png",
-    },
-    {
-        id: "6",
-        title: "Food Security Registry Alert",
-        description: "Your ration card details have been validated and updated in the system.",
-        date: "08/09/2025 08:50 AM",
-        image: "/logo.png",
-    },
-    {
-        id: "7",
-        title: "Skill Development Registry Notice",
-        description: "You have been enrolled in a new skill training program. Please check the schedule and materials.",
-        date: "05/09/2025 10:15 AM",
-        image: "/logo.png",
-    },
-    {
-        id: "8",
-        title: "Social Welfare Registry Update",
-        description: "Your social welfare application status has been updated. Please review the latest changes.",
-        date: "03/09/2025 09:30 AM",
-        image: "/logo.png",
-    },
-    {
-        id: "9",
-        title: "Transport Registry Alert",
-        description: "Your driving license renewal request has been processed. Check your registry for confirmation.",
-        date: "01/09/2025 11:45 AM",
-        image: "/logo.png",
-    },
-    {
-        id: "10",
-        title: "Energy Registry Notification",
-        description: "Your electricity connection details have been updated successfully in the energy registry.",
-        date: "30/08/2025 02:00 PM",
-        image: "/logo.png",
-    },
+    }
 ];
 
-
-
-export default function NotificationsPage() {
+export default function NewsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [searchQuery, setSearchQuery] = useState("");
 
-    const filteredNotifications = myNotifications.filter(n =>
+    const filteredNotifications = newsData.filter(n =>
         n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         n.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -98,13 +61,13 @@ export default function NotificationsPage() {
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
             <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <h1 className="text-lg text-black font-bold">Notifications</h1>
+                <h1 className="text-lg text-black font-bold">Latest News</h1>
             </div>
 
             <div className="bg-white rounded-lg overflow-hidden border border-black/20">
                 <div className="mb-4 px-6 pt-4 flex items-center justify-between">
                     <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">
-                        All Notifications
+                        All News
                     </h2>
                     <SearchInput
                         value={searchQuery}
@@ -129,7 +92,7 @@ export default function NotificationsPage() {
                                     />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h3 className="text-[18px] font-[500] text-black truncate">
+                                    <h3 className="text-[18px] font-[600] text-black truncate">
                                         {notification.title}
                                     </h3>
                                     {notification.date && (
@@ -155,7 +118,7 @@ export default function NotificationsPage() {
                     <div className="text-gray-600">
                         Showing{" "}
                         {Math.min((currentPage - 1) * 5 + 1, filteredNotifications.length)}–
-                        {Math.min(currentPage * 5, filteredNotifications.length)} of {filteredNotifications.length} notifications
+                        {Math.min(currentPage * 5, filteredNotifications.length)} of {filteredNotifications.length} news
                     </div>
                 </div>
             </div>

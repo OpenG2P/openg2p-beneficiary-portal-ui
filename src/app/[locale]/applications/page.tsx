@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { Pagination, SearchInput, FilterInput } from '@/components/shared';
 import { usePagination } from "@/shared/hooks/usePagination";
 import { AuthUtil } from '@/features/auth/components';
-import { ApplicationActionDropdown } from "@/features/program/components";
+import { ApplicationActionDropdown, ApplicationProgress } from "@/features/program/components";
 import ApplicationDetails from "@/features/program/components/ApplicationDetails";
 
 export interface Application {
@@ -17,23 +17,125 @@ export interface Application {
 }
 
 export const applicationsData: Application[] = [
-    { applicationName: "OpenG2P Safety Program", applicationId: "1042504100", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Progress", date: "01/10/2025" },
-    { applicationName: "Food Support Program", applicationId: "1042504101", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Pending", date: "02/10/2025" },
-    { applicationName: "Cash Assistance", applicationId: "1042504102", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Applied", date: "03/10/2025" },
-    { applicationName: "Education Aid", applicationId: "1042504103", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Pending", date: "04/10/2025" },
-    { applicationName: "Gas Relief", applicationId: "1042504104", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Progress", date: "05/10/2025" },
-    { applicationName: "Health Program", applicationId: "1042504105", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Applied", date: "06/10/2025" },
-    { applicationName: "Food Support Program 2", applicationId: "1042504106", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Pending", date: "07/10/2025" },
-    { applicationName: "Cash Assistance 2", applicationId: "1042504107", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Approved", date: "08/10/2025" },
-    { applicationName: "Education Aid 2", applicationId: "1042504108", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Pending", date: "09/10/2025" },
-    { applicationName: "Gas Relief 2", applicationId: "1042504109", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Approved", date: "10/10/2025" },
-    { applicationName: "Health Program 2", applicationId: "1042504110", description: "This program is designed to provide comprehensive safety and financial support to eligible individuals and households. It aims to ensure that beneficiaries have access to essential resources, including healthcare, food assistance, and emergency aid, to improve their overall well-being and stability. By targeting those most in need, the program helps reduce vulnerability, promote social inclusion, and enhance the quality of life for participants, while fostering sustainable community development and resilience.", status: "Pending", date: "11/10/2025" },
-    { applicationName: "OpenG2P Safety Program 2", applicationId: "1042504111", description: "Second phase of safety program implementation.", status: "Approved", date: "12/10/2025" },
-    { applicationName: "Food Support Program 3", applicationId: "1042504112", description: "Third phase food distribution for remote areas.", status: "Pending", date: "13/10/2025" },
-    { applicationName: "Cash Assistance 3", applicationId: "1042504113", description: "Additional cash support for emergency relief.", status: "Pending", date: "14/10/2025" },
-    { applicationName: "Education Aid 3", applicationId: "1042504114", description: "Scholarship and books for students.", status: "Approved", date: "15/10/2025" },
-    { applicationName: "Gas Relief 3", applicationId: "1042504115", description: "Third round of gas cylinder subsidies.", status: "Pending", date: "16/10/2025" },
+    // --- Social Welfare ---
+    {
+        applicationName: "Social Registry",
+        applicationId: "1042504100",
+        description: "The Social Registry program provides a centralized platform to track citizens' participation in social welfare initiatives. It records eligibility, applications, and updates across various welfare schemes, ensuring transparency and timely assistance. Users can submit updates, request benefits, and track the status of their applications, while authorities can monitor coverage, analyze data, and optimize social program delivery.",
+        status: "Progress",
+        date: "01/10/2025"
+    },
+    {
+        applicationName: "Income Tax Assistance",
+        applicationId: "1042504101",
+        description: "This program guides citizens through income tax registration, filing, and compliance. It maintains records of taxpayer applications, deductions, and refunds. Beneficiaries can submit updates, track filings, and request support, while government agencies use the data to monitor compliance, prevent errors, and plan fiscal policies effectively.",
+        status: "Pending",
+        date: "02/10/2025"
+    },
+    {
+        applicationName: "Caste Certificate Issuance",
+        applicationId: "1042504102",
+        description: "The Caste Certificate program allows eligible citizens to apply, update, and verify caste-based documentation. It tracks applications, approvals, and modifications, providing transparency and accountability. Citizens can request updates, monitor progress, and access certificate services efficiently, while authorities manage verification and reporting centrally.",
+        status: "Applied",
+        date: "03/10/2025"
+    },
+    {
+        applicationName: "Electricity Subsidy Program",
+        applicationId: "1042504103",
+        description: "This program manages applications for electricity connections, subsidies, and bill assistance for households. It maintains detailed records of usage, eligibility, and support provided. Beneficiaries can update account information, request new connections, and track their subsidy status, while authorities optimize resource allocation and monitor energy distribution effectively.",
+        status: "Pending",
+        date: "04/10/2025"
+    },
+    {
+        applicationName: "Voter Registry",
+        applicationId: "1042504104",
+        description: "The Voter Registry program maintains citizen enrollment, eligibility verification, and updates for voting purposes. It ensures accurate record-keeping and allows citizens to update personal information, verify registration, and access election-related notifications. Authorities use this system to maintain fair, transparent, and inclusive electoral processes.",
+        status: "Progress",
+        date: "05/10/2025"
+    },
+    {
+        applicationName: "Unemployment Registry",
+        applicationId: "1042504105",
+        description: "This program tracks citizens seeking employment assistance, vocational training, and unemployment benefits. It records applications, program participation, and eligibility verification. Users can request updates, apply for support programs, and track progress, while authorities analyze labor data, plan workforce initiatives, and ensure effective allocation of resources.",
+        status: "Applied",
+        date: "06/10/2025"
+    },
+    {
+        applicationName: "Disability Registry",
+        applicationId: "1042504106",
+        description: "The Disability Registry program records applications, certifications, and benefits for citizens with disabilities. It allows users to update personal information, track eligibility, and request support services. Authorities use the data to ensure inclusive program delivery, monitor accessibility initiatives, and allocate resources efficiently for disabled citizens.",
+        status: "Pending",
+        date: "07/10/2025"
+    },
+
+    // --- Education ---
+    {
+        applicationName: "Education Aid",
+        applicationId: "1042504107",
+        description: "The Education Aid program provides financial support and scholarship opportunities to students across all levels of education. It maintains records of applications, eligibility, and awards. Beneficiaries can update their educational information, apply for scholarships, and track the status of their applications. Authorities monitor participation, plan initiatives, and ensure equitable access to educational resources.",
+        status: "Pending",
+        date: "08/10/2025"
+    },
+    {
+        applicationName: "School Supplies Distribution",
+        applicationId: "1042504108",
+        description: "This program ensures that students from low-income households receive necessary educational materials, including books, uniforms, and stationery. It tracks applications, approvals, and delivery status. Students and parents can submit requests, update details, and check progress, while authorities manage distribution and maintain transparency in program delivery.",
+        status: "Approved",
+        date: "09/10/2025"
+    },
+    {
+        applicationName: "Vocational Training Program",
+        applicationId: "1042504109",
+        description: "The Vocational Training Program provides skill development and training opportunities to enhance employability. It tracks applications, course enrollments, and completion status. Participants can update profiles, apply for courses, and monitor progress. Authorities can evaluate program effectiveness, optimize training resources, and ensure skills development aligns with workforce needs.",
+        status: "Progress",
+        date: "10/10/2025"
+    },
+    {
+        applicationName: "Higher Education Scholarships",
+        applicationId: "1042504114",
+        description: "This program offers scholarships for higher education to deserving students. It tracks applications, eligibility, and disbursement of funds. Beneficiaries can update academic information, submit scholarship requests, and monitor approval status, while authorities ensure fair allocation and transparency in scholarship distribution.",
+        status: "Pending",
+        date: "15/10/2025"
+    },
+
+    // --- Agriculture ---
+    {
+        applicationName: "Crop Subsidy Program",
+        applicationId: "1042504110",
+        description: "The Crop Subsidy Program provides financial assistance to farmers for cultivating approved crops. It maintains detailed records of applications, approvals, and disbursements. Farmers can submit updates, track subsidy payments, and access guidance for eligible crops. Authorities monitor agricultural productivity, allocate resources, and ensure timely support to the farming community.",
+        status: "Applied",
+        date: "11/10/2025"
+    },
+    {
+        applicationName: "Irrigation Support",
+        applicationId: "1042504111",
+        description: "This program helps farmers access irrigation facilities, including water allocation, equipment subsidies, and maintenance support. It tracks applications, usage, and updates. Beneficiaries can request assistance, update records, and monitor progress, while authorities plan resources, maintain equitable water distribution, and optimize agricultural output.",
+        status: "Pending",
+        date: "12/10/2025"
+    },
+    {
+        applicationName: "Fertilizer Subsidy",
+        applicationId: "1042504112",
+        description: "The Fertilizer Subsidy program provides farmers with subsidized access to fertilizers to enhance crop yields. It tracks applications, disbursements, and updates to ensure timely delivery. Beneficiaries can submit requests, monitor status, and update farm details. Authorities use the data to plan resource allocation, prevent misuse, and support sustainable agricultural practices.",
+        status: "Approved",
+        date: "13/10/2025"
+    },
+    {
+        applicationName: "Agricultural Insurance Program",
+        applicationId: "1042504113",
+        description: "This program offers insurance coverage to farmers against crop failures, natural disasters, and other risks. It tracks applications, policy issuance, and claim settlements. Farmers can submit updates, track claims, and request support. Authorities analyze data to improve risk management, plan interventions, and ensure financial protection for the farming community.",
+        status: "Progress",
+        date: "14/10/2025"
+    },
+    {
+        applicationName: "Organic Farming Initiative",
+        applicationId: "1042504115",
+        description: "The Organic Farming Initiative supports farmers transitioning to organic practices. It provides training, subsidies, and certification assistance. Farmers can update their farm details, track subsidy requests, and monitor certification progress. Authorities oversee program compliance, promote sustainable agriculture, and encourage environmentally friendly farming practices.",
+        status: "Pending",
+        date: "16/10/2025"
+    }
 ];
+
 
 export const getStatusClasses = (status: string) => {
     switch (status.toLowerCase()) {
@@ -64,13 +166,17 @@ export default function ApplicationsPage() {
 
     const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [activeModal, setActiveModal] = useState<"details" | "progress" | null>(null);
+
 
     const handleActionSelect = (option: string, application: Application) => {
+        setSelectedApplication(application);
         if (option === "View Details") {
-            setSelectedApplication(application);
+            setActiveModal("details");
             setIsModalOpen(true);
         } else if (option === "Progress") {
-            alert(`Showing progress for ${application.applicationName}`);
+            setActiveModal("progress");
+            setIsModalOpen(true);
         }
     };
 
@@ -159,10 +265,21 @@ export default function ApplicationsPage() {
                 </div>
 
                 {isModalOpen && selectedApplication && (
-                    <ApplicationDetails
-                        application={selectedApplication}
-                        onClose={() => setIsModalOpen(false)}
-                    />
+                    <>
+                        {activeModal === "details" && (
+                            <ApplicationDetails
+                                application={selectedApplication}
+                                onClose={() => setIsModalOpen(false)}
+                            />
+                        )}
+
+                        {activeModal === "progress" && (
+                            <ApplicationProgress
+                                onClose={() => setIsModalOpen(false)}
+                                applicationName={selectedApplication.applicationName}
+                            />
+                        )}
+                    </>
                 )}
 
             </div>

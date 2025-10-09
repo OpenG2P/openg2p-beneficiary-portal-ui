@@ -107,7 +107,7 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                                         return (
                                             <span
                                                 key={idx}
-                                                className={`px-3 py-1 rounded-full text-[14px] font-medium ${bgClass} ${textClass}`}
+                                                className={`px-3 py-1 rounded-full border-1 border-gray-200 text-[14px] font-medium ${bgClass} ${textClass}`}
                                             >
                                                 {benefit}
                                             </span>

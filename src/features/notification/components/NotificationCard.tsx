@@ -57,8 +57,8 @@ export default function NotificationCard({ notifications }: NotificationCardProp
 
             <div className="my-3">
                 <ViewAll
-                    href="/notifications"
-                    label="View all Notifications"
+                    href="/news"
+                    label="View latest News"
                     bgColor="bg-gray-100"
                 />
             </div>

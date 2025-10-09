@@ -30,7 +30,7 @@ const getBenefitClasses = (benefit: string) => {
         case "home":
             return { bg: "bg-[rgba(165,84,236,0.2)]", text: "text-[#A554EC]" };
         default:
-            return { bg: "bg-gray-100", text: "text-gray-800" };
+            return { bg: "bg-gray-200", text: "text-gray-800" };
     }
 };
 

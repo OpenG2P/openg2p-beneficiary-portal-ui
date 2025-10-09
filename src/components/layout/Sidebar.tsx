@@ -52,7 +52,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                     </button>
                 ) : (
                     <div className="flex items-center justify-between w-full px-4">
-                        <span className="font-[600] text-black">Menu</span>
+                        <span className="font-[500] text-black">Menu</span>
                         <button
                             className="px-1 rounded transition-colors cursor-pointer"
                             onClick={() => setExpanded(false)}

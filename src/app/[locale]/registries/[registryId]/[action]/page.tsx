@@ -177,7 +177,7 @@ export default function RegistryActionPage() {
     if (!registry) return <Loading />;
 
     const isAddressChange = action === "address-change";
-    const leftHeading = isAddressChange ? "Change Address" : "Registry Form";
+    const leftHeading = isAddressChange ? "Change Address" : "Social Welfare Registration";
     const rightHeading = isAddressChange ? "Personal Details" : "Registry Details";
 
     return (
@@ -428,11 +428,11 @@ export default function RegistryActionPage() {
                     <div className="flex gap-4 mt-4">
                         <button
                             onClick={() => router.back()}
-                            className="px-6 py-2 bg-gray-200 text-gray-800 font-[500] rounded-md w-full hover:bg-gray-300 transition"
+                            className="px-6 py-2 bg-gray-200 text-gray-800 font-[500] rounded-[20px] w-full hover:bg-gray-300 transition"
                         >
                             BACK
                         </button>
-                        <button className="px-6 py-2 bg-black text-white font-[500] rounded-md w-full hover:bg-gray-800 transition">
+                        <button className="px-6 py-2 bg-black text-white font-[500] rounded-[20px] w-full hover:bg-gray-800 transition">
                             SUBMIT
                         </button>
                     </div>

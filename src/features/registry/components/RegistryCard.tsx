@@ -14,7 +14,7 @@ interface RegistryCardProps {
 
 export default function RegistryCard({ registries }: RegistryCardProps) {
     return (
-        <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mr-[30px] mb-[50px] mr-[50px]">
+        <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mr-[30px] mb-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
                 <h3 className="text-[20px] font-[600] text-black">
                     My Registries
@@ -45,7 +45,7 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
                 ))}
             </div>
 
-            <div className="px-6 m-3">
+            <div className="my-3">
                 <ViewAll
                     href="/registries"
                     label="View all Registries"

@@ -1,11 +1,15 @@
 "use client";
 
 import { useLocale } from "next-intl";
+import Image from "next/image";
+import { prefixBasePath } from "@/shared/utils/path";
+
 import { AuthUtil } from "@/features/auth/components";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/global";
 import { Program } from "@/features/program/types/program";
+import { Loading } from "@/components/shared";
 
 const allPrograms: Program[] = [
     {
@@ -164,7 +168,7 @@ export default function ApplyProgramPage() {
         setProgram(selectedProgram);
     }, [programId]);
 
-    if (!program) return <div className="p-8">Loading program...</div>;
+    if (!program) return <Loading />
 
     return (
         <div className="px-10 py-8 bg-white min-h-screen">
@@ -221,21 +225,48 @@ export default function ApplyProgramPage() {
                                 <label className="block text-[16px] font-[500] text-black mb-1">
                                     Whether Worker is Registered
                                 </label>
-                                <select className="w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 focus:outline-none">
-                                    <option value="">Select</option>
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        className="appearance-none w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 cursor-pointer border-0 focus:outline-none focus:ring-0"
+                                    >
+                                        <option value="">Select</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                    <div className="pointer-events-none absolute right-5 top-1/2 transform -translate-y-1/2">
+                                        <Image
+                                            src={prefixBasePath("/arrow_02.png")}
+                                            alt="Dropdown arrow"
+                                            width={20}
+                                            height={20}
+                                            className="w-4 h-4"
+                                        />
+                                    </div>
+                                </div>
                             </div>
+
                             <div className="flex-1">
                                 <label className="block text-[16px] font-[500] text-black mb-1">
                                     Member of any other State Welfare Board?
                                 </label>
-                                <select className="w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 focus:outline-none">
-                                    <option value="">Select</option>
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        className="appearance-none w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 cursor-pointer border-0 focus:outline-none focus:ring-0"
+                                    >
+                                        <option value="">Select</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                    <div className="pointer-events-none absolute right-5 top-1/2 transform -translate-y-1/2">
+                                        <Image
+                                            src={prefixBasePath("/arrow_02.png")}
+                                            alt="Dropdown arrow"
+                                            width={20}
+                                            height={20}
+                                            className="w-4 h-4"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

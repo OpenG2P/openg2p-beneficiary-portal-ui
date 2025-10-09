@@ -1,82 +1,63 @@
 "use client";
 import { useState } from "react";
-
-import { Pagination } from "@/components/shared";
+import { useLocale } from "next-intl";
+import { AuthUtil } from '@/features/auth/components';
+import { usePagination } from "@/shared/hooks/usePagination";
+import { Pagination, SearchInput } from "@/components/shared";
 import { FileComplaintForm } from "@/features/grievance/components";
-
 import { Complaint } from "@/features/grievance/types/complaint";
 
-import { usePagination } from "@/shared/hooks/usePagination";
-
 const myComplaints: Complaint[] = [
-    {
-        id: "1",
-        number: "C-1001",
-        status: "Open",
-        subject: "Healthcare Service Issue",
-        description: "Delay in updating medical records in the healthcare registry.",
-        date: "2025-09-20 10:30 AM",
-    },
-    {
-        id: "2",
-        number: "C-1002",
-        status: "Closed",
-        subject: "Employment Registry Error",
-        description: "Incorrect designation shown in the employment registry.",
-        date: "2025-09-18 02:15 PM",
-    },
-    {
-        id: "3",
-        number: "C-1003",
-        status: "In Progress",
-        subject: "Housing Registry Complaint",
-        description: "Unable to apply for the new housing scheme online.",
-        date: "2025-09-19 09:45 AM",
-    },
-    {
-        id: "4",
-        number: "C-1004",
-        status: "Open",
-        subject: "Education Registry",
-        description: "My degree verification request is still pending.",
-        date: "2025-09-17 11:00 AM",
-    },
-    {
-        id: "5",
-        number: "C-1005",
-        status: "Closed",
-        subject: "Pension Registry",
-        description: "Mismatch in my pension account details after update.",
-        date: "2025-09-16 03:20 PM",
-    },
-    {
-        id: "6",
-        number: "C-1006",
-        status: "Open",
-        subject: "Food Security Registry",
-        description: "Ration card details not reflecting after verification.",
-        date: "2025-09-15 08:50 AM",
-    },
+    { id: "1", number: "1001", status: "In Progress", subject: "Healthcare Service Issue", description: "Delay in updating medical records in the healthcare registry.", date: "2025-09-20 10:30 AM" },
+    { id: "2", number: "1002", status: "Closed", subject: "Employment Registry Error", description: "Incorrect designation shown in the employment registry.", date: "2025-09-18 02:15 PM" },
+    { id: "3", number: "1003", status: "In Progress", subject: "Housing Registry Complaint", description: "Unable to apply for the new housing scheme online.", date: "2025-09-19 09:45 AM" },
+    { id: "4", number: "1004", status: "Closed", subject: "Education Registry", description: "My degree verification request is still pending.", date: "2025-09-17 11:00 AM" },
+    { id: "5", number: "1005", status: "In Progress", subject: "Pension Registry", description: "Mismatch in my pension account details after update.", date: "2025-09-16 03:20 PM" },
+    { id: "6", number: "1006", status: "Closed", subject: "Food Security Registry", description: "Ration card details not reflecting after verification.", date: "2025-09-15 08:50 AM" },
 ];
 
-
 export default function ComplaintsPage() {
-    const [showModal, setShowModal] = useState(false);
+    const lang = useLocale();
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(myComplaints, 3);
+    const [showModal, setShowModal] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const filteredComplaints = myComplaints.filter(c =>
+        c.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        c.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const itemsPerPage = 4;
+    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(filteredComplaints, itemsPerPage);
+
+    const getStatusStyles = (status: string) => {
+        switch (status) {
+            case "Closed":
+                return "bg-[#3399FF] text-white";
+            case "In Progress":
+                return "bg-[#00B765] text-white";
+            default:
+                return "bg-[#ED7C22] text-white";
+        }
+    };
 
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
-            <div className="mb-4 flex justify-between items-center">
-                <h1 className="text-lg text-black font-bold">Complaints</h1>
-            </div>
+            <h1 className="text-lg text-black font-bold mb-4">Complaints</h1>
 
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20 p-4">
-                <div className="mb-4 px-4">
-                    <div className="flex justify-between items-center border-b-4 border-gray-200 pb-2">
-                        <span className="text-lg font-semibold text-black">All Complaints</span>
+            <div className="bg-white rounded-lg overflow-hidden border border-black/20">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-8 py-4 gap-2">
+                    <span className="text-[20px] font-[600] text-[#ED7C22]">All Complaints</span>
+                    <div className="flex gap-2 items-center">
+                        <SearchInput
+                            value={searchQuery}
+                            onChange={setSearchQuery}
+                            placeholder="Search"
+                            className="w-[200px]"
+                        />
                         <button
-                            className="bg-black text-white px-3 py-1 rounded shadow hover:bg-gray-900 cursor-pointer"
+                            className="bg-black text-white px-4 py-1 rounded-[17px] shadow cursor-pointer"
                             onClick={() => setShowModal(true)}
                         >
                             File a Complaint
@@ -84,54 +65,56 @@ export default function ComplaintsPage() {
                     </div>
                 </div>
 
-
-                <div className="grid gap-4 px-4">
+                <div className="flex flex-col divide-y-12 divide-white max-h-[500px] overflow-y-auto">
                     {currentItems.map((complaint) => (
-                        <div
-                            key={complaint.id}
-                            className="border rounded-lg p-4 shadow-sm bg-white"
-                        >
-                            <div className="flex items-center gap-3 mb-2">
-                                <span className="text-black font-black text-lg">
-                                    Complaint Number: {complaint.number}
-                                </span>
+                        <div key={complaint.id} className="bg-gray-100 w-full">
+                            <div className="px-8 py-3">
+                                <div className="flex items-center gap-3 flex-wrap mb-1">
+                                    <span className="text-black/50 font-bold text-lg">Complaint Number:</span>
+                                    <span className="text-black font-bold text-lg">{complaint.number}</span>
 
-                                <div className="flex items-center gap-1">
-                                    <span className="text-black font-black text-lg px-3 py-1">
-                                        Status:
-                                    </span>
                                     <span
-                                        className="px-2 py-0.5 text-xs font-black text-black bg-gray-400 rounded"
+                                        className={`px-2 py-0.5 text-xs font-semibold rounded ${getStatusStyles(complaint.status)
+                                            }`}
                                     >
-                                        {complaint.status}
+                                        {complaint.status === "Closed" ? "Resolved" : complaint.status}
                                     </span>
+
+                                    {(complaint.status === "Open" || complaint.status === "Closed") && (
+                                        <button className="px-2 py-0.5 text-xs font-medium bg-[#ED7C22] text-white hover:bg-[#d16b1c] rounded">
+                                            Reopen
+                                        </button>
+                                    )}
                                 </div>
 
-                                <button className="px-2 py-0.5 text-xs font-medium bg-black text-white hover:bg-gray-800 rounded">
-                                    Reopen
-                                </button>
-                            </div>
+                                <div className="flex justify-start items-center gap-4 flex-wrap">
+                                    <span className="text-black/50 text-lg font-semibold">Subject:</span>
+                                    <h3 className="text-black text-lg font-semibold">{complaint.subject}</h3>
+                                    <span className="text-sm text-[#3399FF]">{complaint.date}</span>
+                                </div>
 
-                            <div className="flex justify-start items-center gap-4">
-                                <h3 className="text-lg font-semibold text-gray-900">
-                                    Subject: {complaint.subject}
-                                </h3>
-                                <span className="text-lg text-gray-500">
-                                    {complaint.date}
-                                </span>
+                                <p className="text-sm text-gray-700 mt-1">{complaint.description}</p>
                             </div>
-
-                            <p className="text-sm text-gray-700 mt-2">{complaint.description}</p>
                         </div>
                     ))}
+                </div>
+
+                <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onPageChange={setCurrentPage}
                     />
+                    <div className="text-gray-600">
+                        Showing{" "}
+                        {currentItems.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}–
+                        {(currentPage - 1) * itemsPerPage + currentItems.length} of {filteredComplaints.length} complaints
+                    </div>
                 </div>
             </div>
+
             {showModal && <FileComplaintForm onClose={() => setShowModal(false)} />}
         </div>
     );
 }
+

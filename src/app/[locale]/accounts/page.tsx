@@ -4,10 +4,14 @@ import Image from "next/image";
 import { useLocale } from "next-intl";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
+import { useAuth } from "@/context/global";
+
 
 export default function AccountsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+
+    const { profile } = useAuth();
 
     return (
         <div className="px-10 py-8 bg-white min-h-screen">
@@ -31,7 +35,7 @@ export default function AccountsPage() {
                         <div className="flex flex-col justify-start w-full space-y-4">
                             <div>
                                 <div className="text-[16px] font-[500] text-black/50">Name</div>
-                                <div className="text-[20px] text-[#3399FF] font-[500]">John Doe</div>
+                                <div className="text-[20px] text-[#3399FF] font-[500]">{profile?.name}</div>
                             </div>
 
                             <div>
@@ -112,14 +116,14 @@ export default function AccountsPage() {
                         <label className="block text-[16px] font-[500] text-black/50 mb-1">
                             Email ID
                         </label>
-                        <div className="text-[16px] text-black font-[500]">john.doe@email.com</div>
+                        <div className="text-[16px] text-black font-[500]">{profile?.email}</div>
                     </div>
 
                     <div>
                         <label className="block text-[16px] font-[500] text-black/50 mb-1">
                             Phone Number
                         </label>
-                        <div className="text-[16px] text-black font-[500]">+91 98765 43210</div>
+                        <div className="text-[16px] text-black font-[500]">{profile?.phone_number}</div>
                     </div>
 
                     <div>

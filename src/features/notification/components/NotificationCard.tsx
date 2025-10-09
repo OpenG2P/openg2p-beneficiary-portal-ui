@@ -55,7 +55,7 @@ export default function NotificationCard({ notifications }: NotificationCardProp
                 ))}
             </div>
 
-            <div className="px-6 m-3">
+            <div className="my-3">
                 <ViewAll
                     href="/notifications"
                     label="View all Notifications"

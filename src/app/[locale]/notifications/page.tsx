@@ -12,56 +12,56 @@ const myNotifications: Notification[] = [
         id: "1",
         title: "Healthcare Registry Update",
         description: "Your healthcare registry has been successfully updated with the latest medical records.",
-        date: "20/09/2025",
+        date: "20/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "2",
         title: "Employment Registry Alert",
         description: "Please review the changes to your employment registry details.",
-        date: "18/09/2025",
+        date: "18/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "3",
         title: "Housing Registry Notification",
         description: "A new housing scheme has been added to your registry profile.",
-        date: "15/09/2025",
+        date: "15/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "4",
         title: "Education Registry Update",
         description: "Your education qualifications have been verified successfully.",
-        date: "12/09/2025",
+        date: "12/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "5",
         title: "Pension Registry Reminder",
         description: "Please update your pension account details before the due date.",
-        date: "10/09/2025",
+        date: "20/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "6",
         title: "Food Security Registry Alert",
         description: "Your ration card details have been validated.",
-        date: "08/09/2025",
+        date: "20/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "7",
         title: "Skill Development Registry",
         description: "You have been enrolled in a new skill training program.",
-        date: "05/09/2025",
+        date: "20/09/2025 10:30 AM",
         image: "/logo.png",
     },
     {
         id: "8",
         title: "Social Welfare Registry Notice",
         description: "Your social welfare application is under review.",
-        date: "01/09/2025",
+        date: "20/09/2025 10:30 AM",
         image: "/logo.png",
     },
 ];
@@ -114,11 +114,11 @@ export default function NotificationsPage() {
                                     />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h3 className="text-sm sm:text-base font-semibold text-gray-900 truncate">
+                                    <h3 className="text-[18px] font-[600] text-black truncate">
                                         {notification.title}
                                     </h3>
                                     {notification.date && (
-                                        <span className="text-xs sm:text-sm text-gray-500 block mt-0.5">
+                                        <span className="text-[14px] text-[#3399FF] block mt-0.5">
                                             {notification.date}
                                         </span>
                                     )}

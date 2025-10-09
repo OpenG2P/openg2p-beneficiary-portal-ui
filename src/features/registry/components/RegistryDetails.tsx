@@ -14,7 +14,7 @@ export default function RegistryDetails({ registry, onClose }: RegistryDetailsPr
             title={<span className="text-[#ED7C22] text-[24px]">Registry Details</span>}
             onClose={onClose}
             width="900px"
-            height="600px"
+            height="700px"
             sidebarWidth="25%"
             sidebarImage="/registry_details.png"
         >

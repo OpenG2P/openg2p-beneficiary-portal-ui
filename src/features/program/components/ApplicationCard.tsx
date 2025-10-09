@@ -80,7 +80,7 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                 })}
             </div>
 
-            <div className="px-6 m-3">
+            <div className="my-3">
                 <ViewAll
                     href="/applications"
                     label="View all Applications"

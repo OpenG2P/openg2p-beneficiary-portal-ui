@@ -16,7 +16,7 @@ export default function ViewAll({ href, label = "View All", bgColor }: ViewAllPr
         <div className="flex justify-start ml-[30px] mt-[20px]">
             <Link
                 href={href}
-                className={`flex items-center text-black font-semibold text-[14px] ${bgColor ? bgColor : ""} px-3 py-[1px] rounded-[15px]`}
+                className={`flex items-center text-black font-semibold text-[14px] ${bgColor ? bgColor : ""} px-3 py-[4px] rounded-[15px]`}
             >
                 {label}
                 <Image

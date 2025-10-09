@@ -13,10 +13,10 @@ interface ViewAllProps {
 
 export default function ViewAll({ href, label = "View All", bgColor }: ViewAllProps) {
     return (
-        <div className="flex justify-start mt-4">
+        <div className="flex justify-start ml-[30px] mt-[20px]">
             <Link
                 href={href}
-                className={`flex items-center text-black font-semibold text-base ${bgColor ? bgColor : ""} px-3 py-1 rounded-[15px]`}
+                className={`flex items-center text-black font-semibold text-[14px] ${bgColor ? bgColor : ""} px-3 py-[1px] rounded-[15px]`}
             >
                 {label}
                 <Image

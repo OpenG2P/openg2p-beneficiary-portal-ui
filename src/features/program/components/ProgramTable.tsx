@@ -44,9 +44,9 @@ const getBenefitClasses = (benefit: string) => {
 
 export default function ProgramTable({ programs }: ProgramTableProps) {
     return (
-        <div className="bg-white rounded-xl shadow-xl w-full border border-gray-200 overflow-hidden">
-            <div className="flex justify-between items-center px-8 py-4">
-                <h2 className="text-[20px] font-[600] text-[#ED7C22]">My Programs</h2>
+        <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full  overflow-hidden">
+            <div className="flex justify-between items-center px-8 pt-[37px] pb-[12px]">
+                <h2 className="text-[20px]/[20px] font-[600] text-[#ED7C22]">My Programs</h2>
                 <button className="hover:bg-gray-100 rounded-full transition">
                     <Image
                         src={prefixBasePath("/more.png")}
@@ -67,9 +67,9 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                     </colgroup>
 
                     <thead className="bg-[#F5F5F5]">
-                        <tr>
-                            <th className="px-8 py-4 text-[16px] font-[700] text-black">Program Name</th>
-                            <th className="px-8 py-4 text-[16px] font-[700] text-black">
+                        <tr className="h-[50px]">
+                            <th className="px-[30px] text-[16px] font-[700] text-black">Program Name</th>
+                            <th className="px-[30px] text-[16px] font-[700] text-black">
                                 <div className="flex items-center gap-0.5">
                                     Enrollment Date
                                     <Image
@@ -81,7 +81,7 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                                     />
                                 </div>
                             </th>
-                            <th className="px-8 py-4 text-[16px] font-[700] text-black">
+                            <th className="text-[16px] font-[700] text-black">
                                 <div className="flex items-center gap-0.5">
                                     Benefits
                                     <Image
@@ -98,10 +98,10 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
 
                     <tbody>
                         {programs.map((program, index) => (
-                            <tr key={program.id} className={`${index % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}>
-                                <td className="px-8 py-4 text-[16px] font-[400] text-black">{program.name}</td>
-                                <td className="px-8 py-4 text-[16px] font-[400] text-black">{program.appliedDate}</td>
-                                <td className="px-8 py-4 text-[16px] font-[400] flex flex-wrap gap-2">
+                            <tr key={program.id} className={`${index % 2 === 0 ? "bg-white h-[50px]" : "bg-[#F5F5F5] h-[50px]"}`} >
+                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.name}</td>
+                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.appliedDate}</td>
+                                <td className="py-[10px] text-[16px] font-[400] flex flex-wrap gap-2">
                                     {(program.benefits || []).map((benefit, idx) => {
                                         const { bgClass, textClass } = getBenefitClasses(benefit);
                                         return (
@@ -121,7 +121,7 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                 <div className="h-3 bg-[#F5F5F5] w-full"></div>
             </div>
 
-            <div className="px-8 pb-4">
+            <div className="px-8 pb-[18px]">
                 <ViewAll href="/programs" label="View all Programs" bgColor="bg-[#F5F5F5]" />
             </div>
         </div>

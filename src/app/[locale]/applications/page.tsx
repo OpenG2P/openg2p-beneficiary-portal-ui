@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { Pagination, SearchInput, FilterInput } from '@/components/shared';
 import { usePagination } from "@/shared/hooks/usePagination";
 import { AuthUtil } from '@/features/auth/components';
-import { ApplicationActionDropdown } from "@/features/program/components";
+import { ApplicationActionDropdown, ApplicationProgress } from "@/features/program/components";
 import ApplicationDetails from "@/features/program/components/ApplicationDetails";
 
 export interface Application {
@@ -64,13 +64,17 @@ export default function ApplicationsPage() {
 
     const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [activeModal, setActiveModal] = useState<"details" | "progress" | null>(null);
+
 
     const handleActionSelect = (option: string, application: Application) => {
+        setSelectedApplication(application);
         if (option === "View Details") {
-            setSelectedApplication(application);
+            setActiveModal("details");
             setIsModalOpen(true);
         } else if (option === "Progress") {
-            alert(`Showing progress for ${application.applicationName}`);
+            setActiveModal("progress");
+            setIsModalOpen(true);
         }
     };
 
@@ -159,10 +163,21 @@ export default function ApplicationsPage() {
                 </div>
 
                 {isModalOpen && selectedApplication && (
-                    <ApplicationDetails
-                        application={selectedApplication}
-                        onClose={() => setIsModalOpen(false)}
-                    />
+                    <>
+                        {activeModal === "details" && (
+                            <ApplicationDetails
+                                application={selectedApplication}
+                                onClose={() => setIsModalOpen(false)}
+                            />
+                        )}
+
+                        {activeModal === "progress" && (
+                            <ApplicationProgress
+                                onClose={() => setIsModalOpen(false)}
+                                applicationName={selectedApplication.applicationName}
+                            />
+                        )}
+                    </>
                 )}
 
             </div>

@@ -34,9 +34,9 @@ export default function ComplaintsPage() {
     const getStatusStyles = (status: string) => {
         switch (status) {
             case "Closed":
-                return "bg-[#3399FF] text-white";
+                return "bg-[#3399FF]/20 text-[#3399FF]";
             case "In Progress":
-                return "bg-[#00B765] text-white";
+                return "bg-[#00B765]/20 text-[#00B765]";
             default:
                 return "bg-[#ED7C22] text-white";
         }
@@ -70,30 +70,30 @@ export default function ComplaintsPage() {
                         <div key={complaint.id} className="bg-gray-100 w-full">
                             <div className="px-8 py-3">
                                 <div className="flex items-center gap-3 flex-wrap mb-1">
-                                    <span className="text-black/50 font-bold text-lg">Complaint Number:</span>
-                                    <span className="text-black font-bold text-lg">{complaint.number}</span>
+                                    <span className="text-black/50 font-[400] text-[16px]">Complaint Number:</span>
+                                    <span className="text-black font-[500] text-[16px]">{complaint.number}</span>
 
                                     <span
-                                        className={`px-2 py-0.5 text-xs font-semibold rounded ${getStatusStyles(complaint.status)
+                                        className={`px-2 py-1 text-xs font-semibold rounded-[20px] ${getStatusStyles(complaint.status)
                                             }`}
                                     >
                                         {complaint.status === "Closed" ? "Resolved" : complaint.status}
                                     </span>
 
                                     {(complaint.status === "Open" || complaint.status === "Closed") && (
-                                        <button className="px-2 py-0.5 text-xs font-medium bg-[#ED7C22] text-white hover:bg-[#d16b1c] rounded">
+                                        <button className="px-2 py-0.5 text-xs font-medium bg-[#ED7C22] text-white hover:bg-[#d16b1c] rounded-[20px]">
                                             Reopen
                                         </button>
                                     )}
                                 </div>
 
                                 <div className="flex justify-start items-center gap-4 flex-wrap">
-                                    <span className="text-black/50 text-lg font-semibold">Subject:</span>
-                                    <h3 className="text-black text-lg font-semibold">{complaint.subject}</h3>
-                                    <span className="text-sm text-[#3399FF]">{complaint.date}</span>
+                                    <span className="text-black/50 font-[400] text-[16px]">Subject:</span>
+                                    <h3 className="text-black font-[500] text-[16px]">{complaint.subject}</h3>
+                                    <span className="text-[#3399FF] font-[500] text-[16px]">{complaint.date}</span>
                                 </div>
 
-                                <p className="text-sm text-gray-700 mt-1">{complaint.description}</p>
+                                <p className="text-[16px] text-black font-[400] mt-1">{complaint.description}</p>
                             </div>
                         </div>
                     ))}

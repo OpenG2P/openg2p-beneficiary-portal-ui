@@ -13,6 +13,7 @@ export default function AccountsPage() {
 
     const { profile } = useAuth();
 
+    const profileImage = profile?.picture || prefixBasePath("/user_image.png");
     return (
         <div className="px-10 py-8 bg-white min-h-screen">
             <h1 className="text-[18px] font-[600] text-gray-800 mb-2">Account/Wallet</h1>
@@ -25,12 +26,11 @@ export default function AccountsPage() {
 
                     <div className="flex flex-row gap-10 items-start">
                         <Image
-                            src={prefixBasePath("/user_image.png")}
+                            src={profileImage}
                             alt="Profile"
                             width={40}
                             height={40}
-                            className="object-cover"
-                        />
+                            className="object-cover rounded-full" />
 
                         <div className="flex flex-col justify-start w-full space-y-4">
                             <div>
@@ -96,7 +96,7 @@ export default function AccountsPage() {
                 </div>
 
                 <div className="w-[30%] bg-gray-100 p-8 flex flex-col justify-start gap-4">
-                    <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-6">Information</h2>
+                    <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-4">Information</h2>
 
                     <div>
                         <label className="block text-[16px] font-[500] text-black/50 mb-1">

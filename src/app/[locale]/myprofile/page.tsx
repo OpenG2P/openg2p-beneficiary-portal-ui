@@ -1,90 +1,81 @@
 "use client";
 
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-
-import { prefixBasePath } from '@/shared/utils/path';
+import { useLocale } from "next-intl";
+import { prefixBasePath } from "@/shared/utils/path";
+import { AuthUtil } from "@/features/auth/components";
 import { useAuth } from "@/context/global";
-
-import { AuthUtil } from '@/features/auth/components';
 
 export default function MyProfile() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
-    const t = useTranslations();
-
-    const avatarSrc = profile?.picture || prefixBasePath("/user_image.png");
+    const profileImage = profile?.picture || prefixBasePath("/user_image.png");
 
     return (
-        <div className="px-10 py-4 min-h-screen bg-white">
+        <div className="px-10 py-6 min-h-screen bg-gray-50">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-xl font-bold text-black">My Profile</h1>
             </div>
-            <div className="bg-white rounded-xl shadow-xl w-full border border-black/20 overflow-hidden">
-                <div className="max-w-4xl mx-auto">
-                    <section className="bg-white shadow-lg rounded-xl p-6 flex flex-col md:flex-row items-center gap-6 mb-8">
-                        <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-200">
-                            <Image
-                                src={avatarSrc}
-                                alt="User Avatar"
-                                width={112}
-                                height={112}
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="text-center md:text-left">
-                            <h1 className="text-2xl font-bold text-gray-900">
-                                {profile?.name || "User"}
-                            </h1>
-                            {profile?.email && (
-                                <p className="text-gray-500 mt-1">{profile.email}</p>
-                            )}
+
+            <div className="relative bg-white rounded-xl shadow-xl w-full border border-black/20 overflow-hidden pb-20">
+                <div className="absolute left-50 top-18">
+                    <Image
+                        src={profileImage}
+                        alt="Profile"
+                        width={144}
+                        height={144}
+                        className="object-cover rounded-full border-4 border-gray-200 shadow-md"
+                    />
+                </div>
+
+                <div className="bg-gray-100 pl-100 pt-10 pb-10">
+                    <h2 className="text-2xl font-bold text-blue-500">{profile?.name || "User"}</h2>
+                    {profile?.email && (
+                        <p className="text-gray-700 text-lg mt-1">{profile.email}</p>
+                    )}
+                </div>
+
+                <div className="bg-white pl-100 pt-10 pb-10">
+                    <section className="mb-6">
+                        <h2 className="text-[20px] font-semibold text-[#ED7C22] mb-4">Personal Info</h2>
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-gray-800">
+                            <div>
+                                <p className="text-black/50 text-sm mb-1">Provider ID Type</p>
+                                <p className="font-medium">{profile?.provider_unique_id_type || "-"}</p>
+                            </div>
+                            <div>
+                                <p className="text-black/50 text-sm mb-1">Provider Unique ID</p>
+                                <p className="font-medium">{profile?.provider_unique_id || "-"}</p>
+                            </div>
                         </div>
                     </section>
 
-                    <section className="bg-white shadow-md rounded-xl p-6 grid gap-6">
-                        <div>
-                            <h2 className="text-lg font-semibold text-gray-700 mb-3">
-                                {t("profilePage.personalInfo")}
-                            </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-600">
-                                <span className="font-medium">{t("profilePage.name")}:</span>
-                                <span>{profile?.name || "-"}</span>
-
-                                <span className="font-medium">{t("profilePage.providerIdType")}:</span>
-                                <span>{profile?.provider_unique_id_type || "-"}</span>
-
-                                <span className="font-medium">{t("profilePage.providerUniqueId")}:</span>
-                                <span>{profile?.provider_unique_id || "-"}</span>
+                    <section className="mb-6">
+                        <h2 className="text-[20px] font-semibold text-[#ED7C22] mb-4">Contact Info</h2>
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-gray-800">
+                            <div>
+                                <p className="text-black/50 text-sm mb-1">Phone Number</p>
+                                <p className="font-medium">{profile?.phone_number || "-"}</p>
+                            </div>
+                            <div>
+                                <p className="text-black/50 text-sm mb-1">Email ID</p>
+                                <p className="font-medium">{profile?.email || "-"}</p>
                             </div>
                         </div>
+                    </section>
 
-                        <div>
-                            <h2 className="text-lg font-semibold text-gray-700 mb-3">
-                                {t("profilePage.contactInfo")}
-                            </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-600">
-                                <span className="font-medium">{t("profilePage.email")}:</span>
-                                <span>{profile?.email || "-"}</span>
-
-                                <span className="font-medium">{t("profilePage.phone")}:</span>
-                                <span>{profile?.phone_number || "-"}</span>
-
+                    <section>
+                        <h2 className="text-[20px] font-semibold text-[#ED7C22] mb-4">Demographics</h2>
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-gray-800">
+                            <div>
+                                <p className="text-black/50 text-sm mb-1">Gender</p>
+                                <p className="font-medium">{profile?.gender || "-"}</p>
                             </div>
-                        </div>
-
-                        <div>
-                            <h2 className="text-lg font-semibold text-gray-700 mb-3">
-                                {t("profilePage.demographics")}
-                            </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-600">
-                                <span className="font-medium">{t("profilePage.gender")}:</span>
-                                <span>{profile?.gender || "-"}</span>
-
-                                <span className="font-medium">{t("profilePage.birthdate")}:</span>
-                                <span>{profile?.birthdate || "-"}</span>
+                            <div>
+                                <p className="text-black/50 text-sm mb-1">Date of Birth</p>
+                                <p className="font-medium">{profile?.birthdate || "-"}</p>
                             </div>
                         </div>
                     </section>

@@ -47,7 +47,7 @@ export default function ProfileDropdown() {
                 className="flex items-center gap-2 px-3 py-1 bg-white text-sm font-medium text-gray-800 rounded-md transition cursor-pointer"
             >
                 <span className="text-[16px] text-black">
-                    Hi, <span className="font-[600]">{profile?.name || "User"}</span>
+                    Hi, <span className="font-[500]">{profile?.name || "User"}</span>
                 </span>
 
                 <div className="w-8 h-8 rounded-full overflow-hidden shadow-xl border-2 border-gray-300">

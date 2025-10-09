@@ -7,7 +7,8 @@ import { useState, useRef, useEffect } from "react";
 export default function DepartmentDropdown() {
     const departments = ["Education", "Social Welfare", "Agriculture"];
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState<string | null>(null);
+    const [selected, setSelected] = useState<string>("");
+    const [mounted, setMounted] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const toggleDropdown = () => setOpen(!open);
@@ -16,6 +17,11 @@ export default function DepartmentDropdown() {
         setSelected(dept);
         setOpen(false);
     };
+
+    useEffect(() => {
+        setSelected("Social Welfare");
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

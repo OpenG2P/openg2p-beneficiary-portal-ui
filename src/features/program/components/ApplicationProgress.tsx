@@ -97,19 +97,18 @@ export default function ApplicationProgress({
                                         </span>
                                         <span className="text-gray-500 text-sm">{step.date}</span>
                                     </div>
-                                    <div className="text-gray-700 font-medium text-sm">
-                                        Evaluator: {step.evaluator}
+                                    <div className="text-black font-[500] text-[16px]">Evaluator: {step.evaluator}
                                     </div>
                                 </div>
 
                                 {step.description && (
-                                    <p className="pl-8 text-gray-800">{step.description}</p>
+                                    <p className="pl-8 text-black">{step.description}</p>
                                 )}
 
                                 {step.verifications && step.verifications.length > 0 && (
                                     <ul className="pl-8 mt-2 space-y-1">
                                         {step.verifications.map((v, idx) => (
-                                            <li key={idx} className="flex items-center gap-2 text-gray-800">
+                                            <li key={idx} className="flex items-center gap-2 text-black">
                                                 {v.label}
                                                 <Image
                                                     src={prefixBasePath(

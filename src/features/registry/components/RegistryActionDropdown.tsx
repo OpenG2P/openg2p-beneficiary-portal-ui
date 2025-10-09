@@ -10,7 +10,7 @@ interface Props {
 }
 
 const actions = [
-    { slug: "view-details", label: "View Details" },
+    // { slug: "view-details", label: "View Details" },
     { slug: "request-registry-details", label: "Registry Details" },
     { slug: "request-address-change", label: "Change Address" },
 ];

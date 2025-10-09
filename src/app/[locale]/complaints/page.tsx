@@ -14,6 +14,8 @@ const myComplaints: Complaint[] = [
     { id: "4", number: "1004", status: "Closed", subject: "Education Registry", description: "My degree verification request is still pending.", date: "2025-09-17 11:00 AM" },
     { id: "5", number: "1005", status: "In Progress", subject: "Pension Registry", description: "Mismatch in my pension account details after update.", date: "2025-09-16 03:20 PM" },
     { id: "6", number: "1006", status: "Closed", subject: "Food Security Registry", description: "Ration card details not reflecting after verification.", date: "2025-09-15 08:50 AM" },
+    { id: "7", number: "1007", status: "In Progress", subject: "Electricity Billing Issue", description: "Incorrect billing amount shown for last month.", date: "2025-09-21 01:10 PM" },
+    { id: "8", number: "1008", status: "Closed", subject: "Voter Registration Update", description: "Unable to update address in voter registry before elections.", date: "2025-09-14 09:00 AM" },
 ];
 
 export default function ComplaintsPage() {

@@ -12,98 +12,69 @@ import { Notification } from "@/features/notification/types/notification";
 import { Program, Application } from "@/features/program/types";
 import { Registry } from "@/features/registry/types/registry";
 import { BankCard } from "@/features/accountmapping/components";
+import { useAuth } from "@/context/global";
 
 export const programsData: Program[] = [
-    {
-        id: "1010101010",
-        name: "Social Safety Net Program",
-        appliedDate: "2025-09-01",
-        benefits: ["Money", "Home", "Rice", "Oil", "Books"],
-        status: "Applied",
-    },
-    {
-        id: "2025202501",
-        name: "Pension Yojana",
-        appliedDate: "2025-08-15",
-        benefits: ["Money", "Rice", "Oil"],
-        status: "Applied",
-    },
-    {
-        id: "3030303030",
-        name: "PM-KISAN Farmer Support",
-        appliedDate: "2025-08-10",
-        benefits: ["Money", "Rice", "Oil", "Books"],
-        status: "Enrolled",
-    },
-    {
-        id: "4040404040",
-        name: "Ayushman Bharat Health Scheme",
-        appliedDate: "2025-08-20",
-        benefits: ["Money", "Books"],
-        status: "Applied",
-    },
-    {
-        id: "6060606060",
-        name: "Pradhan Mantri Awas Yojana",
-        appliedDate: "2025-07-25",
-        benefits: ["Home"],
-        status: "Enrolled",
-    },
+    { id: "1010101010", name: "Education Support Program", appliedDate: "2025-09-01", benefits: ["Books", "Tuition"], status: "Applied" },
+    { id: "2025202501", name: "Social Welfare Assistance", appliedDate: "2025-08-15", benefits: ["Money", "Food"], status: "Applied" },
+    { id: "3030303030", name: "Agriculture Farmer Support", appliedDate: "2025-08-10", benefits: ["Seeds", "Fertilizer"], status: "Enrolled" },
+    { id: "4040404040", name: "Scholarship Program", appliedDate: "2025-08-20", benefits: ["Books", "Money"], status: "Applied" },
+    { id: "6060606060", name: "Rural Housing Assistance", appliedDate: "2025-07-25", benefits: ["Home"], status: "Enrolled" },
 ];
 
-const bankAccount = { name: "John Smith", number: "xxxx xxxx xxxx 1234" };
-
-
-const previewRegistries: Registry[] = [
-    { name: "Healthcare Registry", id: "12938475639", date: "15/08/2025", action: "Apply", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
-    { name: "Employment Registry", id: "84756392013", date: "05/08/2025", action: "Applied", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
-    { name: "Housing Registry", id: "56473829102", date: "22/07/2025", action: "Apply", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
-    { name: "Education Registry", id: "93847561029", date: "10/07/2025", action: "Apply", description: "This registry serves as a comprehensive platform for tracking and managing citizen-related programs and services. It maintains detailed records of program applications, eligibility criteria, enrollment status, and benefit distribution. The registry ensures transparency and accountability by recording all actions, changes, and updates related to each program. It helps government and administrative agencies monitor resource allocation, plan initiatives effectively, and provide timely support to citizens. Through this system, users can access program details, submit applications, request updates" },
-    { name: "Pension Registry", id: "38475619283", date: "28/06/2025", action: "Apply", description: "Records pension plans and disbursement details." },
+export const previewRegistries: Registry[] = [
+    { name: "Social Registry", id: "SW001", date: "15/08/2025", action: "Apply", description: "Tracks citizens under social welfare schemes." },
+    { name: "Income Tax", id: "SW002", date: "05/08/2025", action: "Applied", description: "Tracks income tax records of citizens." },
+    { name: "Caste Certificate", id: "SW003", date: "22/07/2025", action: "Apply", description: "Records caste certificates issued to citizens." },
+    { name: "Electricity", id: "SW004", date: "10/07/2025", action: "Apply", description: "Tracks electricity connections and usage." },
+    { name: "Voter Registry", id: "SW005", date: "28/06/2025", action: "Apply", description: "Maintains voter registration records." },
 ];
 
-const dashboardApplications: Application[] = [
-    { name: "Social Safety Net Program", status: "Applied" },
-    { name: "Pension Yojana", status: "Applied" },
-    { name: "PM-KISAN Farmer Support", status: "Enrolled" },
-    { name: "Ayushman Bharat Health Scheme", status: "Pending" },
+export const dashboardApplications: Application[] = [
+    { name: "Education Support Program", status: "Applied" },
+    { name: "Social Welfare Assistance", status: "Applied" },
+    { name: "Agriculture Farmer Support", status: "Enrolled" },
+    { name: "Scholarship Program", status: "Pending" },
 ];
 
-const dashboardNotifications: Notification[] = [
+export const dashboardNotifications: Notification[] = [
     {
         id: "1",
-        title: "Healthcare Registry Update",
-        description:
-            "Your healthcare registry has been successfully updated with the.",
-        image: "/logo.png",
+        title: "Social Welfare Programs Launched",
+        description: "The government has launched new social welfare programs to support citizens across various sectors.",
+        image: "/logo.png"
     },
     {
         id: "2",
-        title: "Employment Registry Alert",
-        description:
-            "Please review the changes to your employment registry details.",
-        image: "/logo.png",
+        title: "Income Tax Filing Deadline Announced",
+        description: "The deadline for income tax filing has been extended for this financial year. Make sure to submit your documents on time.",
+        image: "/logo.png"
     },
     {
         id: "3",
-        title: "Employment Registry Alert",
-        description:
-            "Please review the changes to your employment registry details.",
-        image: "/logo.png",
+        title: "Caste Certificate Issuance Updates",
+        description: "New procedures have been introduced for applying and receiving caste certificates efficiently.",
+        image: "/logo.png"
     },
 ];
 
-const benefits = [
+export const benefits = [
     { icon: "/money.png", value: "15400", label: "Money" },
-    { icon: "/rice.png", value: "42 Kg", label: "Rice" },
+    { icon: "/rice.png", value: "42 Kg", label: "Food" },
     { icon: "/oil.png", value: "30 L", label: "Oil" },
     { icon: "/book.png", value: "12 No", label: "Books" },
 ];
+
 
 export default function Dashboard() {
 
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+
+    const { profile } = useAuth();
+
+    // Pull the name dynamically from profile
+    const bankAccount = { name: profile?.name || "John Smith", number: "xxxx xxxx xxxx 1234" };
 
     return (
         <div className="pl-[50px] py-4 min-h-screen bg-white">

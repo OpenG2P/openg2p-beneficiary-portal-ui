@@ -4,15 +4,24 @@ import { prefixBasePath } from '@/shared/utils/path';
 import { Registry } from "@/features/registry/types";
 
 
-export default function RegistryActionDropdown({ registry, onSelect }: { registry: Registry; onSelect: (option: string) => void }) {
+interface Props {
+    registry: Registry;
+    onActionSelect: (action: string) => void;
+}
+
+const actions = [
+    { slug: "view-details", label: "View Details" },
+    { slug: "request-registry-details", label: "Registry Details" },
+    { slug: "request-address-change", label: "Change Address" },
+];
+
+export default function RegistryActionDropdown({ registry, onActionSelect }: Props) {
     const [open, setOpen] = useState(false);
 
-    const options = [
-        "View Details",
-        "Request For Address Change",
-        "Request For Change Phone Number",
-        "Request For Location Change",
-    ];
+    const handleSelect = (actionSlug: string) => {
+        setOpen(false);
+        onActionSelect(actionSlug);
+    };
 
     return (
         <div className="relative">
@@ -30,23 +39,19 @@ export default function RegistryActionDropdown({ registry, onSelect }: { registr
                 </button>
             </div>
 
-
             {open && (
-                <div className="absolute right-0 mt-2 w-65 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                    {options.map((option) => (
+                <div className="absolute right-0 mt-2 w-60 bg-white border border-gray-200 shadow-lg rounded-md z-10">
+                    {actions.map((action) => (
                         <button
-                            key={option}
+                            key={action.slug}
+                            onClick={() => handleSelect(action.slug)}
                             className="w-full flex items-center gap-2 text-[14px] text-left px-2 py-2 text-[#3399FF] font-[400]"
-                            onClick={() => {
-                                onSelect(option);
-                                setOpen(false);
-                            }}
                         >
                             <span
                                 className="w-2 h-2 rounded-full"
                                 style={{ backgroundColor: "rgba(51,153,255,0.2)" }}
                             />
-                            {option}
+                            {action.label}
                         </button>
                     ))}
                 </div>

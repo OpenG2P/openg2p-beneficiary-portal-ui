@@ -10,7 +10,7 @@ const allPrograms: Program[] = [
     {
         name: "Social Safety Net Program",
         status: "Applied",
-        id: "1010101010",
+        id: "1",
         appliedDate: "2025-09-01 10:30 AM",
         benefits: ["Money", "Rice", "Oil", "Books"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -18,7 +18,7 @@ const allPrograms: Program[] = [
     {
         name: "Pension Yojana",
         status: "Apply",
-        id: "2025202501",
+        id: "2",
         appliedDate: "2025-08-15 09:10 AM",
         benefits: ["Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -26,7 +26,7 @@ const allPrograms: Program[] = [
     {
         name: "PM-KISAN Farmer Support",
         status: "Enrolled",
-        id: "3030303030",
+        id: "3",
         appliedDate: "2025-08-10 02:15 PM",
         benefits: ["Money", "Rice", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -34,7 +34,7 @@ const allPrograms: Program[] = [
     {
         name: "Ayushman Bharat Health Scheme",
         status: "Applied",
-        id: "4040404040",
+        id: "4",
         appliedDate: "2025-08-20 11:45 AM",
         benefits: ["Money", "Home"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -42,7 +42,7 @@ const allPrograms: Program[] = [
     {
         name: "Pradhan Mantri Awas Yojana",
         status: "Enrolled",
-        id: "6060606060",
+        id: "5",
         appliedDate: "2025-07-25 03:30 PM",
         benefits: ["Home", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -50,7 +50,7 @@ const allPrograms: Program[] = [
     {
         name: "Skill Development Program",
         status: "Enrolled",
-        id: "8080808080",
+        id: "6",
         appliedDate: "2025-07-15 04:10 PM",
         benefits: ["Books", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -58,7 +58,7 @@ const allPrograms: Program[] = [
     {
         name: "Digital India Initiative",
         status: "Applied",
-        id: "9090909090",
+        id: "7",
         appliedDate: "2025-09-02 11:00 AM",
         benefits: ["Money", "Books", "Home"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -66,7 +66,7 @@ const allPrograms: Program[] = [
     {
         name: "Startup India Support",
         status: "Applied",
-        id: "1111111111",
+        id: "8",
         appliedDate: "2025-08-18 01:20 PM",
         benefits: ["Money", "Books"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -74,7 +74,7 @@ const allPrograms: Program[] = [
     {
         name: "Clean Ganga Mission",
         status: "Apply",
-        id: "1212121212",
+        id: "9",
         appliedDate: "2025-08-28 03:15 PM",
         benefits: ["Money", "Rice", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -82,7 +82,7 @@ const allPrograms: Program[] = [
     {
         name: "Swachh Bharat Abhiyan",
         status: "Enrolled",
-        id: "1313131313",
+        id: "10",
         appliedDate: "2025-08-12 04:45 PM",
         benefits: ["Money", "Rice"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -90,7 +90,7 @@ const allPrograms: Program[] = [
     {
         name: "National Health Mission",
         status: "Applied",
-        id: "1414141414",
+        id: "11",
         appliedDate: "2025-08-22 09:40 AM",
         benefits: ["Money", "Home", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -98,7 +98,7 @@ const allPrograms: Program[] = [
     {
         name: "Housing for All",
         status: "Enrolled",
-        id: "1515151515",
+        id: "12",
         appliedDate: "2025-07-28 02:30 PM",
         benefits: ["Home", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -106,7 +106,7 @@ const allPrograms: Program[] = [
     {
         name: "Rural Skill Training",
         status: "Apply",
-        id: "1616161616",
+        id: "13",
         appliedDate: "2025-08-06 10:10 AM",
         benefits: ["Books", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -114,7 +114,7 @@ const allPrograms: Program[] = [
     {
         name: "Women Empowerment Program",
         status: "Enrolled",
-        id: "1717171717",
+        id: "14",
         appliedDate: "2025-07-17 05:00 PM",
         benefits: ["Money", "Books", "Rice"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -122,7 +122,7 @@ const allPrograms: Program[] = [
     {
         name: "LPG Subsidy",
         status: "Pending",
-        id: "5050505050",
+        id: "15",
         appliedDate: "2025-08-25 05:45 PM",
         benefits: ["Money", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -130,7 +130,7 @@ const allPrograms: Program[] = [
     {
         name: "National Rural Employment Guarantee",
         status: "Apply",
-        id: "7070707070",
+        id: "16",
         appliedDate: "2025-08-05 09:20 AM",
         benefits: ["Money", "Rice", "Books"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -141,7 +141,7 @@ const myPrograms: Program[] = [
     {
         name: "Social Safety Net Program",
         status: "Applied",
-        id: "1010101010",
+        id: "1",
         appliedDate: "2025-09-01",
         benefits: ["Money", "Rice", "Oil", "Books"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -149,7 +149,7 @@ const myPrograms: Program[] = [
     {
         name: "Pension Yojana",
         status: "Applied",
-        id: "2025202501",
+        id: "2",
         appliedDate: "2025-08-15",
         benefits: ["Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -157,7 +157,7 @@ const myPrograms: Program[] = [
     {
         name: "PM-KISAN Farmer Support",
         status: "Applied",
-        id: "3030303030",
+        id: "3",
         appliedDate: "2025-08-10",
         benefits: ["Money", "Rice", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -165,7 +165,7 @@ const myPrograms: Program[] = [
     {
         name: "Ayushman Bharat Health Scheme",
         status: "Applied",
-        id: "4040404040",
+        id: "4",
         appliedDate: "2025-08-20",
         benefits: ["Money", "Home"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -173,7 +173,7 @@ const myPrograms: Program[] = [
     {
         name: "Pradhan Mantri Awas Yojana",
         status: "Applied",
-        id: "6060606060",
+        id: "5",
         appliedDate: "2025-07-25",
         benefits: ["Home", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -181,7 +181,7 @@ const myPrograms: Program[] = [
     {
         name: "Skill Development Program",
         status: "Applied",
-        id: "8080808080",
+        id: "6",
         appliedDate: "2025-07-15",
         benefits: ["Books", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -189,7 +189,7 @@ const myPrograms: Program[] = [
     {
         name: "Digital India Initiative",
         status: "Applied",
-        id: "9090909090",
+        id: "7",
         appliedDate: "2025-09-02",
         benefits: ["Money", "Books", "Home"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -197,7 +197,7 @@ const myPrograms: Program[] = [
     {
         name: "Startup India Support",
         status: "Applied",
-        id: "1111111111",
+        id: "8",
         appliedDate: "2025-08-18",
         benefits: ["Money", "Books"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -205,7 +205,7 @@ const myPrograms: Program[] = [
     {
         name: "Clean Ganga Mission",
         status: "Applied",
-        id: "1212121212",
+        id: "9",
         appliedDate: "2025-08-28",
         benefits: ["Money", "Rice", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -213,7 +213,7 @@ const myPrograms: Program[] = [
     {
         name: "Swachh Bharat Abhiyan",
         status: "Applied",
-        id: "1313131313",
+        id: "10",
         appliedDate: "2025-08-12",
         benefits: ["Money", "Rice"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -221,7 +221,7 @@ const myPrograms: Program[] = [
     {
         name: "National Health Mission",
         status: "Applied",
-        id: "1414141414",
+        id: "11",
         appliedDate: "2025-08-22",
         benefits: ["Money", "Home", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -229,7 +229,7 @@ const myPrograms: Program[] = [
     {
         name: "Housing for All",
         status: "Applied",
-        id: "1515151515",
+        id: "12",
         appliedDate: "2025-07-28",
         benefits: ["Home", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -237,7 +237,7 @@ const myPrograms: Program[] = [
     {
         name: "Rural Skill Training",
         status: "Applied",
-        id: "1616161616",
+        id: "13",
         appliedDate: "2025-08-06",
         benefits: ["Books", "Money"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -245,7 +245,7 @@ const myPrograms: Program[] = [
     {
         name: "Women Empowerment Program",
         status: "Applied",
-        id: "1717171717",
+        id: "14",
         appliedDate: "2025-07-17",
         benefits: ["Money", "Books", "Rice"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -253,7 +253,7 @@ const myPrograms: Program[] = [
     {
         name: "LPG Subsidy",
         status: "Applied",
-        id: "5050505050",
+        id: "15",
         appliedDate: "2025-08-25",
         benefits: ["Money", "Oil"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",
@@ -261,7 +261,7 @@ const myPrograms: Program[] = [
     {
         name: "National Rural Employment Guarantee",
         status: "Applied",
-        id: "7070707070",
+        id: "16",
         appliedDate: "2025-08-05",
         benefits: ["Money", "Rice", "Books"],
         description: "The Social Safety Net Program aims to provide financial and material assistance to vulnerable families and individuals across the country. It ensures access to essential resources such as food, monetary support, and educational materials. The program is designed to reduce poverty, enhance social welfare, and promote equitable growth by helping those who are most in need. Eligible households can benefit from a combination of direct cash transfers and in-kind support, which helps them manage emergencies and maintain a minimum standard of living. Continuous monitoring and community-based evaluation ensure the program reaches the intended beneficiaries effectively.",

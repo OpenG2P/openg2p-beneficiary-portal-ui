@@ -7,6 +7,8 @@ import { prefixBasePath } from '@/shared/utils/path';
 import { Pagination, SearchInput } from '@/components/shared';
 import { RegistryActionDropdown, RegistryDetails } from '@/features/registry/components';
 import { AuthUtil } from '@/features/auth/components';
+import { useRouter } from "next/navigation";
+
 
 import { Registry } from "@/features/registry/types";
 import { usePagination } from "@/shared/hooks/usePagination";
@@ -148,6 +150,7 @@ const myRegistries: Registry[] = [
 export default function RegistriesPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    const router = useRouter();
 
     const [activeTab, setActiveTab] = useState<"all" | "my">("all");
     const [searchQuery, setSearchQuery] = useState("");
@@ -189,17 +192,21 @@ export default function RegistriesPage() {
             </button>
         );
     };
+
     const handleActionSelect = (option: string, registry: Registry) => {
-        if (option === "View Details") {
-            setSelectedRegistry(registry);
-            setOpenDetails(true);
-        } else if (option === "Request for Update") {
-            alert(`Requesting update for ${registry.name}`);
-        } else if (option === "Apply") {
-            alert(`Applying to ${registry.name}`);
+        switch (option) {
+            case "view-details":
+                setSelectedRegistry(registry);
+                setOpenDetails(true);
+                break;
+            case "request-address-change":
+                router.push(`/registries/${registry.id}/address-change`);
+                break;
+            case "request-registry-details":
+                router.push(`/registries/${registry.id}/view-details`);
+                break;
         }
     };
-
 
     return (
         <div className="px-10 py-4 min-h-screen bg-white">
@@ -264,7 +271,7 @@ export default function RegistriesPage() {
                                         ) : (
                                             <RegistryActionDropdown
                                                 registry={r}
-                                                onSelect={(option) => handleActionSelect(option, r)}
+                                                onActionSelect={(option) => handleActionSelect(option, r)}
                                             />
                                         )}
                                     </td>

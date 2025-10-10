@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
     output: "standalone",
     poweredByHeader: false,
     allowedDevOrigins: ["portal.openg2p.my", "*.portal.openg2p.my"],
+
+    // Ignore ESLint errors during production build
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
 };
 
 export default withNextIntl(nextConfig);

@@ -15,26 +15,26 @@ import { BankCard } from "@/features/accountmapping/components";
 import { useAuth } from "@/context/global";
 
 export const programsData: Program[] = [
-    { id: "1010101010", name: "Education Support Program", appliedDate: "2025-09-01", benefits: ["Books", "Tuition"], status: "Applied" },
-    { id: "2025202501", name: "Social Welfare Assistance", appliedDate: "2025-08-15", benefits: ["Money", "Food"], status: "Applied" },
-    { id: "3030303030", name: "Agriculture Farmer Support", appliedDate: "2025-08-10", benefits: ["Seeds", "Fertilizer"], status: "Enrolled" },
-    { id: "4040404040", name: "Scholarship Program", appliedDate: "2025-08-20", benefits: ["Books", "Money"], status: "Applied" },
-    { id: "6060606060", name: "Rural Housing Assistance", appliedDate: "2025-07-25", benefits: ["Home"], status: "Enrolled" },
+    { id: "1010101010", name: "Adult Literacy Drive", appliedDate: "2025-09-01", benefits: ["Books", "Classes"], status: "Applied" },
+    { id: "2025202501", name: "School Supplies Initiative", appliedDate: "2025-08-15", benefits: ["Books", "Uniforms"], status: "Applied" },
+    { id: "3030303030", name: "Social Registry Upgrade", appliedDate: "2025-08-10", benefits: ["Information Access"], status: "Enrolled" },
+    { id: "4040404040", name: "Income Tax Assistance", appliedDate: "2025-08-20", benefits: ["Money", "Guidance"], status: "Applied" },
+    { id: "6060606060", name: "Caste Certificate Facilitation", appliedDate: "2025-07-25", benefits: ["Documentation"], status: "Enrolled" },
 ];
 
 export const previewRegistries: Registry[] = [
-    { name: "Social Registry", id: "SW001", date: "15/08/2025", action: "Apply", description: "Tracks citizens under social welfare schemes." },
-    { name: "Income Tax", id: "SW002", date: "05/08/2025", action: "Applied", description: "Tracks income tax records of citizens." },
-    { name: "Caste Certificate", id: "SW003", date: "22/07/2025", action: "Apply", description: "Records caste certificates issued to citizens." },
-    { name: "Electricity", id: "SW004", date: "10/07/2025", action: "Apply", description: "Tracks electricity connections and usage." },
-    { name: "Voter Registry", id: "SW005", date: "28/06/2025", action: "Apply", description: "Maintains voter registration records." },
+    { name: "Education Registry", id: "SW001", date: "15/08/2025", action: "Apply", description: "Tracks citizens under social welfare schemes." },
+    { name: "Social Registry", id: "SW002", date: "05/08/2025", action: "Applied", description: "Tracks income tax records of citizens." },
+    { name: "Income Tax Registry", id: "SW003", date: "22/07/2025", action: "Apply", description: "Records caste certificates issued to citizens." },
+    { name: "Caste Certificate Registry", id: "SW004", date: "10/07/2025", action: "Apply", description: "Tracks electricity connections and usage." },
+    { name: "Electricity Registry", id: "SW005", date: "28/06/2025", action: "Apply", description: "Maintains voter registration records." },
 ];
 
 export const dashboardApplications: Application[] = [
-    { name: "Education Support Program", status: "Applied" },
-    { name: "Social Welfare Assistance", status: "Applied" },
-    { name: "Agriculture Farmer Support", status: "Enrolled" },
-    { name: "Scholarship Program", status: "Pending" },
+    { name: "Social Registry", status: "Applied" },
+    { name: "Income Tax Assistance", status: "Applied" },
+    { name: "Caste Certificate Issuance", status: "Enrolled" },
+    { name: "Electricity Subsidy Program", status: "Pending" },
 ];
 
 export const dashboardNotifications: Notification[] = [

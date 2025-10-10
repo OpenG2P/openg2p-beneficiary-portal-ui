@@ -88,7 +88,7 @@ export default function NewsPage() {
                                     <img
                                         src={prefixBasePath(notification.image)}
                                         alt={notification.title}
-                                        className="w-full h-full object-contain rounded-md border bg-white"
+                                        className="w-full h-full object-contain rounded-md bg-white"
                                     />
                                 </div>
                                 <div className="flex-1 min-w-0">

@@ -33,7 +33,7 @@ export default function LoginProviders() {
                         href={prefixBaseApiPath(
                             `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${encodeURIComponent(window.location.origin + prefixBasePath(`/${locale}/dashboard`))}`
                         )}
-                        className="block w-full py-2 rounded-[20px] text-[16px] bg-black text-white font-semibold text-center hover:bg-gray-950 transition cursor-pointer"
+                        className="block w-full py-2 rounded-[20px] text-[16px] bg-black text-white font-semibold text-center hover:text-[#ED7C22] hover:bg-black/90 transition"
                     >
                         {x.displayName}
                     </a>

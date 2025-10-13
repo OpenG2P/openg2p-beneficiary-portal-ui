@@ -59,7 +59,7 @@ export default function ComplaintsPage() {
                             className="w-[200px]"
                         />
                         <button
-                            className="bg-black text-white px-4 py-1 rounded-[17px] shadow cursor-pointer"
+                            className="bg-black text-white px-4 py-1 rounded-[17px] shadow"
                             onClick={() => setShowModal(true)}
                         >
                             File a Complaint

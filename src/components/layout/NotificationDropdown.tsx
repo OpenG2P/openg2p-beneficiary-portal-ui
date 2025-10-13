@@ -37,7 +37,7 @@ export default function NotificationDropdown({
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setOpen((prev) => !prev)}
-                className="relative p-1 cursor-pointer"
+                className="relative p-1"
             >
                 <Image
                     src={prefixBasePath("/notification.png")}

@@ -6,6 +6,7 @@ import { AuthUtil } from '@/features/auth/components';
 import { prefixBasePath } from "@/shared/utils/path";
 import { Pagination, SearchInput } from "@/components/shared";
 import { Notification } from "@/features/notification/types";
+import { NewsDetails } from "@/features/notification/components";
 
 const newsData: Notification[] = [
     {
@@ -47,9 +48,10 @@ const newsData: Notification[] = [
 
 export default function NewsPage() {
     const lang = useLocale();
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [searchQuery, setSearchQuery] = useState("");
+    const [selectedNews, setSelectedNews] = useState<Notification | null>(null);
 
     const filteredNotifications = newsData.filter(n =>
         n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -81,6 +83,7 @@ export default function NewsPage() {
                     {currentItems.map((notification, idx) => (
                         <div
                             key={notification.id}
+                            onClick={() => setSelectedNews(notification)}
                             className={`${idx % 2 === 0 ? "bg-gray-100" : "bg-white"} w-full`}
                         >
                             <div className="flex gap-3 px-6 py-3">
@@ -121,6 +124,12 @@ export default function NewsPage() {
                         {Math.min(currentPage * 5, filteredNotifications.length)} of {filteredNotifications.length} news
                     </div>
                 </div>
+                {selectedNews && (
+                    <NewsDetails
+                        news={selectedNews}
+                        onClose={() => setSelectedNews(null)}
+                    />
+                )}
             </div>
         </div>
     );

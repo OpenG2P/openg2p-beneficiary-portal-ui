@@ -21,12 +21,12 @@ export default function middleware(req: NextRequest) {
         return intlMiddleware(req);
     }
 
-    const token = req.cookies.get("X-Access-Token");
-    if (!token) {
-        return NextResponse.redirect(
-            new URL(prefixBasePath(`/${lang}/login`), req.url)
-        );
-    }
+    // const token = req.cookies.get("X-Access-Token");
+    // if (!token) {
+    //     return NextResponse.redirect(
+    //         new URL(prefixBasePath(`/${lang}/login`), req.url)
+    //     );
+    // }
 
     return intlMiddleware(req);
 }

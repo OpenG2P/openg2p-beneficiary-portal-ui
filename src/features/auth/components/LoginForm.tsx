@@ -36,7 +36,7 @@ export default function LoginForm() {
                     </label>
                     <input
                         type="text"
-                        placeholder="enter your email"
+                        placeholder="Enter your email"
                         className="px-4 py-2 text-black bg-white rounded-[10px] placeholder-[#00000040] focus:outline-none"
                     />
                 </div>
@@ -45,7 +45,7 @@ export default function LoginForm() {
                     <label className="mb-1 text-[16px] font-medium text-black">{t("password")}</label>
                     <input
                         type="password"
-                        placeholder="enter your password"
+                        placeholder="Enter your password"
                         className="px-4 py-2 text-black bg-white rounded-[10px] placeholder-[#00000040] focus:outline-none"
                     />
                     <div className="flex justify-end mt-1">

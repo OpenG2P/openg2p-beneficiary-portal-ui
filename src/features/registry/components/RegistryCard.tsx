@@ -49,7 +49,9 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
                 <ViewAll
                     href="/registries"
                     label="View all Registries"
-                    bgColor="bg-[#F5F5F5]"
+                    bgColor="#F5F5F5"
+                    hoverBgColor="#ED7C22"
+                    hoverTextColor="#FFFFFF"
                 />
             </div>
         </div>

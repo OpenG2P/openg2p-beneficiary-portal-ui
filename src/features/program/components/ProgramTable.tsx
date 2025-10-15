@@ -122,7 +122,13 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
             </div>
 
             <div className="pb-[18px]">
-                <ViewAll href="/programs" label="View all Programs" bgColor="bg-[#F5F5F5]" />
+                <ViewAll
+                    href="/programs"
+                    label="View all Programs"
+                    bgColor="#F5F5F5"
+                    hoverBgColor="#ED7C22"
+                    hoverTextColor="#FFFFFF"
+                />
             </div>
         </div>
     );

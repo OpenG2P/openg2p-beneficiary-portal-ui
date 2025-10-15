@@ -73,7 +73,6 @@ export default function Dashboard() {
 
     const { profile } = useAuth();
 
-    // Pull the name dynamically from profile
     const bankAccount = { name: profile?.name || "John Smith", number: "xxxx xxxx xxxx 1234" };
 
     return (

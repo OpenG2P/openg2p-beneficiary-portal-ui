@@ -10,7 +10,7 @@ export default function LoginProviders() {
     const [loginProviders, setLoginProviders] = useState<LoginProvider[]>([]);
 
     useEffect(() => {
-        fetch(prefixBaseApiPath(`/auth/getLoginProviders`))
+        fetch(prefixBaseApiPath(`/auth/get_login_providers`))
             .then((res) => res.json())
             .then((resJson: { loginProviders: LoginProvider[] }) => {
                 const providers = resJson.loginProviders.map((x) => {
@@ -31,7 +31,7 @@ export default function LoginProviders() {
                 <div key={x.id} className="mb-2">
                     <a
                         href={prefixBaseApiPath(
-                            `/auth/getLoginProviderRedirect/${x.id}?redirect_uri=${encodeURIComponent(window.location.origin + prefixBasePath(`/${locale}/dashboard`))}`
+                            `/auth/get_login_provider_redirect/${x.id}?redirect_uri=${encodeURIComponent(window.location.origin + prefixBasePath(`/${locale}/dashboard`))}`
                         )}
                         className="block w-full py-2 rounded-[20px] text-[16px] bg-black text-white font-semibold text-center hover:text-[#ED7C22] hover:bg-black/90 transition"
                     >

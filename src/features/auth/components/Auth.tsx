@@ -13,7 +13,7 @@ export default function AuthUtil(params: { successRedirectUrl?: string; failedRe
     const checkAuth = async () => {
         setIsCheckingAuth(true);
         try {
-            const res = await fetch(prefixBaseApiPath("/auth/profile"));
+            const res = await fetch(prefixBaseApiPath("/auth/get_user_profile"));
             if (res.ok) {
                 const resJson = await res.json();
                 auth.setProfile(resJson);

@@ -41,7 +41,7 @@ class AuthService {
 
     async getProfile(): Promise<UserProfile | null> {
         try {
-            const response = await fetch(prefixBaseApiPath('/auth/profile'), {
+            const response = await fetch(prefixBaseApiPath('/auth/get_user_profile'), {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

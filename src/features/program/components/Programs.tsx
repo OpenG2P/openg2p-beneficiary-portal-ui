@@ -85,32 +85,41 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
 
     return (
         <div className="bg-white rounded-2xl shadow-md w-full border border-gray-200">
-            <div className="flex items-center justify-between px-8 pt-8 gap-4 flex-wrap">
-                <div className="flex gap-2">
-                    <button
-                        onClick={() => setActiveTab("all")}
-                        className={`px-6 py-2 text-[16px] font-[600] rounded-t-xl ${activeTab === "all" ? "bg-[#ED7C22] text-white" : "bg-[#F5F5F5] text-black/50"
-                            }`}
-                    >
-                        All Programs
-                    </button>
-                    <button
-                        onClick={() => setActiveTab("my")}
-                        className={`px-6 py-2 text-[16px] font-[600] rounded-t-xl ${activeTab === "my" ? "bg-[#ED7C22] text-white" : "bg-[#F5F5F5] text-black/50"
-                            }`}
-                    >
-                        My Programs
-                    </button>
-                </div>
-                <div className="flex justify-center pb-4">
-                    <SearchInput
-                        value={searchQuery}
-                        onChange={setSearchQuery}
-                        placeholder="Search programs"
-                        className="w-[200px]"
-                    />
+            <div className="relative">
+                <div className="absolute inset-x-0 bottom-0 h-[6px] bg-[#F5F5F5]" />
+
+                <div className="flex items-center justify-between px-8 gap-4 flex-wrap relative z-10">
+                    <div className="flex gap-2 pt-8">
+                        <button
+                            onClick={() => setActiveTab("all")}
+                            className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "all"
+                                ? "bg-[#ED7C22] text-white"
+                                : "bg-[#D9D9D999]/60 text-black/50"
+                                }`}
+                        >
+                            All Programs
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("my")}
+                            className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "my"
+                                ? "bg-[#ED7C22] text-white"
+                                : "bg-[#D9D9D999]/60 text-black/50"
+                                }`}
+                        >
+                            My Programs
+                        </button>
+                    </div>
+                    <div className="flex justify-center pb-6 pt-6 pr-6">
+                        <SearchInput
+                            value={searchQuery}
+                            onChange={setSearchQuery}
+                            placeholder="Search programs"
+                            className="w-[200px]"
+                        />
+                    </div>
                 </div>
             </div>
+
             <div className="overflow-x-auto">
                 <table className="min-w-full border-collapse">
                     <thead className="bg-[#F5F5F5] text-black text-[16px] font-[700]">

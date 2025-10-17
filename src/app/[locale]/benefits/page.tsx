@@ -168,7 +168,7 @@ export default function BenefitsPage() {
                                 <th colSpan={5}>
                                     <div className="flex justify-between items-center px-2 py-4">
                                         <span className="px-6 py-2 text-[#ED7C22] text-[20px] font-[600]">Benefits Received till Date</span>
-                                        <div className="flex gap-4 px-6">
+                                        <div className="flex gap-4 pr-16">
                                             <FilterInput
                                                 value={filterText}
                                                 onChange={setFilterText}

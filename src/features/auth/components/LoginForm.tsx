@@ -17,7 +17,7 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="w-[420px] h-[540px] bg-[linear-gradient(180deg,#FEF1C1_0%,#FCBE00_100%)] rounded-[20px] shadow-lg flex flex-col items-center p-6">
+        <div className="w-[420px] h-[540px] bg-[linear-gradient(180deg,#FEF1C1_0%,#FCBE00_100%)] rounded-[20px] shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] flex flex-col items-center p-6">
             <Image
                 src={prefixBasePath("/openg2p_logo.png")}
                 alt={t("portalName")}

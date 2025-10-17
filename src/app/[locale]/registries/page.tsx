@@ -156,7 +156,7 @@ export default function RegistriesPage() {
         <div className="px-10 py-4 min-h-screen bg-white">
             <h1 className="text-xl font-bold text-gray-800 mb-4">Registries</h1>
 
-            <div className="bg-white rounded-2xl shadow-md w-full border border-gray-200">
+            <div className="bg-white rounded-2xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] w-full border border-gray-200">
                 <div className="relative">
                     <div className="absolute inset-x-0 bottom-0 h-[6px] bg-[#F5F5F5]" />
 

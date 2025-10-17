@@ -160,7 +160,7 @@ export default function BenefitsPage() {
                 <h1 className="text-xl font-bold text-black">Benefits</h1>
             </div>
 
-            <div className="bg-white rounded-xl shadow-xl w-full border border-black/20 overflow-hidden">
+            <div className="bg-white rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] w-full border border-black/20 overflow-hidden">
                 <div className="overflow-x-auto w-full">
                     <table className="w-full text-left border-collapse min-w-[700px]">
                         <thead>

@@ -66,7 +66,7 @@ export default function NewsPage() {
                 <h1 className="text-lg text-black font-bold">Latest News</h1>
             </div>
 
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20">
+            <div className="bg-white rounded-lg overflow-hidden border border-black/20 shadow-[0_4px_20px_0_rgba(0,0,0,0.25)]">
                 <div className="mb-4 px-6 pt-4 flex items-center justify-between">
                     <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">
                         All News

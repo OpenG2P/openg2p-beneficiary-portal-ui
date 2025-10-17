@@ -109,7 +109,7 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
                             My Programs
                         </button>
                     </div>
-                    <div className="flex justify-center pb-6 pt-6 pr-6">
+                    <div className="flex justify-center py-6 pr-6">
                         <SearchInput
                             value={searchQuery}
                             onChange={setSearchQuery}

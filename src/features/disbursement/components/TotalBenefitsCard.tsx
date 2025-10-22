@@ -35,9 +35,8 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                         />
                     </div>
 
-                    <div className="flex justify-center flex-wrap gap-14 -mx-7  relative">
+                    <div className="flex justify-between items-center w-full px-4">
                         {benefits.map((b, index) => (
-
                             <div
                                 key={index}
                                 className=" flex flex-col items-center text-center min-w-[70px]"

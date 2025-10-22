@@ -84,7 +84,7 @@ const myNotifications: Notification[] = [
 
 export default function NotificationsPage() {
     const lang = useLocale();
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [searchQuery, setSearchQuery] = useState("");
 

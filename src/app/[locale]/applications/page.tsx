@@ -157,7 +157,7 @@ export const getStatusClasses = (status: string) => {
 
 export default function ApplicationsPage() {
     const lang = useLocale();
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(applicationsData, 8);
 

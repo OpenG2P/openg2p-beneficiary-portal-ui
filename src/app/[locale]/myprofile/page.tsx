@@ -8,7 +8,7 @@ import { useAuth } from "@/context/global";
 
 export default function MyProfile() {
     const lang = useLocale();
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");

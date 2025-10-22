@@ -9,7 +9,7 @@ import { useAuth } from "@/context/global";
 
 export default function AccountsPage() {
     const lang = useLocale();
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
 

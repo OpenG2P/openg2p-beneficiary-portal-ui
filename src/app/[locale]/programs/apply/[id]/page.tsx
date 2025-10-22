@@ -149,7 +149,7 @@ export default function ApplyProgramPage() {
     const params = useParams();
     const programId = params.id;
 
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
 
     const [program, setProgram] = useState<Program | null>(null);
@@ -182,18 +182,16 @@ export default function ApplyProgramPage() {
                     </h2>
 
                     <div className="flex flex-col gap-4">
-                        <div className="flex gap-4">
-                            <div className="flex-1 max-w-[50%]">
-                                <label className="block text-[16px] font-[500] text-black mb-1">
-                                    Program Name
-                                </label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 focus:outline-none"
-                                    value={program.name}
-                                    readOnly
-                                />
-                            </div>
+                        <div className="flex-1 pr-2 w-1/2">
+                            <label className="block text-[16px] font-[500] text-black mb-1">
+                                Program Name
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 focus:outline-none"
+                                value={program.name}
+                                readOnly
+                            />
                         </div>
 
                         <div className="flex gap-4">

@@ -133,7 +133,7 @@ export default function RegistryActionPage() {
     const registryId = params.registryId;
     const action = params.action;
 
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
     const [registry, setRegistry] = useState<any>(null);
@@ -258,16 +258,14 @@ export default function RegistryActionPage() {
 
                     ) : (
                         <div className="flex flex-col gap-4">
-                            <div className="flex gap-4">
-                                <div className="flex-1 max-w-[50%]">
-                                    <label className="block text-[16px] font-[500] text-black mb-1">Registry Name</label>
-                                    <input
-                                        type="text"
-                                        className="w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 focus:outline-none"
-                                        value={registry.name}
-                                        readOnly
-                                    />
-                                </div>
+                            <div className="flex-1 pr-2 w-1/2">
+                                <label className="block text-[16px] font-[500] text-black mb-1">Registry Name</label>
+                                <input
+                                    type="text"
+                                    className="w-full bg-gray-100 rounded-md px-4 py-2 text-[16px] text-black/50 focus:outline-none"
+                                    value={registry.name}
+                                    readOnly
+                                />
                             </div>
 
                             <div className="flex gap-4">

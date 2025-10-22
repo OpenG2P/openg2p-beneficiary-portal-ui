@@ -20,7 +20,7 @@ const myComplaints: Complaint[] = [
 
 export default function ComplaintsPage() {
     const lang = useLocale();
-    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [showModal, setShowModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");

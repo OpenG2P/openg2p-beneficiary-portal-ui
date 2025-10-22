@@ -74,12 +74,12 @@ export default function UpdateRegistryForm({ registry, onClose }: UpdateRegistry
             <div className="flex justify-start gap-4 w-full my-10 px-10">
                 <button
                     onClick={onClose}
-                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px]"
                 >
                     CANCEL
                 </button>
                 <button
-                    className="px-8 py-2 bg-black text-white rounded-[20px] cursor-pointer"
+                    className="px-8 py-2 bg-black text-white rounded-[20px]"
                 >
                     SAVE
                 </button>

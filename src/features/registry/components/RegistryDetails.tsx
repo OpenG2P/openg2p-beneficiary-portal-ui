@@ -52,7 +52,7 @@ export default function RegistryDetails({ registry, onClose }: RegistryDetailsPr
             <div className="flex justify-start gap-4 w-full my-8 px-10">
                 <button
                     onClick={onClose}
-                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] cursor-pointer hover:bg-gray-200 transition"
+                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] hover:bg-gray-200 transition"
                 >
                     CLOSE
                 </button>

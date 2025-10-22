@@ -51,8 +51,8 @@ export default function SchemeCard({ schemes }: SchemeCardProps) {
             </div>
 
             <div className="flex justify-between items-center w-full px-4 m-4 max-w-sm">
-                <button className="px-3 py-1 bg-gray-100 text-black rounded-[20px] flex items-center text-base font-semibold cursor-pointer">
-                    Check Your Eligibility
+                <button className="px-3 py-1 bg-gray-100 text-black rounded-[20px] flex items-center text-base font-semibold">
+                    Check Your 
                     <Image
                         src={prefixBasePath("/right_arrow.png")}
                         alt="arrow"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "next-intl";
@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 
 import { getMenuItems, getRouteToIndex } from '@/shared/utils/navigation';
 import { prefixBasePath } from '@/shared/utils/path';
-
 
 interface SidebarProps {
     onItemClick?: (index: number, href: string) => void;
@@ -40,7 +39,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
             <div className="flex items-center justify-center h-16">
                 {!expanded ? (
                     <button
-                        className="px-2 rounded-lg transition-colors cursor-pointer"
+                        className="px-2 rounded-lg transition-colors"
                         onClick={() => setExpanded(true)}
                     >
                         <Image
@@ -52,9 +51,9 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                     </button>
                 ) : (
                     <div className="flex items-center justify-between w-full px-4">
-                        <span className="font-[500] text-black">Menu</span>
+                        <span className="font-[600] text-[20px] text-black">Menu</span>
                         <button
-                            className="px-1 rounded transition-colors cursor-pointer"
+                            className="px-1 rounded transition-colors"
                             onClick={() => setExpanded(false)}
                         >
                             <Image
@@ -70,30 +69,36 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
             </div>
 
             <div className="pb-4">
-                {menuItems.map((item, idx) => (
-                    <Link
-                        key={idx}
-                        href={item.href}
-                        className="flex items-center text-black text-[16px] font-[500] cursor-pointer transition-all duration-200 pl-1.5 mb-3 rounded-lg "
-                        onClick={() => handleItemClick(idx, item.href)}
-                    >
-                        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
-                            <Image
-                                src={prefixBasePath(item.icon)}
-                                alt={item.name}
-                                width={30}
-                                height={30}
-                                className="w-auto h-auto"
-                            />
-                        </div>
+                {menuItems.map((item, idx) => {
+                    const isActive = idx === activeItem;
 
-                        <span
-                            className={`transition-all duration-300 ease-in-out whitespace-nowrap overflow-hidden ${expanded ? "opacity-100 max-w-full ml-2" : "opacity-0 max-w-0 ml-0"}`}
+                    return (
+                        <Link
+                            key={idx}
+                            href={item.href}
+                            className={`flex items-center text-black text-[16px] font-[500] cursor-pointer transition-all duration-200 pl-1.5 mb-3 
+                                ${isActive ? "bg-white/40" : "hover:bg-white/20"}
+                            `}
+                            onClick={() => handleItemClick(idx, item.href)}
                         >
-                            {item.name}
-                        </span>
-                    </Link>
-                ))}
+                            <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                                <Image
+                                    src={prefixBasePath(item.icon)}
+                                    alt={item.name}
+                                    width={30}
+                                    height={30}
+                                    className="w-auto h-auto"
+                                />
+                            </div>
+
+                            <span
+                                className={`transition-all duration-300 ease-in-out whitespace-nowrap overflow-hidden ${expanded ? "opacity-100 max-w-full ml-2" : "opacity-0 max-w-0 ml-0"}`}
+                            >
+                                {item.name}
+                            </span>
+                        </Link>
+                    );
+                })}
             </div>
         </div>
     );

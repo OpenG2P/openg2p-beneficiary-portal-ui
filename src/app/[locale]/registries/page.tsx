@@ -156,29 +156,39 @@ export default function RegistriesPage() {
         <div className="px-10 py-4 min-h-screen bg-white">
             <h1 className="text-xl font-bold text-gray-800 mb-4">Registries</h1>
 
-            <div className="bg-white rounded-2xl shadow-md w-full border border-gray-200">
-                <div className="flex items-center justify-between px-8 pt-8 gap-4 flex-wrap">
-                    <div className="flex gap-2">
-                        <button
-                            onClick={() => setActiveTab("all")}
-                            className={`px-6 py-2 text-[16px] font-[600] rounded-t-xl ${activeTab === "all" ? "bg-[#ED7C22] text-white" : "bg-[#F5F5F5] text-black/50"}`}
-                        >
-                            All Registries
-                        </button>
-                        <button
-                            onClick={() => setActiveTab("my")}
-                            className={`px-6 py-2 text-[16px] font-[600] rounded-t-xl ${activeTab === "my" ? "bg-[#ED7C22] text-white" : "bg-[#F5F5F5] text-black/50"}`}
-                        >
-                            My Registries
-                        </button>
-                    </div>
-                    <div className="flex justify-center pb-4">
-                        <SearchInput
-                            value={searchQuery}
-                            onChange={setSearchQuery}
-                            placeholder="Search registries"
-                            className="w-[200px]"
-                        />
+            <div className="bg-white rounded-2xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] w-full border border-gray-200">
+                <div className="relative">
+                    <div className="absolute inset-x-0 bottom-0 h-[6px] bg-[#F5F5F5]" />
+
+                    <div className="flex items-center justify-between px-8 gap-4 flex-wrap relative z-10">
+                        <div className="flex gap-2 pt-8">
+                            <button
+                                onClick={() => setActiveTab("all")}
+                                className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "all"
+                                    ? "bg-[#ED7C22] text-white"
+                                    : "bg-[#D9D9D999]/60 text-black/50"
+                                    }`}
+                            >
+                                All Registries
+                            </button>
+                            <button
+                                onClick={() => setActiveTab("my")}
+                                className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "my"
+                                    ? "bg-[#ED7C22] text-white"
+                                    : "bg-[#D9D9D999]/60 text-black/50"
+                                    }`}
+                            >
+                                My Registries
+                            </button>
+                        </div>
+                        <div className="flex justify-center py-6">
+                            <SearchInput
+                                value={searchQuery}
+                                onChange={setSearchQuery}
+                                placeholder="Search registries"
+                                className="w-[200px]"
+                            />
+                        </div>
                     </div>
                 </div>
 

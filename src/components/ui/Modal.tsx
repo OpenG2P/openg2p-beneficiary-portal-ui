@@ -49,7 +49,7 @@ export default function Modal({
                 <div className="flex-1 flex flex-col relative">
                     <div className={`flex justify-between items-center pt-8 mb-6 ${paddingXClass}`}>
                         <h2 className="text-xl font-bold text-gray-800">{title}</h2>
-                        <button onClick={onClose} className="cursor-pointer">
+                        <button onClick={onClose}>
                             <Image
                                 src={prefixBasePath("/close.png")}
                                 alt="Close"

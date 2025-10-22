@@ -18,7 +18,7 @@ export default function NotFoundClient() {
                             </p>
                             <button
                                 onClick={() => window.history.back()}
-                                className="inline-block bg-black text-white px-6 py-3 rounded-lg shadow hover:bg-gray-950 transition-colors cursor-pointer"
+                                className="inline-block bg-black text-white px-6 py-3 rounded-lg shadow hover:bg-gray-950 transition-colors"
                             >
                                 Go Back
                             </button>

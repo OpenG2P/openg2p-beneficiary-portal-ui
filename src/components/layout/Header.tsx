@@ -63,7 +63,6 @@ export default function Header() {
 
             <div className="flex items-center gap-6">
                 <button
-                    className="cursor-pointer"
                     onClick={() => console.log("Redirect to Help page")}
                 >
                     <span className="text-[16px] font-[400] text-black">

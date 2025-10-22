@@ -48,7 +48,7 @@ export default function ComplaintsPage() {
         <div className="px-10 py-4 min-h-screen bg-gray-50">
             <h1 className="text-lg text-black font-bold mb-4">Complaints</h1>
 
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20">
+            <div className="bg-white rounded-lg overflow-hidden border border-black/20 shadow-[0_4px_20px_0_rgba(0,0,0,0.25)]">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-8 py-4 gap-2">
                     <span className="text-[20px] font-[600] text-[#ED7C22]">All Complaints</span>
                     <div className="flex gap-2 items-center">
@@ -59,7 +59,7 @@ export default function ComplaintsPage() {
                             className="w-[200px]"
                         />
                         <button
-                            className="bg-black text-white px-4 py-1 rounded-[17px] shadow cursor-pointer"
+                            className="bg-black text-white px-4 py-1 rounded-[17px] shadow"
                             onClick={() => setShowModal(true)}
                         >
                             File a Complaint

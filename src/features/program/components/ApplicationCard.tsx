@@ -84,7 +84,9 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                 <ViewAll
                     href="/applications"
                     label="View all Applications"
-                    bgColor="bg-[#F5F5F5]"
+                    bgColor="#F5F5F5"
+                    hoverBgColor="#ED7C22"
+                    hoverTextColor="#FFFFFF"
                 />
             </div>
         </div>

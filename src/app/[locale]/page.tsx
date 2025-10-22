@@ -112,7 +112,7 @@ export default function HomePage() {
 
                     <button
                         onClick={handleGetStarted}
-                        className="bg-white text-black text-[20px] py-2 px-6 rounded-[30px] font-medium flex items-center justify-center gap-2 cursor-pointer"
+                        className="bg-white text-black text-[20px] py-2 px-6 rounded-[30px] font-[600] flex items-center justify-center gap-2 hover:text-[#ED7C22] transition-colors duration-300"
                     >
                         GET STARTED
                         <Image

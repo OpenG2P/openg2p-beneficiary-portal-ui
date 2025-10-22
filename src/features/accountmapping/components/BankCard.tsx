@@ -47,7 +47,10 @@ export default function BankCard({ account }: BankCardProps) {
                     <ViewAll
                         href="/accounts"
                         label="View Account Details"
-                        bgColor="bg-white/40"
+                        bgColor="#FFFFFF66"
+                        textColor="#000000"
+                        hoverBgColor="#FFFFFF66"
+                        hoverTextColor="#ED7C22"
                     />
 
                     <div className="absolute right-12 bottom-0 opacity-20 " >

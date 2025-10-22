@@ -92,7 +92,7 @@ export default function TransferHistory({ benefit, onClose }: TransferHistoryPro
             <div className="flex justify-start gap-4 w-full my-10 px-12">
                 <button
                     onClick={onClose}
-                    className="px-8 py-2 bg-black text-white text-xl rounded-full cursor-pointer"
+                    className="px-8 py-2 bg-black text-white text-xl rounded-full"
                 >
                     BACK
                 </button>

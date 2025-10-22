@@ -160,7 +160,7 @@ export default function BenefitsPage() {
                 <h1 className="text-xl font-bold text-black">Benefits</h1>
             </div>
 
-            <div className="bg-white rounded-xl shadow-xl w-full border border-black/20 overflow-hidden">
+            <div className="bg-white rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] w-full border border-black/20 overflow-hidden">
                 <div className="overflow-x-auto w-full">
                     <table className="w-full text-left border-collapse min-w-[700px]">
                         <thead>
@@ -168,7 +168,7 @@ export default function BenefitsPage() {
                                 <th colSpan={5}>
                                     <div className="flex justify-between items-center px-2 py-4">
                                         <span className="px-6 py-2 text-[#ED7C22] text-[20px] font-[600]">Benefits Received till Date</span>
-                                        <div className="flex gap-4 px-6">
+                                        <div className="flex gap-4 pr-16">
                                             <FilterInput
                                                 value={filterText}
                                                 onChange={setFilterText}

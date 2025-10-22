@@ -78,12 +78,12 @@ export default function FileComplaintForm({ onClose }: FileComplaintModalProps) 
             <div className="flex justify-start gap-3 mt-10 px-10">
                 <button
                     onClick={onClose}
-                    className="px-4 py-2 bg-gray-200 text-black rounded-[20px] cursor-pointer"
+                    className="px-4 py-2 bg-gray-200 text-black rounded-[20px]"
                 >
                     Cancel
                 </button>
                 <button
-                    className="px-4 py-2 bg-black text-white rounded-[20px] cursor-pointer"
+                    className="px-4 py-2 bg-black text-white rounded-[20px]"
                 >
                     Submit
                 </button>

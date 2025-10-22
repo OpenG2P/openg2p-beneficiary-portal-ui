@@ -59,7 +59,9 @@ export default function NotificationCard({ notifications }: NotificationCardProp
                 <ViewAll
                     href="/news"
                     label="View latest News"
-                    bgColor="bg-gray-100"
+                    bgColor="#F5F5F5"
+                    hoverBgColor="#ED7C22"
+                    hoverTextColor="#FFFFFF"
                 />
             </div>
         </div>

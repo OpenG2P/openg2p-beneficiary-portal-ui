@@ -17,7 +17,7 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="w-[420px] h-[540px] bg-[linear-gradient(180deg,#FEF1C1_0%,#FCBE00_100%)] rounded-[20px] shadow-lg flex flex-col items-center p-6">
+        <div className="w-[420px] h-[540px] bg-[linear-gradient(180deg,#FEF1C1_0%,#FCBE00_100%)] rounded-[20px] shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] flex flex-col items-center p-6">
             <Image
                 src={prefixBasePath("/openg2p_logo.png")}
                 alt={t("portalName")}
@@ -36,7 +36,7 @@ export default function LoginForm() {
                     </label>
                     <input
                         type="text"
-                        placeholder="enter your email"
+                        placeholder="Enter your email"
                         className="px-4 py-2 text-black bg-white rounded-[10px] placeholder-[#00000040] focus:outline-none"
                     />
                 </div>
@@ -45,7 +45,7 @@ export default function LoginForm() {
                     <label className="mb-1 text-[16px] font-medium text-black">{t("password")}</label>
                     <input
                         type="password"
-                        placeholder="enter your password"
+                        placeholder="Enter your password"
                         className="px-4 py-2 text-black bg-white rounded-[10px] placeholder-[#00000040] focus:outline-none"
                     />
                     <div className="flex justify-end mt-1">
@@ -60,7 +60,7 @@ export default function LoginForm() {
 
                 <button
                     type="submit"
-                    className="mt-2 w-full bg-black text-[16px] text-white py-2 rounded-[20px] font-semibold hover:bg-gray-950 transition cursor-pointer"
+                    className="mt-2 w-full bg-black text-[16px] text-white py-2 rounded-[20px] font-semibold hover:text-[#ED7C22] hover:bg-black/90 transition"
                 >
                     {t("login")}
                 </button>

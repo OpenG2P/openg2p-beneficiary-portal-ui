@@ -6,6 +6,7 @@ import { AuthUtil } from '@/features/auth/components';
 import { prefixBasePath } from "@/shared/utils/path";
 import { Pagination, SearchInput } from "@/components/shared";
 import { Notification } from "@/features/notification/types";
+import { NewsDetails } from "@/features/notification/components";
 
 const newsData: Notification[] = [
     {
@@ -50,6 +51,7 @@ export default function NewsPage() {
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [searchQuery, setSearchQuery] = useState("");
+    const [selectedNews, setSelectedNews] = useState<Notification | null>(null);
 
     const filteredNotifications = newsData.filter(n =>
         n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -64,7 +66,7 @@ export default function NewsPage() {
                 <h1 className="text-lg text-black font-bold">Latest News</h1>
             </div>
 
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20">
+            <div className="bg-white rounded-lg overflow-hidden border border-black/20 shadow-[0_4px_20px_0_rgba(0,0,0,0.25)]">
                 <div className="mb-4 px-6 pt-4 flex items-center justify-between">
                     <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">
                         All News
@@ -81,6 +83,7 @@ export default function NewsPage() {
                     {currentItems.map((notification, idx) => (
                         <div
                             key={notification.id}
+                            onClick={() => setSelectedNews(notification)}
                             className={`${idx % 2 === 0 ? "bg-gray-100" : "bg-white"} w-full`}
                         >
                             <div className="flex gap-3 px-6 py-3">
@@ -121,6 +124,12 @@ export default function NewsPage() {
                         {Math.min(currentPage * 5, filteredNotifications.length)} of {filteredNotifications.length} news
                     </div>
                 </div>
+                {selectedNews && (
+                    <NewsDetails
+                        news={selectedNews}
+                        onClose={() => setSelectedNews(null)}
+                    />
+                )}
             </div>
         </div>
     );

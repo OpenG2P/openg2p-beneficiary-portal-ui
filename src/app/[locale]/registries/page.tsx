@@ -92,7 +92,7 @@ const myRegistries: Registry[] = allRegistries.map(r => ({ ...r, action: "Reques
 
 export default function RegistriesPage() {
     const lang = useLocale();
-    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
     const router = useRouter();
 
     const [activeTab, setActiveTab] = useState<"all" | "my">("all");

@@ -48,7 +48,7 @@ const newsData: Notification[] = [
 
 export default function NewsPage() {
     const lang = useLocale();
-    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedNews, setSelectedNews] = useState<Notification | null>(null);

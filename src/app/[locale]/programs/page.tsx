@@ -273,7 +273,7 @@ const myPrograms: Program[] = [
 
 export default function ProgramsPage() {
     const lang = useLocale();
-    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [activeTab, setActiveTab] = useState<"all" | "my">("all");
 

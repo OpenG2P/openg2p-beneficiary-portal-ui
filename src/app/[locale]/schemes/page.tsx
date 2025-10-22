@@ -147,7 +147,7 @@ const schemes: Scheme[] = [
 
 export default function SchemePage() {
     const lang = useLocale();
-    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const [openForm, setOpenForm] = useState(false);
     const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);

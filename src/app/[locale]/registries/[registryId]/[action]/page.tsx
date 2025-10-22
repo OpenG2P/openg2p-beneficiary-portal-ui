@@ -133,7 +133,7 @@ export default function RegistryActionPage() {
     const registryId = params.registryId;
     const action = params.action;
 
-    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
     const [registry, setRegistry] = useState<any>(null);

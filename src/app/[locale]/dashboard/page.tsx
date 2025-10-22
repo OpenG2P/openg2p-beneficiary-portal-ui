@@ -69,7 +69,7 @@ export const benefits = [
 export default function Dashboard() {
 
     const lang = useLocale();
-    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
 

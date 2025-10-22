@@ -149,7 +149,7 @@ export default function ApplyProgramPage() {
     const params = useParams();
     const programId = params.id;
 
-    // AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
 
     const [program, setProgram] = useState<Program | null>(null);

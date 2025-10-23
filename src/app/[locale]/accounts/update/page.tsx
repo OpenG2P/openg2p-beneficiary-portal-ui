@@ -6,6 +6,7 @@ import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
 import { useAuth } from "@/context/global";
 import { useState } from "react";
+import { AccountSuccessModal, AccountErrorModal, AccountRemoveModal } from "@/features/accountmapping/components";
 
 export default function AccountUpdatePage() {
     const lang = useLocale();
@@ -21,14 +22,16 @@ export default function AccountUpdatePage() {
     const [branch, setBranch] = useState(branchOptions[0]);
     const [accountNumber, setAccountNumber] = useState("1234 5678 9012");
     const [mobile, setMobile] = useState(profile?.phone_number || "");
+    const [showModal, setShowModal] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [showRemoveModal, setShowRemoveModal] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log({ bank, branch, accountNumber, mobile });
     };
-
     return (
-        <div className="px-10 py-8 bg-white min-h-screen">
+        <div className="relative px-10 py-8 bg-white min-h-screen">
             <h1 className="text-[18px] font-[600] text-gray-800 mb-2">Update Account</h1>
 
             <div className="flex flex-row gap-0 rounded-lg shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] overflow-hidden border border-gray-200">
@@ -127,7 +130,6 @@ export default function AccountUpdatePage() {
                                     Save
                                 </button>
                             </div>
-
                         </div>
                     </form>
 
@@ -196,6 +198,26 @@ export default function AccountUpdatePage() {
                     </div>
                 </div>
             </div>
+
+            {showModal && (
+                <AccountSuccessModal
+                    onClose={() => setShowModal(false)}
+                    onBack={() => window.history.back()}
+                />
+            )}
+
+            {showErrorModal && (
+                <AccountErrorModal
+                    onClose={() => setShowErrorModal(false)}
+                />
+            )}
+
+            {showRemoveModal && (
+                <AccountRemoveModal
+                    onClose={() => setShowRemoveModal(false)}
+                    onConfirm={() => setShowRemoveModal(false)}
+                />
+            )}
         </div>
     );
 }

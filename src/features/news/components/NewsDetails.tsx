@@ -1,10 +1,10 @@
 "use client";
 
 import Modal from "@/components/ui/Modal";
-import { Notification } from "@/features/notification/types";
+import { News } from "@/features/news/types";
 
 interface NewsDetailsProps {
-    news: Notification;
+    news: News;
     onClose: () => void;
 }
 

@@ -1,18 +1,21 @@
 "use client";
 
 import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 
 import { AuthUtil } from "@/features/auth/components";
 import { ProgramTable, ApplicationCard } from '@/features/program/components';
 import { TotalBenefitsCard } from '@/features/disbursement/components';
-import { NotificationCard } from "@/features/notification/components";
 import { RegistryCard } from "@/features/registry/components";
+import { NewsCard } from "@/features/news/components";
+import { News } from "@/features/news/types";
 
-import { Notification } from "@/features/notification/types/notification";
 import { Program, Application } from "@/features/program/types";
 import { Registry } from "@/features/registry/types/registry";
 import { BankCard } from "@/features/accountmapping/components";
 import { useAuth } from "@/context/global";
+import { getNews } from "@/features/news/utils";
+
 
 export const programsData: Program[] = [
     { id: "1010101010", name: "Adult Literacy Drive", appliedDate: "2025-09-01", benefits: ["Books", "Classes"], status: "Applied" },
@@ -37,27 +40,6 @@ export const dashboardApplications: Application[] = [
     { name: "Electricity Subsidy Program", status: "Pending" },
 ];
 
-export const dashboardNotifications: Notification[] = [
-    {
-        id: "1",
-        title: "Social Welfare Programs Launched",
-        description: "The government has launched new social welfare programs to support citizens across various sectors.",
-        image: "/logo.png"
-    },
-    {
-        id: "2",
-        title: "Income Tax Filing Deadline Announced",
-        description: "The deadline for income tax filing has been extended for this financial year. Make sure to submit your documents on time.",
-        image: "/logo.png"
-    },
-    {
-        id: "3",
-        title: "Caste Certificate Issuance Updates",
-        description: "New procedures have been introduced for applying and receiving caste certificates efficiently.",
-        image: "/logo.png"
-    },
-];
-
 export const benefits = [
     { icon: "/money.png", value: "15400", label: "Money" },
     { icon: "/rice.png", value: "42 Kg", label: "Food" },
@@ -72,6 +54,13 @@ export default function Dashboard() {
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
+    const [news, setNews] = useState<News[]>([]);
+
+    useEffect(() => {
+        getNews()
+            .then(setNews)
+            .catch(console.error);
+    }, []);
 
     const bankAccount = { name: profile?.name || "John Smith", number: "xxxx xxxx xxxx 1234" };
 
@@ -96,7 +85,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 xl:grid-cols-3 ">
                 <RegistryCard registries={previewRegistries} />
                 <ApplicationCard applications={dashboardApplications} />
-                <NotificationCard notifications={dashboardNotifications} />
+                <NewsCard news={news.slice(0, 3)} />
             </div>
         </div>
     );

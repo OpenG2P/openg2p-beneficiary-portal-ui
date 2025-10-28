@@ -9,6 +9,10 @@ module.exports = {
     './src/commons/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      'hd1366': '1366px',
+      'hd1536': '1536px',
+    },
     extend: {
       colors: {
         // Design System Colors

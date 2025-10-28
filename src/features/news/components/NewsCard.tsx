@@ -3,18 +3,13 @@
 import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
 import { ViewAll } from "@/components/shared";
+import { News } from "@/features/news/types";
 
-interface Notification {
-    id: string;
-    title: string;
-    description: string;
+interface NewsCardProps {
+    news: News[];
 }
 
-interface NotificationCardProps {
-    notifications: Notification[];
-}
-
-export default function NotificationCard({ notifications }: NotificationCardProps) {
+export default function NewsCard({ news }: NewsCardProps) {
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mb-[50px] mr-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
@@ -32,15 +27,14 @@ export default function NotificationCard({ notifications }: NotificationCardProp
             </div>
 
             <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
-                {notifications.map((n, idx) => (
+                {news.map((n, idx) => (
                     <div key={n.id} className={`${idx % 2 === 0 ? "bg-[#F5F5F5]" : ""}`}>
                         <div className="flex gap-4 px-8 py-3">
                             <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
-                                <Image
-                                    src={prefixBasePath("/notification_img.png")}
-                                    alt="Notification Icon"
-                                    width={20}
-                                    height={20}
+                                <img
+                                    src={n.image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_PATH}${n.image.url}` : "/logo.png"}
+                                    alt={n.image?.alternativeText || n.title}
+                                    className="w-full h-full object-contain rounded-md bg-white"
                                 />
                             </div>
                             <div className="flex-1">

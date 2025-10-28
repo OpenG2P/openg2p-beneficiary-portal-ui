@@ -5,6 +5,7 @@ import { useLocale } from "next-intl";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
 import { useAuth } from "@/context/global";
+import { useRouter } from "next/navigation";
 
 
 export default function AccountsPage() {
@@ -12,6 +13,7 @@ export default function AccountsPage() {
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
+    const router = useRouter();
 
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
     return (
@@ -134,10 +136,13 @@ export default function AccountsPage() {
                     </div>
 
                     <div className="mt-6 flex flex-col items-start gap-3">
-                        <button className="px-4 py-1 bg-[#3399FF]/10 text-[#3399FF] font-[500] rounded-full w-auto">
+                        <button
+                            onClick={() => router.push(`/${lang}/accounts/update`)}
+                            className="px-4 py-1 bg-[#3399FF] text-white font-[500] rounded-full w-auto"
+                        >
                             Edit Account Information
                         </button>
-                        <button className="px-4 py-1 bg-[#3399FF]/10 text-[#3399FF] font-[500] rounded-full w-auto">
+                        <button className="px-4 py-1 bg-[#3399FF] text-white font-[500] rounded-full w-auto">
                             Remove Account
                         </button>
                     </div>

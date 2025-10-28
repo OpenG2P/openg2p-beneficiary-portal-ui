@@ -34,7 +34,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
 
     return (
         <div
-            className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[250px]" : "w-[60px]"} z-10`}
+            className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[250px]" : "w-[60px]"} z-20`}
         >
             <div className="flex items-center justify-center h-16">
                 {!expanded ? (

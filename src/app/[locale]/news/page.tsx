@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
-import { usePagination } from "@/shared/hooks/usePagination";
-import { AuthUtil } from '@/features/auth/components';
+import { AuthUtil } from "@/features/auth/components";
 import { Pagination, SearchInput } from "@/components/shared";
 import { NewsDetails } from "@/features/news/components";
 import { getNews } from "@/features/news/utils";
@@ -12,47 +11,49 @@ export default function NewsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
+    const pageSize = 5;
+    const [currentPage, setCurrentPage] = useState(1);
     const [news, setNews] = useState<News[]>([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedNews, setSelectedNews] = useState<News | null>(null);
+    const [total, setTotal] = useState(0);
 
     useEffect(() => {
-        getNews()
-            .then(setNews)
+        getNews(currentPage, pageSize, searchQuery)
+            .then(({ data, total }) => {
+                setNews(data);
+                setTotal(total);
+            })
             .catch(console.error);
-    }, []);
+    }, [currentPage, searchQuery]);
 
-
-    const filtered = news.filter(n =>
-        n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        n.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(filtered, 5);
+    const totalPages = Math.ceil(total / pageSize);
 
     return (
         <div className="px-10 py-4 min-h-screen bg-gray-50">
-            <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="mb-4 flex items-center justify-between">
                 <h1 className="text-lg text-black font-bold">Latest News</h1>
             </div>
 
             <div className="bg-white rounded-lg overflow-hidden border border-black/20 shadow-[0_4px_20px_0_rgba(0,0,0,0.25)]">
                 <div className="mb-4 px-6 pt-4 flex items-center justify-between">
-                    <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">All News</h2>
+                    <h2 className="text-[20px] font-[600] text-[#ED7C22]">All News</h2>
                     <SearchInput
-                        value={searchQuery}
-                        onChange={setSearchQuery}
+                        onSearch={(val) => {
+                            setCurrentPage(1);
+                            setSearchQuery(val);
+                        }}
                         placeholder="Search"
                         className="w-[200px]"
                     />
                 </div>
 
                 <div className="flex flex-col divide-y divide-gray-200 max-h-[500px] overflow-y-auto">
-                    {currentItems.map((n, idx) => (
+                    {news.map((n, idx) => (
                         <div
                             key={n.id}
                             onClick={() => setSelectedNews(n)}
-                            className={`${idx % 2 === 0 ? "bg-gray-100" : "bg-white"} w-full`}
+                            className={`${idx % 2 === 0 ? "bg-gray-100" : "bg-white"} cursor-pointer`}
                         >
                             <div className="flex gap-3 px-6 py-3">
                                 <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16">
@@ -86,17 +87,13 @@ export default function NewsPage() {
                         onPageChange={setCurrentPage}
                     />
                     <div className="text-gray-600">
-                        Showing{" "}
-                        {Math.min((currentPage - 1) * 5 + 1, filtered.length)}–
-                        {Math.min(currentPage * 5, filtered.length)} of {filtered.length} news
+                        Showing {(currentPage - 1) * pageSize + 1}–
+                        {Math.min(currentPage * pageSize, total)} of {total} news
                     </div>
                 </div>
 
                 {selectedNews && (
-                    <NewsDetails
-                        news={selectedNews}
-                        onClose={() => setSelectedNews(null)}
-                    />
+                    <NewsDetails news={selectedNews} onClose={() => setSelectedNews(null)} />
                 )}
             </div>
         </div>

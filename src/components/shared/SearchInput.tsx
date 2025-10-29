@@ -1,37 +1,46 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { prefixBasePath } from "@/shared/utils/path";
 
 interface SearchInputProps {
-    value: string;
-    onChange: (value: string) => void;
+    onSearch: (value: string) => void;
     placeholder?: string;
     className?: string;
-    onIconClick?: () => void;
     bgColor?: string;
 }
 
 export default function SearchInput({
-    value,
-    onChange,
+    onSearch,
     placeholder = "Search",
     className = "",
-    onIconClick,
     bgColor = "bg-gray-100",
 }: SearchInputProps) {
+
+    const [value, setValue] = useState("");
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const val = e.target.value;
+        setValue(val);
+
+        if (val.trim() === "") {
+            onSearch("");
+        }
+    }
+
     return (
         <div className={`relative ${className}`}>
             <input
                 type="text"
                 placeholder={placeholder}
                 value={value}
-                onChange={(e) => onChange(e.target.value)}
+                onChange={handleChange}
                 className={`w-full py-2 px-4 text-black rounded-[20px] focus:outline-none ${bgColor}`}
             />
             <span
                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-                onClick={onIconClick}
+                onClick={() => onSearch(value)}
             >
                 <Image
                     src={prefixBasePath("/search.png")}

@@ -57,8 +57,8 @@ export default function Dashboard() {
     const [news, setNews] = useState<News[]>([]);
 
     useEffect(() => {
-        getNews()
-            .then(setNews)
+        getNews(1, 3)
+            .then(({ data }) => setNews(data))
             .catch(console.error);
     }, []);
 
@@ -85,7 +85,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 xl:grid-cols-3 ">
                 <RegistryCard registries={previewRegistries} />
                 <ApplicationCard applications={dashboardApplications} />
-                <NewsCard news={news.slice(0, 3)} />
+                <NewsCard news={news} />
             </div>
         </div>
     );

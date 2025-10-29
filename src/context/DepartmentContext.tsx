@@ -41,7 +41,7 @@ export const DepartmentContextProvider = ({ children }: { children: ReactNode })
         if (!dept) return;
         setCurrentDepartment(dept);
         localStorage.setItem("currentDepartment", JSON.stringify(dept));
-        window.location.reload();
+        // window.location.reload();
     };
 
     const getServiceUrl = (key: keyof Department) =>

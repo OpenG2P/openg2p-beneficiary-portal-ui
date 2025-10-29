@@ -67,16 +67,18 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                     return (
                         <div
                             key={idx}
-                            className={`flex items-center px-8 py-3 ${idx % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
+                            className={`relative ${idx % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
                         >
-                            <p className="flex-1 truncate font-[400] text-black text-[14px] hd1366:text-[15px] hd1536:text-[16px]">
-                                {app.name}
-                            </p>
-                            <p
-                                className={`min-w-[90px] text-center font-[400] rounded-full px-1 py-1 text-[13px] hd1366:text-[14px] hd1536:text-[15px] ${bgClass} ${textClass}`}
-                            >
-                                {app.status}
-                            </p>
+                            <div className="flex items-center justify-start py-3 px-8">
+                                <p className="flex-1 truncate font-[400] text-black text-[14px] py-1 hd1366:text-[15px] hd1536:text-[16px]">
+                                    {app.name}
+                                </p>
+                                <p
+                                    className={`min-w-[90px] text-center font-[400] rounded-full px-1 py-1 text-[13px] hd1366:text-[14px] hd1536:text-[15px] ${bgClass} ${textClass}`}
+                                >
+                                    {app.status}
+                                </p>
+                            </div>
                         </div>
                     );
                 })}

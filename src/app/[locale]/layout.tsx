@@ -6,7 +6,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "@/commons/globals.css";
 
-import { GlobalContextProvider } from "@/context/global";
+import { GlobalContextProvider } from "@/context/GlobalContext";
+
 import { prefixBasePath } from '@/shared/utils/path';
 
 const geistSans = Geist({

@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { useAuth } from "@/context/global";
+import { useAuth } from "@/context/GlobalContext";
 import { prefixBaseApiPath } from '@/shared/utils/path';
 
 export default function AuthUtil(params: { successRedirectUrl?: string; failedRedirectUrl?: string }) {

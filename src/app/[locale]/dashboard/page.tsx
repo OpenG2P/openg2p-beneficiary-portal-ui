@@ -13,7 +13,7 @@ import { News } from "@/features/news/types";
 import { Program, Application } from "@/features/program/types";
 import { Registry } from "@/features/registry/types/registry";
 import { BankCard } from "@/features/accountmapping/components";
-import { useAuth } from "@/context/global";
+import { useAuth } from "@/context/GlobalContext";
 import { getNews } from "@/features/news/utils";
 
 

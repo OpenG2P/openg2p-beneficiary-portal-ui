@@ -1,7 +1,7 @@
 "use client";
 
 import "@/commons/globals.css";
-import { GlobalContextProvider } from "@/context/global";
+import { GlobalContextProvider } from "@/context/GlobalContext";
 
 export default function NotFoundClient() {
     return (

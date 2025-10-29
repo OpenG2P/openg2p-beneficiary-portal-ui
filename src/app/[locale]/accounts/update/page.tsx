@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useLocale } from "next-intl";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
-import { useAuth } from "@/context/global";
+import { useAuth } from "@/context/GlobalContext";
 import { useState } from "react";
 import { AccountSuccessModal, AccountErrorModal, AccountRemoveModal } from "@/features/accountmapping/components";
 

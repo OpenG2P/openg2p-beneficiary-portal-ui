@@ -6,7 +6,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
-import { useAuth } from "@/context/global";
+import { useAuth } from "@/context/GlobalContext";
+
 import { prefixBasePath, prefixBaseApiPath } from "@/shared/utils/path";
 
 export default function ProfileDropdown() {

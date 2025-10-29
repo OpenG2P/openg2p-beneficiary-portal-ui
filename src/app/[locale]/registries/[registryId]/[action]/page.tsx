@@ -6,7 +6,7 @@ import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/context/global";
+import { useAuth } from "@/context/GlobalContext";
 import { Loading } from "@/components/shared";
 import { Registry } from "@/features/registry/types";
 

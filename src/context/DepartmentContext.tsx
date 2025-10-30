@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { Department } from "@/shared/types/department";
 import { prefixBaseApiPath } from "@/shared/utils/path";
+import { useAuth } from "@/context/GlobalContext";
 
 interface DepartmentContextType {
     departments: Department[];
@@ -14,6 +15,7 @@ interface DepartmentContextType {
 const DepartmentContext = createContext<DepartmentContextType | undefined>(undefined);
 
 export const DepartmentContextProvider = ({ children }: { children: ReactNode }) => {
+    const { profile } = useAuth();
     const [departments, setDepartments] = useState<Department[]>([]);
     const [currentDepartment, setCurrentDepartment] = useState<Department | null>(null);
 
@@ -33,8 +35,9 @@ export const DepartmentContextProvider = ({ children }: { children: ReactNode })
     };
 
     useEffect(() => {
-        if (typeof window !== "undefined") loadDepartments();
-    }, []);
+        if (!profile) return;
+        loadDepartments();
+    }, [profile]);
 
     const setDepartment = (mnemonic: string) => {
         const dept = departments.find((d) => d.department_mnemonic === mnemonic);

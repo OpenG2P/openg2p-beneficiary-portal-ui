@@ -96,6 +96,8 @@ export default function NotificationDropdown({
                             href="/notifications"
                             label="View All Notifications"
                             bgColor="bg-[#F5F5F5]"
+                            hoverBgColor="#ED7C22"
+                            hoverTextColor="#FFFFFF"
                         />
                     </div>
                 </div>

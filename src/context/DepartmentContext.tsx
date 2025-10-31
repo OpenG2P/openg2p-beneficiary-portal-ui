@@ -20,22 +20,39 @@ export const DepartmentContextProvider = ({ children }: { children: ReactNode })
     const [currentDepartment, setCurrentDepartment] = useState<Department | null>(null);
 
     const loadDepartments = async () => {
+        const storedDepartments = localStorage.getItem("departments");
+        const storedCurrentDept = localStorage.getItem("currentDepartment");
+
+        if (storedDepartments) {
+            const deptList: Department[] = JSON.parse(storedDepartments);
+            setDepartments(deptList);
+
+            if (storedCurrentDept) {
+                setCurrentDepartment(JSON.parse(storedCurrentDept));
+            } else {
+                setCurrentDepartment(deptList[0]);
+                localStorage.setItem("currentDepartment", JSON.stringify(deptList[0]));
+            }
+            return;
+        }
+
         const res = await fetch(prefixBaseApiPath("/departments"), { method: "POST" });
         const list: Department[] = await res.json();
 
         setDepartments(list);
-        const stored = localStorage.getItem("currentDepartment");
+        localStorage.setItem("departments", JSON.stringify(list));
 
-        if (stored) {
-            setCurrentDepartment(JSON.parse(stored));
-        } else {
-            setCurrentDepartment(list[0]);
-            localStorage.setItem("currentDepartment", JSON.stringify(list[0]));
-        }
+        const initialDept = storedCurrentDept ? JSON.parse(storedCurrentDept) : list[0];
+        setCurrentDepartment(initialDept);
+        localStorage.setItem("currentDepartment", JSON.stringify(initialDept));
     };
 
     useEffect(() => {
-        if (!profile) return;
+        if (!profile) {
+            localStorage.removeItem("departments");
+            localStorage.removeItem("currentDepartment");
+            return;
+        }
         loadDepartments();
     }, [profile]);
 
@@ -44,7 +61,6 @@ export const DepartmentContextProvider = ({ children }: { children: ReactNode })
         if (!dept) return;
         setCurrentDepartment(dept);
         localStorage.setItem("currentDepartment", JSON.stringify(dept));
-        // window.location.reload();
     };
 
     const getServiceUrl = (key: keyof Department) =>

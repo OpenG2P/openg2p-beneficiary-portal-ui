@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { useAuth } from "@/context/global";
+import { useAuth } from "@/context/GlobalContext";
 import { prefixBaseApiPath } from '@/shared/utils/path';
 
 export default function AuthUtil(params: { successRedirectUrl?: string; failedRedirectUrl?: string }) {
@@ -31,9 +31,9 @@ export default function AuthUtil(params: { successRedirectUrl?: string; failedRe
     useEffect(() => {
         checkAuth();
 
-        const intervalId = setInterval(checkAuth, 1 * 60 * 1000);
+        // const intervalId = setInterval(checkAuth, 1 * 60 * 1000);
 
-        return () => clearInterval(intervalId);
+        // return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {

@@ -165,12 +165,12 @@ export default function SchemePage() {
                     <span className="text-lg font-semibold text-[#ED7C22]">List of Schemes</span>
                     <div className="w-23/100">
                         <SearchInput
-                            value={searchQuery}
-                            onChange={setSearchQuery}
+                            onSearch={(val) => {
+                                setCurrentPage(1);
+                                setSearchQuery(val);
+                            }}
                             placeholder="Search"
-                            className="w-50"
-                            bgColor="bg-gray-100"
-                            onIconClick={() => console.log("Search triggered:", searchQuery)}
+                            className="w-[200px]"
                         />
                     </div>
                 </div>

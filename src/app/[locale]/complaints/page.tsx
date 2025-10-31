@@ -53,8 +53,10 @@ export default function ComplaintsPage() {
                     <span className="text-[20px] font-[600] text-[#ED7C22]">All Complaints</span>
                     <div className="flex gap-2 items-center">
                         <SearchInput
-                            value={searchQuery}
-                            onChange={setSearchQuery}
+                            onSearch={(val) => {
+                                setCurrentPage(1);
+                                setSearchQuery(val);
+                            }}
                             placeholder="Search"
                             className="w-[200px]"
                         />

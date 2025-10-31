@@ -3,25 +3,19 @@
 import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
 import { useState, useRef, useEffect } from "react";
+import { useDepartment } from "@/context/GlobalContext";
 
 export default function DepartmentDropdown() {
-    const departments = ["Education", "Social Welfare", "Agriculture"];
+    const { departments, currentDepartment, setDepartment } = useDepartment();
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState<string>("");
-    const [mounted, setMounted] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const toggleDropdown = () => setOpen(!open);
 
-    const selectDepartment = (dept: string) => {
-        setSelected(dept);
+    const selectDepartment = (mnemonic: string) => {
+        setDepartment(mnemonic);
         setOpen(false);
     };
-
-    useEffect(() => {
-        setSelected("Social Welfare");
-        setMounted(true);
-    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -46,7 +40,7 @@ export default function DepartmentDropdown() {
                 onClick={toggleDropdown}
             >
                 <span className="text-black text-[16px] font-medium whitespace-nowrap">
-                    {selected || "Departments"}
+                    {currentDepartment?.department_name || "Departments"}
                 </span>
                 <Image
                     src={prefixBasePath("/arrow_02.png")}
@@ -82,21 +76,23 @@ export default function DepartmentDropdown() {
                 </div>
 
                 <div className="py-2 px-2">
-                    {departments.map((dept, idx) => (
+                    {departments.map((dept) => (
                         <div
-                            key={idx}
-                            onClick={() => selectDepartment(dept)}
-                            className={`flex items-center gap-3 py-2.5 px-3 rounded-lg cursor-pointer transition-all duration-300 hover:bg-orange-50 group ${selected === dept ? "bg-orange-50" : ""
+                            key={dept.department_mnemonic}
+                            onClick={() => selectDepartment(dept.department_mnemonic)}
+                            className={`flex items-center gap-3 py-2.5 px-3 rounded-lg cursor-pointer transition-all duration-300 hover:bg-orange-50 group ${currentDepartment?.department_mnemonic === dept.department_mnemonic
+                                ? "bg-orange-50"
+                                : ""
                                 }`}
                         >
                             <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0 group-hover:scale-125 transition-transform duration-300"></span>
                             <span
-                                className={`text-sm transition-colors duration-300 ${selected === dept
+                                className={`text-sm transition-colors duration-300 ${currentDepartment?.department_mnemonic === dept.department_mnemonic
                                     ? "font-medium text-orange-600"
                                     : "text-gray-700"
                                     }`}
                             >
-                                {dept}
+                                {dept.department_name}
                             </span>
                         </div>
                     ))}

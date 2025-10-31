@@ -177,11 +177,12 @@ export default function BenefitsPage() {
                                                 bgColor="bg-[#F5F5F5]"
                                             />
                                             <SearchInput
-                                                value={searchQuery}
-                                                onChange={setSearchQuery}
+                                                onSearch={(val) => {
+                                                    setCurrentPage(1);
+                                                    setSearchQuery(val);
+                                                }}
                                                 placeholder="Search"
-                                                className="w-50"
-                                                bgColor="bg-[#F5F5F5]"
+                                                className="w-[200px]"
                                             />
                                         </div>
                                     </div>

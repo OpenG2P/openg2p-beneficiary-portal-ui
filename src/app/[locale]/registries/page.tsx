@@ -183,9 +183,11 @@ export default function RegistriesPage() {
                         </div>
                         <div className="flex justify-center py-6">
                             <SearchInput
-                                value={searchQuery}
-                                onChange={setSearchQuery}
-                                placeholder="Search registries"
+                                onSearch={(val) => {
+                                    setCurrentPage(1);
+                                    setSearchQuery(val);
+                                }}
+                                placeholder="Search"
                                 className="w-[200px]"
                             />
                         </div>

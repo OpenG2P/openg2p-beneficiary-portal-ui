@@ -41,7 +41,7 @@ export default function NewsCard({ news }: NewsCardProps) {
                                 <h3 className="text-[14px] hd1366:text-[15px] hd1536:text-[16px] font-[600] text-black">
                                     {n.title}
                                 </h3>
-                                <p className="text-[13px] hd1366:text-[14px] hd1536:text-[15px] font-[400] text-black/50 mt-0.5 line-clamp-2">
+                                <p className="text-[13px] hd1366:text-[14px] hd1536:text-[15px] font-[400] text-black/50 mt-1 line-clamp-2">
                                     {n.description}
                                 </p>
                             </div>

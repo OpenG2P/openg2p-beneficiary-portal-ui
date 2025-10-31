@@ -107,8 +107,10 @@ export default function NotificationsPage() {
                         All Notifications
                     </h2>
                     <SearchInput
-                        value={searchQuery}
-                        onChange={setSearchQuery}
+                        onSearch={(val) => {
+                            setCurrentPage(1);
+                            setSearchQuery(val);
+                        }}
                         placeholder="Search"
                         className="w-[200px]"
                     />

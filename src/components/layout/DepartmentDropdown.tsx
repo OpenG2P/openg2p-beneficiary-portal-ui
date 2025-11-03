@@ -4,6 +4,7 @@ import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
 import { useState, useRef, useEffect } from "react";
 import { useDepartment } from "@/context/GlobalContext";
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
 
 export default function DepartmentDropdown() {
     const { departments, currentDepartment, setDepartment } = useDepartment();
@@ -17,21 +18,7 @@ export default function DepartmentDropdown() {
         setOpen(false);
     };
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setOpen(false);
-            }
-        };
-
-        if (open) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [open]);
+    useClickOutside(dropdownRef, () => setOpen(false), open);
 
     return (
         <div className="relative w-fit select-none text-sm" ref={dropdownRef}>

@@ -226,7 +226,6 @@ export default function RegistriesPage() {
                                             getActionButton(r.action, r)
                                         ) : (
                                             <RegistryActionDropdown
-                                                registry={r}
                                                 onActionSelect={(option) => handleActionSelect(option, r)}
                                             />
                                         )}

@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { prefixBasePath } from '@/shared/utils/path';
 import { getSupportedLocales } from '@/shared/utils/lang';
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
 
 const localeMap: Record<string, { name: string; flag: string }> = {
     en: { name: "English", flag: "/flag_en.png" },
@@ -23,15 +24,7 @@ export default function LanguageDropdown() {
     const pathname = usePathname();
     const router = useRouter();
 
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    useClickOutside(dropdownRef, () => setOpen(false), open);
 
     const handleLocaleChange = (locale: string) => {
         setOpen(false);

@@ -41,10 +41,10 @@ export const dashboardApplications: Application[] = [
 ];
 
 export const benefits = [
-    { icon: "/money.png", value: "15400", label: "Money" },
-    { icon: "/rice.png", value: "42 Kg", label: "Food" },
-    { icon: "/oil.png", value: "30 L", label: "Oil" },
-    { icon: "/book.png", value: "12 No", label: "Books" },
+    { icon: "/digital_cash.png", value: "15400", label: "Digital Cash" },
+    { icon: "/physical_cash.png", value: "10000", label: "Physical Cash" },
+    { icon: "/commodity.png", value: "420", label: "Commodity" },
+    { icon: "/service.png", value: "250", label: "Service" },
 ];
 
 

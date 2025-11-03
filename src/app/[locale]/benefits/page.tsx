@@ -6,29 +6,12 @@ import { AuthUtil } from '@/features/auth/components';
 import { Pagination, SearchInput, FilterInput } from '@/components/shared';
 import { usePagination } from "@/shared/hooks/usePagination";
 import { prefixBasePath } from "@/shared/utils/path";
-import { DeliveryDetails } from "@/features/disbursement/components";
+import { BenefitActionsDropdown, DeliveryDetails } from "@/features/disbursement/components";
+import { Benefit } from "@/features/disbursement/types";
+
 import Image from "next/image";
 
-export interface Agent {
-    name: string;
-    address: string
-}
-
-export interface ReceivedBenefit {
-    programName: string;
-    benefitCode: string;
-    quantity: string;
-    dateReceived: string;
-    agent: Agent;
-    deliveryDateTime: string;
-    address: string;
-    mapImageUrl: string;
-    evidenceImages: string[];
-    biometricVerified: boolean;
-    verificationType: string;
-}
-
-export const receivedBenefitsData: ReceivedBenefit[] = [
+export const receivedBenefitsData: Benefit[] = [
     {
         programName: "Social Registry Upgrade",
         benefitCode: "Information Access",
@@ -146,12 +129,27 @@ export default function BenefitsPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [filterText, setFilterText] = useState("");
 
-    const [selectedBenefit, setSelectedBenefit] = useState<ReceivedBenefit | null>(null);
+    const [selectedBenefit, setSelectedBenefit] = useState<Benefit | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleOpenModal = (benefit: ReceivedBenefit) => {
+    const handleOpenModal = (benefit: Benefit) => {
         setSelectedBenefit(benefit);
         setIsModalOpen(true);
+    };
+
+    const handleProgramActionSelect = (action: string, benefit: Benefit) => {
+        switch (action) {
+            case "delivery-details":
+                handleOpenModal(benefit);
+                break;
+
+            case "support":
+                console.log("Redirect to support")
+                break;
+
+            default:
+                console.warn("Unknown program action:", action);
+        }
     };
 
     return (
@@ -227,7 +225,7 @@ export default function BenefitsPage() {
                                         />
                                     </div>
                                 </th>
-                                <th className="px-8 py-3 text-left text-black">View</th>
+                                <th className="pl-7 pr-8 py-3 text-left text-black">Action</th>
                             </tr>
                         </thead>
 
@@ -242,12 +240,9 @@ export default function BenefitsPage() {
                                     <td className="px-8 py-3 text-black">{benefit.quantity}</td>
                                     <td className="px-8 py-3 text-black">{benefit.dateReceived}</td>
                                     <td className="px-7 py-2 text-[16px] font-[400] text-black">
-                                        <button
-                                            className="text-[#3399FF] bg-white border border-gray-200 px-3 py-1 rounded-full font-[500] shadow-sm hover:bg-[#3399FF]/10 transition"
-                                            onClick={() => handleOpenModal(benefit)}
-                                        >
-                                            Delivery Details
-                                        </button>
+                                        <BenefitActionsDropdown
+                                            onActionSelect={(action) => handleProgramActionSelect(action, benefit)}
+                                        />
                                     </td>
                                 </tr>
                             ))}

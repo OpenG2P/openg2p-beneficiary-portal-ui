@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
 import { useAuth } from "@/context/GlobalContext";
 import { useRouter } from "next/navigation";
+import { getAccountInformation } from "@/features/accountmapping/utils/getAccountInformation";
 
 
 export default function AccountsPage() {
@@ -14,6 +16,13 @@ export default function AccountsPage() {
 
     const { profile } = useAuth();
     const router = useRouter();
+    const [accountInfo, setAccountInfo] = useState<any>(null);
+
+    useEffect(() => {
+        getAccountInformation("mztlhvhinbbcs2pfawwrsuzd")
+            .then((data) => setAccountInfo(data))
+            .catch(console.error);
+    }, []);
 
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
     return (
@@ -54,9 +63,9 @@ export default function AccountsPage() {
                                     <label className="text-[16px] text-black/50 font-[600]">
                                         Account Number
                                     </label>
-                                    <span className="ml-3 px-3 py-1 bg-green-100 text-[#00B765] rounded-full text-[14px] font-[400]">
+                                    {/* <span className="ml-3 px-3 py-1 bg-green-100 text-[#00B765] rounded-full text-[14px] font-[400]">
                                         Verified
-                                    </span>
+                                    </span> */}
                                 </div>
                                 <div className="text-[16px] text-black font-[500]">
                                     1234 5678 9012
@@ -97,45 +106,18 @@ export default function AccountsPage() {
                     </div>
                 </div>
 
-                <div className="w-[30%] bg-gray-100 p-8 flex flex-col justify-start gap-4">
-                    <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-4">Information</h2>
+                <div className="w-[30%] bg-gray-100 p-8 flex flex-col justify-between gap-4">
+                    <div className="flex flex-col gap-4">
+                        <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">Information</h2>
 
-                    <div>
-                        <label className="block text-[16px] font-[500] text-black/50 mb-1">
-                            Bank Name
-                        </label>
-                        <div className="text-[16px] text-black font-[500]">State Bank of India</div>
+                        <p className="text-[16px] text-black/70 leading-relaxed">
+                            {accountInfo && accountInfo.AccountInfo}
+                        </p>
                     </div>
 
-                    <div>
-                        <label className="block text-[16px] font-[500] text-black/50 mb-1">
-                            Bank Location
-                        </label>
-                        <div className="text-[16px] text-black font-[500]">Mumbai, Maharashtra</div>
-                    </div>
+                    <div className="flex-1"></div>
 
-                    <div>
-                        <label className="block text-[16px] font-[500] text-black/50 mb-1">
-                            Email ID
-                        </label>
-                        <div className="text-[16px] text-black font-[500]">{profile?.email}</div>
-                    </div>
-
-                    <div>
-                        <label className="block text-[16px] font-[500] text-black/50 mb-1">
-                            Phone Number
-                        </label>
-                        <div className="text-[16px] text-black font-[500]">{profile?.phone_number}</div>
-                    </div>
-
-                    <div>
-                        <label className="block text-[16px] font-[500] text-black/50 mb-1">
-                            Account Linked Date
-                        </label>
-                        <div className="text-[16px] text-black font-[500]">01 October 2025</div>
-                    </div>
-
-                    <div className="mt-6 flex flex-col items-start gap-3">
+                    <div className="flex flex-col items-start gap-3 mt-6">
                         <button
                             onClick={() => router.push(`/${lang}/accounts/update`)}
                             className="px-4 py-1 bg-[#3399FF] text-white font-[500] rounded-full w-auto"

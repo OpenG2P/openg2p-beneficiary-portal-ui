@@ -13,6 +13,8 @@ interface RegistryCardProps {
 }
 
 export default function RegistryCard({ registries }: RegistryCardProps) {
+    const placeholderRows = Array(Math.max(5 - registries.length, 0)).fill(null);
+
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mr-[30px] mb-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
@@ -40,6 +42,18 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
                             <p className="font-[400] text-black text-[14px] hd1366:text-[15px] hd1536:text-[16px]">
                                 {registry.name}
                             </p>
+                        </div>
+                    </div>
+                ))}
+
+                {placeholderRows.map((_, index) => (
+                    <div
+                        key={`placeholder-reg-${index}`}
+                        className={`${(registries.length + index) % 2 === 0 ? "bg-[#F5F5F5]" : "bg-white"} animate-pulse`}
+                    >
+                        <div className="flex items-center justify-start py-4 px-8">
+                            <div className="w-2.5 h-2.5 rounded-full bg-gray-300 mr-3"></div>
+                            <div className="h-5 bg-gray-300 rounded w-3/4"></div>
                         </div>
                     </div>
                 ))}

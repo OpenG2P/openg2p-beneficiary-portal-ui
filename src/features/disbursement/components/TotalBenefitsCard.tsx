@@ -15,6 +15,8 @@ interface TotalBenefitsCardProps {
 }
 
 export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) {
+    const placeholderCount = Math.max(0, 4 - (benefits?.length || 0));
+    const placeholders = Array(placeholderCount).fill(null);
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
@@ -53,6 +55,13 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
 
                                 <div className="text-[20px]/[23px] text-white font-[700]">{b.value}</div>
                                 <div className="text-[14px]/[16px] text-black font-[600]">{b.label}</div>
+                            </div>
+                        ))}
+                        {placeholders.map((_, index) => (
+                            <div key={`placeholder-${index}`} className="flex flex-col items-center text-center min-w-[70px] animate-pulse">
+                                <div className="mb-1 w-[34px] h-[34px] rounded-full bg-white/50" />
+                                <div className="h-4 w-10 bg-white/40 rounded mb-1" />
+                                <div className="h-4 w-12 bg-black/20 rounded" />
                             </div>
                         ))}
                     </div>

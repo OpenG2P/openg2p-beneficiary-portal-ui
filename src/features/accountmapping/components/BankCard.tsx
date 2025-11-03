@@ -13,6 +13,7 @@ interface BankCardProps {
 }
 
 export default function BankCard({ account }: BankCardProps) {
+    const isLoading = !account;
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
@@ -36,12 +37,23 @@ export default function BankCard({ account }: BankCardProps) {
 
                 <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22]  pt-[36px] pb-[18px] relative">
                     <div className=" px-[30px] pb-[12px]">
-                        <div className="text-[16px]/[19px] font-[600] text-black">
-                            {account.name}
-                        </div>
-                        <div className="text-[16px]/[19px] font-[600] text-black">
-                            {account.number}
-                        </div>
+                        {!isLoading && (
+                            <>
+                                <div className="text-[16px]/[19px] font-[600] text-black">
+                                    {account.name}
+                                </div>
+                                <div className="text-[16px]/[19px] font-[600] text-black">
+                                    {account.number}
+                                </div>
+                            </>
+                        )}
+
+                        {isLoading && (
+                            <div className="animate-pulse">
+                                <div className="h-4 w-2/3 bg-black/30 rounded mb-2"></div>
+                                <div className="h-4 w-1/2 bg-black/30 rounded"></div>
+                            </div>
+                        )}
                     </div>
 
                     <ViewAll

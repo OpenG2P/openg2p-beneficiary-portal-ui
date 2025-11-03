@@ -231,7 +231,6 @@ export default function ApplicationsPage() {
                                 >
                                     <td className="px-8 py-3 text-black font-medium">{application.applicationName}</td>
                                     <td className="px-8 py-3 text-black">{application.applicationId}</td>
-                                    {/* <td className="px-8 py-3 text-black">{application.status}</td> */}
                                     <td className="px-8 py-3">
                                         <span
                                             className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusClasses(application.status).bg
@@ -245,9 +244,6 @@ export default function ApplicationsPage() {
                                         <ApplicationActionDropdown
                                             onActionSelect={(action) => handleActionSelect(action, application)}
                                         />
-                                        {/* <ProgramActionsDropdown
-                                            onActionSelect={(action) => handleProgramActionSelect(action, p)}
-                                        /> */}
                                     </td>
                                 </tr>
                             ))}

@@ -7,5 +7,6 @@ export { default as ApplicationCard } from './ApplicationCard';
 export { default as ProgramDetails } from './ProgramDetails';
 export { default as ApplicationActionDropdown } from './ApplicationActionDropdown';
 export { default as ApplicationProgress } from './ApplicationProgress';
+export { default as ProgramActionsDropdown } from './ProgramActionsDropdown';
 
 

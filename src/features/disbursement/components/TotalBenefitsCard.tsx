@@ -25,7 +25,7 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                 </div>
 
                 <div className="relative bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] pt-4  pb-[18px] overflow-hidden">
-                    <div className="absolute right-16 bottom-0 opacity-20 pointer-events-none select-none">
+                    <div className="absolute right-16 bottom-0 opacity-20 pointer-events-none select-none z-0">
                         <Image
                             src={prefixBasePath("/dollar.png")}
                             alt="Dollar Icon"
@@ -35,24 +35,24 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                         />
                     </div>
 
-                    <div className="flex justify-between items-center w-full px-4">
+                    <div className="flex justify-between items-center w-full px-6">
                         {benefits.map((b, index) => (
                             <div
                                 key={index}
-                                className=" flex flex-col items-center text-center min-w-[70px]"
+                                className=" flex flex-col items-center text-center min-w-[70px] z-10"
                             >
-                                <div className="w-[34px] h-[34px] rounded-full bg-[#FFFFFF80] flex items-center justify-center">
+                                <div className="mb-1 w-[34px] h-[34px] rounded-full bg-[#FFFFFF80] flex items-center justify-center">
                                     <Image
                                         src={prefixBasePath(b.icon)}
                                         alt={b.label}
-                                        width={22}
-                                        height={22}
+                                        width={25}
+                                        height={25}
                                         className="object-contain"
                                     />
                                 </div>
 
                                 <div className="text-[20px]/[23px] text-white font-[700]">{b.value}</div>
-                                <div className="text-[14px]/[16px] text-black font-[500]">{b.label}</div>
+                                <div className="text-[14px]/[16px] text-black font-[600]">{b.label}</div>
                             </div>
                         ))}
                     </div>

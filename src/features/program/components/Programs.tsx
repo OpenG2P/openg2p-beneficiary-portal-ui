@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Program } from "@/features/program/types/program";
 import { SearchInput, Pagination } from "@/components/shared";
-import { ApplyProgramForm, ProgramDetails } from "@/features/program/components";
+import { ApplyProgramForm, ProgramActionsDropdown, ProgramDetails } from "@/features/program/components";
 import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -83,6 +83,30 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
         );
     };
 
+    const handleProgramActionSelect = (action: string, program: Program) => {
+        switch (action) {
+            case "view-details":
+                setSelectedProgram(program);
+                setOpenDetails(true);
+                break;
+
+            case "details-submited":
+                console.log("Redirect to details submitted")
+                break;
+
+            case "progress":
+                console.log("Redirect to progress")
+                break;
+
+            case "disbursement-history":
+                console.log("Redirect to disbursement history")
+                break;
+
+            default:
+                console.warn("Unknown program action:", action);
+        }
+    };
+
     return (
         <div className="bg-white rounded-2xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] w-full border border-gray-200">
             <div className="relative">
@@ -153,12 +177,12 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
                                             />
                                         </div>
                                     </th>
-                                    <th className="px-8 py-3 text-left">
-                                        View
+                                    <th className="pl-7 pr-8 py-3 text-left">
+                                        Action
                                     </th>
                                 </>
                             ) : (
-                                <th className="px-8 py-3 text-left">Action</th>
+                                <th className="pl-9 pr-8 py-3 text-left">Action</th>
                             )}
                         </tr>
                     </thead>
@@ -176,15 +200,9 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
                                     <>
                                         <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.appliedDate}</td>
                                         <td className="px-7 py-2 text-[16px] font-[400] text-black">
-                                            <button
-                                                className="text-[#3399FF] bg-white border border-gray-200 px-3 py-1 rounded-full font-[500] shadow-sm hover:bg-[#3399FF]/10 transition"
-                                                onClick={() => {
-                                                    setSelectedProgram(p);
-                                                    setOpenDetails(true);
-                                                }}
-                                            >
-                                                View Details
-                                            </button>
+                                            <ProgramActionsDropdown
+                                                onActionSelect={(action) => handleProgramActionSelect(action, p)}
+                                            />
                                         </td>
                                     </>
                                 ) : (

@@ -1,1 +1,1 @@
-export type { Benefit } from './benefit';
+export type { Benefit, Agent } from './benefit';

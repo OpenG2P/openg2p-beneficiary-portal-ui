@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
 
 interface Action {
     slug: string;
@@ -18,20 +19,7 @@ export default function ActionDropdown({ actions, onActionSelect }: Props) {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target as Node)
-            ) {
-                setOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+    useClickOutside(dropdownRef, () => setOpen(false), open);
 
     const handleSelect = (actionSlug: string) => {
         setOpen(false);

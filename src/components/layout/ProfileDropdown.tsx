@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useAuth } from "@/context/GlobalContext";
 
 import { prefixBasePath, prefixBaseApiPath } from "@/shared/utils/path";
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
 
 export default function ProfileDropdown() {
     const [open, setOpen] = useState(false);
@@ -29,15 +30,7 @@ export default function ProfileDropdown() {
         }
     };
 
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    useClickOutside(dropdownRef, () => setOpen(false), open);
 
     const avatarSrc = profile?.picture || prefixBasePath("/user_image.png");
 

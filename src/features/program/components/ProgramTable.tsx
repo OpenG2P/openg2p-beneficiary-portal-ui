@@ -140,7 +140,7 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                 <div className="h-3 bg-[#F5F5F5] w-full"></div>
             </div>
 
-            <div className="pb-[18px]">
+            <div className="pb-[18px] mb-1">
                 <ViewAll
                     href="/programs"
                     label="View all Programs"

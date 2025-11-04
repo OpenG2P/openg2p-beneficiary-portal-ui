@@ -49,7 +49,7 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full  overflow-hidden">
             <div className="flex justify-between items-center px-8 pt-[37px] pb-[12px]">
                 <h2 className="text-[20px]/[20px] font-[600] text-[#ED7C22]">My Programs</h2>
-                <button className="hover:bg-gray-100 rounded-full transition">
+                <button className="hover:bg-gray-100 rounded-full transition p-1">
                     <Image
                         src={prefixBasePath("/more.png")}
                         alt="More"
@@ -140,7 +140,7 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                 <div className="h-3 bg-[#F5F5F5] w-full"></div>
             </div>
 
-            <div className="pb-[18px] mb-1">
+            <div className="pb-[18px]">
                 <ViewAll
                     href="/programs"
                     label="View all Programs"

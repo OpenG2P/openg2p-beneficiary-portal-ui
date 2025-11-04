@@ -5,8 +5,13 @@ import { prefixBasePath } from "@/shared/utils/path";
 import { useState, useRef, useEffect } from "react";
 import { useDepartment } from "@/context/GlobalContext";
 import { useClickOutside } from "@/shared/hooks/useClickOutside";
+import { useLocale } from "next-intl";
+import { AuthUtil } from "@/features/auth/components";
 
 export default function DepartmentDropdown() {
+    const lang = useLocale();
+    AuthUtil({ failedRedirectUrl: `/${lang}/login` });
+
     const { departments, currentDepartment, setDepartment } = useDepartment();
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);

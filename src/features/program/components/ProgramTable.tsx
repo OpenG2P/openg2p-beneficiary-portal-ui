@@ -43,11 +43,13 @@ const getBenefitClasses = (benefit: string) => {
 };
 
 export default function ProgramTable({ programs }: ProgramTableProps) {
+    const placeholderRows = Array(Math.max(5 - programs.length, 0)).fill(null);
+
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full  overflow-hidden">
             <div className="flex justify-between items-center px-8 pt-[37px] pb-[12px]">
                 <h2 className="text-[20px]/[20px] font-[600] text-[#ED7C22]">My Programs</h2>
-                <button className="hover:bg-gray-100 rounded-full transition">
+                <button className="hover:bg-gray-100 rounded-full transition p-1">
                     <Image
                         src={prefixBasePath("/more.png")}
                         alt="More"
@@ -113,6 +115,23 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                                             </span>
                                         );
                                     })}
+                                </td>
+                            </tr>
+                        ))}
+
+                        {placeholderRows.map((_, index) => (
+                            <tr
+                                key={`placeholder-${index}`}
+                                className={`${(programs.length + index) % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"} animate-pulse h-[50px]`}
+                            >
+                                <td className="px-[30px]">
+                                    <div className="h-5 w-3/4 bg-gray-300 rounded"></div>
+                                </td>
+                                <td className="px-[30px]">
+                                    <div className="h-5 w-1/2 bg-gray-300 rounded"></div>
+                                </td>
+                                <td className="py-[16px] flex gap-2">
+                                    <div className="h-5 w-[60px] bg-gray-300 rounded-full"></div>
                                 </td>
                             </tr>
                         ))}

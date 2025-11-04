@@ -169,12 +169,12 @@ export default function ApplicationsPage() {
     const [activeModal, setActiveModal] = useState<"details" | "progress" | null>(null);
 
 
-    const handleActionSelect = (option: string, application: Application) => {
+    const handleActionSelect = (action: string, application: Application) => {
         setSelectedApplication(application);
-        if (option === "View Details") {
+        if (action === "view-details") {
             setActiveModal("details");
             setIsModalOpen(true);
-        } else if (option === "Progress") {
+        } else if (action === "progress") {
             setActiveModal("progress");
             setIsModalOpen(true);
         }
@@ -231,7 +231,6 @@ export default function ApplicationsPage() {
                                 >
                                     <td className="px-8 py-3 text-black font-medium">{application.applicationName}</td>
                                     <td className="px-8 py-3 text-black">{application.applicationId}</td>
-                                    {/* <td className="px-8 py-3 text-black">{application.status}</td> */}
                                     <td className="px-8 py-3">
                                         <span
                                             className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusClasses(application.status).bg
@@ -243,7 +242,7 @@ export default function ApplicationsPage() {
                                     <td className="px-8 py-3 text-black">{application.date}</td>
                                     <td className="px-8 py-3">
                                         <ApplicationActionDropdown
-                                            onSelect={(option) => handleActionSelect(option, application)}
+                                            onActionSelect={(action) => handleActionSelect(action, application)}
                                         />
                                     </td>
                                 </tr>

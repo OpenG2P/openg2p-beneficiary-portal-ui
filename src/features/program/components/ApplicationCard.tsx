@@ -40,6 +40,8 @@ const getStatusClasses = (status: string) => {
 };
 
 export default function ApplicationCard({ applications }: ApplicationCardProps) {
+    const placeholderRows = Array(Math.max(4 - applications.length, 0)).fill(null);
+
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mr-[50px] mb-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
@@ -82,6 +84,22 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                         </div>
                     );
                 })}
+                {placeholderRows.map((_, index) => (
+                    <div
+                        key={`placeholder-${index}`}
+                        className={`${(applications.length + index) % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"} animate-pulse`}
+                    >
+                        <div className="flex items-center justify-start py-4 px-8">
+                            <div className="flex-1">
+                                <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+                            </div>
+
+                            <div className="min-w-[90px]">
+                                <div className="h-5 bg-gray-300 rounded-full w-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
 
             <div className="my-3">

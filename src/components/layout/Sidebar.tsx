@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "next-intl";
@@ -8,6 +9,8 @@ import { usePathname } from "next/navigation";
 
 import { getMenuItems, getRouteToIndex } from '@/shared/utils/navigation';
 import { prefixBasePath } from '@/shared/utils/path';
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
+
 
 interface SidebarProps {
     onItemClick?: (index: number, href: string) => void;
@@ -17,6 +20,8 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
     const [expanded, setExpanded] = useState(false);
     const locale = useLocale();
     const pathname = usePathname();
+    const sidebarRef = useRef<HTMLDivElement>(null);
+
 
     const menuItems = getMenuItems(locale);
     const routeToIndex = getRouteToIndex(locale);
@@ -32,8 +37,11 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
         }
     };
 
+    useClickOutside(sidebarRef, () => setExpanded(false), expanded);
+
     return (
         <div
+            ref={sidebarRef}
             className={`bg-[#FCBE00] border-r border-gray-100 fixed top-[70px] left-0 bottom-0 transition-all duration-300 ease-in-out ${expanded ? "w-[250px]" : "w-[60px]"} z-20`}
         >
             <div className="flex items-center justify-center h-16">

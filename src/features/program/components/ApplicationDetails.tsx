@@ -1,7 +1,7 @@
 "use client";
 
 import Modal from "@/components/ui/Modal";
-import { getStatusClasses } from "@/app/[locale]/applications/page"
+import { getStatusClasses } from "@/app/[locale]/(protected)/applications/page"
 export interface Application {
     applicationName: string;
     applicationId: string;

@@ -1,7 +1,10 @@
 export interface Notification {
     id: string;
-    title: string;
-    description: string;
-    date?: string;
-    image: string;
+    subject: string;
+    body: string;
+    createdAt: string;
+    isRead: boolean;
+    isSeen: boolean;
+    isArchived: boolean;
+    avatar?: string;
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Modal from "@/components/ui/Modal";
-import { getStatusClasses } from "@/app/[locale]/applications/page";
+import { getStatusClasses } from "@/app/[locale]/(protected)/applications/page";
 import { prefixBasePath } from "@/shared/utils/path";
 
 export interface VerificationItem {

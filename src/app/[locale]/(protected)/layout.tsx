@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { Header, Sidebar } from '@/components/layout';
 
-export default function BenefitsLayout({ children }: { children: ReactNode }) {
+export default function ProtectedLayout({ children }: { children: ReactNode }) {
     const router = useRouter();
 
     const handleSidebarItemClick = (index: number, href: string) => {

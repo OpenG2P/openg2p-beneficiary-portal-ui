@@ -4,17 +4,23 @@ import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
 import { ViewAll } from "@/components/shared";
 import { useClickOutside } from "@/shared/hooks/useClickOutside";
-import { Notification } from "@/features/notification/types";
+import { useNovuNotifications } from "@/features/notification/utils/useNovuNotifications";
+import { useAuth } from "@/context/GlobalContext";
 
-
-interface NotificationDropdownProps {
-    notifications: Notification[];
-    unreadCount: number;
-}
-
-export default function NotificationDropdown({ notifications, unreadCount }: NotificationDropdownProps) {
+export default function NotificationDropdown() {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const { profile } = useAuth();
+
+    const subscriberId = profile?.provider_unique_id ?? "";
+    const applicationIdentifier = process.env.NEXT_PUBLIC_NOVU_APP_ID ?? "";
+
+    const { notifications, unreadCount } = useNovuNotifications(
+        subscriberId,
+        applicationIdentifier,
+        4
+    );
 
     useClickOutside(dropdownRef, () => setOpen(false), open);
 

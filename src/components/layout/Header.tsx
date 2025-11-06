@@ -3,19 +3,8 @@ import Image from "next/image";
 
 import { prefixBasePath } from '@/shared/utils/path';
 import { LanguageDropdown, ProfileDropdown, NotificationDropdown, DepartmentDropdown } from '@/components/layout';
-import { useNovuNotifications } from "@/features/notification/utils/useNovuNotifications";
-
 
 export default function Header() {
-    const subscriberId = "3112264971";
-    const applicationIdentifier = "Ka89_F8DMMRl";
-
-    const { notifications, unreadCount } = useNovuNotifications(
-        subscriberId,
-        applicationIdentifier,
-        4
-    );
-
     return (
         <header className="w-full bg-white flex items-center justify-between px-3 py-3 fixed top-0 left-0 right-0 z-20 h-[70px] border-b border-gray-300 shadow-[0px_4px_10px_0px_#00000026]">
             <div className="flex items-center gap-3">
@@ -40,10 +29,7 @@ export default function Header() {
                     </span>
                 </button>
                 <LanguageDropdown />
-                <NotificationDropdown
-                    notifications={notifications}
-                    unreadCount={unreadCount}
-                />
+                <NotificationDropdown />
                 <ProfileDropdown />
             </div>
         </header>

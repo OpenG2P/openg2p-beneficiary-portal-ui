@@ -14,7 +14,10 @@ export function useNovuNotifications(
     const novuRef = useRef<Novu | null>(null);
 
     useEffect(() => {
+        if (!subscriberId) return;
+
         if (!novuRef.current) {
+            console.log(subscriberId, applicationIdentifier)
             novuRef.current = new Novu({ subscriberId, applicationIdentifier });
         }
 

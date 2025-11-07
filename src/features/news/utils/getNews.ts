@@ -7,7 +7,8 @@ export async function getNews(
     search: string = ""
 ): Promise<{ data: News[]; total: number }> {
 
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH ?? "http://localhost:1337";
+    console.log(baseUrl)
     const path = "/api/allnews";
     const url = new URL(path, baseUrl);
 

@@ -4,23 +4,13 @@ import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
 import { ViewAll } from "@/components/shared";
 import { useClickOutside } from "@/shared/hooks/useClickOutside";
-import { useNovuNotifications } from "@/features/notification/utils/useNovuNotifications";
-import { useAuth } from "@/context/GlobalContext";
+import { useNotification } from "@/context/GlobalContext";
 
 export default function NotificationDropdown() {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const { profile } = useAuth();
-
-    const subscriberId = profile?.provider_unique_id ?? "";
-    const applicationIdentifier = process.env.NEXT_PUBLIC_NOVU_APP_ID ?? "";
-
-    const { notifications, unreadCount } = useNovuNotifications(
-        subscriberId,
-        applicationIdentifier,
-        4
-    );
+    const { notifications, unreadCount } = useNotification();
 
     useClickOutside(dropdownRef, () => setOpen(false), open);
 
@@ -54,7 +44,7 @@ export default function NotificationDropdown() {
                     </div>
 
                     <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
-                        {notifications?.map((n, index) => (
+                        {notifications.slice(0, 4)?.map((n, index) => (
                             <div
                                 key={n.id}
                                 className={`pl-4 pr-2 flex items-start ${index % 2 === 0 ? "bg-[#F5F5F5]" : ""}`}

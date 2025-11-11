@@ -14,6 +14,7 @@ export function usePrograms(type: "all" | "my") {
 
         async function fetchPrograms() {
             try {
+                setPrograms([]);
                 setLoading(true);
 
                 const result = type === "my"

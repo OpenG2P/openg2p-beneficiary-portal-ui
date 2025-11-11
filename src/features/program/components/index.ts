@@ -10,3 +10,5 @@ export { default as ApplicationProgress } from './ApplicationProgress';
 export { default as ProgramActionsDropdown } from './ProgramActionsDropdown';
 export { default as ProgramTableEmptyRow } from './ProgramTableEmptyRow';
 export { default as ProgramTablePlaceholderRow } from './ProgramTablePlaceholderRow';
+export { default as ProgramsPageEmptyRow } from './ProgramsPageEmptyRow';
+export { default as ProgramsPagePlaceholderRow } from './ProgramsPagePlaceholderRow';

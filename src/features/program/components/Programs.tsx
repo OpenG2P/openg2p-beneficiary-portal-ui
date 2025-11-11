@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Program } from "@/features/program/types/program";
 import { SearchInput, Pagination } from "@/components/shared";
-import { ApplyProgramForm, ProgramActionsDropdown, ProgramDetails } from "@/features/program/components";
+import { ApplyProgramForm, ProgramActionsDropdown, ProgramDetails, ProgramsPageEmptyRow, ProgramsPagePlaceholderRow } from "@/features/program/components";
 import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -15,9 +15,10 @@ interface ProgramsProps {
     showMyPrograms: boolean;
     activeTab: "all" | "my";
     setActiveTab: (tab: "all" | "my") => void;
+    loading: boolean;
 }
 
-export default function Programs({ programs, showMyPrograms, activeTab, setActiveTab }: ProgramsProps) {
+export default function Programs({ programs, loading, showMyPrograms, activeTab, setActiveTab }: ProgramsProps) {
     const lang = useLocale();
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
@@ -51,6 +52,8 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
             </button>
         );
     };
+
+    const emptyRowsCount = Math.max(itemsPerPage - currentItems.length, 0);
 
     const handleProgramActionSelect = (action: string, program: Program) => {
         switch (action) {
@@ -116,7 +119,8 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
             </div>
 
             <div className="overflow-x-auto">
-                <table className="min-w-full border-collapse">
+                {/* <table className="min-w-full border-collapse"> */}
+                <table className="min-w-full border-collapse table-fixed">
                     <thead className="bg-[#F5F5F5] text-black text-[16px] font-[700]">
                         <tr>
                             <th className="px-8 py-3 text-left">Program Name</th>
@@ -156,29 +160,41 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
                         </tr>
                     </thead>
                     <tbody>
+                        {loading &&
+                            [...Array(emptyRowsCount)].map((_, i) => (
+                                <ProgramsPagePlaceholderRow
+                                    key={`empty-${i}`}
+                                    index={i}
+                                    variant={showMyPrograms ? "my" : "all"}
+                                />
+                            ))
+                        }
                         {currentItems.map((p, idx) => (
                             <tr
                                 key={p.id}
                                 className={`text-sm ${idx % 2 === 0 ? "bg-white" : "bg-black/5"}`}
                             >
                                 <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.program_mnemonic}</td>
-                                <td className="px-7 py-3 flex flex-wrap gap-2">
-                                    {p.benefit_codes.map((b) => {
-                                        const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
-                                        return (
-                                            <span
-                                                key={b.id}
-                                                className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
-                                            >
-                                                {b.benefit_code_mnemonic}
-                                            </span>
-                                        );
-                                    })}
+                                {/* <td className="px-7 py-3 flex flex-wrap gap-2"> */}
+                                <td className="px-8 py-3">
+                                    <div className="flex flex-wrap gap-2">
+                                        {p.benefit_codes.map((b) => {
+                                            const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
+                                            return (
+                                                <span
+                                                    key={b.id}
+                                                    className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
+                                                >
+                                                    {b.benefit_code_mnemonic}
+                                                </span>
+                                            );
+                                        })}
+                                    </div>
                                 </td>
                                 {showMyPrograms ? (
                                     <>
                                         <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.enrolment_date}</td>
-                                        <td className="px-7 py-2 text-[16px] font-[400] text-black">
+                                        <td className="px-7 py-3 text-[16px] font-[400] text-black">
                                             <ProgramActionsDropdown
                                                 onActionSelect={(action) => handleProgramActionSelect(action, p)}
                                             />
@@ -189,6 +205,15 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
                                 )}
                             </tr>
                         ))}
+                        {!loading &&
+                            [...Array(emptyRowsCount)].map((_, i) => (
+                                <ProgramsPageEmptyRow
+                                    key={`empty-${i}`}
+                                    index={i}
+                                    variant={showMyPrograms ? "my" : "all"}
+                                />
+                            ))
+                        }
                     </tbody>
                 </table>
             </div>

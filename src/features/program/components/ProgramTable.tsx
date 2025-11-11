@@ -72,8 +72,8 @@ export default function ProgramTable({ programs, loading }: ProgramTableProps) {
                             <tr key={program.id} className={`${index % 2 === 0 ? "bg-white h-[50px]" : "bg-[#F5F5F5] h-[50px]"}`} >
                                 <td className="px-[30px] text-[16px] font-[400] text-black">{program.program_mnemonic}</td>
                                 <td className="px-[30px] text-[16px] font-[400] text-black">{program.enrolment_date}</td>
-                                <td className="py-[10px] text-[16px] font-[400] flex flex-wrap gap-2">
-                                    {program.benefit_codes.map((b) => {
+                                <td className="py-[12px] text-[16px] font-[400] flex flex-wrap gap-2">
+                                    {program.benefit_codes.slice(0, 2).map((b) => {
                                         const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
                                         return (
                                             <span

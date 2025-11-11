@@ -12,10 +12,9 @@ export default function ProgramsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const [activeTab, setActiveTab] = useState<"all" | "my">("all");
+    const [activeTab, setActiveTab] = useState<"all" | "my">("my");
 
     const { programs, loading } = usePrograms(activeTab);
-    // if (loading) return <Loading />
 
     return (
         <div className="px-[50px] py-4 min-h-screen bg-white">
@@ -25,6 +24,7 @@ export default function ProgramsPage() {
 
             <Programs
                 programs={programs}
+                loading={loading}
                 showMyPrograms={activeTab === "my"}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

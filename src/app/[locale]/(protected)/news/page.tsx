@@ -91,11 +91,10 @@ export default function NewsPage() {
                         {Math.min(currentPage * pageSize, total)} of {total} news
                     </div>
                 </div>
-
-                {selectedNews && (
-                    <NewsDetails news={selectedNews} onClose={() => setSelectedNews(null)} />
-                )}
             </div>
+            {selectedNews && (
+                <NewsDetails news={selectedNews} onClose={() => setSelectedNews(null)} />
+            )}
         </div>
     );
 }

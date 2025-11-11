@@ -3,44 +3,11 @@ import { Program } from "@/features/program/types/program";
 import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
 import { ViewAll } from '@/components/shared';
+import { getColorForBenefit } from "@/features/program/utils/benefitColors"
 
 interface ProgramTableProps {
     programs: Program[];
 }
-
-const getBenefitClasses = (benefit: string) => {
-    let bgClass = "";
-    let textClass = "";
-
-    switch (benefit.toLowerCase()) {
-        case "money":
-            bgClass = "bg-[rgba(0,183,101,0.2)]";
-            textClass = "text-[#00B765]";
-            break;
-        case "rice":
-            bgClass = "bg-[rgba(237,124,34,0.2)]";
-            textClass = "text-[#ED7C22]";
-            break;
-        case "oil":
-            bgClass = "bg-[rgba(51,153,255,0.2)]";
-            textClass = "text-[#3399FF]";
-            break;
-        case "books":
-            bgClass = "bg-[rgba(252,190,0,0.2)]";
-            textClass = "text-[#FCBE00]";
-            break;
-        case "home":
-            bgClass = "bg-[rgba(165,84,236,0.2)]";
-            textClass = "text-[#A554EC]";
-            break;
-        default:
-            bgClass = "bg-gray-100";
-            textClass = "text-gray-800";
-            break;
-    }
-
-    return { bgClass, textClass };
-};
 
 export default function ProgramTable({ programs }: ProgramTableProps) {
     const placeholderRows = Array(Math.max(5 - programs.length, 0)).fill(null);
@@ -101,10 +68,10 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                     <tbody>
                         {programs.map((program, index) => (
                             <tr key={program.id} className={`${index % 2 === 0 ? "bg-white h-[50px]" : "bg-[#F5F5F5] h-[50px]"}`} >
-                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.name}</td>
-                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.appliedDate}</td>
+                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.program_mnemonic}</td>
+                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.enrolment_date}</td>
                                 <td className="py-[10px] text-[16px] font-[400] flex flex-wrap gap-2">
-                                    {(program.benefits || []).map((benefit, idx) => {
+                                    {/* {(program.benefits || []).map((benefit, idx) => {
                                         const { bgClass, textClass } = getBenefitClasses(benefit);
                                         return (
                                             <span
@@ -112,6 +79,17 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                                                 className={`px-3 py-1 rounded-full border-1 border-gray-200 text-[14px] font-medium ${bgClass} ${textClass}`}
                                             >
                                                 {benefit}
+                                            </span>
+                                        );
+                                    })} */}
+                                    {program.benefit_codes.map((b) => {
+                                        const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
+                                        return (
+                                            <span
+                                                key={b.id}
+                                                className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
+                                            >
+                                                {b.benefit_code_mnemonic}
                                             </span>
                                         );
                                     })}

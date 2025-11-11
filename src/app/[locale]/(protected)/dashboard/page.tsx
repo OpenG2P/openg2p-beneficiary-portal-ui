@@ -10,20 +10,13 @@ import { RegistryCard } from "@/features/registry/components";
 import { NewsCard } from "@/features/news/components";
 import { News } from "@/features/news/types";
 
-import { Program, Application } from "@/features/program/types";
+import { Application } from "@/features/program/types";
 import { Registry } from "@/features/registry/types/registry";
 import { BankCard } from "@/features/accountmapping/components";
 import { useAuth } from "@/context/GlobalContext";
 import { getNews } from "@/features/news/utils";
+import { usePrograms } from "@/features/program/hooks/usePrograms";
 
-
-export const programsData: Program[] = [
-    { id: "1010101010", name: "Adult Literacy Drive", appliedDate: "2025-09-01", benefits: ["Books", "Classes"], status: "Applied" },
-    { id: "2025202501", name: "School Supplies Initiative", appliedDate: "2025-08-15", benefits: ["Books", "Uniforms"], status: "Applied" },
-    { id: "3030303030", name: "Social Registry Upgrade", appliedDate: "2025-08-10", benefits: ["Information Access"], status: "Enrolled" },
-    { id: "4040404040", name: "Income Tax Assistance", appliedDate: "2025-08-20", benefits: ["Money", "Guidance"], status: "Applied" },
-    { id: "6060606060", name: "Caste Certificate Facilitation", appliedDate: "2025-07-25", benefits: ["Documentation"], status: "Enrolled" },
-];
 
 export const previewRegistries: Registry[] = [
     { name: "Education Registry", id: "SW001", date: "15/08/2025", action: "Apply", description: "Tracks citizens under social welfare schemes." },
@@ -56,6 +49,8 @@ export default function Dashboard() {
     const { profile } = useAuth();
     const [news, setNews] = useState<News[]>([]);
 
+    const { programs } = usePrograms("my");
+
     useEffect(() => {
         getNews(1, 3)
             .then(({ data }) => setNews(data))
@@ -73,7 +68,7 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-1 xl:grid-cols-3">
                 <div className="xl:col-span-2 pr-[50px] pb-[50px]">
-                    <ProgramTable programs={programsData} />
+                    <ProgramTable programs={programs} />
                 </div>
 
                 <div className="flex flex-col gap-4 sm:gap-6 h-full pb-[50px] pr-[50px]">

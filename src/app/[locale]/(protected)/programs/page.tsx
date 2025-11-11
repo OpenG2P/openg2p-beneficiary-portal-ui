@@ -12,7 +12,7 @@ export default function ProgramsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const [activeTab, setActiveTab] = useState<"all" | "my">("my");
+    const [activeTab, setActiveTab] = useState<"all" | "my">("all");
 
     const { programs, loading } = usePrograms(activeTab);
 

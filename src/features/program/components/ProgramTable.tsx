@@ -4,13 +4,15 @@ import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
 import { ViewAll } from '@/components/shared';
 import { getColorForBenefit } from "@/features/program/utils/benefitColors"
+import { ProgramTablePlaceholderRow, ProgramTableEmptyRow } from "@/features/program/components";
 
 interface ProgramTableProps {
     programs: Program[];
+    loading: boolean;
 }
 
-export default function ProgramTable({ programs }: ProgramTableProps) {
-    const placeholderRows = Array(Math.max(5 - programs.length, 0)).fill(null);
+export default function ProgramTable({ programs, loading }: ProgramTableProps) {
+    const emptyRowsCount = Math.max(5 - programs.length, 0);
 
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full  overflow-hidden">
@@ -71,17 +73,6 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                                 <td className="px-[30px] text-[16px] font-[400] text-black">{program.program_mnemonic}</td>
                                 <td className="px-[30px] text-[16px] font-[400] text-black">{program.enrolment_date}</td>
                                 <td className="py-[10px] text-[16px] font-[400] flex flex-wrap gap-2">
-                                    {/* {(program.benefits || []).map((benefit, idx) => {
-                                        const { bgClass, textClass } = getBenefitClasses(benefit);
-                                        return (
-                                            <span
-                                                key={idx}
-                                                className={`px-3 py-1 rounded-full border-1 border-gray-200 text-[14px] font-medium ${bgClass} ${textClass}`}
-                                            >
-                                                {benefit}
-                                            </span>
-                                        );
-                                    })} */}
                                     {program.benefit_codes.map((b) => {
                                         const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
                                         return (
@@ -97,25 +88,20 @@ export default function ProgramTable({ programs }: ProgramTableProps) {
                             </tr>
                         ))}
 
-                        {placeholderRows.map((_, index) => (
-                            <tr
-                                key={`placeholder-${index}`}
-                                className={`${(programs.length + index) % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"} animate-pulse h-[50px]`}
-                            >
-                                <td className="px-[30px]">
-                                    <div className="h-5 w-3/4 bg-gray-300 rounded"></div>
-                                </td>
-                                <td className="px-[30px]">
-                                    <div className="h-5 w-1/2 bg-gray-300 rounded"></div>
-                                </td>
-                                <td className="py-[16px] flex gap-2">
-                                    <div className="h-5 w-[60px] bg-gray-300 rounded-full"></div>
-                                </td>
-                            </tr>
-                        ))}
+                        {loading &&
+                            [...Array(5)].map((_, i) => (
+                                <ProgramTablePlaceholderRow key={`loading-${i}`} index={programs.length + i} />
+                            ))
+                        }
+
+                        {!loading &&
+                            [...Array(emptyRowsCount)].map((_, i) => (
+                                <ProgramTableEmptyRow key={`empty-${i}`} index={programs.length + i} />
+                            ))
+                        }
                     </tbody>
                 </table>
-                <div className="h-3 bg-[#F5F5F5] w-full"></div>
+                <div className="h-2 bg-[#F5F5F5] w-full"></div>
             </div>
 
             <div className="pb-[18px]">

@@ -77,7 +77,7 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
     };
 
     return (
-        <div className="bg-white rounded-2xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] w-full border border-gray-200">
+        <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full">
             <div className="relative">
                 <div className="absolute inset-x-0 bottom-0 h-[6px] bg-[#F5F5F5]" />
 

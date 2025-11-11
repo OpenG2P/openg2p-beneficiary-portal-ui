@@ -76,7 +76,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                 )}
             </div>
 
-            <div className="pb-4">
+            <div>
                 {menuItems.map((item, idx) => {
                     const isActive = idx === activeItem;
 
@@ -84,7 +84,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
                         <Link
                             key={idx}
                             href={item.href}
-                            className={`flex items-center text-black text-[16px] font-[500] cursor-pointer transition-all duration-200 pl-1.5 mb-3 
+                            className={`flex items-center text-black text-[16px] font-[500] cursor-pointer transition-all duration-200 pl-1.5 mb-5 
                                 ${isActive ? "bg-white/40" : "hover:bg-white/20"}
                             `}
                             onClick={() => handleItemClick(idx, item.href)}

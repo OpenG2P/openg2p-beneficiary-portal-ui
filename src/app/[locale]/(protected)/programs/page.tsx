@@ -15,11 +15,13 @@ export default function ProgramsPage() {
     const [activeTab, setActiveTab] = useState<"all" | "my">("all");
 
     const { programs, loading } = usePrograms(activeTab);
-    if (loading) return <Loading />
+    // if (loading) return <Loading />
 
     return (
-        <div className="px-10 py-4 min-h-screen bg-white">
-            <h1 className="text-xl font-bold text-gray-800 mb-4">Programs</h1>
+        <div className="px-[50px] py-4 min-h-screen bg-white">
+            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+                Programs
+            </h1>
 
             <Programs
                 programs={programs}

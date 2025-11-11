@@ -23,12 +23,12 @@ export default function NotificationsPage() {
     );
 
     return (
-        <div className="px-10 py-4 min-h-screen bg-gray-50">
-            <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <h1 className="text-lg text-black font-bold">Notifications</h1>
-            </div>
+        <div className="px-[50px] py-4 min-h-screen bg-white">
+            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+                Notifications
+            </h1>
 
-            <div className="bg-white rounded-lg overflow-hidden border border-black/20 shadow-[0_4px_20px_0_rgba(0,0,0,0.25)]">
+            <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] overflow-hidden">
                 <div className="mb-4 px-6 pt-4 flex items-center justify-between">
                     <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">
                         All Notifications

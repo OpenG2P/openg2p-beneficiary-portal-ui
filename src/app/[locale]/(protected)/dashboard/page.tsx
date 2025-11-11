@@ -49,7 +49,7 @@ export default function Dashboard() {
     const { profile } = useAuth();
     const [news, setNews] = useState<News[]>([]);
 
-    const { programs } = usePrograms("my");
+    const { programs, loading } = usePrograms("my");
 
     useEffect(() => {
         getNews(1, 3)
@@ -61,14 +61,13 @@ export default function Dashboard() {
 
     return (
         <div className="pl-[50px] py-4 min-h-screen bg-white">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-2">
+            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
                 Dashboard
             </h1>
 
-
             <div className="grid grid-cols-1 xl:grid-cols-3">
                 <div className="xl:col-span-2 pr-[50px] pb-[50px]">
-                    <ProgramTable programs={programs} />
+                    <ProgramTable programs={programs} loading={loading} />
                 </div>
 
                 <div className="flex flex-col gap-4 sm:gap-6 h-full pb-[50px] pr-[50px]">

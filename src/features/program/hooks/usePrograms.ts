@@ -15,8 +15,6 @@ export function usePrograms(type: "all" | "my", currentPage: number, pageSize = 
         let isMounted = true;
 
         async function fetchPrograms() {
-            console.log("Fetching page:", currentPage);
-
             try {
                 setPrograms([]);
                 setLoading(true);

@@ -14,12 +14,12 @@ export default function MyProfile() {
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
 
     return (
-        <div className="px-10 py-6 min-h-screen bg-gray-50">
-            <div className="flex justify-between items-center mb-4">
-                <h1 className="text-xl font-bold text-black">My Profile</h1>
-            </div>
+        <div className="pl-[50px] py-4 min-h-screen bg-white">
+            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+                My Profile
+            </h1>
 
-            <div className="relative bg-white rounded-xl shadow-xl w-full border border-black/20 overflow-hidden pb-20">
+            <div className="relative bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full overflow-hidden pb-20">
                 <div className="absolute left-50 top-18">
                     <Image
                         src={profileImage}

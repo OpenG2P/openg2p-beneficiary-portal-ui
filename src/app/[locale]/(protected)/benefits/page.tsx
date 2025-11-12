@@ -153,122 +153,124 @@ export default function BenefitsPage() {
     };
 
     return (
-        <div className="px-[50px] py-4 min-h-screen bg-white">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
-                Benefits
-            </h1>
+        <>
+            <div className="px-[50px] py-4 min-h-screen bg-white">
+                <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+                    Benefits
+                </h1>
 
-            <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full overflow-hidden">
-                <div className="overflow-x-auto w-full">
-                    <table className="w-full text-left border-collapse min-w-[700px]">
-                        <thead>
-                            <tr>
-                                <th colSpan={5}>
-                                    <div className="flex justify-between items-center px-2 py-4">
-                                        <span className="px-6 py-2 text-[#ED7C22] text-[20px] font-[600]">Benefits Received till Date</span>
-                                        <div className="flex gap-4 pr-16">
-                                            <FilterInput
-                                                value={filterText}
-                                                onChange={setFilterText}
-                                                placeholder="Filter"
-                                                className="w-50"
-                                                bgColor="bg-[#F5F5F5]"
-                                            />
-                                            <SearchInput
-                                                onSearch={(val) => {
-                                                    setCurrentPage(1);
-                                                    setSearchQuery(val);
-                                                }}
-                                                placeholder="Search"
-                                                className="w-[200px]"
+                <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full overflow-hidden">
+                    <div className="overflow-x-auto w-full">
+                        <table className="w-full text-left border-collapse min-w-[700px]">
+                            <thead>
+                                <tr>
+                                    <th colSpan={5}>
+                                        <div className="flex justify-between items-center px-2 py-4">
+                                            <span className="px-6 py-2 text-[#ED7C22] text-[20px] font-[600]">Benefits Received till Date</span>
+                                            <div className="flex gap-4 pr-6">
+                                                <FilterInput
+                                                    value={filterText}
+                                                    onChange={setFilterText}
+                                                    placeholder="Filter"
+                                                    className="w-50"
+                                                    bgColor="bg-[#F5F5F5]"
+                                                />
+                                                <SearchInput
+                                                    onSearch={(val) => {
+                                                        setCurrentPage(1);
+                                                        setSearchQuery(val);
+                                                    }}
+                                                    placeholder="Search"
+                                                    className="w-[200px]"
+                                                />
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+
+                                <tr className="bg-[#F5F5F5]">
+                                    <th className="px-8 py-3 text-left text-black">
+                                        <div className="flex items-center gap-0.5">
+                                            Program Name
+                                            <Image
+                                                src={prefixBasePath("/updown_arrow.png")}
+                                                alt="Sort"
+                                                width={20}
+                                                height={20}
+                                                className="cursor-pointer opacity-40"
                                             />
                                         </div>
-                                    </div>
-                                </th>
-                            </tr>
-
-                            <tr className="bg-[#F5F5F5]">
-                                <th className="px-8 py-3 text-left text-black">
-                                    <div className="flex items-center gap-0.5">
-                                        Program Name
-                                        <Image
-                                            src={prefixBasePath("/updown_arrow.png")}
-                                            alt="Sort"
-                                            width={20}
-                                            height={20}
-                                            className="cursor-pointer opacity-40"
-                                        />
-                                    </div>
-                                </th>
-                                <th className="px-8 py-3 text-left text-black">
-                                    <div className="flex items-center gap-0.5">
-                                        Benefit Code
-                                        <Image
-                                            src={prefixBasePath("/updown_arrow.png")}
-                                            alt="Sort"
-                                            width={20}
-                                            height={20}
-                                            className="cursor-pointer opacity-40"
-                                        />
-                                    </div>
-                                </th>
-                                <th className="px-8 py-3 text-left text-black">Quantity</th>
-                                <th className="px-8 py-3 text-left text-black">
-                                    <div className="flex items-center gap-0.5">
-                                        Received Date
-                                        <Image
-                                            src={prefixBasePath("/updown_arrow.png")}
-                                            alt="Sort"
-                                            width={20}
-                                            height={20}
-                                            className="cursor-pointer opacity-40"
-                                        />
-                                    </div>
-                                </th>
-                                <th className="pl-7 pr-8 py-3 text-left text-black">Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {currentItems.map((benefit, index) => (
-                                <tr
-                                    key={index}
-                                    className={`transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
-                                >
-                                    <td className="px-8 py-3 text-black font-medium">{benefit.programName}</td>
-                                    <td className="px-8 py-3 text-black">{benefit.benefitCode}</td>
-                                    <td className="px-8 py-3 text-black">{benefit.quantity}</td>
-                                    <td className="px-8 py-3 text-black">{benefit.dateReceived}</td>
-                                    <td className="px-7 py-2 text-[16px] font-[400] text-black">
-                                        <BenefitActionsDropdown
-                                            onActionSelect={(action) => handleProgramActionSelect(action, benefit)}
-                                        />
-                                    </td>
+                                    </th>
+                                    <th className="px-8 py-3 text-left text-black">
+                                        <div className="flex items-center gap-0.5">
+                                            Benefit Code
+                                            <Image
+                                                src={prefixBasePath("/updown_arrow.png")}
+                                                alt="Sort"
+                                                width={20}
+                                                height={20}
+                                                className="cursor-pointer opacity-40"
+                                            />
+                                        </div>
+                                    </th>
+                                    <th className="px-8 py-3 text-left text-black">Quantity</th>
+                                    <th className="px-8 py-3 text-left text-black">
+                                        <div className="flex items-center gap-0.5">
+                                            Received Date
+                                            <Image
+                                                src={prefixBasePath("/updown_arrow.png")}
+                                                alt="Sort"
+                                                width={20}
+                                                height={20}
+                                                className="cursor-pointer opacity-40"
+                                            />
+                                        </div>
+                                    </th>
+                                    <th className="pl-7 pr-8 py-3 text-left text-black">Action</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
 
-                <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={setCurrentPage}
-                    />
-                    <div className="text-gray-600 text-sm">
-                        Showing{" "}
-                        {Math.min((currentPage - 1) * 8 + 1, receivedBenefitsData.length)}–
-                        {Math.min(currentPage * 8, receivedBenefitsData.length)} of {receivedBenefitsData.length}
+                            <tbody>
+                                {currentItems.map((benefit, index) => (
+                                    <tr
+                                        key={index}
+                                        className={`transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
+                                    >
+                                        <td className="px-8 py-3 text-black font-medium">{benefit.programName}</td>
+                                        <td className="px-8 py-3 text-black">{benefit.benefitCode}</td>
+                                        <td className="px-8 py-3 text-black">{benefit.quantity}</td>
+                                        <td className="px-8 py-3 text-black">{benefit.dateReceived}</td>
+                                        <td className="px-7 py-2 text-[16px] font-[400] text-black">
+                                            <BenefitActionsDropdown
+                                                onActionSelect={(action) => handleProgramActionSelect(action, benefit)}
+                                            />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
+                        <div className="text-gray-600 text-sm">
+                            Showing{" "}
+                            {Math.min((currentPage - 1) * 8 + 1, receivedBenefitsData.length)}–
+                            {Math.min(currentPage * 8, receivedBenefitsData.length)} of {receivedBenefitsData.length}
+                        </div>
                     </div>
                 </div>
-                {isModalOpen && selectedBenefit && (
-                    <DeliveryDetails
-                        benefit={selectedBenefit}
-                        onClose={() => setIsModalOpen(false)}
-                    />
-                )}
             </div>
-        </div>
+            {isModalOpen && selectedBenefit && (
+                <DeliveryDetails
+                    benefit={selectedBenefit}
+                    onClose={() => setIsModalOpen(false)}
+                />
+            )}
+        </>
     );
 }

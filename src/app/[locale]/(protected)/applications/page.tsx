@@ -181,108 +181,108 @@ export default function ApplicationsPage() {
     };
 
     return (
-        <div className="px-[50px] py-4 min-h-screen bg-white">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
-                Applications
-            </h1>
+        <>
+            <div className="px-[50px] py-4 min-h-screen bg-white">
+                <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+                    Applications
+                </h1>
 
-            <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full overflow-hidden">
-                <div className="overflow-x-auto w-full">
-                    <table className="w-full text-left border-collapse min-w-[700px]">
-                        <thead>
-                            <tr>
-                                <th colSpan={5}>
-                                    <div className="flex justify-between items-center px-2 py-4">
-                                        <span className="px-6 py-2 text-[#ED7C22] text-[20px] font-[600]">My Applications</span>
-                                        <div className="flex gap-4 px-6">
-                                            <FilterInput
-                                                value={filterText}
-                                                onChange={setFilterText}
-                                                placeholder="Filter"
-                                                className="w-50"
-                                                bgColor="bg-[#F5F5F5]"
-                                            />
-                                            <SearchInput
-                                                onSearch={(val) => {
-                                                    setCurrentPage(1);
-                                                    setSearchQuery(val);
-                                                }}
-                                                placeholder="Search"
-                                                className="w-[200px]"
-                                            />
+                <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full overflow-hidden">
+                    <div className="overflow-x-auto w-full">
+                        <table className="w-full text-left border-collapse min-w-[700px]">
+                            <thead>
+                                <tr>
+                                    <th colSpan={5}>
+                                        <div className="flex justify-between items-center px-2 py-4">
+                                            <span className="px-6 py-2 text-[#ED7C22] text-[20px] font-[600]">My Applications</span>
+                                            <div className="flex gap-4 px-6">
+                                                <FilterInput
+                                                    value={filterText}
+                                                    onChange={setFilterText}
+                                                    placeholder="Filter"
+                                                    className="w-50"
+                                                    bgColor="bg-[#F5F5F5]"
+                                                />
+                                                <SearchInput
+                                                    onSearch={(val) => {
+                                                        setCurrentPage(1);
+                                                        setSearchQuery(val);
+                                                    }}
+                                                    placeholder="Search"
+                                                    className="w-[200px]"
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr className="bg-[#F5F5F5]">
-                                <th className="px-8 py-3 text-left text-black">Application Name</th>
-                                <th className="px-8 py-3 text-left text-black">Application ID</th>
-                                <th className="px-8 py-3 text-left text-black">Status</th>
-                                <th className="px-8 py-3 text-left text-black">Date</th>
-                                <th className="px-8 py-3 text-left text-black">Actions</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {currentItems.map((application, index) => (
-                                <tr
-                                    key={index}
-                                    className={`transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
-                                >
-                                    <td className="px-8 py-3 text-black font-medium">{application.applicationName}</td>
-                                    <td className="px-8 py-3 text-black">{application.applicationId}</td>
-                                    <td className="px-8 py-3">
-                                        <span
-                                            className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusClasses(application.status).bg
-                                                } ${getStatusClasses(application.status).text}`}
-                                        >
-                                            {application.status}
-                                        </span>
-                                    </td>
-                                    <td className="px-8 py-3 text-black">{application.date}</td>
-                                    <td className="px-8 py-3">
-                                        <ApplicationActionDropdown
-                                            onActionSelect={(action) => handleActionSelect(action, application)}
-                                        />
-                                    </td>
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                                <tr className="bg-[#F5F5F5]">
+                                    <th className="px-8 py-3 text-left text-black">Application Name</th>
+                                    <th className="px-8 py-3 text-left text-black">Application ID</th>
+                                    <th className="px-8 py-3 text-left text-black">Status</th>
+                                    <th className="px-8 py-3 text-left text-black">Date</th>
+                                    <th className="px-8 py-3 text-left text-black">Actions</th>
+                                </tr>
+                            </thead>
 
-                <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={setCurrentPage}
-                    />
-                    <div className="text-gray-600 text-sm">
-                        Showing{" "}
-                        {Math.min((currentPage - 1) * 8 + 1, applicationsData.length)}–
-                        {Math.min(currentPage * 8, applicationsData.length)} of {applicationsData.length}
+                            <tbody>
+                                {currentItems.map((application, index) => (
+                                    <tr
+                                        key={index}
+                                        className={`transition-colors duration-150 ${index % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
+                                    >
+                                        <td className="px-8 py-3 text-black font-medium">{application.applicationName}</td>
+                                        <td className="px-8 py-3 text-black">{application.applicationId}</td>
+                                        <td className="px-8 py-3">
+                                            <span
+                                                className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusClasses(application.status).bg
+                                                    } ${getStatusClasses(application.status).text}`}
+                                            >
+                                                {application.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-8 py-3 text-black">{application.date}</td>
+                                        <td className="px-8 py-3">
+                                            <ApplicationActionDropdown
+                                                onActionSelect={(action) => handleActionSelect(action, application)}
+                                            />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
+                        <div className="text-gray-600 text-sm">
+                            Showing{" "}
+                            {Math.min((currentPage - 1) * 8 + 1, applicationsData.length)}–
+                            {Math.min(currentPage * 8, applicationsData.length)} of {applicationsData.length}
+                        </div>
                     </div>
                 </div>
-
-                {isModalOpen && selectedApplication && (
-                    <>
-                        {activeModal === "details" && (
-                            <ApplicationDetails
-                                application={selectedApplication}
-                                onClose={() => setIsModalOpen(false)}
-                            />
-                        )}
-
-                        {activeModal === "progress" && (
-                            <ApplicationProgress
-                                onClose={() => setIsModalOpen(false)}
-                                applicationName={selectedApplication.applicationName}
-                            />
-                        )}
-                    </>
-                )}
-
             </div>
-        </div>
+            {isModalOpen && selectedApplication && (
+                <>
+                    {activeModal === "details" && (
+                        <ApplicationDetails
+                            application={selectedApplication}
+                            onClose={() => setIsModalOpen(false)}
+                        />
+                    )}
+
+                    {activeModal === "progress" && (
+                        <ApplicationProgress
+                            onClose={() => setIsModalOpen(false)}
+                            applicationName={selectedApplication.applicationName}
+                        />
+                    )}
+                </>
+            )}
+        </>
     );
 }

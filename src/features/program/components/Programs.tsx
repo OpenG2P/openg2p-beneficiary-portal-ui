@@ -102,7 +102,7 @@ export default function Programs({ showMyPrograms, activeTab, setActiveTab }: Pr
                                 My Programs
                             </button>
                         </div>
-                        <div className="flex justify-center py-6 pr-6">
+                        <div className="flex justify-center py-6">
                             <SearchInput
                                 onSearch={(val) => {
                                     setCurrentPage(1);
@@ -204,7 +204,7 @@ export default function Programs({ showMyPrograms, activeTab, setActiveTab }: Pr
                                 [...Array(emptyRowsCount)].map((_, i) => (
                                     <ProgramsPageEmptyRow
                                         key={`empty-${i}`}
-                                        index={i}
+                                        index={programs.length + i}
                                         variant={showMyPrograms ? "my" : "all"}
                                     />
                                 ))

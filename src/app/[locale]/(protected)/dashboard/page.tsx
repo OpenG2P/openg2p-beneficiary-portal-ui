@@ -49,7 +49,7 @@ export default function Dashboard() {
     const { profile } = useAuth();
     const [news, setNews] = useState<News[]>([]);
 
-    const { programs, loading } = usePrograms("my");
+    const { programs, loading } = usePrograms("my", 1, 5);
 
     useEffect(() => {
         getNews(1, 3)

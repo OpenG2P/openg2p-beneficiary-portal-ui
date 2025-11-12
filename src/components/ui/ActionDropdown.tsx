@@ -42,12 +42,12 @@ export default function ActionDropdown({ actions, onActionSelect }: Props) {
                 </button>
 
                 {open && (
-                    <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-l border-t border-gray-200 rotate-45 z-20"></div>
+                    <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-l border-t border-gray-200 rotate-45 z-60"></div>
                 )}
             </div>
 
             {open && (
-                <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 bg-white border border-gray-200 drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] rounded-md z-10 w-max whitespace-nowrap">
+                <div className="absolute top-full mt-3 -left-1/10 -translate-x-1/2 bg-white border border-gray-200 rounded-md z-50 w-max whitespace-nowrap">
                     {actions.map((action) => (
                         <button
                             key={action.slug}

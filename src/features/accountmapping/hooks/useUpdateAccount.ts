@@ -29,8 +29,8 @@ export function useUpdateAccount(baseUrl: string) {
             ];
 
             const response = await updateAccount(baseUrl, "txn-" + Date.now(), updateRequest);
-            const parsed = extractResolvedData(response);
-            setResult(parsed);
+            const { status } = response?.response_body?.response_payload?.update_response?.[0];
+            setResult(status);
             return response;
         } catch (err: any) {
             setError(err.message || "Failed to update account");

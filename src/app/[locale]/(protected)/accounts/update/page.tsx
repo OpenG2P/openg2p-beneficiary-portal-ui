@@ -68,7 +68,8 @@ export default function AccountUpdatePage() {
     }, [walletType]);
 
     useEffect(() => {
-        if (updateResult?.status === "succ" || linkResult?.status === "succ") {
+        console.log(updateResult)
+        if (updateResult === "succ" || linkResult === "succ") {
             setShowModal(true);
         } else if (updateError || linkError) {
             setShowErrorModal(true);

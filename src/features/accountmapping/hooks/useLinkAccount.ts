@@ -29,8 +29,8 @@ export function useLinkAccount(baseUrl: string) {
             ];
 
             const response = await linkAccount(baseUrl, "txn-" + Date.now(), linkRequest);
-            const parsed = extractResolvedData(response);
-            setResult(parsed);
+            const { status } = response?.response_body?.response_payload?.link_response?.[0];
+            setResult(status);
         } catch (err: any) {
             setError(err.message || "Failed to link account");
         } finally {

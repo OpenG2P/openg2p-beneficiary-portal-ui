@@ -1,5 +1,3 @@
-// utils/formUtils.ts - Logic for building form data
-
 import { STRATEGIES } from "@/features/accountmapping/utils/strategyMap";
 import type { Bank, Branch, WalletProvider, FaData, AccountType, WalletType } from "@/features/accountmapping/types";
 

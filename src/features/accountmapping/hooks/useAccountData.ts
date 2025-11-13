@@ -1,5 +1,3 @@
-// hooks/useAccountData.ts - Hook for fetching banks and wallet providers
-
 import { useEffect, useState } from "react";
 import {
     getAllBanks,

@@ -1,5 +1,3 @@
-// components/FormInputs.tsx - Reusable form input components
-
 interface TextInputProps {
     label: string;
     value: string;

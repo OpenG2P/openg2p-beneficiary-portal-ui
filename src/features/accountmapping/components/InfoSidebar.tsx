@@ -1,5 +1,3 @@
-// components/InfoSidebar.tsx - Information sidebar component
-
 import { Info } from "./FormInputs";
 import type { AccountType } from "@/features/accountmapping/types";
 

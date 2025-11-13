@@ -1,5 +1,3 @@
-// components/AccountFormSection.tsx - Main form section
-
 import { TextInput, SelectInput } from "./FormInputs";
 import type { AccountType, WalletType, Bank, Branch, WalletProvider } from "@/features/accountmapping/types";
 

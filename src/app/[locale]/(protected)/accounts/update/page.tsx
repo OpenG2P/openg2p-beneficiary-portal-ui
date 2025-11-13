@@ -2,25 +2,31 @@
 
 import Image from "next/image";
 import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
 import { useAuth } from "@/context/GlobalContext";
-import { useEffect, useState } from "react";
 import {
     AccountSuccessModal,
     AccountErrorModal,
     AccountRemoveModal,
+    AccountFormSection,
+    InfoSidebar
 } from "@/features/accountmapping/components";
 import {
-    getAllBanks,
-    getBranchesByBankId,
-    getAllWalletProviders,
-} from "@/features/accountmapping/utils/dfspApi";
+    useResolveAccount,
+    useUpdateAccount,
+    useLinkAccount,
+    useAccountData,
+    useBranches
+} from "@/features/accountmapping/hooks";
 
-import { useLinkAccount } from "@/features/accountmapping/hooks/useLinkAccount";
-import { useUpdateAccount } from "@/features/accountmapping/hooks/useUpdateAccount";
-import { useResolveAccount } from "@/features/accountmapping/hooks/useResolveAccount";
-import { STRATEGIES } from "@/features/accountmapping/utils/strategyMap";
+
+import { buildFaData } from "@/features/accountmapping/utils";
+import type { AccountType, WalletType } from "@/features/accountmapping/types";
+
+const BASE_URL = "http://localhost:8080";
+const BASE_URL_MAPPER = "http://localhost:8080/mapper";
 
 export default function AccountUpdatePage() {
     const lang = useLocale();
@@ -28,116 +34,38 @@ export default function AccountUpdatePage() {
     const { profile } = useAuth();
 
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
-    const baseUrl = "http://localhost:8080";
-    const baseUrl1 = "http://localhost:8080/mapper";
 
-    const [accountType, setAccountType] = useState("bank");
-    const [banks, setBanks] = useState<any[]>([]);
-    const [branches, setBranches] = useState<any[]>([]);
-    const [walletProviders, setWalletProviders] = useState<any[]>([]);
+    const [accountType, setAccountType] = useState<AccountType>("bank");
     const [bank, setBank] = useState("");
     const [branch, setBranch] = useState("");
     const [accountNumber, setAccountNumber] = useState("");
     const [mobile, setMobile] = useState(profile?.phone_number || "");
     const [email, setEmail] = useState(profile?.email || "");
     const [walletProvider, setWalletProvider] = useState("");
-    const [walletType, setWalletType] = useState("Mobile Wallet");
+    const [walletType, setWalletType] = useState<WalletType>("Mobile Wallet");
 
     const [showModal, setShowModal] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
-    const { handleResolve, resolving, result: resolveResult, error: resolveError } = useResolveAccount(baseUrl1);
-    const { handleLink, linking, result: linkResult, error: linkError } = useLinkAccount(baseUrl1);
-    const { handleUpdate, updating, result: updateResult, error: updateError } = useUpdateAccount(baseUrl1);
+    const { banks, walletProviders } = useAccountData(BASE_URL);
+    const { branches } = useBranches(BASE_URL, bank, banks);
+
+    const { handleResolve, result: resolveResult } = useResolveAccount(BASE_URL_MAPPER);
+    const { handleLink, linking, result: linkResult, error: linkError } = useLinkAccount(BASE_URL_MAPPER);
+    const { handleUpdate, updating, result: updateResult, error: updateError } = useUpdateAccount(BASE_URL_MAPPER);
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const [banksRes, walletsRes] = await Promise.all([
-                    getAllBanks(baseUrl),
-                    getAllWalletProviders(baseUrl),
-                ]);
-
-                const banks = banksRes?.response_body?.response_payload?.banks || [];
-                const wallets = walletsRes?.response_body?.response_payload?.wallet_service_providers || [];
-
-                setBanks(banks);
-                setWalletProviders(wallets);
-            } catch (err) {
-                console.error("❌ Error fetching DFSP data:", err);
-            }
-        }
-
-        fetchData();
-    }, [baseUrl]);
-
-    useEffect(() => {
-        if (!bank) {
-            setBranches([]);
-            setBranch("");
-            return;
-        }
-
-        const selectedBank = banks.find((b) => b.bank_name === bank);
-        if (!selectedBank) {
-            setBranches([]);
-            setBranch("");
-            return;
-        }
-
-        getBranchesByBankId(baseUrl, selectedBank.id)
-            .then((res) => {
-                const branches = res?.response_body?.response_payload?.branches || [];
-                setBranches(branches);
-                setBranch("");
-            })
-            .catch((err) => {
-                console.error("❌ Branch fetch failed:", err);
-                setBranches([]);
-                setBranch("");
-            });
-    }, [bank, banks, baseUrl]);
-
-
-    useEffect(() => {
-        if (!profile?.name) return;
-        handleResolve(profile.name);
+        handleResolve("");
     }, []);
+
+    useEffect(() => {
+        setBranch("");
+    }, [bank]);
 
     useEffect(() => {
         setWalletProvider("");
     }, [walletType]);
-
-    const buildFaData = () => {
-        if (accountType === "bank") {
-            return {
-                strategy_id: STRATEGIES.BANK.id,
-                fa_type: STRATEGIES.BANK.type,
-                bank_name: bank,
-                bank_code: banks.find((b) => b.bank_name === bank)?.bank_code,
-                branch_name: branch,
-                branch_code: branches.find((br) => br.branch_name === branch)?.branch_code,
-                account_number: accountNumber,
-            };
-        } else if (accountType === "wallet" && walletType === "Mobile Wallet") {
-            return {
-                strategy_id: STRATEGIES.MOBILE_WALLET.id,
-                fa_type: STRATEGIES.MOBILE_WALLET.type,
-                wallet_provider_name: walletProvider,
-                wallet_provider_code: walletProviders.find((w) => w.sp_name === walletProvider)?.sp_code,
-                mobile_number: mobile,
-            };
-        } else if (accountType === "wallet" && walletType === "Email Wallet") {
-            return {
-                strategy_id: STRATEGIES.EMAIL_WALLET.id,
-                fa_type: STRATEGIES.EMAIL_WALLET.type,
-                wallet_provider_name: walletProvider,
-                wallet_provider_code: walletProviders.find((w) => w.sp_name === walletProvider)?.sp_code,
-                email_address: email,
-            };
-        }
-    };
 
     useEffect(() => {
         if (updateResult?.status === "succ" || linkResult?.status === "succ") {
@@ -149,10 +77,28 @@ export default function AccountUpdatePage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const faData = buildFaData();
+
+        const faData = buildFaData({
+            accountType,
+            walletType,
+            bank,
+            banks,
+            branch,
+            branches,
+            accountNumber,
+            walletProvider,
+            walletProviders,
+            mobile,
+            email,
+        });
+
         const name = profile?.name || "";
-        handleUpdate(name, faData);
-        handleLink(name, faData);
+
+        if (resolveResult?.type === "unknown") {
+            await handleLink(name, faData);
+        } else {
+            await handleUpdate(name, faData);
+        }
     };
 
     return (
@@ -181,78 +127,27 @@ export default function AccountUpdatePage() {
                                 </div>
                             </div>
 
-                            <div>
-                                <label className="block text-[16px] text-black font-[500] mb-1">
-                                    Select Account Type
-                                </label>
-                                <select
-                                    value={accountType}
-                                    onChange={(e) => setAccountType(e.target.value)}
-                                    className="w-1/2 bg-gray-100 rounded-lg px-3 py-2 text-[16px] font-[500] text-black focus:outline-none"
-                                >
-                                    <option value="bank">Bank</option>
-                                    <option value="wallet">Wallet</option>
-                                </select>
-                            </div>
-
-                            {accountType === "bank" && (
-                                <>
-                                    <SelectInput
-                                        label="Bank Name"
-                                        value={bank}
-                                        options={banks.map((b) => b.bank_name)}
-                                        onChange={setBank}
-                                    />
-                                    <SelectInput
-                                        label="Branch"
-                                        value={branch}
-                                        options={branches.map((br) => br.branch_name)}
-                                        onChange={setBranch}
-                                    />
-                                    <TextInput
-                                        label="Account Number"
-                                        value={accountNumber}
-                                        onChange={setAccountNumber}
-                                    />
-                                </>
-                            )}
-
-                            {accountType === "wallet" && (
-                                <>
-                                    <SelectInput
-                                        label="Wallet Type"
-                                        value={walletType}
-                                        options={[...new Set(walletProviders.map((w) => w.wallet_type))]}
-                                        onChange={setWalletType}
-                                    />
-
-                                    <SelectInput
-                                        label="Wallet Provider"
-                                        value={walletProvider}
-                                        options={
-                                            walletProviders
-                                                .filter((w) => w.wallet_type === walletType)
-                                                .map((w) => w.sp_name)
-                                        }
-                                        onChange={setWalletProvider}
-                                    />
-
-                                    {walletType === "Mobile Wallet" ? (
-                                        <TextInput
-                                            label="Mobile Number"
-                                            value={mobile}
-                                            onChange={setMobile}
-                                        />
-                                    ) : (
-                                        <TextInput
-                                            label="Email Address"
-                                            type="email"
-                                            value={email}
-                                            onChange={setEmail}
-                                        />
-                                    )}
-                                </>
-                            )}
+                            <AccountFormSection
+                                accountType={accountType}
+                                setAccountType={setAccountType}
+                                bank={bank}
+                                setBank={setBank}
+                                branch={branch}
+                                setBranch={setBranch}
+                                accountNumber={accountNumber}
+                                setAccountNumber={setAccountNumber}
+                                walletType={walletType}
+                                setWalletType={setWalletType}
+                                walletProvider={walletProvider}
+                                setWalletProvider={setWalletProvider}
+                                mobile={mobile}
+                                setMobile={setMobile}
+                                email={email}
+                                setEmail={setEmail}
+                                banks={banks}
+                                branches={branches}
+                                walletProviders={walletProviders}
+                            />
 
                             <div className="pt-6 flex gap-4">
                                 <button
@@ -264,9 +159,10 @@ export default function AccountUpdatePage() {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-6 py-2 bg-black text-white font-[500] rounded-full"
+                                    disabled={linking || updating}
+                                    className="px-6 py-2 bg-black text-white font-[500] rounded-full disabled:opacity-50"
                                 >
-                                    Save
+                                    {linking || updating ? "Saving..." : "Save"}
                                 </button>
                             </div>
                         </div>
@@ -286,43 +182,16 @@ export default function AccountUpdatePage() {
                     </div>
                 </div>
 
-                <div className="w-[30%] bg-gray-100 p-8 flex flex-col justify-start gap-4">
-                    <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-4">Information</h2>
-
-                    {accountType === "bank" && (
-                        <>
-                            <Info label="Bank Name" value={bank} />
-                            <Info label="Branch" value={branch} />
-                            <Info label="Account Number" value={accountNumber} />
-                        </>
-                    )}
-                    {accountType === "wallet" && (
-                        <>
-                            <Info label="Wallet Provider" value={walletProvider} />
-                            <Info label="Mobile Number" value={mobile} />
-                        </>
-                    )}
-                    {accountType === "other" && (
-                        <Info label="Email Address" value={email} />
-                    )}
-
-                    <Info label="Account Linked Date" value="01 October 2025" />
-
-                    <div className="mt-6 flex flex-col items-start gap-3">
-                        <button
-                            disabled
-                            className="px-4 py-1 bg-gray-300 text-white font-[500] rounded-full w-auto cursor-not-allowed"
-                        >
-                            Edit Account Information
-                        </button>
-                        <button
-                            onClick={() => setShowRemoveModal(true)}
-                            className="px-4 py-1 bg-[#3399FF] text-white font-[500] rounded-full w-auto"
-                        >
-                            Remove Account
-                        </button>
-                    </div>
-                </div>
+                <InfoSidebar
+                    accountType={accountType}
+                    bank={bank}
+                    branch={branch}
+                    accountNumber={accountNumber}
+                    walletProvider={walletProvider}
+                    mobile={mobile}
+                    email={email}
+                    onRemoveAccount={() => setShowRemoveModal(true)}
+                />
             </div>
 
             {showModal && (
@@ -341,67 +210,3 @@ export default function AccountUpdatePage() {
         </div>
     );
 }
-
-function Info({ label, value }: { label: string; value?: string }) {
-    return (
-        <div>
-            <label className="block text-[16px] font-[500] text-black/50 mb-1">{label}</label>
-            <div className="text-[16px] text-black font-[500]">{value || "-"}</div>
-        </div>
-    );
-}
-
-function TextInput({
-    label,
-    value,
-    onChange,
-    type = "text",
-}: {
-    label: string;
-    value: string;
-    onChange: (v: string) => void;
-    type?: string;
-}) {
-    return (
-        <div>
-            <label className="block text-[16px] text-black font-[500] mb-1">{label}</label>
-            <input
-                type={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className="w-1/2 bg-gray-100 rounded-lg px-3 py-2 text-[16px] font-[500] text-black focus:outline-none"
-            />
-        </div>
-    );
-}
-
-function SelectInput({
-    label,
-    value,
-    options,
-    onChange,
-}: {
-    label: string;
-    value: string;
-    options: string[];
-    onChange: (v: string) => void;
-}) {
-    return (
-        <div>
-            <label className="block text-[16px] text-black font-[500] mb-1">{label}</label>
-            <select
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className="w-1/2 bg-gray-100 rounded-lg px-3 py-2 text-[16px] font-[500] text-black focus:outline-none"
-            >
-                <option value="">-- Select --</option>
-                {options.map((opt) => (
-                    <option key={opt} value={opt}>
-                        {opt}
-                    </option>
-                ))}
-            </select>
-        </div>
-    );
-}
-

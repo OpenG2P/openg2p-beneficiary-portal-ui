@@ -6,3 +6,7 @@ export { default as AccountEmptyState } from './AccountEmptyState';
 export { default as AccountField } from './AccountField';
 export { default as AccountInfoSection } from './AccountInfoSection';
 export { default as AccountSidebar } from './AccountSidebar';
+export { Info, TextInput } from './FormInputs';
+export { AccountFormSection } from './AccountFormSection';
+export { InfoSidebar } from './InfoSidebar';
+

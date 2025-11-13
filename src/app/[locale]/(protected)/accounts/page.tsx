@@ -12,7 +12,12 @@ import { Loading } from "@/components";
 import { prefixBasePath } from "@/shared/utils/path";
 
 import { useUnlinkAccount, useResolveAccount } from "@/features/accountmapping/hooks";
-import { AccountRemoveModal, AccountInfoSection, AccountSidebar, AccountEmptyState } from "@/features/accountmapping/components";
+import {
+    AccountRemoveModal,
+    AccountInfoSection,
+    AccountSidebar,
+    AccountEmptyState
+} from "@/features/accountmapping/components";
 
 
 export default function AccountsPage() {

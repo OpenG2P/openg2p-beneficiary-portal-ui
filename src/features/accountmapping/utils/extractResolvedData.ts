@@ -3,9 +3,10 @@ export function extractResolvedData(data: any) {
 
     if (!resolveResponse) return null;
 
-    const { status, id, fa, status_reason_code } = resolveResponse;
+    const { status, id, fa, status_reason_code, status_reason_message } = resolveResponse;
 
-    if (!fa) return { type: "unknown", status, id };
+    if (!fa) return { type: "unknown", status: status, statusReason: status_reason_code, statusReasonMessage: status_reason_message };
+
 
     const strategy_id = fa.strategy_id;
 
@@ -13,7 +14,8 @@ export function extractResolvedData(data: any) {
         case 1:
             return {
                 type: "bank",
-                status,
+                status: status,
+                statusReasonMessage: status_reason_message,
                 strategy_id: fa.strategy_id,
                 bankName: fa.bank_name,
                 bankCode: fa.bank_code,
@@ -25,7 +27,8 @@ export function extractResolvedData(data: any) {
         case 2:
             return {
                 type: "phone",
-                status,
+                status: status,
+                statusReasonMessage: status_reason_message,
                 strategy_id: fa.strategy_id,
                 mobileNumber: fa.mobile_number,
                 walletProvider: fa.wallet_provider_name,
@@ -35,7 +38,8 @@ export function extractResolvedData(data: any) {
         case 3:
             return {
                 type: "email",
-                status,
+                status: status,
+                statusReasonMessage: status_reason_message,
                 strategy_id: fa.strategy_id,
                 emailAddress: fa.email_address,
                 walletProvider: fa.wallet_provider_name,
@@ -43,6 +47,6 @@ export function extractResolvedData(data: any) {
                 statusReason: status_reason_code,
             };
         default:
-            return { type: "unknown", status, id };
+            return { type: "unknown", status: status, statusReason: status_reason_code, statusReasonMessage: status_reason_message };
     }
 }

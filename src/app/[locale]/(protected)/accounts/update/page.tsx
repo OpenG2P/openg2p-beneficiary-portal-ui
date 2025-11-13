@@ -139,11 +139,20 @@ export default function AccountUpdatePage() {
         }
     };
 
+    useEffect(() => {
+        if (updateResult?.status === "succ" || linkResult?.status === "succ") {
+            setShowModal(true);
+        } else if (updateError || linkError) {
+            setShowErrorModal(true);
+        }
+    }, [updateResult, linkResult, updateError, linkError]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const faData = buildFaData();
         const name = profile?.name || "";
         handleUpdate(name, faData);
+        handleLink(name, faData);
     };
 
     return (

@@ -34,14 +34,14 @@ export default function AccountsPage() {
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
     useEffect(() => {
-        handleResolve("");
+        handleResolve();
     }, []);
 
     const confirmRemoveHandler = async () => {
         try {
-            await handleUnlink("");
+            await handleUnlink();
             setShowRemoveModal(false);
-            await handleResolve("");
+            await handleResolve();
         } catch (err) {
             console.error("❌ Failed to unlink account:", err);
         }

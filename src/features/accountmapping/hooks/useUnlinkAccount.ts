@@ -6,7 +6,7 @@ export function useUnlinkAccount(baseUrl: string) {
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleUnlink(name: string) {
+    async function handleUnlink() {
         try {
             setUnlinking(true);
             setError(null);
@@ -17,7 +17,7 @@ export function useUnlinkAccount(baseUrl: string) {
                     timestamp: new Date().toISOString(),
                     id: "",
                     fa: "",
-                    name: name,
+                    name: "",
                     phone_number: "",
                     additional_info: [],
                     locale: "en",

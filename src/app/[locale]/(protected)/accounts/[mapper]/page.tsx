@@ -94,12 +94,10 @@ export default function AccountUpdatePage() {
             email,
         });
 
-        const name = profile?.name || "";
-
         if (mapper === "link") {
-            await handleLink(name, faData);
+            await handleLink(faData);
         } else {
-            await handleUpdate(name, faData);
+            await handleUpdate(faData);
         }
     };
 

@@ -8,7 +8,7 @@ export function useUpdateAccount(baseUrl: string) {
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleUpdate(name: string, faData: any) {
+    async function handleUpdate(faData: any) {
         try {
             setUpdating(true);
             setError(null);
@@ -20,7 +20,7 @@ export function useUpdateAccount(baseUrl: string) {
                     timestamp: new Date().toISOString(),
                     id: "",
                     fa: faData,
-                    name,
+                    name: "",
                     phone_number: "",
                     additional_info: [],
                     locale: "en",

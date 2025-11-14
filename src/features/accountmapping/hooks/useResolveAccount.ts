@@ -9,7 +9,7 @@ export function useResolveAccount(baseUrl: string) {
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleResolve(name: string) {
+    async function handleResolve() {
         try {
             setResolving(true);
             setError(null);
@@ -21,7 +21,7 @@ export function useResolveAccount(baseUrl: string) {
                     timestamp: new Date().toISOString(),
                     fa: "",
                     id: "",
-                    name,
+                    name: "",
                     scope: "details",
                     additional_info: [],
                     locale: "en",

@@ -13,9 +13,9 @@ import { News } from "@/features/news/types";
 import { Application } from "@/features/program/types";
 import { Registry } from "@/features/registry/types/registry";
 import { BankCard } from "@/features/accountmapping/components";
-import { useAuth } from "@/context/GlobalContext";
 import { getNews } from "@/features/news/utils";
 import { usePrograms } from "@/features/program/hooks/usePrograms";
+import { useResolveAccount } from "@/features/accountmapping/hooks/useResolveAccount";
 
 
 export const previewRegistries: Registry[] = [
@@ -46,18 +46,21 @@ export default function Dashboard() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const { profile } = useAuth();
     const [news, setNews] = useState<News[]>([]);
 
     const { programs, loading } = usePrograms("my", 1, 5);
+
+    const BASE_URL = "http://localhost:8080/mapper";
+    const { handleResolve, resolving, result } = useResolveAccount(BASE_URL);
+
 
     useEffect(() => {
         getNews(1, 3)
             .then(({ data }) => setNews(data))
             .catch(console.error);
-    }, []);
 
-    const bankAccount = { name: profile?.name || "John Smith", number: "xxxx xxxx xxxx 1234" };
+        handleResolve();
+    }, []);
 
     return (
         <div className="pl-[50px] py-4 min-h-screen bg-white">
@@ -72,7 +75,7 @@ export default function Dashboard() {
 
                 <div className="flex flex-col gap-4 sm:gap-6 h-full pb-[50px] pr-[50px]">
                     <TotalBenefitsCard benefits={benefits} />
-                    <BankCard account={bankAccount} />
+                    <BankCard result={result} resolving={resolving} />
                 </div>
             </div>
 

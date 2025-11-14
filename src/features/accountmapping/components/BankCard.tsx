@@ -3,17 +3,41 @@ import Image from "next/image";
 import { ViewAll } from '@/components/shared';
 import { prefixBasePath } from "@/shared/utils/path";
 
-interface BankAccount {
-    name: string;
-    number: string;
-}
-
 interface BankCardProps {
-    account: BankAccount;
+    result: any;
+    resolving: boolean;
 }
 
-export default function BankCard({ account }: BankCardProps) {
-    const isLoading = !account;
+export default function BankCard({ result, resolving }: BankCardProps) {
+    const accountData =
+        result?.type === "bank"
+            ? {
+                exists: true,
+                type: "bank",
+                title: result.bankName,
+                value: result.accountNumber,
+            }
+            : result?.type === "phone"
+                ? {
+                    exists: true,
+                    type: "phone",
+                    title: result.walletProvider,
+                    value: result.mobileNumber,
+                }
+                : result?.type === "email"
+                    ? {
+                        exists: true,
+                        type: "email",
+                        title: result.walletProvider,
+                        value: result.emailAddress,
+                    }
+                    : {
+                        exists: false,
+                        type: "unknown",
+                    };
+    const isLoading = resolving;
+    const isLinked = accountData?.exists;
+
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
@@ -37,21 +61,27 @@ export default function BankCard({ account }: BankCardProps) {
 
                 <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22]  pt-[36px] pb-[18px] relative">
                     <div className=" px-[30px] pb-[12px]">
-                        {!isLoading && (
+                        {!isLoading && isLinked && (
                             <>
                                 <div className="text-[16px]/[19px] font-[600] text-black">
-                                    {account.name}
+                                    {accountData.title}
                                 </div>
                                 <div className="text-[16px]/[19px] font-[600] text-black">
-                                    {account.number}
+                                    {accountData.value}
                                 </div>
                             </>
                         )}
 
                         {isLoading && (
                             <div className="animate-pulse">
-                                <div className="h-4 w-2/3 bg-black/30 rounded mb-2"></div>
-                                <div className="h-4 w-1/2 bg-black/30 rounded"></div>
+                                <div className="h-4 w-2/3 bg-black/30 rounded mb-1"></div>
+                                <div className="h-4 w-1/2 bg-black/30 rounded mb-0.5"></div>
+                            </div>
+                        )}
+
+                        {!isLoading && !isLinked && (
+                            <div className="text-[16px] text-black font-[600]">
+                                No linked account found
                             </div>
                         )}
                     </div>

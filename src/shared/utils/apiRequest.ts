@@ -8,7 +8,7 @@ export async function apiRequest(
         ?.split("; ")
         ?.find(row => row.startsWith("X-Access-Token="))
         ?.split("=")[1];
-        
+
 
     const finalHeaders: Record<string, string> = {
         "Content-Type": "application/json",
@@ -27,12 +27,5 @@ export async function apiRequest(
     });
 
     const data = await response.json().catch(() => null);
-
-    if (!response.ok) {
-        throw new Error(
-            data?.detail || data?.message || `Request failed: ${response.status}`
-        );
-    }
-
     return data;
 }

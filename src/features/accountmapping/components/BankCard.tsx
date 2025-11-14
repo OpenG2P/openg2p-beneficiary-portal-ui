@@ -80,7 +80,7 @@ export default function BankCard({ result, resolving }: BankCardProps) {
                         )}
 
                         {!isLoading && !isLinked && (
-                            <div className="text-[16px] text-black font-[600]">
+                            <div className="text-[16px] h-9.5 text-black font-[600]">
                                 No linked account found
                             </div>
                         )}

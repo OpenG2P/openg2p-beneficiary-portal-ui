@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { updateAccount } from "@/features/accountmapping/utils/accountApi";
-import { extractResolvedData } from "@/features/accountmapping/utils/extractResolvedData";
 
 export function useUpdateAccount(baseUrl: string) {
     const [updating, setUpdating] = useState(false);

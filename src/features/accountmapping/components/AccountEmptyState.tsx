@@ -12,7 +12,7 @@ export default function AccountEmptyState({ lang }: { lang: string }) {
                 You currently don’t have any linked account or wallet. Please link an account to proceed.
             </p>
             <button
-                onClick={() => router.push(`/${lang}/accounts/update`)}
+                onClick={() => router.push(`/${lang}/accounts/link`)}
                 className="px-6 py-2 bg-[#3399FF] text-white font-[500] rounded-full hover:bg-[#2780D7] transition-all"
             >
                 Link Account

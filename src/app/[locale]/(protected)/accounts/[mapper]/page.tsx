@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useLocale } from "next-intl";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
@@ -32,6 +33,8 @@ export default function AccountUpdatePage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
     const { profile } = useAuth();
+    const params = useParams();
+    const mapper = params.mapper;
 
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
 
@@ -51,13 +54,8 @@ export default function AccountUpdatePage() {
     const { banks, walletProviders } = useAccountData(BASE_URL);
     const { branches } = useBranches(BASE_URL, bank, banks);
 
-    const { handleResolve, result: resolveResult } = useResolveAccount(BASE_URL_MAPPER);
     const { handleLink, linking, result: linkResult, error: linkError } = useLinkAccount(BASE_URL_MAPPER);
     const { handleUpdate, updating, result: updateResult, error: updateError } = useUpdateAccount(BASE_URL_MAPPER);
-
-    useEffect(() => {
-        handleResolve("");
-    }, []);
 
     useEffect(() => {
         setBranch("");
@@ -68,11 +66,14 @@ export default function AccountUpdatePage() {
     }, [walletType]);
 
     useEffect(() => {
-        console.log(updateResult)
         if (updateResult === "succ" || linkResult === "succ") {
             setShowModal(true);
         } else if (updateError || linkError) {
             setShowErrorModal(true);
+        }
+        else if(updateResult === "rjct")
+        {
+            setShowErrorModal(true)
         }
     }, [updateResult, linkResult, updateError, linkError]);
 
@@ -95,7 +96,7 @@ export default function AccountUpdatePage() {
 
         const name = profile?.name || "";
 
-        if (resolveResult?.type === "unknown") {
+        if (mapper === "link") {
             await handleLink(name, faData);
         } else {
             await handleUpdate(name, faData);

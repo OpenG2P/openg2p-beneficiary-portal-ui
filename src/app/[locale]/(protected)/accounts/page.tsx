@@ -60,6 +60,7 @@ export default function AccountsPage() {
     }
 
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
+    const profileName = profile?.name || "User"
 
     return (
         <>
@@ -69,7 +70,7 @@ export default function AccountsPage() {
                 <div className="flex flex-row rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] overflow-hidden">
                     <AccountInfoSection
                         profileImage={profileImage}
-                        profileName={profile?.name}
+                        profileName={profileName}
                         result={result}
                     />
                     <AccountSidebar

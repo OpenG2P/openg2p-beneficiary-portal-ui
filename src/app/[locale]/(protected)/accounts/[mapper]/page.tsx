@@ -37,6 +37,7 @@ export default function AccountUpdatePage() {
     const mapper = params.mapper;
 
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
+    const profileName = profile?.name || "User"
 
     const [accountType, setAccountType] = useState<AccountType>("bank");
     const [bank, setBank] = useState("");
@@ -71,8 +72,7 @@ export default function AccountUpdatePage() {
         } else if (updateError || linkError) {
             setShowErrorModal(true);
         }
-        else if(updateResult === "rjct")
-        {
+        else if (updateResult === "rjct") {
             setShowErrorModal(true)
         }
     }, [updateResult, linkResult, updateError, linkError]);
@@ -125,7 +125,7 @@ export default function AccountUpdatePage() {
                             <div>
                                 <div className="text-[16px] font-[500] text-black">Name</div>
                                 <div className="text-[20px] text-[#3399FF] font-[500]">
-                                    {profile?.name}
+                                    {profileName}
                                 </div>
                             </div>
 

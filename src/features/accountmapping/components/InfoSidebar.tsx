@@ -43,7 +43,7 @@ export function InfoSidebar({
 
             <Info label="Account Linked Date" value="01 October 2025" />
 
-            <div className="mt-6 flex flex-col items-start gap-3">
+            {/* <div className="mt-6 flex flex-col items-start gap-3">
                 <button
                     disabled
                     className="px-4 py-1 bg-gray-300 text-white font-[500] rounded-full w-auto cursor-not-allowed"
@@ -56,7 +56,7 @@ export function InfoSidebar({
                 >
                     Remove Account
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }

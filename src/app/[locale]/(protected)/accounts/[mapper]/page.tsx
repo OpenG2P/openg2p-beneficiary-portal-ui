@@ -15,7 +15,6 @@ import {
     InfoSidebar
 } from "@/features/accountmapping/components";
 import {
-    useResolveAccount,
     useUpdateAccount,
     useLinkAccount,
     useAccountData,
@@ -23,7 +22,7 @@ import {
 } from "@/features/accountmapping/hooks";
 
 
-import { buildFaData } from "@/features/accountmapping/utils";
+import { buildFaData, getAccountInformation } from "@/features/accountmapping/utils";
 import type { AccountType, WalletType } from "@/features/accountmapping/types";
 
 const BASE_URL = "http://localhost:8080";
@@ -51,6 +50,13 @@ export default function AccountUpdatePage() {
     const [showModal, setShowModal] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
+    const [accountInfo, setAccountInfo] = useState<any>(null);
+
+    useEffect(() => {
+        getAccountInformation("mztlhvhinbbcs2pfawwrsuzd")
+            .then((data) => setAccountInfo(data))
+            .catch(console.error);
+    }, []);
 
     const { banks, walletProviders } = useAccountData(BASE_URL);
     const { branches } = useBranches(BASE_URL, bank, banks);
@@ -183,14 +189,7 @@ export default function AccountUpdatePage() {
                 </div>
 
                 <InfoSidebar
-                    accountType={accountType}
-                    bank={bank}
-                    branch={branch}
-                    accountNumber={accountNumber}
-                    walletProvider={walletProvider}
-                    mobile={mobile}
-                    email={email}
-                    onRemoveAccount={() => setShowRemoveModal(true)}
+                    accountInfo={accountInfo}
                 />
             </div>
 

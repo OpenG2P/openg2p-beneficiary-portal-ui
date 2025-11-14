@@ -18,6 +18,7 @@ import {
     AccountSidebar,
     AccountEmptyState
 } from "@/features/accountmapping/components";
+import { getAccountInformation } from "@/features/accountmapping/utils/getAccountInformation";
 
 
 export default function AccountsPage() {
@@ -32,6 +33,14 @@ export default function AccountsPage() {
     const { handleUnlink, unlinking } = useUnlinkAccount(BASE_URL);
 
     const [showRemoveModal, setShowRemoveModal] = useState(false);
+
+    const [accountInfo, setAccountInfo] = useState<any>(null);
+
+    useEffect(() => {
+        getAccountInformation("mztlhvhinbbcs2pfawwrsuzd")
+            .then((data) => setAccountInfo(data))
+            .catch(console.error);
+    }, []);
 
     useEffect(() => {
         handleResolve();
@@ -74,6 +83,7 @@ export default function AccountsPage() {
                         result={result}
                     />
                     <AccountSidebar
+                        accountInfo={accountInfo}
                         result={result}
                         unlinking={unlinking}
                         onEdit={() => router.push(`/${lang}/accounts/update`)}

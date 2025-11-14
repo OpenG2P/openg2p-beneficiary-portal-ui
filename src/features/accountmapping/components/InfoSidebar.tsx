@@ -2,46 +2,19 @@ import { Info } from "./FormInputs";
 import type { AccountType } from "@/features/accountmapping/types";
 
 interface InfoSidebarProps {
-    accountType: AccountType;
-    bank: string;
-    branch: string;
-    accountNumber: string;
-    walletProvider: string;
-    mobile: string;
-    email: string;
-    onRemoveAccount: () => void;
+    accountInfo: any,
 }
 
-export function InfoSidebar({
-    accountType,
-    bank,
-    branch,
-    accountNumber,
-    walletProvider,
-    mobile,
-    email,
-    onRemoveAccount,
-}: InfoSidebarProps) {
+export function InfoSidebar({ accountInfo }: InfoSidebarProps) {
     return (
         <div className="w-[30%] bg-gray-100 p-8 flex flex-col justify-start gap-4">
-            <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-4">Information</h2>
+            <div className="flex flex-col gap-4">
+                <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-2">Information</h2>
 
-            {accountType === "bank" && (
-                <>
-                    <Info label="Bank Name" value={bank} />
-                    <Info label="Branch" value={branch} />
-                    <Info label="Account Number" value={accountNumber} />
-                </>
-            )}
-
-            {accountType === "wallet" && (
-                <>
-                    <Info label="Wallet Provider" value={walletProvider} />
-                    <Info label="Mobile Number" value={mobile} />
-                </>
-            )}
-
-            <Info label="Account Linked Date" value="01 October 2025" />
+                <p className="text-[16px] text-black/70 leading-relaxed">
+                    {accountInfo && accountInfo.AccountInfo}
+                </p>
+            </div>
 
             {/* <div className="mt-6 flex flex-col items-start gap-3">
                 <button

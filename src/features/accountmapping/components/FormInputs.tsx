@@ -10,6 +10,7 @@ export function TextInput({ label, value, onChange, type = "text" }: TextInputPr
         <div>
             <label className="block text-[16px] text-black font-[500] mb-1">{label}</label>
             <input
+                required
                 type={type}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
@@ -31,6 +32,7 @@ export function SelectInput({ label, value, options, onChange }: SelectInputProp
         <div>
             <label className="block text-[16px] text-black font-[500] mb-1">{label}</label>
             <select
+                required
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 className="w-1/2 bg-gray-100 rounded-lg px-3 py-2 text-[16px] font-[500] text-black focus:outline-none"

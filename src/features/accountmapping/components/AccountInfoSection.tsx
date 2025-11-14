@@ -60,7 +60,7 @@ export default function AccountInfoSection({ profileImage, profileName, result }
                 </div>
             </div>
 
-            <div className="mt-60 pl-20">
+            <div className="mt-40 pl-20">
                 <label className="block text-[16px] text-black/50 font-[500] mb-1">
                     Powered By
                 </label>

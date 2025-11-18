@@ -4,7 +4,6 @@ import { useLocale } from "next-intl";
 
 import { AuthUtil } from '@/features/auth/components';
 import { Pagination, SearchInput, FilterInput } from '@/components/shared';
-import { usePagination } from "@/shared/hooks/usePagination";
 import { prefixBasePath } from "@/shared/utils/path";
 import { BenefitActionsDropdown, DeliveryDetails } from "@/features/disbursement/components";
 import { DisbursementRecord } from "@/features/disbursement/types/disbursementTypes";
@@ -26,20 +25,21 @@ const modalBenefit = {
     verificationType: "Fingerprint",
 }
 
+const PAGE_SIZE = 8;
 
 export default function BenefitsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const { disbursements, loading, totalItems } = useDisbursementList(1, 8);
-
-    const { currentPage, setCurrentPage, totalPages, currentItems } = usePagination(disbursements, 8);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const [searchQuery, setSearchQuery] = useState("");
     const [filterText, setFilterText] = useState("");
 
     const [selectedBenefit, setSelectedBenefit] = useState<DisbursementRecord | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const { disbursements, loading, totalItems } = useDisbursementList(currentPage, PAGE_SIZE);
 
     const handleOpenModal = (benefit: DisbursementRecord) => {
         setSelectedBenefit(benefit);
@@ -60,6 +60,9 @@ export default function BenefitsPage() {
                 console.warn("Unknown program action:", action);
         }
     };
+
+    const startItem = totalItems === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+    const endItem = Math.min(currentPage * PAGE_SIZE, totalItems);
 
     return (
         <>
@@ -160,18 +163,14 @@ export default function BenefitsPage() {
                         </table>
                     </div>
 
-                    <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={setCurrentPage}
-                        />
-                        <div className="text-gray-600 text-sm">
-                            Showing{" "}
-                            {Math.min((currentPage - 1) * 8 + 1, disbursements.length)}–
-                            {Math.min(currentPage * 8, disbursements.length)} of {disbursements.length}
+                    {!loading && totalItems > 0 && (
+                        <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
+                            <Pagination currentPage={currentPage} totalPages={totalItems / PAGE_SIZE} onPageChange={setCurrentPage} />
+                            <div className="text-gray-600">
+                                Showing {startItem}-{endItem} of {totalItems} Benefits
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
             {isModalOpen && selectedBenefit && (

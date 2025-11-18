@@ -1,21 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { resolveAccount } from "@/features/accountmapping/utils/accountApi";
 import { extractResolvedData } from "@/features/accountmapping/utils/extractResolvedData";
 
 export function useResolveAccount(baseUrl: string) {
-    const [resolving, setResolving] = useState(true);
     const [result, setResult] = useState<any>(null);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleResolve() {
+    async function fetchResolve() {
         try {
-            setResolving(true);
+            setLoading(true);
             setError(null);
-            setResult(null);
 
-            const resolveRequest = [
+            const request = [
                 {
                     reference_id: "ref-" + Date.now(),
                     timestamp: new Date().toISOString(),
@@ -28,18 +27,22 @@ export function useResolveAccount(baseUrl: string) {
                 },
             ];
 
-            const response = await resolveAccount(baseUrl, "txn-" + Date.now(), resolveRequest);
-            const parsed = extractResolvedData(response);
-            setResult(parsed);
-            return parsed;
+            const response = await resolveAccount(baseUrl, "txn-" + Date.now(), request);
+            setResult(extractResolvedData(response));
         } catch (err: any) {
             setError(err.message || "Failed to resolve account");
-            throw err;
+            setResult(null);
         } finally {
-            setResolving(false);
+            setLoading(false);
         }
     }
 
-    return { handleResolve, resolving, result, error };
+    useEffect(() => {
+        if (baseUrl) {
+            fetchResolve();
+        }
+    }, [baseUrl]);
+
+    return { result, loading, error };
 }
 

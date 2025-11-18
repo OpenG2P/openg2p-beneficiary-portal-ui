@@ -29,7 +29,7 @@ export default function AccountsPage() {
     const router = useRouter();
 
     const BASE_URL = "http://localhost:8080/mapper";
-    const { handleResolve, resolving, result } = useResolveAccount(BASE_URL);
+    const { result, loading } = useResolveAccount(BASE_URL);
     const { handleUnlink, unlinking } = useUnlinkAccount(BASE_URL);
 
     const [showRemoveModal, setShowRemoveModal] = useState(false);
@@ -37,26 +37,22 @@ export default function AccountsPage() {
     const [accountInfo, setAccountInfo] = useState<any>(null);
 
     useEffect(() => {
-        getAccountInformation("mztlhvhinbbcs2pfawwrsuzd")
+        getAccountInformation("ahuh2rqcqvv1wl7rysxfoblz")
             .then((data) => setAccountInfo(data))
             .catch(console.error);
     }, []);
 
-    useEffect(() => {
-        handleResolve();
-    }, []);
 
     const confirmRemoveHandler = async () => {
         try {
             await handleUnlink();
             setShowRemoveModal(false);
-            await handleResolve();
         } catch (err) {
             console.error("❌ Failed to unlink account:", err);
         }
     };
 
-    if (resolving) {
+    if (loading) {
         return (
             <div className="px-[50px] py-4 min-h-screen bg-white flex justify-center items-center">
                 <Loading />

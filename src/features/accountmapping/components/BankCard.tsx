@@ -5,10 +5,10 @@ import { prefixBasePath } from "@/shared/utils/path";
 
 interface BankCardProps {
     result: any;
-    resolving: boolean;
+    loading: boolean;
 }
 
-export default function BankCard({ result, resolving }: BankCardProps) {
+export default function BankCard({ result, loading }: BankCardProps) {
     const accountData =
         result?.type === "bank"
             ? {
@@ -35,7 +35,6 @@ export default function BankCard({ result, resolving }: BankCardProps) {
                         exists: false,
                         type: "unknown",
                     };
-    const isLoading = resolving;
     const isLinked = accountData?.exists;
 
     return (
@@ -61,7 +60,7 @@ export default function BankCard({ result, resolving }: BankCardProps) {
 
                 <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22]  pt-[36px] pb-[18px] relative">
                     <div className=" px-[30px] pb-[12px]">
-                        {!isLoading && isLinked && (
+                        {!loading && isLinked && (
                             <>
                                 <div className="text-[16px]/[19px] font-[600] text-black">
                                     {accountData.title}
@@ -72,14 +71,14 @@ export default function BankCard({ result, resolving }: BankCardProps) {
                             </>
                         )}
 
-                        {isLoading && (
+                        {loading && (
                             <div className="animate-pulse">
                                 <div className="h-4 w-2/3 bg-black/30 rounded mb-1"></div>
                                 <div className="h-4 w-1/2 bg-black/30 rounded mb-0.5"></div>
                             </div>
                         )}
 
-                        {!isLoading && !isLinked && (
+                        {!loading && !isLinked && (
                             <div className="text-[16px] h-9.5 text-black font-[600]">
                                 No linked account found
                             </div>

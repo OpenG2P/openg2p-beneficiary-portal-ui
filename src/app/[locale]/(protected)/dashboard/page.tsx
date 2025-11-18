@@ -1,22 +1,20 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useEffect, useState } from "react";
 
 import { AuthUtil } from "@/features/auth/components";
 import { ProgramTable, ApplicationCard } from '@/features/program/components';
 import { TotalBenefitsCard } from '@/features/disbursement/components';
 import { RegistryCard } from "@/features/registry/components";
 import { NewsCard } from "@/features/news/components";
-import { News } from "@/features/news/types";
 
 import { Application } from "@/features/program/types";
 import { Registry } from "@/features/registry/types/registry";
 import { BankCard } from "@/features/accountmapping/components";
-import { getNews } from "@/features/news/utils";
 import { usePrograms } from "@/features/program/hooks/usePrograms";
 import { useResolveAccount } from "@/features/accountmapping/hooks/useResolveAccount";
-
+import { useDisbursementSummary } from "@/features/disbursement/hooks/useDisbursementSummary";
+import { useNews } from "@/features/news/hooks/useNews";
 
 export const previewRegistries: Registry[] = [
     { name: "Education Registry", id: "SW001", date: "15/08/2025", action: "Apply", description: "Tracks citizens under social welfare schemes." },
@@ -33,12 +31,6 @@ export const dashboardApplications: Application[] = [
     { name: "Electricity Subsidy Program", status: "Pending" },
 ];
 
-export const benefits = [
-    { icon: "/digital_cash.png", value: "15400", label: "Digital Cash" },
-    { icon: "/physical_cash.png", value: "10000", label: "Physical Cash" },
-    { icon: "/commodity.png", value: "420", label: "Commodity" },
-    { icon: "/service.png", value: "250", label: "Service" },
-];
 
 
 export default function Dashboard() {
@@ -46,21 +38,14 @@ export default function Dashboard() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
-    const [news, setNews] = useState<News[]>([]);
+    const { news, loading: newsLoading } = useNews(1, 3);
 
-    const { programs, loading } = usePrograms("my", 1, 5);
+    const { programs, loading: programLoading } = usePrograms("my", 1, 5);
+
+    const { benefits, loading: benefitLoading } = useDisbursementSummary();
 
     const BASE_URL = "http://localhost:8080/mapper";
-    const { handleResolve, resolving, result } = useResolveAccount(BASE_URL);
-
-
-    useEffect(() => {
-        getNews(1, 3)
-            .then(({ data }) => setNews(data))
-            .catch(console.error);
-
-        handleResolve();
-    }, []);
+    const { result, loading: accountLoading } = useResolveAccount(BASE_URL);
 
     return (
         <div className="pl-[50px] py-4 min-h-screen bg-white">
@@ -70,12 +55,12 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-1 xl:grid-cols-3">
                 <div className="xl:col-span-2 pr-[50px] pb-[50px]">
-                    <ProgramTable programs={programs} loading={loading} />
+                    <ProgramTable programs={programs} loading={programLoading} />
                 </div>
 
                 <div className="flex flex-col gap-4 sm:gap-6 h-full pb-[50px] pr-[50px]">
                     <TotalBenefitsCard benefits={benefits} />
-                    <BankCard result={result} resolving={resolving} />
+                    <BankCard result={result} loading={accountLoading} />
                 </div>
             </div>
 

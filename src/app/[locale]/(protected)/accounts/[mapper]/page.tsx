@@ -53,7 +53,7 @@ export default function AccountUpdatePage() {
     const [accountInfo, setAccountInfo] = useState<any>(null);
 
     useEffect(() => {
-        getAccountInformation("mztlhvhinbbcs2pfawwrsuzd")
+        getAccountInformation("ahuh2rqcqvv1wl7rysxfoblz")
             .then((data) => setAccountInfo(data))
             .catch(console.error);
     }, []);

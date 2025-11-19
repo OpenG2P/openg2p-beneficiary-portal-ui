@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { unlinkAccount } from "@/features/accountmapping/utils/accountApi";
+import { unlinkAccount } from "@/features/accountmapping/utils";
 
 export function useUnlinkAccount() {
     const [unlinking, setUnlinking] = useState(false);

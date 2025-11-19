@@ -1,37 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getDisbursementSummaryTillDate } from "@/features/disbursement/utils/disbursementApi";
+import { getDisbursementSummaryTillDate, transformDisbursementSummary } from "@/features/disbursement/utils";
 import {
     BenefitCardData,
     DisbursementItem,
-    DisbursementSummary
-} from "@/features/disbursement/types/disbursementTypes";
-import { useDepartment } from "@/context/GlobalContext";
-
-function transformDisbursementSummary(list: DisbursementItem[] = []): DisbursementSummary {
-    return {
-        digital_cash: list
-            .filter(i => i.benefit_type === "CASH_DIGITAL")
-            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
-
-        physical_cash: list
-            .filter(i => i.benefit_type === "CASH_PHYSICAL")
-            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
-
-        commodity: list
-            .filter(i => i.benefit_type === "COMMODITY")
-            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
-
-        service: list
-            .filter(i => i.benefit_type === "SERVICE")
-            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
-    };
-}
+} from "@/features/disbursement/types";
+import { useBridgeUrl } from "@/features/disbursement/hooks/useBridgeUrl";
 
 export function useDisbursementSummary() {
-    const { currentDepartment } = useDepartment();
-    const departmentBridgeUrl = currentDepartment?.bridge_url;
+    const bridgeUrl = useBridgeUrl();
 
     const [benefits, setBenefits] = useState<BenefitCardData[]>([]);
     const [loading, setLoading] = useState(true);
@@ -61,9 +39,9 @@ export function useDisbursementSummary() {
     }
 
     useEffect(() => {
-        if (!departmentBridgeUrl) return;
-        fetchSummary(departmentBridgeUrl);
-    }, [departmentBridgeUrl]);
+        if (!bridgeUrl) return;
+        fetchSummary(bridgeUrl);
+    }, [bridgeUrl]);
 
     return {
         benefits,

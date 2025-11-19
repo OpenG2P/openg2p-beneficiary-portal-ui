@@ -1,9 +1,10 @@
 "use client";
-import { Program } from "@/features/program/types/program";
-import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
+import { prefixBasePath } from "@/shared/utils/path";
 import { ViewAll } from '@/components/shared';
-import { getColorForBenefit } from "@/features/program/utils/benefitColors"
+
+import { Program } from "@/features/program/types";
+import { getColorForBenefit } from "@/features/program/utils"
 import { ProgramTablePlaceholderRow, ProgramTableEmptyRow } from "@/features/program/components";
 
 interface ProgramTableProps {

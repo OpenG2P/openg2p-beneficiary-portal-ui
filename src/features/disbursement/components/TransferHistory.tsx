@@ -1,8 +1,7 @@
 "use client";
 import React from "react"
 
-import { Benefit } from "@/features/disbursement/types/benefit";
-
+import { Benefit } from "@/features/disbursement/types";
 import Modal from "@/components/ui/Modal";
 
 interface TransferHistoryProps {

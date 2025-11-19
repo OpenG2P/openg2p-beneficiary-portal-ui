@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllDisbursements } from "@/features/disbursement/utils/disbursementApi";
-import { DisbursementRecord } from "@/features/disbursement/types/disbursementTypes";
-import { useDepartment } from "@/context/GlobalContext";
+import { getAllDisbursements } from "@/features/disbursement/utils";
+import { DisbursementRecord } from "@/features/disbursement/types";
+import { useBridgeUrl } from "@/features/disbursement/hooks";
 
 export function useDisbursementList(currentPage: number, pageSize = 8) {
-    const { currentDepartment } = useDepartment();
-    const departmentBridgeUrl = currentDepartment?.bridge_url;
+    const bridgeUrl = useBridgeUrl();
 
     const [disbursements, setDisbursements] = useState<DisbursementRecord[]>([]);
     const [loading, setLoading] = useState(true);
@@ -37,9 +36,9 @@ export function useDisbursementList(currentPage: number, pageSize = 8) {
     }
 
     useEffect(() => {
-        if (!departmentBridgeUrl) return;
-        fetchDisbursements(departmentBridgeUrl);
-    }, [currentPage, pageSize, departmentBridgeUrl]);
+        if (!bridgeUrl) return;
+        fetchDisbursements(bridgeUrl);
+    }, [currentPage, pageSize, bridgeUrl]);
 
     return {
         disbursements,

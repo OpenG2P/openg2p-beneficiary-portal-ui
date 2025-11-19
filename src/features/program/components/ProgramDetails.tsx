@@ -1,8 +1,8 @@
 "use client";
 
-import { Program } from "@/features/program/types/program";
+import { Program } from "@/features/program/types";
 import Modal from "@/components/ui/Modal";
-import { getColorForBenefit } from "@/features/program/utils/benefitColors"
+import { getColorForBenefit } from "@/features/program/utils"
 
 
 interface ProgramDetailsProps {

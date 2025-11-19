@@ -5,56 +5,54 @@ import {
     getAllWalletProviders,
 } from "@/features/accountmapping/utils/dfspApi";
 import type { Bank, Branch, WalletProvider } from "@/features/accountmapping/types";
-import { useDepartment } from "@/context/GlobalContext";
+import { useSparUrl } from "@/features/accountmapping/hooks";
 
 export function useAccountData() {
-    const { currentDepartment } = useDepartment();
-    const departmentSparUrl = currentDepartment?.spar_url;
+    const sparUrl = useSparUrl();
 
     const [banks, setBanks] = useState<Bank[]>([]);
     const [walletProviders, setWalletProviders] = useState<WalletProvider[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
-    useEffect(() => {
-        if (!departmentSparUrl) return;
+    async function fetchData(baseUrl: string) {
+        try {
+            setLoading(true);
+            const [banksRes, walletsRes] = await Promise.all([
+                getAllBanks(baseUrl),
+                getAllWalletProviders(baseUrl),
+            ]);
 
-        async function fetchData(url: string) {
-            try {
-                setLoading(true);
-                const [banksRes, walletsRes] = await Promise.all([
-                    getAllBanks(url),
-                    getAllWalletProviders(url),
-                ]);
+            const banks = banksRes?.response_body?.response_payload?.banks || [];
+            const wallets =
+                walletsRes?.response_body?.response_payload?.wallet_service_providers || [];
 
-                const banks = banksRes?.response_body?.response_payload?.banks || [];
-                const wallets =
-                    walletsRes?.response_body?.response_payload?.wallet_service_providers || [];
-
-                setBanks(banks);
-                setWalletProviders(wallets);
-            } catch (err) {
-                console.error("Error fetching DFSP data:", err);
-                setError(err instanceof Error ? err : new Error("Failed to fetch data"));
-            } finally {
-                setLoading(false);
-            }
+            setBanks(banks);
+            setWalletProviders(wallets);
+        } catch (err) {
+            console.error("Error fetching DFSP data:", err);
+            setError(err instanceof Error ? err : new Error("Failed to fetch data"));
+        } finally {
+            setLoading(false);
         }
+    }
 
-        fetchData(departmentSparUrl);
-    }, [departmentSparUrl]);
+    useEffect(() => {
+        if (!sparUrl) return;
+        fetchData(sparUrl);
+    }, [sparUrl]);
 
     return { banks, walletProviders, loading, error };
 }
 
 export function useBranches(bankName: string, banks: Bank[]) {
-    const { currentDepartment } = useDepartment();
-    const departmentSparUrl = currentDepartment?.spar_url;
+    const sparUrl = useSparUrl();
+
     const [branches, setBranches] = useState<Branch[]>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (!departmentSparUrl) return;
+        if (!sparUrl) return;
 
         if (!bankName) {
             setBranches([]);
@@ -68,7 +66,7 @@ export function useBranches(bankName: string, banks: Bank[]) {
         }
 
         setLoading(true);
-        getBranchesByBankId(departmentSparUrl, selectedBank.id)
+        getBranchesByBankId(sparUrl, selectedBank.id)
             .then((res) => {
                 const branches = res?.response_body?.response_payload?.branches || [];
                 setBranches(branches);
@@ -80,7 +78,7 @@ export function useBranches(bankName: string, banks: Bank[]) {
             .finally(() => {
                 setLoading(false);
             });
-    }, [bankName, banks, departmentSparUrl]);
+    }, [bankName, banks, sparUrl]);
 
     return { branches, loading };
 }

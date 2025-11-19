@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updateAccount } from "@/features/accountmapping/utils/accountApi";
+import { updateAccount } from "@/features/accountmapping/utils";
 
 export function useUpdateAccount() {
     const [updating, setUpdating] = useState(false);

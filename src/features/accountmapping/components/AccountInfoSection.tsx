@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { prefixBasePath } from "@/shared/utils/path";
-import AccountField from "./AccountField";
+import { AccountField } from "@/features/accountmapping/components";
 
 interface AccountInfoSectionProps {
     profileImage: string;

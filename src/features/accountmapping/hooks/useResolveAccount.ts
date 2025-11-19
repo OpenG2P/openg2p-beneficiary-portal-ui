@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { resolveAccount } from "@/features/accountmapping/utils/accountApi";
-import { extractResolvedData } from "@/features/accountmapping/utils/extractResolvedData";
-import { useDepartment } from "@/context/GlobalContext";
+import { resolveAccount, extractResolvedData } from "@/features/accountmapping/utils";
+import { useSparUrl } from "@/features/accountmapping/hooks";
 
 export function useResolveAccount() {
-    const { currentDepartment } = useDepartment();
-    const departmentSparUrl = currentDepartment?.spar_url;
+    const sparUrl = useSparUrl();
 
     const [result, setResult] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -42,10 +40,9 @@ export function useResolveAccount() {
     }
 
     useEffect(() => {
-        if (!departmentSparUrl) return;
-
-        handleResolve(departmentSparUrl);
-    }, [departmentSparUrl]);
+        if (!sparUrl) return;
+        handleResolve(sparUrl);
+    }, [sparUrl]);
 
     return { result, loading, error, handleResolve };
 }

@@ -5,31 +5,36 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { AuthUtil } from "@/features/auth/components";
-import { useAuth, useDepartment } from "@/context/GlobalContext";
+import { useAuth } from "@/context/GlobalContext";
 
 import { Loading } from "@/components";
 
 import { prefixBasePath } from "@/shared/utils/path";
 
-import { useUnlinkAccount, useResolveAccount } from "@/features/accountmapping/hooks";
+import {
+    useUnlinkAccount,
+    useResolveAccount,
+    useSparUrl
+} from "@/features/accountmapping/hooks";
+
 import {
     AccountRemoveModal,
     AccountInfoSection,
     AccountSidebar,
     AccountEmptyState
 } from "@/features/accountmapping/components";
-import { getAccountInformation } from "@/features/accountmapping/utils/getAccountInformation";
 
+import { getAccountInformation } from "@/features/accountmapping/utils";
 
 export default function AccountsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
-    const { currentDepartment } = useDepartment()
-    const router = useRouter();
 
-    const departmentSparUrl = currentDepartment?.spar_url;
+    const sparUrl = useSparUrl();
+
+    const router = useRouter();
 
     const { result, loading, handleResolve } = useResolveAccount();
     const { handleUnlink, unlinking } = useUnlinkAccount();
@@ -46,10 +51,10 @@ export default function AccountsPage() {
 
 
     const confirmRemoveHandler = async () => {
-        if (!departmentSparUrl) return;
+        if (!sparUrl) return;
         try {
-            await handleUnlink(departmentSparUrl);
-            await handleResolve(departmentSparUrl);
+            await handleUnlink(sparUrl);
+            await handleResolve(sparUrl);
             setShowRemoveModal(false);
         } catch (err) {
             console.error("Failed to unlink account:", err);

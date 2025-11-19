@@ -6,7 +6,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
-import { useAuth, useDepartment } from "@/context/GlobalContext";
+import { useAuth } from "@/context/GlobalContext";
+
 import {
     AccountSuccessModal,
     AccountErrorModal,
@@ -14,11 +15,13 @@ import {
     AccountFormSection,
     InfoSidebar
 } from "@/features/accountmapping/components";
+
 import {
     useUpdateAccount,
     useLinkAccount,
     useAccountData,
-    useBranches
+    useBranches,
+    useSparUrl
 } from "@/features/accountmapping/hooks";
 
 
@@ -30,8 +33,7 @@ export default function AccountUpdatePage() {
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
     const { profile } = useAuth();
 
-    const { currentDepartment } = useDepartment();
-    const departmentSparUrl = currentDepartment?.spar_url;
+    const sparUrl = useSparUrl();
 
     const params = useParams();
     const mapper = params.mapper;
@@ -85,7 +87,7 @@ export default function AccountUpdatePage() {
     }, [updateResult, linkResult, updateError, linkError]);
 
     const handleSubmit = async (e: React.FormEvent) => {
-        if (!departmentSparUrl) return;
+        if (!sparUrl) return;
         e.preventDefault();
 
         const faData = buildFaData({
@@ -103,9 +105,9 @@ export default function AccountUpdatePage() {
         });
 
         if (mapper === "link") {
-            await handleLink(departmentSparUrl, faData);
+            await handleLink(sparUrl, faData);
         } else {
-            await handleUpdate(departmentSparUrl, faData);
+            await handleUpdate(sparUrl, faData);
         }
     };
 

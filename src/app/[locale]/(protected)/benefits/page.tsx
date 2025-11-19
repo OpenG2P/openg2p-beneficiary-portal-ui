@@ -1,4 +1,6 @@
 "use client";
+
+import Image from "next/image";
 import { useState } from "react";
 import { useLocale } from "next-intl";
 
@@ -6,10 +8,8 @@ import { AuthUtil } from '@/features/auth/components';
 import { Pagination, SearchInput, FilterInput } from '@/components/shared';
 import { prefixBasePath } from "@/shared/utils/path";
 import { BenefitActionsDropdown, DeliveryDetails } from "@/features/disbursement/components";
-import { DisbursementRecord } from "@/features/disbursement/types/disbursementTypes";
-
-import Image from "next/image";
-import { useDisbursementList } from "@/features/disbursement/hooks/useDisbursementList";
+import { DisbursementRecord } from "@/features/disbursement/types";
+import { useDisbursementList } from "@/features/disbursement/hooks";
 
 const modalBenefit = {
     programName: "Social Registry Upgrade",

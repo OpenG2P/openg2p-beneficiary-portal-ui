@@ -1,15 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Program } from "@/features/program/types/program";
-import { SearchInput, Pagination } from "@/components/shared";
-import { ApplyProgramForm, ProgramActionsDropdown, ProgramDetails, ProgramsPageEmptyRow, ProgramsPagePlaceholderRow } from "@/features/program/components";
-import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
-import { getColorForBenefit } from "@/features/program/utils/benefitColors"
-import { usePrograms } from "@/features/program/hooks/usePrograms";
+
+import { prefixBasePath } from "@/shared/utils/path";
+
+import { Program } from "@/features/program/types/program";
+import { SearchInput, Pagination } from "@/components/shared";
+import {
+    ApplyProgramForm,
+    ProgramActionsDropdown,
+    ProgramDetails,
+    ProgramsPageEmptyRow,
+    ProgramsPagePlaceholderRow
+} from "@/features/program/components";
+
+import { getColorForBenefit } from "@/features/program/utils"
+import { usePrograms } from "@/features/program/hooks";
 
 interface ProgramsProps {
     showMyPrograms: boolean;

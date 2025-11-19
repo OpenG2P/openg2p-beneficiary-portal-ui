@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { linkAccount } from "@/features/accountmapping/utils/accountApi";
+import { linkAccount } from "@/features/accountmapping/utils";
 
 export function useLinkAccount() {
     const [linking, setLinking] = useState(false);

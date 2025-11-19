@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { ViewAll } from '@/components/shared';
 import { prefixBasePath } from "@/shared/utils/path";
-import { BenefitCardData } from "@/features/disbursement/types/disbursementTypes";
+import { BenefitCardData } from "@/features/disbursement/types";
 
 interface TotalBenefitsCardProps {
     benefits: BenefitCardData[];

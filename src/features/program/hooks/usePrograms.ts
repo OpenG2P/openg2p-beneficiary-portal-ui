@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllPrograms, getMyPrograms } from "@/features/program/utils/programsApi";
-import type { Program } from "@/features/program/types/program";
-import { useDepartment } from "@/context/GlobalContext";
+import { getAllPrograms, getMyPrograms } from "@/features/program/utils";
+import type { Program } from "@/features/program/types";
+import { usePbmsUrl } from "@/features/program/hooks";
 
 export function usePrograms(type: "all" | "my", currentPage: number, pageSize = 8) {
-    const { currentDepartment } = useDepartment();
-    const departmentPbmsUrl = currentDepartment?.pbms_url;
+    const pbmsUrl = usePbmsUrl();
 
     const [programs, setPrograms] = useState<Program[]>([]);
     const [loading, setLoading] = useState(true);
@@ -15,7 +14,7 @@ export function usePrograms(type: "all" | "my", currentPage: number, pageSize = 
     const [totalItems, setTotalItems] = useState(0);
 
     useEffect(() => {
-        if (!departmentPbmsUrl) return;
+        if (!pbmsUrl) return;
 
         async function fetchPrograms(baseUrl: string) {
             try {
@@ -46,8 +45,8 @@ export function usePrograms(type: "all" | "my", currentPage: number, pageSize = 
             }
         }
 
-        fetchPrograms(departmentPbmsUrl);
-    }, [type, currentPage, pageSize, departmentPbmsUrl]);
+        fetchPrograms(pbmsUrl);
+    }, [type, currentPage, pageSize, pbmsUrl]);
 
     return { programs, loading, totalPages, totalItems };
 }

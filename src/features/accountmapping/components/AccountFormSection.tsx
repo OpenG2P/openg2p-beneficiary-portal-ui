@@ -1,4 +1,4 @@
-import { TextInput, SelectInput } from "./FormInputs";
+import { TextInput, SelectInput } from "@/features/accountmapping/components";
 import type { AccountType, WalletType, Bank, Branch, WalletProvider } from "@/features/accountmapping/types";
 
 interface AccountFormSectionProps {

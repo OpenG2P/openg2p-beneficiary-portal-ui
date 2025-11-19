@@ -17,7 +17,7 @@ const NotificationContext = createContext<NotificationContextType | undefined>(u
 export const NotificationContextProvider = ({ children }: { children: ReactNode }) => {
     const { profile } = useAuth();
     const subscriberId = profile?.provider_unique_id ?? "";
-    const applicationIdentifier = process.env.NEXT_PUBLIC_NOVU_APP_ID ?? "";
+    const applicationIdentifier = process.env.NEXT_PUBLIC_NOVU_APPLICATION_IDENTIFIER ?? "";
 
     const { notifications, unreadCount, loadMore, isLoading, markAsRead } = useNovuNotifications(
         subscriberId,

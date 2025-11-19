@@ -3,13 +3,17 @@
 import { useEffect, useState } from "react";
 import { resolveAccount } from "@/features/accountmapping/utils/accountApi";
 import { extractResolvedData } from "@/features/accountmapping/utils/extractResolvedData";
+import { useDepartment } from "@/context/GlobalContext";
 
-export function useResolveAccount(baseUrl: string) {
+export function useResolveAccount() {
+    const { currentDepartment } = useDepartment();
+    const departmentSparUrl = currentDepartment?.spar_url;
+
     const [result, setResult] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    async function fetchResolve() {
+    async function handleResolve(baseUrl: string) {
         try {
             setLoading(true);
             setError(null);
@@ -38,11 +42,11 @@ export function useResolveAccount(baseUrl: string) {
     }
 
     useEffect(() => {
-        if (baseUrl) {
-            fetchResolve();
-        }
-    }, [baseUrl]);
+        if (!departmentSparUrl) return;
 
-    return { result, loading, error };
+        handleResolve(departmentSparUrl);
+    }, [departmentSparUrl]);
+
+    return { result, loading, error, handleResolve };
 }
 

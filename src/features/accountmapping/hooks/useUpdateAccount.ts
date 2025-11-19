@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { updateAccount } from "@/features/accountmapping/utils/accountApi";
 
-export function useUpdateAccount(baseUrl: string) {
+export function useUpdateAccount() {
     const [updating, setUpdating] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleUpdate(faData: any) {
+    async function handleUpdate(baseUrl: string, faData: any) {
         try {
             setUpdating(true);
             setError(null);

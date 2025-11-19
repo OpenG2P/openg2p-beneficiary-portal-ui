@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
-import { useAuth } from "@/context/GlobalContext";
+import { useAuth, useDepartment } from "@/context/GlobalContext";
 import {
     AccountSuccessModal,
     AccountErrorModal,
@@ -25,13 +25,14 @@ import {
 import { buildFaData, getAccountInformation } from "@/features/accountmapping/utils";
 import type { AccountType, WalletType } from "@/features/accountmapping/types";
 
-const BASE_URL = "http://localhost:8080";
-const BASE_URL_MAPPER = "http://localhost:8080/mapper";
-
 export default function AccountUpdatePage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
     const { profile } = useAuth();
+
+    const { currentDepartment } = useDepartment();
+    const departmentSparUrl = currentDepartment?.spar_url;
+
     const params = useParams();
     const mapper = params.mapper;
 
@@ -58,11 +59,11 @@ export default function AccountUpdatePage() {
             .catch(console.error);
     }, []);
 
-    const { banks, walletProviders } = useAccountData(BASE_URL);
-    const { branches } = useBranches(BASE_URL, bank, banks);
+    const { banks, walletProviders } = useAccountData();
+    const { branches } = useBranches(bank, banks);
 
-    const { handleLink, linking, result: linkResult, error: linkError } = useLinkAccount(BASE_URL_MAPPER);
-    const { handleUpdate, updating, result: updateResult, error: updateError } = useUpdateAccount(BASE_URL_MAPPER);
+    const { handleLink, linking, result: linkResult, error: linkError } = useLinkAccount();
+    const { handleUpdate, updating, result: updateResult, error: updateError } = useUpdateAccount();
 
     useEffect(() => {
         setBranch("");
@@ -84,6 +85,7 @@ export default function AccountUpdatePage() {
     }, [updateResult, linkResult, updateError, linkError]);
 
     const handleSubmit = async (e: React.FormEvent) => {
+        if (!departmentSparUrl) return;
         e.preventDefault();
 
         const faData = buildFaData({
@@ -101,9 +103,9 @@ export default function AccountUpdatePage() {
         });
 
         if (mapper === "link") {
-            await handleLink(faData);
+            await handleLink(departmentSparUrl, faData);
         } else {
-            await handleUpdate(faData);
+            await handleUpdate(departmentSparUrl, faData);
         }
     };
 

@@ -27,7 +27,7 @@ export function linkAccount(baseUrl: string, transaction_id: string, linkRequest
         transaction_id: transaction_id,
         link_request: linkRequest,
     });
-    return apiRequest(baseUrl, "/link", payload);
+    return apiRequest(baseUrl, "/mapper/link", payload);
 }
 
 export function resolveAccount(baseUrl: string, transaction_id: string, resolveRequest: any[]) {
@@ -35,7 +35,7 @@ export function resolveAccount(baseUrl: string, transaction_id: string, resolveR
         transaction_id: transaction_id,
         resolve_request: resolveRequest,
     });
-    return apiRequest(baseUrl, "/resolve", payload);
+    return apiRequest(baseUrl, "/mapper/resolve", payload);
 }
 
 export function unlinkAccount(baseUrl: string, transaction_id: string, unlinkRequest: any[]) {
@@ -43,7 +43,7 @@ export function unlinkAccount(baseUrl: string, transaction_id: string, unlinkReq
         transaction_id: transaction_id,
         unlink_request: unlinkRequest,
     });
-    return apiRequest(baseUrl, "/unlink", payload);
+    return apiRequest(baseUrl, "/mapper/unlink", payload);
 }
 
 export function updateAccount(baseUrl: string, transaction_id: string, updateRequest: any[]) {
@@ -51,5 +51,5 @@ export function updateAccount(baseUrl: string, transaction_id: string, updateReq
         transaction_id: transaction_id,
         update_request: updateRequest,
     });
-    return apiRequest(baseUrl, "/update", payload);
+    return apiRequest(baseUrl, "/mapper/update", payload);
 }

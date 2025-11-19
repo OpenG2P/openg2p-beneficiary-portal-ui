@@ -9,7 +9,6 @@ interface DepartmentContextType {
     departments: Department[];
     currentDepartment: Department | null;
     setDepartment: (mnemonic: string) => void;
-    getServiceUrl: (key: keyof Department) => string | null;
 }
 
 const DepartmentContext = createContext<DepartmentContextType | undefined>(undefined);
@@ -37,6 +36,9 @@ export const DepartmentContextProvider = ({ children }: { children: ReactNode })
         }
 
         const res = await fetch(prefixBaseApiPath("/departments"), { method: "POST" });
+
+        if (!res.ok) return;
+
         const list: Department[] = await res.json();
 
         setDepartments(list);
@@ -63,16 +65,12 @@ export const DepartmentContextProvider = ({ children }: { children: ReactNode })
         localStorage.setItem("currentDepartment", JSON.stringify(dept));
     };
 
-    const getServiceUrl = (key: keyof Department) =>
-        currentDepartment ? currentDepartment.base_url + (currentDepartment[key] || "") : null;
-
     return (
         <DepartmentContext.Provider
             value={{
                 departments,
                 currentDepartment,
                 setDepartment,
-                getServiceUrl,
             }}
         >
             {children}
@@ -87,6 +85,6 @@ export const useDepartmentContext = () => {
 };
 
 export const useDepartment = () => {
-    const { departments, currentDepartment, setDepartment, getServiceUrl } = useDepartmentContext();
-    return { departments, currentDepartment, setDepartment, getServiceUrl };
+    const { departments, currentDepartment, setDepartment } = useDepartmentContext();
+    return { departments, currentDepartment, setDepartment };
 };

@@ -7,47 +7,42 @@ import {
     DisbursementItem,
     DisbursementSummary
 } from "@/features/disbursement/types/disbursementTypes";
-
-const BASE_URL = "http://localhost:8082";
+import { useDepartment } from "@/context/GlobalContext";
 
 function transformDisbursementSummary(list: DisbursementItem[] = []): DisbursementSummary {
-    const summary: DisbursementSummary = {
-        digital_cash: 0,
-        physical_cash: 0,
-        commodity: 0,
-        service: 0,
+    return {
+        digital_cash: list
+            .filter(i => i.benefit_type === "CASH_DIGITAL")
+            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
+
+        physical_cash: list
+            .filter(i => i.benefit_type === "CASH_PHYSICAL")
+            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
+
+        commodity: list
+            .filter(i => i.benefit_type === "COMMODITY")
+            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
+
+        service: list
+            .filter(i => i.benefit_type === "SERVICE")
+            .reduce((sum, i) => sum + (i.total_quantity_received ?? 0), 0),
     };
-
-    list.forEach((item) => {
-        switch (item.benefit_type) {
-            case "CASH_DIGITAL":
-                summary.digital_cash += item.total_quantity_received ?? 0;
-                break;
-            case "CASH_PHYSICAL":
-                summary.physical_cash += item.total_quantity_received ?? 0;
-                break;
-            case "COMMODITY":
-                summary.commodity += item.total_quantity_received ?? 0;
-                break;
-            case "SERVICE":
-                summary.service += item.total_quantity_received ?? 0;
-                break;
-        }
-    });
-
-    return summary;
 }
 
 export function useDisbursementSummary() {
+    const { currentDepartment } = useDepartment();
+    const departmentBridgeUrl = currentDepartment?.bridge_url;
+
     const [benefits, setBenefits] = useState<BenefitCardData[]>([]);
     const [loading, setLoading] = useState(true);
 
-    async function fetchSummary() {
+    async function fetchSummary(baseUrl: string) {
         try {
             setLoading(true);
 
-            const result = await getDisbursementSummaryTillDate(BASE_URL);
-            const list: DisbursementItem[] = result?.g2p_response_body?.g2p_response_payload ?? [];
+            const result = await getDisbursementSummaryTillDate(baseUrl);
+            const list: DisbursementItem[] =
+                result?.g2p_response_body?.g2p_response_payload ?? [];
 
             const summary = transformDisbursementSummary(list);
 
@@ -66,12 +61,12 @@ export function useDisbursementSummary() {
     }
 
     useEffect(() => {
-        fetchSummary();
-    }, []);
+        if (!departmentBridgeUrl) return;
+        fetchSummary(departmentBridgeUrl);
+    }, [departmentBridgeUrl]);
 
     return {
         benefits,
         loading,
-        refetch: fetchSummary
     };
 }

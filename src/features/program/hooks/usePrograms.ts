@@ -3,57 +3,51 @@
 import { useEffect, useState } from "react";
 import { getAllPrograms, getMyPrograms } from "@/features/program/utils/programsApi";
 import type { Program } from "@/features/program/types/program";
+import { useDepartment } from "@/context/GlobalContext";
 
 export function usePrograms(type: "all" | "my", currentPage: number, pageSize = 8) {
-    const PBMS_BASE = "http://0.0.0.0:8000";
+    const { currentDepartment } = useDepartment();
+    const departmentPbmsUrl = currentDepartment?.pbms_url;
+
     const [programs, setPrograms] = useState<Program[]>([]);
     const [loading, setLoading] = useState(true);
     const [totalPages, setTotalPages] = useState(1);
     const [totalItems, setTotalItems] = useState(0);
 
     useEffect(() => {
-        let isMounted = true;
+        if (!departmentPbmsUrl) return;
 
-        async function fetchPrograms() {
+        async function fetchPrograms(baseUrl: string) {
             try {
                 setPrograms([]);
                 setLoading(true);
 
-                const params = {
-                    currentPage,
-                    pageSize,
-                };
+                const params = { currentPage, pageSize };
 
                 const result =
                     type === "my"
-                        ? await getMyPrograms(PBMS_BASE, params)
-                        : await getAllPrograms(PBMS_BASE, params);
+                        ? await getMyPrograms(baseUrl, params)
+                        : await getAllPrograms(baseUrl, params);
 
                 const list = result?.response_body?.response_payload ?? [];
                 const pagination = result?.response_body?.pagination_response ?? {};
 
-                if (isMounted) {
-                    setPrograms(Array.isArray(list) ? list : []);
-                    setTotalPages(pagination.number_of_pages || 1);
-                    setTotalItems(pagination.number_of_items || 0);
-                }
+                setPrograms(Array.isArray(list) ? list : []);
+                setTotalPages(pagination.number_of_pages || 1);
+                setTotalItems(pagination.number_of_items || 0);
+
             } catch (err) {
                 console.error("Failed to fetch programs:", err);
-                if (isMounted) {
-                    setPrograms([]);
-                    setTotalPages(1);
-                    setTotalItems(0);
-                }
+                setPrograms([]);
+                setTotalPages(1);
+                setTotalItems(0);
             } finally {
-                if (isMounted) setLoading(false);
+                setLoading(false);
             }
         }
 
-        fetchPrograms();
-        return () => {
-            isMounted = false;
-        };
-    }, [type, currentPage, pageSize]);
+        fetchPrograms(departmentPbmsUrl);
+    }, [type, currentPage, pageSize, departmentPbmsUrl]);
 
     return { programs, loading, totalPages, totalItems };
 }

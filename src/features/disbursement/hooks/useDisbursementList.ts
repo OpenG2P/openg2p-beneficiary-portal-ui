@@ -3,20 +3,22 @@
 import { useEffect, useState } from "react";
 import { getAllDisbursements } from "@/features/disbursement/utils/disbursementApi";
 import { DisbursementRecord } from "@/features/disbursement/types/disbursementTypes";
-
-const BASE_URL = "http://localhost:8082";
+import { useDepartment } from "@/context/GlobalContext";
 
 export function useDisbursementList(currentPage: number, pageSize = 8) {
+    const { currentDepartment } = useDepartment();
+    const departmentBridgeUrl = currentDepartment?.bridge_url;
+
     const [disbursements, setDisbursements] = useState<DisbursementRecord[]>([]);
     const [loading, setLoading] = useState(true);
     const [totalPages, setTotalPages] = useState(1);
     const [totalItems, setTotalItems] = useState(0);
 
-    async function fetchDisbursements() {
+    async function fetchDisbursements(baseUrl: string) {
         try {
             setLoading(true);
 
-            const result = await getAllDisbursements(BASE_URL, { currentPage, pageSize });
+            const result = await getAllDisbursements(baseUrl, { currentPage, pageSize });
 
             const list = result?.g2p_response_body?.g2p_response_payload ?? [];
             const pagination = result?.g2p_response_body?.g2p_pagination_response ?? {};
@@ -26,7 +28,6 @@ export function useDisbursementList(currentPage: number, pageSize = 8) {
             setTotalItems(pagination.number_of_items || 0);
 
         } catch (err) {
-            console.error("Failed to fetch disbursement list:", err);
             setDisbursements([]);
             setTotalPages(1);
             setTotalItems(0);
@@ -36,14 +37,14 @@ export function useDisbursementList(currentPage: number, pageSize = 8) {
     }
 
     useEffect(() => {
-        fetchDisbursements();
-    }, [currentPage, pageSize]);
+        if (!departmentBridgeUrl) return;
+        fetchDisbursements(departmentBridgeUrl);
+    }, [currentPage, pageSize, departmentBridgeUrl]);
 
     return {
         disbursements,
         loading,
         totalPages,
         totalItems,
-        refetch: fetchDisbursements
     };
 }

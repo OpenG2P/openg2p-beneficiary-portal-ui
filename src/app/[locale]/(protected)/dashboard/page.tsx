@@ -44,8 +44,7 @@ export default function Dashboard() {
 
     const { benefits, loading: benefitLoading } = useDisbursementSummary();
 
-    const BASE_URL = "http://localhost:8080/mapper";
-    const { result, loading: accountLoading } = useResolveAccount(BASE_URL);
+    const { result, loading: accountLoading } = useResolveAccount();
 
     return (
         <div className="pl-[50px] py-4 min-h-screen bg-white">

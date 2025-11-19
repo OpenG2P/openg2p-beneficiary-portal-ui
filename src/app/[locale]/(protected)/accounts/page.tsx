@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { AuthUtil } from "@/features/auth/components";
-import { useAuth } from "@/context/GlobalContext";
+import { useAuth, useDepartment } from "@/context/GlobalContext";
 
 import { Loading } from "@/components";
 
@@ -26,11 +26,13 @@ export default function AccountsPage() {
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
+    const { currentDepartment } = useDepartment()
     const router = useRouter();
 
-    const BASE_URL = "http://localhost:8080/mapper";
-    const { result, loading } = useResolveAccount(BASE_URL);
-    const { handleUnlink, unlinking } = useUnlinkAccount(BASE_URL);
+    const departmentSparUrl = currentDepartment?.spar_url;
+
+    const { result, loading, handleResolve } = useResolveAccount();
+    const { handleUnlink, unlinking } = useUnlinkAccount();
 
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
@@ -44,11 +46,13 @@ export default function AccountsPage() {
 
 
     const confirmRemoveHandler = async () => {
+        if (!departmentSparUrl) return;
         try {
-            await handleUnlink();
+            await handleUnlink(departmentSparUrl);
+            await handleResolve(departmentSparUrl);
             setShowRemoveModal(false);
         } catch (err) {
-            console.error("❌ Failed to unlink account:", err);
+            console.error("Failed to unlink account:", err);
         }
     };
 

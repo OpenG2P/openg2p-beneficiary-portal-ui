@@ -2,12 +2,12 @@ import qs from "qs";
 import { News } from "@/features/news/types";
 
 export async function getNews(
+    baseUrl: string,
     page: number = 1,
     pageSize: number = 5,
     search: string = ""
 ): Promise<{ data: News[]; total: number }> {
 
-    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH ?? "http://localhost:1337";
     const path = "/api/allnews";
     const url = new URL(path, baseUrl);
 

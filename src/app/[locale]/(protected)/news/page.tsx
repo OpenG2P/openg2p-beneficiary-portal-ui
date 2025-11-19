@@ -18,14 +18,17 @@ export default function NewsPage() {
     const [selectedNews, setSelectedNews] = useState<News | null>(null);
     const [total, setTotal] = useState(0);
 
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH;
+
     useEffect(() => {
-        getNews(currentPage, pageSize, searchQuery)
+        if (!strapiUrl) return;
+        getNews(strapiUrl, currentPage, pageSize, searchQuery)
             .then(({ data, total }) => {
                 setNews(data);
                 setTotal(total);
             })
             .catch(console.error);
-    }, [currentPage, searchQuery]);
+    }, [currentPage, searchQuery, strapiUrl]);
 
     const totalPages = Math.ceil(total / pageSize);
 
@@ -71,7 +74,7 @@ export default function NewsPage() {
                                             {new Date(n.date).toLocaleString()}
                                         </span>
                                     )}
-                                    <p className="text-xs sm:text-sm text-gray-700 mt-1 line-clamp-2">
+                                    <p className="text-xs sm:text-sm text-gray-700 mt-1 line-clamp-1">
                                         {n.description}
                                     </p>
                                 </div>

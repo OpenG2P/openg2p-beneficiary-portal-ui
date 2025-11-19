@@ -9,16 +9,16 @@ export function useNews(page = 1, limit = 3, search = "") {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    async function fetchNews() {
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH;
+
+    async function fetchNews(baseUrl: string) {
         try {
             setLoading(true);
             setError(null);
 
-            const { data } = await getNews(page, limit, search);
-
+            const { data } = await getNews(baseUrl, page, limit, search);
             setNews(data);
         } catch (err) {
-            console.error("Failed to load news:", err);
             setError("Failed to load news");
             setNews([]);
         } finally {
@@ -27,13 +27,14 @@ export function useNews(page = 1, limit = 3, search = "") {
     }
 
     useEffect(() => {
-        fetchNews();
-    }, [page, limit]);
+        if (!strapiUrl) return;
+
+        fetchNews(strapiUrl);
+    }, [page, limit, search, strapiUrl]);
 
     return {
         news,
         loading,
         error,
-        refetch: fetchNews
     };
 }

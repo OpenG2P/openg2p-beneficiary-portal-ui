@@ -5,20 +5,26 @@ import {
     getAllWalletProviders,
 } from "@/features/accountmapping/utils/dfspApi";
 import type { Bank, Branch, WalletProvider } from "@/features/accountmapping/types";
+import { useDepartment } from "@/context/GlobalContext";
 
-export function useAccountData(baseUrl: string) {
+export function useAccountData() {
+    const { currentDepartment } = useDepartment();
+    const departmentSparUrl = currentDepartment?.spar_url;
+
     const [banks, setBanks] = useState<Bank[]>([]);
     const [walletProviders, setWalletProviders] = useState<WalletProvider[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        async function fetchData() {
+        if (!departmentSparUrl) return;
+
+        async function fetchData(url: string) {
             try {
                 setLoading(true);
                 const [banksRes, walletsRes] = await Promise.all([
-                    getAllBanks(baseUrl),
-                    getAllWalletProviders(baseUrl),
+                    getAllBanks(url),
+                    getAllWalletProviders(url),
                 ]);
 
                 const banks = banksRes?.response_body?.response_payload?.banks || [];
@@ -28,24 +34,28 @@ export function useAccountData(baseUrl: string) {
                 setBanks(banks);
                 setWalletProviders(wallets);
             } catch (err) {
-                console.error("❌ Error fetching DFSP data:", err);
+                console.error("Error fetching DFSP data:", err);
                 setError(err instanceof Error ? err : new Error("Failed to fetch data"));
             } finally {
                 setLoading(false);
             }
         }
 
-        fetchData();
-    }, [baseUrl]);
+        fetchData(departmentSparUrl);
+    }, [departmentSparUrl]);
 
     return { banks, walletProviders, loading, error };
 }
 
-export function useBranches(baseUrl: string, bankName: string, banks: Bank[]) {
+export function useBranches(bankName: string, banks: Bank[]) {
+    const { currentDepartment } = useDepartment();
+    const departmentSparUrl = currentDepartment?.spar_url;
     const [branches, setBranches] = useState<Branch[]>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        if (!departmentSparUrl) return;
+
         if (!bankName) {
             setBranches([]);
             return;
@@ -58,19 +68,19 @@ export function useBranches(baseUrl: string, bankName: string, banks: Bank[]) {
         }
 
         setLoading(true);
-        getBranchesByBankId(baseUrl, selectedBank.id)
+        getBranchesByBankId(departmentSparUrl, selectedBank.id)
             .then((res) => {
                 const branches = res?.response_body?.response_payload?.branches || [];
                 setBranches(branches);
             })
             .catch((err) => {
-                console.error("❌ Branch fetch failed:", err);
+                console.error("Branch fetch failed:", err);
                 setBranches([]);
             })
             .finally(() => {
                 setLoading(false);
             });
-    }, [bankName, banks, baseUrl]);
+    }, [bankName, banks, departmentSparUrl]);
 
     return { branches, loading };
 }

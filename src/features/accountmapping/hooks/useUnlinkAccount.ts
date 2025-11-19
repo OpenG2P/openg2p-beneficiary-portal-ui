@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { unlinkAccount } from "@/features/accountmapping/utils/accountApi";
 
-export function useUnlinkAccount(baseUrl: string) {
+export function useUnlinkAccount() {
     const [unlinking, setUnlinking] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleUnlink() {
+    async function handleUnlink(baseUrl: string) {
         try {
             setUnlinking(true);
             setError(null);

@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { linkAccount } from "@/features/accountmapping/utils/accountApi";
 
-export function useLinkAccount(baseUrl: string) {
+export function useLinkAccount() {
     const [linking, setLinking] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleLink(faData: any) {
+    async function handleLink(baseUrl: string, faData: any) {
         try {
             setLinking(true);
             setError(null);

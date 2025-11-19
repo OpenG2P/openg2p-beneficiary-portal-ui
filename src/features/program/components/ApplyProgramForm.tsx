@@ -25,7 +25,7 @@ export default function ApplyProgramForm({ program, onClose }: ApplyProgramFormP
                     </label>
                     <input
                         type="text"
-                        value={program.name}
+                        value={program.program_mnemonic}
                         disabled
                         className="mt-1 block w-full text-gray-600 rounded-md bg-gray-100 py-2 px-4"
                     />

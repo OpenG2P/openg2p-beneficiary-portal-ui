@@ -1,73 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Program } from "@/features/program/types/program";
 import { SearchInput, Pagination } from "@/components/shared";
-import { ApplyProgramForm, ProgramActionsDropdown, ProgramDetails } from "@/features/program/components";
+import { ApplyProgramForm, ProgramActionsDropdown, ProgramDetails, ProgramsPageEmptyRow, ProgramsPagePlaceholderRow } from "@/features/program/components";
 import { prefixBasePath } from "@/shared/utils/path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
-
+import { getColorForBenefit } from "@/features/program/utils/benefitColors"
+import { usePrograms } from "@/features/program/hooks/usePrograms";
 
 interface ProgramsProps {
-    programs: Program[];
     showMyPrograms: boolean;
     activeTab: "all" | "my";
     setActiveTab: (tab: "all" | "my") => void;
 }
 
-const getBenefitClasses = (benefit: string) => {
-    switch (benefit.toLowerCase()) {
-        case "money":
-            return { bg: "bg-[rgba(0,183,101,0.2)]", text: "text-[#00B765]" };
-        case "rice":
-            return { bg: "bg-[rgba(237,124,34,0.2)]", text: "text-[#ED7C22]" };
-        case "oil":
-            return { bg: "bg-[rgba(51,153,255,0.2)]", text: "text-[#3399FF]" };
-        case "books":
-            return { bg: "bg-[rgba(252,190,0,0.2)]", text: "text-[#FCBE00]" };
-        case "home":
-            return { bg: "bg-[rgba(165,84,236,0.2)]", text: "text-[#A554EC]" };
-        default:
-            return { bg: "bg-gray-200", text: "text-gray-800" };
-    }
-};
-
-export default function Programs({ programs, showMyPrograms, activeTab, setActiveTab }: ProgramsProps) {
+export default function Programs({ showMyPrograms, activeTab, setActiveTab }: ProgramsProps) {
     const lang = useLocale();
+    const pageSize = 8;
+
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [openForm, setOpenForm] = useState(false);
+    const { programs, loading, totalPages, totalItems } = usePrograms(activeTab, currentPage, pageSize);
     const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
     const [openDetails, setOpenDetails] = useState(false);
     const router = useRouter();
 
+    const emptyRowsCount = Math.max(pageSize - programs.length, 0);
+    const startItem = totalItems === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+    const endItem = Math.min(currentPage * pageSize, totalItems);
 
-
-    const itemsPerPage = 8;
-
-    const filteredPrograms = programs.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    const totalPages = Math.ceil(filteredPrograms.length / itemsPerPage);
-    const currentItems = filteredPrograms.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
-
-    const getBenefitBadge = (benefit: string) => {
-        const { bg, text } = getBenefitClasses(benefit);
-        return (
-            <span
-                key={benefit}
-                className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
-            >
-                {benefit}
-            </span>
-        );
-    };
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [activeTab]);
 
     const getActionButton = (status: string, program: Program) => {
         if (status === "Applied") {
@@ -108,139 +76,174 @@ export default function Programs({ programs, showMyPrograms, activeTab, setActiv
     };
 
     return (
-        <div className="bg-white rounded-2xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] w-full border border-gray-200">
-            <div className="relative">
-                <div className="absolute inset-x-0 bottom-0 h-[6px] bg-[#F5F5F5]" />
+        <>
+            <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full">
+                <div className="relative">
+                    <div className="absolute inset-x-0 bottom-0 h-[6px] bg-[#F5F5F5]" />
 
-                <div className="flex items-center justify-between px-8 gap-4 flex-wrap relative z-10">
-                    <div className="flex gap-2 pt-8">
-                        <button
-                            onClick={() => setActiveTab("all")}
-                            className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "all"
-                                ? "bg-[#ED7C22] text-white"
-                                : "bg-[#D9D9D999]/60 text-black/50"
-                                }`}
-                        >
-                            All Programs
-                        </button>
-                        <button
-                            onClick={() => setActiveTab("my")}
-                            className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "my"
-                                ? "bg-[#ED7C22] text-white"
-                                : "bg-[#D9D9D999]/60 text-black/50"
-                                }`}
-                        >
-                            My Programs
-                        </button>
-                    </div>
-                    <div className="flex justify-center py-6 pr-6">
-                        <SearchInput
-                            onSearch={(val) => {
-                                setCurrentPage(1);
-                                setSearchQuery(val);
-                            }}
-                            placeholder="Search"
-                            className="w-[200px]"
-                        />
+                    <div className="flex items-center justify-between px-8 gap-4 flex-wrap relative z-10">
+                        <div className="flex gap-2 pt-8">
+                            <button
+                                onClick={() => setActiveTab("all")}
+                                className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "all"
+                                    ? "bg-[#ED7C22] text-white"
+                                    : "bg-[#D9D9D999]/60 text-black/50"
+                                    }`}
+                            >
+                                All Programs
+                            </button>
+                            <button
+                                onClick={() => setActiveTab("my")}
+                                className={`px-6 py-2 text-[18px] font-[600] rounded-t-[20px] transition-all ${activeTab === "my"
+                                    ? "bg-[#ED7C22] text-white"
+                                    : "bg-[#D9D9D999]/60 text-black/50"
+                                    }`}
+                            >
+                                My Programs
+                            </button>
+                        </div>
+                        <div className="flex justify-center py-6">
+                            <SearchInput
+                                onSearch={(val) => {
+                                    setCurrentPage(1);
+                                    setSearchQuery(val);
+                                }}
+                                placeholder="Search"
+                                className="w-[200px]"
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="overflow-x-auto">
-                <table className="min-w-full border-collapse">
-                    <thead className="bg-[#F5F5F5] text-black text-[16px] font-[700]">
-                        <tr>
-                            <th className="px-8 py-3 text-left">Program Name</th>
-                            <th className="px-8 py-3 text-left">
-                                <div className="flex items-center gap-0.5">
-                                    Benefits
-                                    <Image
-                                        src={prefixBasePath("/updown_arrow.png")}
-                                        alt="Sort"
-                                        width={20}
-                                        height={20}
-                                        className="cursor-pointer opacity-40"
-                                    />
-                                </div>
-                            </th>
-                            {showMyPrograms ? (
-                                <>
-                                    <th className="px-8 py-3 text-left">
-                                        <div className="flex items-center gap-0.5">
-                                            Enrollment Date
-                                            <Image
-                                                src={prefixBasePath("/updown_arrow.png")}
-                                                alt="Sort"
-                                                width={20}
-                                                height={20}
-                                                className="cursor-pointer opacity-40"
-                                            />
-                                        </div>
-                                    </th>
-                                    <th className="pl-7 pr-8 py-3 text-left">
-                                        Action
-                                    </th>
-                                </>
-                            ) : (
-                                <th className="pl-9 pr-8 py-3 text-left">Action</th>
-                            )}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentItems.map((p, idx) => (
-                            <tr
-                                key={p.id}
-                                className={`text-sm ${idx % 2 === 0 ? "bg-white" : "bg-black/5"}`}
-                            >
-                                <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.name}</td>
-                                <td className="px-7 py-3 flex flex-wrap gap-2">
-                                    {p.benefits.map(getBenefitBadge)}
-                                </td>
+                <div className="overflow-x-auto">
+                    <table className="min-w-full border-collapse table-fixed">
+                        <thead className="bg-[#F5F5F5] text-black text-[16px] font-[700]">
+                            <tr>
+                                <th className="px-8 py-3 text-left">Program Name</th>
+                                <th className="px-8 py-3 text-left">
+                                    <div className="flex items-center gap-0.5">
+                                        Benefits
+                                        <Image
+                                            src={prefixBasePath("/updown_arrow.png")}
+                                            alt="Sort"
+                                            width={20}
+                                            height={20}
+                                            className="cursor-pointer opacity-40"
+                                        />
+                                    </div>
+                                </th>
                                 {showMyPrograms ? (
                                     <>
-                                        <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.appliedDate}</td>
-                                        <td className="px-7 py-2 text-[16px] font-[400] text-black">
-                                            <ProgramActionsDropdown
-                                                onActionSelect={(action) => handleProgramActionSelect(action, p)}
-                                            />
-                                        </td>
+                                        <th className="px-8 py-3 text-left">
+                                            <div className="flex items-center gap-0.5">
+                                                Enrollment Date
+                                                <Image
+                                                    src={prefixBasePath("/updown_arrow.png")}
+                                                    alt="Sort"
+                                                    width={20}
+                                                    height={20}
+                                                    className="cursor-pointer opacity-40"
+                                                />
+                                            </div>
+                                        </th>
+                                        <th className="pl-7 pr-8 py-3 text-left">
+                                            Action
+                                        </th>
                                     </>
                                 ) : (
-                                    <td className="px-8 py-3">{getActionButton(p.status, p)}</td>
+                                    <th className="pl-9 pr-8 py-3 text-left">Action</th>
                                 )}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={setCurrentPage}
-                />
-                <div className="text-gray-600">
-                    Showing{" "}
-                    {Math.min((currentPage - 1) * itemsPerPage + 1, filteredPrograms.length)}–
-                    {Math.min(currentPage * itemsPerPage, filteredPrograms.length)} of{" "}
-                    {filteredPrograms.length}
+                        </thead>
+                        <tbody>
+                            {loading &&
+                                [...Array(emptyRowsCount)].map((_, i) => (
+                                    <ProgramsPagePlaceholderRow
+                                        key={`empty-${i}`}
+                                        index={i}
+                                        variant={showMyPrograms ? "my" : "all"}
+                                    />
+                                ))
+                            }
+                            {programs.map((p, idx) => (
+                                <tr
+                                    key={p.id}
+                                    className={`text-sm ${idx % 2 === 0 ? "bg-white" : "bg-black/5"}`}
+                                >
+                                    <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.program_mnemonic}</td>
+                                    <td className="px-8 py-3">
+                                        <div className="flex flex-wrap gap-2">
+                                            {p.benefit_codes.map((b) => {
+                                                const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
+                                                return (
+                                                    <span
+                                                        key={b.id}
+                                                        className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
+                                                    >
+                                                        {b.benefit_code_mnemonic}
+                                                    </span>
+                                                );
+                                            })}
+                                        </div>
+                                    </td>
+                                    {showMyPrograms ? (
+                                        <>
+                                            <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.enrolment_date}</td>
+                                            <td className="px-7 py-3 text-[16px] font-[400] text-black">
+                                                <ProgramActionsDropdown
+                                                    onActionSelect={(action) => handleProgramActionSelect(action, p)}
+                                                />
+                                            </td>
+                                        </>
+                                    ) : (
+                                        <td className="px-8 py-3">{getActionButton(p.am_i_enrolled ? "Applied" : "NO", p)}</td>
+                                    )}
+                                </tr>
+                            ))}
+                            {!loading &&
+                                [...Array(emptyRowsCount)].map((_, i) => (
+                                    <ProgramsPageEmptyRow
+                                        key={`empty-${i}`}
+                                        index={programs.length + i}
+                                        variant={showMyPrograms ? "my" : "all"}
+                                    />
+                                ))
+                            }
+                        </tbody>
+                    </table>
                 </div>
+
+                <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
+                    {loading ? (
+                        <div className="text-gray-600 py-4.5">Loading programs...</div>
+                    ) : totalItems === 0 ? (
+                        <div className="text-gray-600 py-4.5">No programs found</div>
+                    ) : (
+                        <>
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={setCurrentPage}
+                            />
+                            <div className="text-gray-600">
+                                Showing {startItem}-{endItem} of {totalItems} Programs
+                            </div>
+                        </>
+                    )}
+                </div>
+
             </div>
-
-            {openForm && selectedProgram && (
-                <ApplyProgramForm
-                    program={selectedProgram}
-                    onClose={() => setOpenForm(false)} />
-            )}
-
             {openDetails && selectedProgram && (
                 <ProgramDetails
                     program={selectedProgram}
                     onClose={() => setOpenDetails(false)}
                 />
             )}
-
-        </div>
+            {openForm && selectedProgram && (
+                <ApplyProgramForm
+                    program={selectedProgram}
+                    onClose={() => setOpenForm(false)} />
+            )}
+        </>
     );
 }

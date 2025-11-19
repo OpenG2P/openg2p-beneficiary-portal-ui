@@ -1,1 +1,1 @@
-export type { FormLevel, FormLevelValue, KeyValue, LinkOrUpdate } from './dfsp-levels';
+export type { Bank, Branch, WalletProvider, FaData, AccountType, WalletType } from './types';

@@ -10,10 +10,27 @@ export default function AuthUtil(params: { successRedirectUrl?: string; failedRe
     const { push } = useRouter();
     const [isCheckingAuth, setIsCheckingAuth] = useState(false);
     const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
+
+    const logoutAndRedirect = async () => {
+        try {
+            await fetch(prefixBaseApiPath("/auth/logout"), { method: "POST" });
+        } catch (err) {
+            console.error("Logout error:", err);
+        }
+
+        auth.setProfile(null);
+        push(params.failedRedirectUrl || "/login");
+    };
+
     const checkAuth = async () => {
         setIsCheckingAuth(true);
         try {
             const res = await fetch(prefixBaseApiPath("/auth/get_user_profile"));
+
+            if (res.status === 401) {
+                return logoutAndRedirect();
+            }
+
             if (res.ok) {
                 const resJson = await res.json();
                 auth.setProfile(resJson);

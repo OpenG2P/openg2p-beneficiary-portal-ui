@@ -3,4 +3,4 @@ export { default as Programs } from './components/Programs';
 export { default as ApplyProgramForm } from './components/ApplyProgramForm';
 
 // Types
-export type { Program, ProgramStatus } from './types';
+export type { Program } from './types';

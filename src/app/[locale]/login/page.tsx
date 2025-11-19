@@ -51,7 +51,7 @@ export default function LoginPage() {
                         alt="Decoration"
                         width={120}
                         height={120}
-                        className="absolute top-[40.13%] left-[83.75%] w-[7.5%] h-auto rounded-xl shadow-lg"
+                        className="absolute top-[40.13%] left-[84.5%] w-[7.5%] h-auto rounded-xl shadow-lg"
                     />
                     <Image
                         src={prefixBasePath("/06_login.png")}

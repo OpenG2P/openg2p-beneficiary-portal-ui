@@ -1,14 +1,16 @@
-export type ProgramStatus = "Apply" | "Applied" | "Pending" | "Enrolled";
+export interface BenefitCode {
+    id: number;
+    benefit_code_mnemonic: string;
+    benefit_type: string;
+    benefit_code_description: string;
+    benefit_code_max_quantity: number;
+}
 
 export interface Program {
-    name: string;
-    status: ProgramStatus;
-    id: string;
-    appliedDate: string;
-    description?: string;
-    eligibility?: string[];
-    benefits: string[];
-    requirements?: string[];
-    deadline?: string;
-    category?: string;
+    id: number;
+    program_mnemonic: string;
+    program_description: string;
+    enrolment_date?: string;
+    am_i_enrolled?: boolean;
+    benefit_codes: BenefitCode[];
 }

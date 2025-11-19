@@ -9,6 +9,7 @@ export const getMenuItems = (locale: string): MenuItem[] => [
     { name: "Applications", href: `/${locale}/applications`, icon: "/leftmenu_schemes_06.png" },
     { name: "Notifications", href: `/${locale}/notifications`, icon: "/leftmenu_notifications_07.png" },
     { name: "Complaints", href: `/${locale}/complaints`, icon: "/leftmenu_complaints_08.png" },
+    { name: "News", href: `/${locale}/news`, icon: "/leftmenu_news_09.png" },
 ];
 
 export const getRouteToIndex = (locale: string): Record<string, number> =>

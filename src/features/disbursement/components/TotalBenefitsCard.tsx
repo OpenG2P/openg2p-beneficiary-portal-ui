@@ -3,15 +3,10 @@ import Image from "next/image";
 
 import { ViewAll } from '@/components/shared';
 import { prefixBasePath } from "@/shared/utils/path";
-
-interface BenefitItem {
-    icon: string;
-    value: string;
-    label: string;
-}
+import { BenefitCardData } from "@/features/disbursement/types/disbursementTypes";
 
 interface TotalBenefitsCardProps {
-    benefits: BenefitItem[];
+    benefits: BenefitCardData[];
 }
 
 export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) {
@@ -59,7 +54,7 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                         ))}
                         {placeholders.map((_, index) => (
                             <div key={`placeholder-${index}`} className="flex flex-col items-center text-center min-w-[70px] animate-pulse">
-                                <div className="mb-1 w-[34px] h-[34px] rounded-full bg-white/50" />
+                                <div className="h-[37px] w-[37px] rounded-full bg-white/50 mb-1" />
                                 <div className="h-4 w-10 bg-white/40 rounded mb-1" />
                                 <div className="h-4 w-12 bg-black/20 rounded" />
                             </div>

@@ -31,7 +31,7 @@ export default function HomePage() {
         <main className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-black via-[#202020] to-[#939292]">
             <div className="relative w-full max-w-[1440px] h-full max-h-[900px] mx-auto px-4">
                 <div className="absolute top-[5.44%] left-[31.74%] w-[61.81%] h-[77%]">
-                    <div className="absolute top-[39.1%] left-[11.24%] w-[20.79%]">
+                    <div className="absolute top-[39.1%] left-[18.24%] w-[20.79%]">
                         <Image
                             src={prefixBasePath("/02_landing.png")}
                             alt="Decoration"
@@ -41,7 +41,7 @@ export default function HomePage() {
                         />
                     </div>
 
-                    <div className="absolute top-[66.09%] left-[35.39%] w-[15.17%]">
+                    <div className="absolute top-[66.09%] left-[42.39%] w-[15.17%]">
                         <Image
                             src={prefixBasePath("/05_landing.png")}
                             alt="Decoration"
@@ -51,7 +51,7 @@ export default function HomePage() {
                         />
                     </div>
 
-                    <div className="absolute top-[67.97%] left-0 w-[30.9%]">
+                    <div className="absolute top-[67.97%] left-7 w-[30.9%]">
                         <Image
                             src={prefixBasePath("/06_landing.png")}
                             alt="Decoration"
@@ -61,7 +61,7 @@ export default function HomePage() {
                         />
                     </div>
 
-                    <div className="absolute top-0 left-[36.52%] w-[41.57%]">
+                    <div className="absolute top-0 left-[43.52%] w-[41.57%]">
                         <Image
                             src={prefixBasePath("/01_landing.png")}
                             alt="Decoration"
@@ -71,7 +71,7 @@ export default function HomePage() {
                         />
                     </div>
 
-                    <div className="absolute top-[26.41%] left-[82.58%] w-[15.17%]">
+                    <div className="absolute top-[26.41%] left-[89.58%] w-[15.17%]">
                         <Image
                             src={prefixBasePath("/04_landing.png")}
                             alt="Decoration"
@@ -81,7 +81,7 @@ export default function HomePage() {
                         />
                     </div>
 
-                    <div className="absolute top-[53.54%] left-[55.06%] w-[30.9%]">
+                    <div className="absolute top-[53.54%] left-[62.06%] w-[30.9%]">
                         <Image
                             src={prefixBasePath("/03_landing.png")}
                             alt="Decoration"
@@ -91,7 +91,7 @@ export default function HomePage() {
                         />
                     </div>
 
-                    <div className="absolute top-[83.41%] left-[87.08%] w-[12.92%]">
+                    <div className="absolute top-[83.41%] left-[94.08%] w-[12.92%]">
                         <Image
                             src={prefixBasePath("/07_landing.png")}
                             alt="Logo"
@@ -102,7 +102,7 @@ export default function HomePage() {
                     </div>
                 </div>
 
-                <div className="absolute top-[28%] left-[6.94%] w-[35%]">
+                <div className="absolute top-[35%] left-[6.94%] w-[35%]">
                     <div className="mb-6">
                         <h1 className="text-white leading-[100%] text-[50px]">
                             Welcome to OpenG2P<br />

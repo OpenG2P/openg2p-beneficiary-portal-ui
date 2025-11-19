@@ -2,28 +2,13 @@
 
 import { Program } from "@/features/program/types/program";
 import Modal from "@/components/ui/Modal";
+import { getColorForBenefit } from "@/features/program/utils/benefitColors"
+
 
 interface ProgramDetailsProps {
     program: Program;
     onClose: () => void;
 }
-
-const getBenefitClasses = (benefit: string) => {
-    switch (benefit.toLowerCase()) {
-        case "money":
-            return { bg: "bg-[rgba(0,183,101,0.2)]", text: "text-[#00B765]" };
-        case "rice":
-            return { bg: "bg-[rgba(237,124,34,0.2)]", text: "text-[#ED7C22]" };
-        case "oil":
-            return { bg: "bg-[rgba(51,153,255,0.2)]", text: "text-[#3399FF]" };
-        case "books":
-            return { bg: "bg-[rgba(252,190,0,0.2)]", text: "text-[#FCBE00]" };
-        case "home":
-            return { bg: "bg-[rgba(165,84,236,0.2)]", text: "text-[#A554EC]" };
-        default:
-            return { bg: "bg-gray-100", text: "text-gray-800" };
-    }
-};
 
 export default function ProgramDetails({ program, onClose }: ProgramDetailsProps) {
     return (
@@ -38,13 +23,13 @@ export default function ProgramDetails({ program, onClose }: ProgramDetailsProps
             <div className="space-y-5 px-10">
                 <div>
                     <label className="block text-[16px] text-black/50 font-[600] mb-1">Program Name</label>
-                    <div className="text-[16px] text-black font-[600]">{program.name}</div>
+                    <div className="text-[16px] text-black font-[600]">{program.program_mnemonic}</div>
                 </div>
 
                 <div className="flex gap-8">
                     <div>
                         <label className="block text-[16px] text-black/50 font-[600] mb-1">Date</label>
-                        <div className="text-[16px] text-black font-[600]">{program.appliedDate}</div>
+                        <div className="text-[16px] text-black font-[600]">{program.enrolment_date}</div>
                     </div>
                     <div>
                         <label className="block text-[16px] text-black/50 font-[600] mb-1">Application ID</label>
@@ -55,14 +40,14 @@ export default function ProgramDetails({ program, onClose }: ProgramDetailsProps
                 <div>
                     <label className="block text-sm font-bold text-black mb-1">Benefits</label>
                     <div className="flex flex-wrap gap-2">
-                        {program.benefits.map((b) => {
-                            const { bg, text } = getBenefitClasses(b);
+                        {program.benefit_codes.map((b) => {
+                            const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
                             return (
                                 <span
-                                    key={b}
+                                    key={b.id}
                                     className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
                                 >
-                                    {b}
+                                    {b.benefit_code_mnemonic}
                                 </span>
                             );
                         })}
@@ -71,7 +56,7 @@ export default function ProgramDetails({ program, onClose }: ProgramDetailsProps
 
                 <div>
                     <p className="text-[16px] text-black font-normal leading-relaxed">
-                        {program.description}
+                        {program.program_description}
                     </p>
                 </div>
             </div>

@@ -7,11 +7,10 @@ import { BenefitCardData } from "@/features/disbursement/types";
 
 interface TotalBenefitsCardProps {
     benefits: BenefitCardData[];
+    loading: boolean;
 }
 
-export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) {
-    const placeholderCount = Math.max(0, 4 - (benefits?.length || 0));
-    const placeholders = Array(placeholderCount).fill(null);
+export default function TotalBenefitsCard({ benefits, loading }: TotalBenefitsCardProps) {
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
@@ -33,7 +32,7 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                     </div>
 
                     <div className="flex justify-between items-center w-full px-6">
-                        {benefits.map((b, index) => (
+                        {!loading && benefits.map((b, index) => (
                             <div
                                 key={index}
                                 className=" flex flex-col items-center text-center min-w-[70px] z-10"
@@ -52,23 +51,33 @@ export default function TotalBenefitsCard({ benefits }: TotalBenefitsCardProps) 
                                 <div className="text-[14px]/[16px] text-black font-[600]">{b.label}</div>
                             </div>
                         ))}
-                        {placeholders.map((_, index) => (
-                            <div key={`placeholder-${index}`} className="flex flex-col items-center text-center min-w-[70px] animate-pulse">
-                                <div className="h-[37px] w-[37px] rounded-full bg-white/50 mb-1" />
-                                <div className="h-4 w-10 bg-white/40 rounded mb-1" />
-                                <div className="h-4 w-12 bg-black/20 rounded" />
-                            </div>
-                        ))}
+                        {loading &&
+                            Array(4)
+                                .fill(0)
+                                .map((_, index) => (
+                                    <div
+                                        key={`placeholder-${index}`}
+                                        className="flex flex-col items-center text-center min-w-[70px] animate-pulse"
+                                    >
+                                        <div className="h-[37px] w-[37px] rounded-full bg-white/50 mb-1" />
+                                        <div className="h-4 w-10 bg-white/40 rounded mb-1" />
+                                        <div className="h-4 w-12 bg-black/20 rounded" />
+                                    </div>
+                                ))}
                     </div>
 
-                    <ViewAll
-                        href="/benefits"
-                        label="View All Benefits"
-                        bgColor="#FFFFFF66"
-                        textColor="#000000"
-                        hoverBgColor="#FFFFFF66"
-                        hoverTextColor="#ED7C22"
-                    />
+                    {loading ? (
+                        <div className="mt-3.5 mx-[30px] h-[35px] w-[180px] rounded-[15px] bg-black/20 animate-pulse"></div>
+                    ) : (
+                        <ViewAll
+                            href="/benefits"
+                            label="View All Benefits"
+                            bgColor="#FFFFFF66"
+                            textColor="#000000"
+                            hoverBgColor="#FFFFFF66"
+                            hoverTextColor="#ED7C22"
+                        />
+                    )}
                 </div>
             </div>
         </div>

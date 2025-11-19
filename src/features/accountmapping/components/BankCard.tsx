@@ -85,14 +85,18 @@ export default function BankCard({ result, loading }: BankCardProps) {
                         )}
                     </div>
 
-                    <ViewAll
-                        href="/accounts"
-                        label="View Account Details"
-                        bgColor="#FFFFFF66"
-                        textColor="#000000"
-                        hoverBgColor="#FFFFFF66"
-                        hoverTextColor="#ED7C22"
-                    />
+                    {loading ? (
+                        <div className="mt-3.5 mx-[30px] h-[35px] w-[180px] rounded-[15px] bg-black/20 animate-pulse"></div>
+                    ) : (
+                        <ViewAll
+                            href={isLinked ? "/accounts" : "/accounts/link"}
+                            label={isLinked ? "View Account Details" : "Link Account"}
+                            bgColor="#FFFFFF66"
+                            textColor="#000000"
+                            hoverBgColor="#FFFFFF66"
+                            hoverTextColor="#ED7C22"
+                        />
+                    )}
 
                     <div className="absolute right-12 bottom-0 opacity-20 " >
                         <Image

@@ -17,8 +17,8 @@ export default function ProgramTable({ programs, loading }: ProgramTableProps) {
 
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full  overflow-hidden">
-            <div className="flex justify-between items-center px-8 pt-[37px] pb-[12px]">
-                <h2 className="text-[20px]/[20px] font-[600] text-[#ED7C22]">My Programs</h2>
+            <div className="flex justify-between items-center px-8 pt-[30px] pb-[12px]">
+                <h2 className="lg:text-[16px]/[19px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-[#ED7C22]">My Programs</h2>
                 <button className="hover:bg-gray-100 rounded-full transition p-1">
                     <Image
                         src={prefixBasePath("/more.png")}
@@ -40,8 +40,8 @@ export default function ProgramTable({ programs, loading }: ProgramTableProps) {
 
                     <thead className="bg-[#F5F5F5]">
                         <tr className="h-[50px]">
-                            <th className="px-[30px] text-[16px] font-[700] text-black">Program Name</th>
-                            <th className="px-[30px] text-[16px] font-[700] text-black">
+                            <th className="lg:text-[14px] xl:text-[16px] 2xl:text-[18px] px-[30px] font-[600] text-black">Program Name</th>
+                            <th className="lg:text-[14px] xl:text-[16px] 2xl:text-[18px] px-[30px] font-[600] text-black">
                                 <div className="flex items-center gap-0.5">
                                     Enrollment Date
                                     <Image
@@ -53,7 +53,7 @@ export default function ProgramTable({ programs, loading }: ProgramTableProps) {
                                     />
                                 </div>
                             </th>
-                            <th className="text-[16px] font-[700] text-black">
+                            <th className="lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-[700] text-black">
                                 <div className="flex items-center gap-0.5">
                                     Benefits
                                     <Image
@@ -71,15 +71,15 @@ export default function ProgramTable({ programs, loading }: ProgramTableProps) {
                     <tbody>
                         {programs.map((program, index) => (
                             <tr key={program.id} className={`${index % 2 === 0 ? "bg-white h-[50px]" : "bg-[#F5F5F5] h-[50px]"}`} >
-                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.program_mnemonic}</td>
-                                <td className="px-[30px] text-[16px] font-[400] text-black">{program.enrolment_date}</td>
-                                <td className="py-[12px] text-[16px] font-[400] flex flex-wrap gap-2">
+                                <td className="lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-[30px] font-[400] text-black">{program.program_mnemonic}</td>
+                                <td className="lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-[30px] font-[400] text-black">{program.enrolment_date}</td>
+                                <td className="py-[12px] font-[400] flex flex-wrap gap-2">
                                     {program.benefit_codes.slice(0, 2).map((b) => {
                                         const { bg, text } = getColorForBenefit(b.benefit_code_mnemonic);
                                         return (
                                             <span
                                                 key={b.id}
-                                                className={`px-3 py-1 rounded-full text-sm font-medium ${bg} ${text}`}
+                                                className={`flex items-center justify-centerlg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-3 py-1 rounded-[15px] font-medium ${bg} ${text}`}
                                             >
                                                 {b.benefit_code_mnemonic}
                                             </span>
@@ -102,10 +102,10 @@ export default function ProgramTable({ programs, loading }: ProgramTableProps) {
                         }
                     </tbody>
                 </table>
-                <div className="h-2 bg-[#F5F5F5] w-full"></div>
+                <div className="h-4 bg-[#F5F5F5] w-full"></div>
             </div>
 
-            <div className="pb-[18px]">
+            <div className="pb-[20px]">
                 <ViewAll
                     href="/programs"
                     label="View all Programs"

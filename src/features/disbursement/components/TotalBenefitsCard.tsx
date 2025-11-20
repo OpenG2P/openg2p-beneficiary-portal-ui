@@ -14,8 +14,8 @@ export default function TotalBenefitsCard({ benefits, loading }: TotalBenefitsCa
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
-                <div className="bg-[#ffcb30] px-8 pt-[30px] pb-[7px] flex justify-between items-end">
-                    <h3 className="text-[20px]/[23px] font-[600] text-black">
+                <div className="bg-[#ffcb30] px-8 pt-[30px] pb-[12px] flex justify-between items-end">
+                    <h3 className="lg:text-[16px]/[19px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-black">
                         Benefits Received till date
                     </h3>
                 </div>
@@ -47,8 +47,8 @@ export default function TotalBenefitsCard({ benefits, loading }: TotalBenefitsCa
                                     />
                                 </div>
 
-                                <div className="text-[20px]/[23px] text-white font-[700]">{b.value}</div>
-                                <div className="text-[14px]/[16px] text-black font-[600]">{b.label}</div>
+                                <div className="lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-white font-[700]">{b.value}</div>
+                                <div className="lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-black font-[600]">{b.label}</div>
                             </div>
                         ))}
                         {loading &&
@@ -59,15 +59,15 @@ export default function TotalBenefitsCard({ benefits, loading }: TotalBenefitsCa
                                         key={`placeholder-${index}`}
                                         className="flex flex-col items-center text-center min-w-[70px] animate-pulse"
                                     >
-                                        <div className="h-[37px] w-[37px] rounded-full bg-white/50 mb-1" />
-                                        <div className="h-4 w-10 bg-white/40 rounded mb-1" />
-                                        <div className="h-4 w-12 bg-black/20 rounded" />
+                                        <div className="h-[34px] w-[34px] rounded-full bg-white/50 mb-1" />
+                                        <div className="lg:h-4 xl:h-5 2xl:h-6 w-10 bg-white/40 rounded-[15px] mb-1" />
+                                        <div className="lg:h-4 xl:h-5 2xl:h-6 w-12 bg-black/20 rounded-[15px]" />
                                     </div>
                                 ))}
                     </div>
 
                     {loading ? (
-                        <div className="mt-3.5 mx-[30px] h-[35px] w-[180px] rounded-[15px] bg-black/20 animate-pulse"></div>
+                        <div className="mt-4 mx-[30px] h-[35px] w-[180px] rounded-[15px] bg-black/20 animate-pulse"></div>
                     ) : (
                         <ViewAll
                             href="/benefits"

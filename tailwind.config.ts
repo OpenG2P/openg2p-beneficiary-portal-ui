@@ -10,8 +10,10 @@ module.exports = {
   ],
   theme: {
     screens: {
-      'hd1366': '1366px',
-      'hd1536': '1536px',
+      'lg': '1280',
+      'xl': '1366',
+      '2xl': '1536px',
+      '3xl': '1920px',
     },
     extend: {
       colors: {

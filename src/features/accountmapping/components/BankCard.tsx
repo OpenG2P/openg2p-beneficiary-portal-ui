@@ -40,9 +40,9 @@ export default function BankCard({ result, loading }: BankCardProps) {
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
-                <div className="bg-[#ffcb30] px-8 pt-[30px] pb-[7px] flex justify-between items-end">
+                <div className="bg-[#ffcb30] px-8 pt-[30px] pb-[12px] flex justify-between items-end">
                     <div>
-                        <h3 className="text-[20px]/[23px] font-[600] text-black">
+                        <h3 className="lg:text-[16px]/[19px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-black">
                             Account/Wallet
                         </h3>
                     </div>
@@ -58,14 +58,14 @@ export default function BankCard({ result, loading }: BankCardProps) {
                     </div>
                 </div>
 
-                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22]  pt-[36px] pb-[18px] relative">
-                    <div className=" px-[30px] pb-[12px]">
+                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22]  pt-[32px] pb-[16px] relative">
+                    <div className=" px-[30px] pb-[10px]">
                         {!loading && isLinked && (
                             <>
-                                <div className="text-[16px]/[19px] font-[600] text-black">
+                                <div className="lg:text-[12px] xl:text-[14px] 2xl:text-[16px] font-[600] text-black">
                                     {accountData.title}
                                 </div>
-                                <div className="text-[16px]/[19px] font-[600] text-black">
+                                <div className="lg:text-[12px] xl:text-[14px] 2xl:text-[16px] font-[600] text-black">
                                     {accountData.value}
                                 </div>
                             </>
@@ -73,15 +73,20 @@ export default function BankCard({ result, loading }: BankCardProps) {
 
                         {loading && (
                             <div className="animate-pulse">
-                                <div className="h-4 w-2/3 bg-black/30 rounded mb-1"></div>
-                                <div className="h-4 w-1/2 bg-black/30 rounded mb-0.5"></div>
+                                <div className="lg:h-3 xl:h-4 2xl:h-5 w-2/3 bg-black/30 rounded mb-1"></div>
+                                <div className="lg:h-3 xl:h-4 2xl:h-5 w-1/2 bg-black/30 rounded mb-1"></div>
                             </div>
                         )}
 
                         {!loading && !isLinked && (
-                            <div className="text-[16px] h-9.5 text-black font-[600]">
-                                No linked account found
-                            </div>
+                            <>
+                                <div className="opacity-0 lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-black font-[600]">
+                                    No linked account found
+                                </div>
+                                <div className="lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-black font-[600]">
+                                    No linked account found
+                                </div>
+                            </>
                         )}
                     </div>
 

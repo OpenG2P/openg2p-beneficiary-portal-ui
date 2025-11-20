@@ -103,7 +103,7 @@ export default function NotificationDropdown() {
                                 .map((_, idx) => (
                                     <div
                                         key={`empty-${idx}`}
-                                        className={`pl-4 pr-2 flex items-start ${idx % 2 === 0 ? "bg-[#F5F5F5]" : ""}`}
+                                        className={`pl-4 pr-2 flex items-start ${(idx + notifications.length) % 2 === 0 ? "bg-[#F5F5F5]" : ""}`}
                                     >
                                         <div className="flex gap-3 p-3 w-full opacity-40">
                                             <div className="flex-shrink-0 w-10 h-10 rounded-md bg-gray-200"></div>

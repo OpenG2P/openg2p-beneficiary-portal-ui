@@ -58,8 +58,6 @@ export function useNovuNotifications(
             const listResponse = await novu.notifications.list({ limit: limit, offset });
             const raw = listResponse?.data?.notifications ?? [];
 
-            console.log(listResponse)
-
             const formatted = raw.map(formatNotification);
 
             setNotifications(prev => {

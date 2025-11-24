@@ -16,7 +16,7 @@ export default function NewsCard({ news, loading }: NewsCardProps) {
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mb-[50px] mr-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
-                <h3 className="lg:text-[16px]/[19px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-black">
+                <h3 className="lg:text-[18px]/[21px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-black">
                     Latest News
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
@@ -42,8 +42,8 @@ export default function NewsCard({ news, loading }: NewsCardProps) {
                                     />
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className="lg:text-[12px] xl:text-[14px] 2xl:text-[15px] font-[600] text-black line-clamp-1">{n.title}</h3>
-                                    <p className="lg:text-[11px] xl:text-[13px] 2xl:text-[14px] text-black/50 mt-1 line-clamp-2">
+                                    <h3 className="lg:text-[14px] xl:text-[14px] 2xl:text-[15px] font-[600] text-black line-clamp-1">{n.title}</h3>
+                                    <p className="lg:text-[13px] xl:text-[13px] 2xl:text-[14px] text-black/50 mt-1 line-clamp-2">
                                         {n.description}
                                     </p>
                                 </div>

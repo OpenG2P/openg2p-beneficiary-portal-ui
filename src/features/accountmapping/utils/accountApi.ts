@@ -1,55 +1,39 @@
 import { apiRequest } from "@/shared/utils/apiRequest";
+import { buildStandardPayload } from "@/shared/utils/payloadBuilder";
 
-function buildAccountPayload(extraPayload: Record<string, any> = {}) {
-    return {
-        request_header: {
-            sender_app_mnemonic: "BENEFICIARY_PORTAL",
-            sender_app_url: typeof window !== "undefined" ? window.location.origin : "",
-            request_id: "web-client",
-            request_timestamp: new Date().toISOString(),
-            instance_id: "portal-ui",
-        },
-        request_body: {
-            pagination_request: {
-                current_page: 1,
-                page_size: 1,
-                sort_by: "",
-                filter_by: "",
-                search_text: "",
-            },
-            request_payload: extraPayload,
-        },
-    };
+function createMapperRequest(
+    baseUrl: string,
+    endpoint: string,
+    transactionId: string,
+    requestData: any[],
+    requestKey: string
+) {
+    const payload = buildStandardPayload({
+        currentPage: 1,
+        pageSize: 1,
+        sortBy: "",
+        filterBy: "",
+        searchText: "",
+        extraPayload: {
+            transaction_id: transactionId,
+            [requestKey]: requestData
+        }
+    });
+    return apiRequest(baseUrl, endpoint, payload);
 }
 
-export function linkAccount(baseUrl: string, transaction_id: string, linkRequest: any[]) {
-    const payload = buildAccountPayload({
-        transaction_id: transaction_id,
-        link_request: linkRequest,
-    });
-    return apiRequest(baseUrl, "/mapper/link", payload);
+export function linkAccount(baseUrl: string, transactionId: string, linkRequest: any[]) {
+    return createMapperRequest(baseUrl, "/mapper/link", transactionId, linkRequest, "link_request");
 }
 
-export function resolveAccount(baseUrl: string, transaction_id: string, resolveRequest: any[]) {
-    const payload = buildAccountPayload({
-        transaction_id: transaction_id,
-        resolve_request: resolveRequest,
-    });
-    return apiRequest(baseUrl, "/mapper/resolve", payload);
+export function resolveAccount(baseUrl: string, transactionId: string, resolveRequest: any[]) {
+    return createMapperRequest(baseUrl, "/mapper/resolve", transactionId, resolveRequest, "resolve_request");
 }
 
-export function unlinkAccount(baseUrl: string, transaction_id: string, unlinkRequest: any[]) {
-    const payload = buildAccountPayload({
-        transaction_id: transaction_id,
-        unlink_request: unlinkRequest,
-    });
-    return apiRequest(baseUrl, "/mapper/unlink", payload);
+export function unlinkAccount(baseUrl: string, transactionId: string, unlinkRequest: any[]) {
+    return createMapperRequest(baseUrl, "/mapper/unlink", transactionId, unlinkRequest, "unlink_request");
 }
 
-export function updateAccount(baseUrl: string, transaction_id: string, updateRequest: any[]) {
-    const payload = buildAccountPayload({
-        transaction_id: transaction_id,
-        update_request: updateRequest,
-    });
-    return apiRequest(baseUrl, "/mapper/update", payload);
+export function updateAccount(baseUrl: string, transactionId: string, updateRequest: any[]) {
+    return createMapperRequest(baseUrl, "/mapper/update", transactionId, updateRequest, "update_request");
 }

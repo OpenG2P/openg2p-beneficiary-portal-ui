@@ -20,7 +20,7 @@ export function useDisbursementSummary() {
 
             const result = await getDisbursementSummaryTillDate(baseUrl);
             const list: DisbursementItem[] =
-                result?.g2p_response_body?.g2p_response_payload ?? [];
+                result?.response_body?.response_payload ?? [];
 
             const summary = transformDisbursementSummary(list);
 

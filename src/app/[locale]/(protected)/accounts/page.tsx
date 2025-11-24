@@ -62,11 +62,7 @@ export default function AccountsPage() {
     };
 
     if (loading) {
-        return (
-            <div className="px-[50px] py-4 min-h-screen bg-white flex justify-center items-center">
-                <Loading />
-            </div>
-        );
+        return <Loading title={"Account / Wallet"} height={"670px"} />
     }
 
     if (result?.type === "unknown") {

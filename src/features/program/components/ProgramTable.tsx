@@ -17,7 +17,7 @@ export default function ProgramTable({ programs, loading }: ProgramTableProps) {
 
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] w-full  overflow-hidden">
-            <div className="flex justify-between items-center px-8 pt-[30px] pb-[12px]">
+            <div className="flex justify-between items-center pl-7 pr-8 pt-[30px] pb-[12px]">
                 <h2 className="lg:text-[18px]/[21px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-[#ED7C22]">My Programs</h2>
                 <button className="hover:bg-gray-100 rounded-full transition p-1">
                     <Image

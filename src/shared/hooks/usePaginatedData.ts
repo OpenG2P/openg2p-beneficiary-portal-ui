@@ -68,7 +68,7 @@ export function usePaginatedData<T>({
     useEffect(() => {
         if (!baseUrl) return;
         fetchData(baseUrl);
-    }, [baseUrl, currentPage, pageSize]);
+    }, [baseUrl, currentPage, pageSize, fetchFn]);
 
     return { data, loading, totalPages, totalItems };
 }

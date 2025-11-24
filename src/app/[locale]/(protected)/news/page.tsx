@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocale } from "next-intl";
 import { AuthUtil } from "@/features/auth/components";
-import { Pagination, SearchInput } from "@/components/shared";
+import { Loading, Pagination, SearchInput } from "@/components/shared";
 import { NewsDetails } from "@/features/news/components";
-import { getNews } from "@/features/news/utils";
 import { News } from "@/features/news/types";
+import { useNews } from "@/features/news/hooks/useNews";
 
 export default function NewsPage() {
     const lang = useLocale();
@@ -13,24 +13,20 @@ export default function NewsPage() {
 
     const pageSize = 5;
     const [currentPage, setCurrentPage] = useState(1);
-    const [news, setNews] = useState<News[]>([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedNews, setSelectedNews] = useState<News | null>(null);
-    const [total, setTotal] = useState(0);
 
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH;
-
-    useEffect(() => {
-        if (!strapiUrl) return;
-        getNews(strapiUrl, currentPage, pageSize, searchQuery)
-            .then(({ data, total }) => {
-                setNews(data);
-                setTotal(total);
-            })
-            .catch(console.error);
-    }, [currentPage, searchQuery, strapiUrl]);
+    const { news, total, loading } = useNews(
+        currentPage,
+        pageSize,
+        searchQuery
+    );
 
     const totalPages = Math.ceil(total / pageSize);
+
+    if (loading) {
+        return <Loading title={"Latest News"} height={"655px"} />
+    }
 
     return (
         <div className="px-[50px] py-4 min-h-screen bg-white">
@@ -59,7 +55,7 @@ export default function NewsPage() {
                             className={`${idx % 2 === 0 ? "bg-gray-100" : "bg-white"} cursor-pointer`}
                         >
                             <div className="flex gap-3 px-6 py-3">
-                                <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16">
+                                <div className="flex-shrink-0 w-16 h-16">
                                     <img
                                         src={n.image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_PATH}${n.image.url}` : "/logo.png"}
                                         alt={n.image?.alternativeText || n.title}
@@ -74,10 +70,22 @@ export default function NewsPage() {
                                             {new Date(n.date).toLocaleString()}
                                         </span>
                                     )}
-                                    <p className="text-xs sm:text-sm text-gray-700 mt-1 line-clamp-1">
+                                    <p className="text-sm text-gray-700 mt-1 line-clamp-1">
                                         {n.description}
                                     </p>
                                 </div>
+                            </div>
+                        </div>
+                    ))}
+
+                    {Array.from({ length: pageSize - news.length }).map((_, idx) => (
+                        <div
+                            key={`empty-${idx}`}
+                            className={`${(news.length + idx) % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
+                        >
+                            <div className="flex gap-3 px-6 py-[17px]">
+                                <div className="w-16 h-16 bg-transparent" />
+                                <div className="flex-1 py-3">&nbsp;</div>
                             </div>
                         </div>
                     ))}

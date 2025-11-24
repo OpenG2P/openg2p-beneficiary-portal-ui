@@ -8,16 +8,19 @@ export function useNews(page = 1, limit = 3, search = "") {
     const [news, setNews] = useState<News[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [total, setTotal] = useState(0);
 
     const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH;
 
     async function fetchNews(baseUrl: string) {
         try {
+            setNews([]);
             setLoading(true);
             setError(null);
 
-            const { data } = await getNews(baseUrl, page, limit, search);
+            const { data, total } = await getNews(baseUrl, page, limit, search);
             setNews(data);
+            setTotal(total)
         } catch (err) {
             setError("Failed to load news");
             setNews([]);
@@ -34,6 +37,7 @@ export function useNews(page = 1, limit = 3, search = "") {
 
     return {
         news,
+        total,
         loading,
         error,
     };

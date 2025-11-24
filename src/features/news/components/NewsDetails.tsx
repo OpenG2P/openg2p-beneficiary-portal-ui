@@ -16,7 +16,7 @@ export default function NewsDetails({ news, onClose }: NewsDetailsProps) {
             width="800px"
             height="500px"
             sidebarWidth="25%"
-            sidebarImage="/application_details.png"
+            sidebarImage="/news_popup.png"
         >
             <div className="space-y-6 px-10 py-4">
                 <div>

@@ -228,6 +228,8 @@ export default function RegistriesPage() {
                                             getActionButton(r.action, r)
                                         ) : (
                                             <RegistryActionDropdown
+                                                rowIndex={idx}
+                                                totalRows={currentItems.length}
                                                 onActionSelect={(option) => handleActionSelect(option, r)}
                                             />
                                         )}

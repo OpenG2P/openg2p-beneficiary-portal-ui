@@ -159,6 +159,8 @@ export default function BenefitsPage() {
                                         <td className="px-8 py-3 text-black">{d.disbursement_schedule_date}</td>
                                         <td className="px-7 py-3 text-[16px] font-[400] text-black">
                                             <BenefitActionsDropdown
+                                                rowIndex={index}
+                                                totalRows={disbursements.length}
                                                 onActionSelect={(action) => handleProgramActionSelect(action, d)}
                                             />
                                         </td>

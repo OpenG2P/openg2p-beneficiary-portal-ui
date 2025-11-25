@@ -3,6 +3,8 @@ import ActionDropdown from "@/components/ui/ActionDropdown";
 
 interface Props {
     onActionSelect: (action: string) => void;
+    rowIndex: number;
+    totalRows: number;
 }
 
 const applicationoptions = [
@@ -10,6 +12,13 @@ const applicationoptions = [
     { slug: "progress", label: "Progress" },
 ];
 
-export default function ApplicationActionDropdown({ onActionSelect }: Props) {
-    return <ActionDropdown actions={applicationoptions} onActionSelect={onActionSelect} />;
+export default function ApplicationActionDropdown({ onActionSelect, rowIndex, totalRows }: Props) {
+    const shouldOpenUp = rowIndex >= totalRows - 4;
+    return (
+        <ActionDropdown
+            actions={applicationoptions}
+            onActionSelect={onActionSelect}
+            openUp={shouldOpenUp}
+        />
+    );
 }

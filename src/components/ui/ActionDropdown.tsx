@@ -13,9 +13,10 @@ interface Action {
 interface Props {
     actions: Action[];
     onActionSelect: (action: string) => void;
+    openUp?: boolean;
 }
 
-export default function ActionDropdown({ actions, onActionSelect }: Props) {
+export default function ActionDropdown({ actions, onActionSelect, openUp }: Props) {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -42,12 +43,23 @@ export default function ActionDropdown({ actions, onActionSelect }: Props) {
                 </button>
 
                 {open && (
-                    <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-l border-t border-gray-200 rotate-45 z-60"></div>
+                    <div
+                        className={`absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 z-60
+                            ${openUp
+                                ? "bottom-full mb-1 border-r border-b border-gray-200"
+                                : "top-full mt-1 border-l border-t border-gray-200"
+                            }`}
+                    />
                 )}
             </div>
 
             {open && (
-                <div className="absolute top-full mt-3 -left-1/10 -translate-x-1/2 bg-white border border-gray-200 rounded-md z-50 w-max whitespace-nowrap">
+                <div
+                    className={`absolute ${openUp
+                        ? "bottom-full mb-3"
+                        : "top-full mt-3"
+                        } -left-1/10 -translate-x-1/2 bg-white border border-gray-200 rounded-md z-50 w-max whitespace-nowrap`}
+                >
                     {actions.map((action) => (
                         <button
                             key={action.slug}

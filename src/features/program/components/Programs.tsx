@@ -200,6 +200,8 @@ export default function Programs({ showMyPrograms, activeTab, setActiveTab }: Pr
                                             <td className="px-8 py-3 text-[16px] font-[400] text-black">{p.enrolment_date}</td>
                                             <td className="px-7 py-3 text-[16px] font-[400] text-black">
                                                 <ProgramActionsDropdown
+                                                    rowIndex={idx}
+                                                    totalRows={programs.length}
                                                     onActionSelect={(action) => handleProgramActionSelect(action, p)}
                                                 />
                                             </td>

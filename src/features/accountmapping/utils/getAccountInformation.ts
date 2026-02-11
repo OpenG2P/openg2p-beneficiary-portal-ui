@@ -1,7 +1,7 @@
 import qs from "qs";
 
 export async function getAccountInformation(id: string) {
-    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH ?? "http://localhost:1337";
+    const baseUrl = process.env.STRAPI_API_URL ?? "http://localhost:1337";
     const path = `/api/account-informations/${id}`;
     const url = new URL(path, baseUrl);
 

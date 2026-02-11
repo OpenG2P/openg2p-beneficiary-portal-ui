@@ -4,8 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import { Novu } from "@novu/js";
 import { Notification } from "@/features/notification/types";
 
-const backendUrl = process.env.NEXT_PUBLIC_NOVU_BACKEND_URL;
-const socketUrl = process.env.NEXT_PUBLIC_NOVU_SOCKET_URL;
+// const backendUrl = process.env.NOVU_BACKEND_URL;
+// const socketUrl = process.env.NOVU_SOCKET_URL;
 
 export function useNovuNotifications(
     subscriberId: string,
@@ -19,9 +19,16 @@ export function useNovuNotifications(
 
     const novuRef = useRef<Novu | null>(null);
 
+    // const initNovu = () => {
+    //     if (!novuRef.current) {
+    //         novuRef.current = new Novu({ subscriberId, applicationIdentifier, backendUrl, socketUrl });
+    //     }
+    //     return novuRef.current;
+    // };
+
     const initNovu = () => {
         if (!novuRef.current) {
-            novuRef.current = new Novu({ subscriberId, applicationIdentifier, backendUrl, socketUrl });
+            novuRef.current = new Novu({ subscriberId, applicationIdentifier });
         }
         return novuRef.current;
     };

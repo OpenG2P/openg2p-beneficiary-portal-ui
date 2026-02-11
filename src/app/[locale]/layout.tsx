@@ -9,6 +9,8 @@ import "@/commons/globals.css";
 import { GlobalContextProvider } from "@/context/GlobalContext";
 
 import { prefixBasePath } from '@/shared/utils/path';
+import { RuntimeConfigProvider } from "@/context/RuntimeConfigContext";
+import { loadRuntimeConfig } from "../api/_utils/runtimeConfig.server";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -41,15 +43,18 @@ export default async function RootLayout(props: {
     const { children, params } = props;
     const { locale } = await params;
     const messages = await getMessages({ locale });
+    const config = loadRuntimeConfig();
 
     return (
         <html lang={locale}>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <NextIntlClientProvider locale={locale} messages={messages}>
-                    <GlobalContextProvider>
-                        {children}
-                    </GlobalContextProvider>
-                </NextIntlClientProvider>
+                <RuntimeConfigProvider config={config}>
+                    <NextIntlClientProvider locale={locale} messages={messages}>
+                        <GlobalContextProvider>
+                            {children}
+                        </GlobalContextProvider>
+                    </NextIntlClientProvider>
+                </RuntimeConfigProvider>
             </body>
         </html>
     );

@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { updateAccount } from "@/features/accountmapping/utils";
+import { updateAccountApi } from "../utils/accountApi";
+import { useSparUrl } from "./useSparUrl";
 
 export function useUpdateAccount() {
+    const sparUrl = useSparUrl();
     const [updating, setUpdating] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleUpdate(baseUrl: string, faData: any) {
+    async function handleUpdate(faData: any) {
         try {
             setUpdating(true);
             setError(null);
@@ -27,8 +29,15 @@ export function useUpdateAccount() {
                 },
             ];
 
-            const response = await updateAccount(baseUrl, "txn-" + Date.now(), updateRequest);
-            const { status } = response?.response_body?.response_payload?.update_response?.[0];
+            const response = await updateAccountApi(
+                sparUrl,
+                "txn-" + Date.now(),
+                updateRequest
+            );
+
+            const status =
+                response?.response_body?.response_payload?.update_response?.[0]?.status;
+
             setResult(status);
             return response;
         } catch (err: any) {

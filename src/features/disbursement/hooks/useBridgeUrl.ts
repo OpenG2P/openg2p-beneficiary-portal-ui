@@ -1,19 +1,13 @@
 "use client";
 
 import { useDepartment } from "@/context/GlobalContext";
-
-const MULTI_DEPT_ENABLED =
-    process.env.NEXT_PUBLIC_MULTI_DEPARTMENT === "true";
-
-const DEFAULT_BRIDGE_URL =
-    process.env.NEXT_PUBLIC_BRIDGE_API_PATH ?? "";
+import { useRuntimeConfig } from "@/context/RuntimeConfigContext";
 
 export function useBridgeUrl() {
     const { currentDepartment } = useDepartment();
+    const { multiDepartmentEnabled, bridgeApiUrl } = useRuntimeConfig();
 
-    const bridgeUrl = MULTI_DEPT_ENABLED
-        ? currentDepartment?.bridge_url
-        : DEFAULT_BRIDGE_URL;
-
-    return bridgeUrl;
+    return multiDepartmentEnabled
+        ? currentDepartment?.bridge_url ?? ""
+        : bridgeApiUrl;
 }

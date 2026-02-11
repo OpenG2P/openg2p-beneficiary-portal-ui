@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { getNews } from "@/features/news/utils";
 import { News } from "@/features/news/types";
+import { useRuntimeConfig } from "@/context/RuntimeConfigContext";
 
 export function useNews(page = 1, limit = 3, search = "") {
     const [news, setNews] = useState<News[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [total, setTotal] = useState(0);
-
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_PATH;
+    const { strapiApiUrl } = useRuntimeConfig();
 
     async function fetchNews(baseUrl: string) {
         try {
@@ -30,10 +30,10 @@ export function useNews(page = 1, limit = 3, search = "") {
     }
 
     useEffect(() => {
-        if (!strapiUrl) return;
+        if (!strapiApiUrl) return;
 
-        fetchNews(strapiUrl);
-    }, [page, limit, search, strapiUrl]);
+        fetchNews(strapiApiUrl);
+    }, [page, limit, search, strapiApiUrl]);
 
     return {
         news,

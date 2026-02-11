@@ -21,7 +21,6 @@ import {
     useLinkAccount,
     useAccountData,
     useBranches,
-    useSparUrl
 } from "@/features/accountmapping/hooks";
 
 
@@ -32,8 +31,6 @@ export default function AccountUpdatePage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
     const { profile } = useAuth();
-
-    const sparUrl = useSparUrl();
 
     const params = useParams();
     const mapper = params.mapper;
@@ -87,7 +84,6 @@ export default function AccountUpdatePage() {
     }, [updateResult, linkResult, updateError, linkError]);
 
     const handleSubmit = async (e: React.FormEvent) => {
-        if (!sparUrl) return;
         e.preventDefault();
 
         const faData = buildFaData({
@@ -105,9 +101,9 @@ export default function AccountUpdatePage() {
         });
 
         if (mapper === "link") {
-            await handleLink(sparUrl, faData);
+            await handleLink(faData);
         } else {
-            await handleUpdate(sparUrl, faData);
+            await handleUpdate(faData);
         }
     };
 

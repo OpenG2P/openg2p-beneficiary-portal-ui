@@ -1,12 +1,16 @@
+"use client";
+
 import { useState } from "react";
-import { unlinkAccount } from "@/features/accountmapping/utils";
+import { unlinkAccountApi } from "../utils/accountApi";
+import { useSparUrl } from "./useSparUrl";
 
 export function useUnlinkAccount() {
+    const sparUrl = useSparUrl();
     const [unlinking, setUnlinking] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleUnlink(baseUrl: string) {
+    async function handleUnlink() {
         try {
             setUnlinking(true);
             setError(null);
@@ -24,7 +28,12 @@ export function useUnlinkAccount() {
                 },
             ];
 
-            const response = await unlinkAccount(baseUrl, "txn-" + Date.now(), unlinkRequest);
+            const response = await unlinkAccountApi(
+                sparUrl,
+                "txn-" + Date.now(),
+                unlinkRequest
+            );
+
             setResult(response);
             return response;
         } catch (err: any) {

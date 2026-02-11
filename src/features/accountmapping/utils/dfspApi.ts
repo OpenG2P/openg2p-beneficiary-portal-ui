@@ -1,29 +1,13 @@
-import { apiRequest } from "@/shared/utils/apiRequest";
-import { buildStandardPayload } from "@/shared/utils/payloadBuilder";
+import { portalApi } from "@/shared/utils/apiClient";
 
-export function getAllBanks(baseUrl: string) {
-    return apiRequest(
-        baseUrl,
-        "/dfsp/fetch-banks",
-        buildStandardPayload({ pageSize: 100 })
-    );
-}
+export const fetchBanks = (sparUrl: string) =>
+    portalApi("/api/dfsp/banks", { sparUrl });
 
-export function getBranchesByBankId(baseUrl: string, bankId: number) {
-    return apiRequest(
-        baseUrl,
-        "/dfsp/fetch-branches",
-        buildStandardPayload({
-            pageSize: 100,
-            extraPayload: { bank_id: bankId }
-        })
-    );
-}
+export const fetchWalletProviders = (sparUrl: string) =>
+    portalApi("/api/dfsp/wallets", { sparUrl });
 
-export function getAllWalletProviders(baseUrl: string) {
-    return apiRequest(
-        baseUrl,
-        "/dfsp/fetch-wallet-service-providers",
-        buildStandardPayload({ pageSize: 100 })
-    );
-}
+export const fetchBranchesByBankId = (
+    sparUrl: string,
+    bankId: number
+) =>
+    portalApi("/api/dfsp/branches", { sparUrl, bankId });

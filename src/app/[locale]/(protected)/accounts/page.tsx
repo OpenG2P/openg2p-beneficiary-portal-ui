@@ -14,7 +14,6 @@ import { prefixBasePath } from "@/shared/utils/path";
 import {
     useUnlinkAccount,
     useResolveAccount,
-    useSparUrl
 } from "@/features/accountmapping/hooks";
 
 import {
@@ -31,8 +30,6 @@ export default function AccountsPage() {
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
-
-    const sparUrl = useSparUrl();
 
     const router = useRouter();
 
@@ -51,10 +48,9 @@ export default function AccountsPage() {
 
 
     const confirmRemoveHandler = async () => {
-        if (!sparUrl) return;
         try {
-            await handleUnlink(sparUrl);
-            await handleResolve(sparUrl);
+            await handleUnlink();
+            await handleResolve();
             setShowRemoveModal(false);
         } catch (err) {
             console.error("Failed to unlink account:", err);

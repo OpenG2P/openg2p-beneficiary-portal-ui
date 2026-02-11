@@ -1,39 +1,45 @@
-import { apiRequest } from "@/shared/utils/apiRequest";
-import { buildStandardPayload } from "@/shared/utils/payloadBuilder";
+import { portalApi } from "@/shared/utils/apiClient";
 
-function createMapperRequest(
-    baseUrl: string,
-    endpoint: string,
+export const resolveAccountApi = (
+    sparUrl: string,
     transactionId: string,
-    requestData: any[],
-    requestKey: string
-) {
-    const payload = buildStandardPayload({
-        currentPage: 1,
-        pageSize: 1,
-        sortBy: "",
-        filterBy: "",
-        searchText: "",
-        extraPayload: {
-            transaction_id: transactionId,
-            [requestKey]: requestData
-        }
+    resolveRequest: any[]
+) =>
+    portalApi("/api/account-mapper/resolve", {
+        sparUrl,
+        transactionId,
+        resolveRequest,
     });
-    return apiRequest(baseUrl, endpoint, payload);
-}
 
-export function linkAccount(baseUrl: string, transactionId: string, linkRequest: any[]) {
-    return createMapperRequest(baseUrl, "/mapper/link", transactionId, linkRequest, "link_request");
-}
+export const linkAccountApi = (
+    sparUrl: string,
+    transactionId: string,
+    linkRequest: any[]
+) =>
+    portalApi("/api/account-mapper/link", {
+        sparUrl,
+        transactionId,
+        linkRequest,
+    });
 
-export function resolveAccount(baseUrl: string, transactionId: string, resolveRequest: any[]) {
-    return createMapperRequest(baseUrl, "/mapper/resolve", transactionId, resolveRequest, "resolve_request");
-}
+export const unlinkAccountApi = (
+    sparUrl: string,
+    transactionId: string,
+    unlinkRequest: any[]
+) =>
+    portalApi("/api/account-mapper/unlink", {
+        sparUrl,
+        transactionId,
+        unlinkRequest,
+    });
 
-export function unlinkAccount(baseUrl: string, transactionId: string, unlinkRequest: any[]) {
-    return createMapperRequest(baseUrl, "/mapper/unlink", transactionId, unlinkRequest, "unlink_request");
-}
-
-export function updateAccount(baseUrl: string, transactionId: string, updateRequest: any[]) {
-    return createMapperRequest(baseUrl, "/mapper/update", transactionId, updateRequest, "update_request");
-}
+export const updateAccountApi = (
+    sparUrl: string,
+    transactionId: string,
+    updateRequest: any[]
+) =>
+    portalApi("/api/account-mapper/update", {
+        sparUrl,
+        transactionId,
+        updateRequest,
+    });

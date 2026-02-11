@@ -3,10 +3,10 @@ import Image from "next/image";
 
 import { prefixBasePath } from '@/shared/utils/path';
 import { LanguageDropdown, ProfileDropdown, NotificationDropdown, DepartmentDropdown } from '@/components/layout';
-
-const MULTI_DEPT_ENABLED = process.env.NEXT_PUBLIC_MULTI_DEPARTMENT === "true";
+import { useRuntimeConfig } from "@/context/RuntimeConfigContext";
 
 export default function Header() {
+    const { multiDepartmentEnabled } = useRuntimeConfig();
     return (
         <header className="w-full bg-white flex items-center justify-between px-3 py-3 fixed top-0 left-0 right-0 z-20 h-[70px] border-b border-gray-300 shadow-[0px_4px_10px_0px_#00000026]">
             <div className="flex items-center gap-3">
@@ -19,7 +19,7 @@ export default function Header() {
                 <span className="text-[20px] font-[500] text-black">
                     Beneficiary Portal
                 </span>
-                {MULTI_DEPT_ENABLED && <DepartmentDropdown />}
+                {multiDepartmentEnabled && <DepartmentDropdown />}
             </div>
 
             <div className="flex items-center gap-6">

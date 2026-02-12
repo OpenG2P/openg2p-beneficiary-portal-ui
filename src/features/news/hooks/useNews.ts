@@ -18,7 +18,7 @@ export function useNews(page = 1, limit = 3, search = "") {
             setLoading(true);
             setError(null);
 
-            const { data, total } = await getNews(baseUrl, page, limit, search);
+            const { data, total } = await getNews(page, limit, search);
             setNews(data);
             setTotal(total)
         } catch (err) {

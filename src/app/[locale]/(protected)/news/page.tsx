@@ -6,7 +6,7 @@ import { Loading, Pagination, SearchInput } from "@/components/shared";
 import { NewsDetails } from "@/features/news/components";
 import { News } from "@/features/news/types";
 import { useNews } from "@/features/news/hooks/useNews";
-import { useRuntimeConfig } from "@/context/RuntimeConfigContext";
+import { getMediaUrl } from "@/features/news/utils/utils";
 
 export default function NewsPage() {
     const lang = useLocale();
@@ -28,8 +28,6 @@ export default function NewsPage() {
     if (loading) {
         return <Loading title={"Latest News"} height={"655px"} />
     }
-
-    const { strapiApiUrl } = useRuntimeConfig();
 
     return (
         <div className="px-[50px] py-4 min-h-screen bg-white">
@@ -60,7 +58,7 @@ export default function NewsPage() {
                             <div className="flex gap-3 px-6 py-3">
                                 <div className="flex-shrink-0 w-16 h-16">
                                     <img
-                                        src={n.image?.url ? `${strapiApiUrl}${n.image.url}` : "/logo.png"}
+                                        src={getMediaUrl(n.image?.url)}
                                         alt={n.image?.alternativeText || n.title}
                                         className="w-full h-full object-contain rounded-md bg-white"
                                     />
@@ -101,7 +99,7 @@ export default function NewsPage() {
                         onPageChange={setCurrentPage}
                     />
                     <div className="text-gray-600">
-                        Showing {(currentPage - 1) * pageSize + 1}–
+                        Showing {(currentPage - 1) * pageSize + 1}-
                         {Math.min(currentPage * pageSize, total)} of {total} news
                     </div>
                 </div>

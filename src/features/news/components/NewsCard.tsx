@@ -5,7 +5,7 @@ import { prefixBasePath } from "@/shared/utils/path";
 import { ViewAll } from "@/components/shared";
 import { News } from "@/features/news/types";
 import { NewsCardEmptyRows, NewsCardLoading } from "@/features/news/components";
-import { useRuntimeConfig } from "@/context/RuntimeConfigContext";
+import { getMediaUrl } from "../utils/utils";
 
 
 interface NewsCardProps {
@@ -14,7 +14,6 @@ interface NewsCardProps {
 }
 
 export default function NewsCard({ news, loading }: NewsCardProps) {
-    const { strapiApiUrl } = useRuntimeConfig();
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mb-[50px] mr-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
@@ -38,7 +37,7 @@ export default function NewsCard({ news, loading }: NewsCardProps) {
                             <div className="flex gap-4 px-8 py-3">
                                 <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-[#FFF4EB]">
                                     <img
-                                        src={n.image?.url ? `${strapiApiUrl}${n.image.url}` : "/logo.png"}
+                                        src={getMediaUrl(n.image?.url)}
                                         alt={n.image?.alternativeText || n.title}
                                         className="w-full h-full object-contain rounded-md bg-white"
                                     />

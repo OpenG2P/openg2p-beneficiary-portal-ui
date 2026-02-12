@@ -41,7 +41,7 @@ export default function AccountsPage() {
     const [accountInfo, setAccountInfo] = useState<any>(null);
 
     useEffect(() => {
-        getAccountInformation("ahuh2rqcqvv1wl7rysxfoblz")
+        getAccountInformation()
             .then((data) => setAccountInfo(data))
             .catch(console.error);
     }, []);

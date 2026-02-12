@@ -1,20 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { resolveAccount } from "@/features/accountmapping/utils/accountApi";
-import { extractResolvedData } from "@/features/accountmapping/utils/extractResolvedData";
+import { extractResolvedData } from "@/features/accountmapping/utils";
+import { useSparUrl } from "@/features/accountmapping/hooks";
+import { resolveAccountApi } from "../utils/accountApi";
 
-export function useResolveAccount(baseUrl: string) {
+export function useResolveAccount() {
+    const sparUrl = useSparUrl();
+
     const [result, setResult] = useState<any>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    async function fetchResolve() {
+    async function handleResolve() {
         try {
             setLoading(true);
             setError(null);
 
-            const request = [
+            const resolveRequest = [
                 {
                     reference_id: "ref-" + Date.now(),
                     timestamp: new Date().toISOString(),
@@ -27,7 +30,12 @@ export function useResolveAccount(baseUrl: string) {
                 },
             ];
 
-            const response = await resolveAccount(baseUrl, "txn-" + Date.now(), request);
+            const response = await resolveAccountApi(
+                sparUrl,
+                "txn-" + Date.now(),
+                resolveRequest
+            );
+
             setResult(extractResolvedData(response));
         } catch (err: any) {
             setError(err.message || "Failed to resolve account");
@@ -38,11 +46,8 @@ export function useResolveAccount(baseUrl: string) {
     }
 
     useEffect(() => {
-        if (baseUrl) {
-            fetchResolve();
-        }
-    }, [baseUrl]);
+        if (sparUrl) handleResolve();
+    }, [sparUrl]);
 
-    return { result, loading, error };
+    return { result, loading, error, handleResolve };
 }
-

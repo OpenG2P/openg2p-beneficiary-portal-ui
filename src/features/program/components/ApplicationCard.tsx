@@ -45,7 +45,7 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mr-[50px] mb-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
-                <h3 className="text-[18px] hd1366:text-[19px] hd1536:text-[20px] font-[600] text-black">
+                <h3 className="lg:text-[18px]/[21px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-black">
                     My Applications
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
@@ -58,7 +58,7 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                 </button>
             </div>
 
-            <div className="flex px-8 py-4 bg-[#F5F5F5] font-[700] text-black text-[14px] hd1366:text-[15px] hd1536:text-[16px]">
+            <div className="flex px-8 py-4 bg-[#F5F5F5] font-[700] text-black lg:text-[15px] xl:text-[15px] 2xl:text-[17px]">
                 <span className="flex-1">Name</span>
                 <span className="min-w-[90px]">Status</span>
             </div>
@@ -72,11 +72,11 @@ export default function ApplicationCard({ applications }: ApplicationCardProps) 
                             className={`relative ${idx % 2 === 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
                         >
                             <div className="flex items-center justify-start py-3 px-8">
-                                <p className="flex-1 truncate font-[400] text-black text-[14px] py-1 hd1366:text-[15px] hd1536:text-[16px]">
+                                <p className="flex-1 truncate font-[400] text-black lg:text-[14px] xl:text-[14px] 2xl:text-[16px]">
                                     {app.name}
                                 </p>
                                 <p
-                                    className={`min-w-[90px] text-center font-[400] rounded-full px-1 py-1 text-[13px] hd1366:text-[14px] hd1536:text-[15px] ${bgClass} ${textClass}`}
+                                    className={`min-w-[90px] text-center font-[400] rounded-full px-1 py-1 lg:text-[14px] xl:text-[14px] 2xl:text-[16px] ${bgClass} ${textClass}`}
                                 >
                                     {app.status}
                                 </p>

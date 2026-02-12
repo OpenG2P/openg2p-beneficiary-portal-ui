@@ -18,7 +18,7 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
     return (
         <div className="bg-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex-1 mr-[30px] mb-[50px]">
             <div className="flex items-center justify-between h-16 px-8">
-                <h3 className="text-[18px] hd1366:text-[19px] hd1536:text-[20px] font-[600] text-black">
+                <h3 className="lg:text-[18px]/[21px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-black">
                     My Registries
                 </h3>
                 <button className="p-1 rounded-full hover:bg-gray-200">
@@ -39,7 +39,7 @@ export default function RegistryCard({ registries }: RegistryCardProps) {
                     >
                         <div className="flex items-center justify-start py-4 px-8">
                             <span className="w-2.5 h-2.5 rounded-full bg-gray-400 mr-3 flex-shrink-0"></span>
-                            <p className="font-[400] text-black text-[14px] hd1366:text-[15px] hd1536:text-[16px]">
+                            <p className="font-[400] text-black lg:text-[14px] xl:text-[14px] 2xl:text-[16px]">
                                 {registry.name}
                             </p>
                         </div>

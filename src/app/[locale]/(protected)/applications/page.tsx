@@ -243,6 +243,8 @@ export default function ApplicationsPage() {
                                         <td className="px-8 py-3 text-black">{application.date}</td>
                                         <td className="px-8 py-3">
                                             <ApplicationActionDropdown
+                                                rowIndex={index}
+                                                totalRows={currentItems.length}
                                                 onActionSelect={(action) => handleActionSelect(action, application)}
                                             />
                                         </td>

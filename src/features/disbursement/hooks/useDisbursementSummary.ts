@@ -1,53 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getDisbursementSummaryTillDate } from "@/features/disbursement/utils/disbursementApi";
+import { getDisbursementSummaryTillDate, transformDisbursementSummary } from "@/features/disbursement/utils";
 import {
     BenefitCardData,
     DisbursementItem,
-    DisbursementSummary
-} from "@/features/disbursement/types/disbursementTypes";
-
-const BASE_URL = "http://localhost:8082";
-
-function transformDisbursementSummary(list: DisbursementItem[] = []): DisbursementSummary {
-    const summary: DisbursementSummary = {
-        digital_cash: 0,
-        physical_cash: 0,
-        commodity: 0,
-        service: 0,
-    };
-
-    list.forEach((item) => {
-        switch (item.benefit_type) {
-            case "CASH_DIGITAL":
-                summary.digital_cash += item.total_quantity_received ?? 0;
-                break;
-            case "CASH_PHYSICAL":
-                summary.physical_cash += item.total_quantity_received ?? 0;
-                break;
-            case "COMMODITY":
-                summary.commodity += item.total_quantity_received ?? 0;
-                break;
-            case "SERVICE":
-                summary.service += item.total_quantity_received ?? 0;
-                break;
-        }
-    });
-
-    return summary;
-}
+} from "@/features/disbursement/types";
+import { useBridgeUrl } from "@/features/disbursement/hooks/useBridgeUrl";
 
 export function useDisbursementSummary() {
+    const bridgeUrl = useBridgeUrl();
+
     const [benefits, setBenefits] = useState<BenefitCardData[]>([]);
     const [loading, setLoading] = useState(true);
 
-    async function fetchSummary() {
+    async function fetchSummary(baseUrl: string) {
         try {
             setLoading(true);
 
-            const result = await getDisbursementSummaryTillDate(BASE_URL);
-            const list: DisbursementItem[] = result?.g2p_response_body?.g2p_response_payload ?? [];
+            const result = await getDisbursementSummaryTillDate(baseUrl);
+            const list: DisbursementItem[] =
+                result?.response_body?.response_payload ?? [];
 
             const summary = transformDisbursementSummary(list);
 
@@ -66,12 +39,12 @@ export function useDisbursementSummary() {
     }
 
     useEffect(() => {
-        fetchSummary();
-    }, []);
+        if (!bridgeUrl) return;
+        fetchSummary(bridgeUrl);
+    }, [bridgeUrl]);
 
     return {
         benefits,
         loading,
-        refetch: fetchSummary
     };
 }

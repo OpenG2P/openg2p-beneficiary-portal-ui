@@ -9,7 +9,6 @@ export async function apiRequest(
         ?.find(row => row.startsWith("X-Access-Token="))
         ?.split("=")[1];
 
-
     const finalHeaders: Record<string, string> = {
         "Content-Type": "application/json",
         ...headers,

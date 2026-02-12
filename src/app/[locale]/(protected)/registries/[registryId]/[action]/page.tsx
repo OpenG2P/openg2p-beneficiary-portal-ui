@@ -174,7 +174,7 @@ export default function RegistryActionPage() {
         }
     };
 
-    if (!registry) return <Loading />;
+    if (!registry) return <Loading title={"Registries"} height={"670px"} />;
 
     const isAddressChange = action === "address-change";
     const leftHeading = isAddressChange ? "Change Address" : "Social Welfare Registration";

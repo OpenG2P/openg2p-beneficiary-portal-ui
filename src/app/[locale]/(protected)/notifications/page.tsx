@@ -17,10 +17,11 @@ export default function NotificationsPage() {
 
     const { notifications, loadMore, isLoading, markAsRead } = useNotification()
 
-    const filteredNotifications = notifications.filter(n =>
-        n.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        n.body.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    // const filteredNotifications = notifications.filter(n =>
+    //     n.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    //     n.body.toLowerCase().includes(searchQuery.toLowerCase())
+    // );
+    const filteredNotifications = notifications
 
     return (
         <div className="px-[50px] py-4 min-h-screen bg-white">

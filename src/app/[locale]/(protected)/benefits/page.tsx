@@ -1,15 +1,15 @@
 "use client";
+
+import Image from "next/image";
 import { useState } from "react";
 import { useLocale } from "next-intl";
 
 import { AuthUtil } from '@/features/auth/components';
-import { Pagination, SearchInput, FilterInput } from '@/components/shared';
+import { Pagination, SearchInput, FilterInput, Loading } from '@/components/shared';
 import { prefixBasePath } from "@/shared/utils/path";
-import { BenefitActionsDropdown, DeliveryDetails } from "@/features/disbursement/components";
-import { DisbursementRecord } from "@/features/disbursement/types/disbursementTypes";
-
-import Image from "next/image";
-import { useDisbursementList } from "@/features/disbursement/hooks/useDisbursementList";
+import { BenefitActionsDropdown, DeliveryDetails, BenefitsPageEmptyRow } from "@/features/disbursement/components";
+import { DisbursementRecord } from "@/features/disbursement/types";
+import { useDisbursementList } from "@/features/disbursement/hooks";
 
 const modalBenefit = {
     programName: "Social Registry Upgrade",
@@ -39,7 +39,7 @@ export default function BenefitsPage() {
     const [selectedBenefit, setSelectedBenefit] = useState<DisbursementRecord | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const { disbursements, loading, totalItems } = useDisbursementList(currentPage, PAGE_SIZE);
+    const { disbursements, loading, totalItems, totalPages } = useDisbursementList(currentPage, PAGE_SIZE);
 
     const handleOpenModal = (benefit: DisbursementRecord) => {
         setSelectedBenefit(benefit);
@@ -63,6 +63,11 @@ export default function BenefitsPage() {
 
     const startItem = totalItems === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
     const endItem = Math.min(currentPage * PAGE_SIZE, totalItems);
+    const emptyRowsCount = Math.max(PAGE_SIZE - disbursements.length, 0);
+
+    if (loading) {
+        return <Loading title={"Benefits"} height={"633px"} />
+    }
 
     return (
         <>
@@ -78,7 +83,7 @@ export default function BenefitsPage() {
                                 <tr>
                                     <th colSpan={5}>
                                         <div className="flex justify-between items-center px-2 py-4">
-                                            <span className="px-6 py-2 text-[#ED7C22] text-[20px] font-[600]">Benefits Received till Date</span>
+                                            <span className="px-6 py-2 text-[#ED7C22] text-[18px] font-[600]">Benefits Received till Date</span>
                                             <div className="flex gap-4 pr-6">
                                                 <FilterInput
                                                     value={filterText}
@@ -101,7 +106,7 @@ export default function BenefitsPage() {
                                 </tr>
 
                                 <tr className="bg-[#F5F5F5]">
-                                    <th className="px-8 py-3 text-left text-black">
+                                    <th className="px-8 py-4 text-left text-black">
                                         <div className="flex items-center gap-0.5">
                                             Program Name
                                             <Image
@@ -113,7 +118,7 @@ export default function BenefitsPage() {
                                             />
                                         </div>
                                     </th>
-                                    <th className="px-8 py-3 text-left text-black">
+                                    <th className="px-8 py-4 text-left text-black">
                                         <div className="flex items-center gap-0.5">
                                             Benefit Code
                                             <Image
@@ -125,8 +130,8 @@ export default function BenefitsPage() {
                                             />
                                         </div>
                                     </th>
-                                    <th className="px-8 py-3 text-left text-black">Quantity</th>
-                                    <th className="px-8 py-3 text-left text-black">
+                                    <th className="px-8 py-4 text-left text-black">Quantity</th>
+                                    <th className="px-8 py-4 text-left text-black">
                                         <div className="flex items-center gap-0.5">
                                             Received Date
                                             <Image
@@ -138,7 +143,7 @@ export default function BenefitsPage() {
                                             />
                                         </div>
                                     </th>
-                                    <th className="pl-7 pr-8 py-3 text-left text-black">Action</th>
+                                    <th className="pl-7 pr-8 py-4 text-left text-black">Action</th>
                                 </tr>
                             </thead>
 
@@ -152,12 +157,18 @@ export default function BenefitsPage() {
                                         <td className="px-8 py-3 text-black">{d.benefit_code}</td>
                                         <td className="px-8 py-3 text-black">{d.disbursement_quantity} {d.measurement_unit}</td>
                                         <td className="px-8 py-3 text-black">{d.disbursement_schedule_date}</td>
-                                        <td className="px-7 py-2 text-[16px] font-[400] text-black">
+                                        <td className="px-7 py-3 text-[16px] font-[400] text-black">
                                             <BenefitActionsDropdown
+                                                rowIndex={index}
+                                                totalRows={disbursements.length}
                                                 onActionSelect={(action) => handleProgramActionSelect(action, d)}
                                             />
                                         </td>
                                     </tr>
+                                ))}
+
+                                {[...Array(emptyRowsCount)].map((_, i) => (
+                                    <BenefitsPageEmptyRow key={`empty-${i}`} index={disbursements.length + i} />
                                 ))}
                             </tbody>
                         </table>
@@ -165,7 +176,7 @@ export default function BenefitsPage() {
 
                     {!loading && totalItems > 0 && (
                         <div className="flex items-center gap-6 px-8 py-4 text-sm text-black">
-                            <Pagination currentPage={currentPage} totalPages={totalItems / PAGE_SIZE} onPageChange={setCurrentPage} />
+                            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                             <div className="text-gray-600">
                                 Showing {startItem}-{endItem} of {totalItems} Benefits
                             </div>

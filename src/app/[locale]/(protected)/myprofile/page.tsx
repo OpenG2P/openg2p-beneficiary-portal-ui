@@ -14,7 +14,7 @@ export default function MyProfile() {
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
 
     return (
-        <div className="pl-[50px] py-4 min-h-screen bg-white">
+        <div className="px-[50px] py-4 min-h-screen bg-white">
             <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
                 My Profile
             </h1>

@@ -4,6 +4,8 @@ import { ActionDropdown } from "@/components/ui";
 
 interface Props {
     onActionSelect: (action: string) => void;
+    rowIndex: number;
+    totalRows: number;
 }
 
 const programActions = [
@@ -13,6 +15,13 @@ const programActions = [
     { slug: "disbursement-history", label: "Disbursement History" },
 ];
 
-export default function ProgramActionsDropdown({ onActionSelect }: Props) {
-    return <ActionDropdown actions={programActions} onActionSelect={onActionSelect} />;
+export default function ProgramActionsDropdown({ onActionSelect, rowIndex, totalRows }: Props) {
+    const shouldOpenUp = rowIndex >= totalRows - 4;
+    return (
+        <ActionDropdown
+            actions={programActions}
+            onActionSelect={onActionSelect}
+            openUp={shouldOpenUp}
+        />
+    );
 }

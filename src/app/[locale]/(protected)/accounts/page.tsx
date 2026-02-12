@@ -11,33 +11,37 @@ import { Loading } from "@/components";
 
 import { prefixBasePath } from "@/shared/utils/path";
 
-import { useUnlinkAccount, useResolveAccount } from "@/features/accountmapping/hooks";
+import {
+    useUnlinkAccount,
+    useResolveAccount,
+} from "@/features/accountmapping/hooks";
+
 import {
     AccountRemoveModal,
     AccountInfoSection,
     AccountSidebar,
     AccountEmptyState
 } from "@/features/accountmapping/components";
-import { getAccountInformation } from "@/features/accountmapping/utils/getAccountInformation";
 
+import { getAccountInformation } from "@/features/accountmapping/utils";
 
 export default function AccountsPage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
 
     const { profile } = useAuth();
+
     const router = useRouter();
 
-    const BASE_URL = "http://localhost:8080/mapper";
-    const { result, loading } = useResolveAccount(BASE_URL);
-    const { handleUnlink, unlinking } = useUnlinkAccount(BASE_URL);
+    const { result, loading, handleResolve } = useResolveAccount();
+    const { handleUnlink, unlinking } = useUnlinkAccount();
 
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
     const [accountInfo, setAccountInfo] = useState<any>(null);
 
     useEffect(() => {
-        getAccountInformation("ahuh2rqcqvv1wl7rysxfoblz")
+        getAccountInformation()
             .then((data) => setAccountInfo(data))
             .catch(console.error);
     }, []);
@@ -46,18 +50,15 @@ export default function AccountsPage() {
     const confirmRemoveHandler = async () => {
         try {
             await handleUnlink();
+            await handleResolve();
             setShowRemoveModal(false);
         } catch (err) {
-            console.error("❌ Failed to unlink account:", err);
+            console.error("Failed to unlink account:", err);
         }
     };
 
     if (loading) {
-        return (
-            <div className="px-[50px] py-4 min-h-screen bg-white flex justify-center items-center">
-                <Loading />
-            </div>
-        );
+        return <Loading title={"Account / Wallet"} height={"670px"} />
     }
 
     if (result?.type === "unknown") {

@@ -44,8 +44,7 @@ export default function Dashboard() {
 
     const { benefits, loading: benefitLoading } = useDisbursementSummary();
 
-    const BASE_URL = "http://localhost:8080/mapper";
-    const { result, loading: accountLoading } = useResolveAccount(BASE_URL);
+    const { result, loading: accountLoading } = useResolveAccount();
 
     return (
         <div className="pl-[50px] py-4 min-h-screen bg-white">
@@ -59,7 +58,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="flex flex-col gap-4 sm:gap-6 h-full pb-[50px] pr-[50px]">
-                    <TotalBenefitsCard benefits={benefits} />
+                    <TotalBenefitsCard benefits={benefits} loading={benefitLoading} />
                     <BankCard result={result} loading={accountLoading} />
                 </div>
             </div>
@@ -67,7 +66,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 xl:grid-cols-3 ">
                 <RegistryCard registries={previewRegistries} />
                 <ApplicationCard applications={dashboardApplications} />
-                <NewsCard news={news} />
+                <NewsCard news={news} loading={newsLoading} />
             </div>
         </div>
     );

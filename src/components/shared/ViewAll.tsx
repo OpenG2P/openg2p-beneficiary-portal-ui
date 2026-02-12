@@ -29,7 +29,7 @@ export default function ViewAll({
         <div className="flex justify-start ml-[30px] mt-[20px]">
             <Link
                 href={href}
-                className="flex items-center font-semibold text-[14px] px-3 py-[4px] rounded-[15px] transition-colors duration-200"
+                className="lg:text-[12px] xl:text-[12px] 2xl:text-[14px] flex items-center font-semibold px-3 py-[4px] rounded-[15px] transition-colors duration-200"
                 style={{
                     backgroundColor: isHovered && hoverBgColor ? hoverBgColor : bgColor,
                     color: isHovered && hoverTextColor ? hoverTextColor : textColor

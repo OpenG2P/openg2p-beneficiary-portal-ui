@@ -1,51 +1,63 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import {
-    getAllBanks,
-    getBranchesByBankId,
-    getAllWalletProviders,
+    fetchBanks,
+    fetchWalletProviders,
 } from "@/features/accountmapping/utils/dfspApi";
 import type { Bank, Branch, WalletProvider } from "@/features/accountmapping/types";
+import { useSparUrl } from "@/features/accountmapping/hooks";
+import { fetchBranchesByBankId } from "../utils/dfspApi";
 
-export function useAccountData(baseUrl: string) {
+export function useAccountData() {
+    const sparUrl = useSparUrl();
+
     const [banks, setBanks] = useState<Bank[]>([]);
     const [walletProviders, setWalletProviders] = useState<WalletProvider[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        async function fetchData() {
+        if (!sparUrl) return;
+
+        async function load() {
             try {
                 setLoading(true);
+
                 const [banksRes, walletsRes] = await Promise.all([
-                    getAllBanks(baseUrl),
-                    getAllWalletProviders(baseUrl),
+                    fetchBanks(sparUrl),
+                    fetchWalletProviders(sparUrl),
                 ]);
 
-                const banks = banksRes?.response_body?.response_payload?.banks || [];
-                const wallets =
-                    walletsRes?.response_body?.response_payload?.wallet_service_providers || [];
+                setBanks(
+                    banksRes?.response_body?.response_payload?.banks || []
+                );
 
-                setBanks(banks);
-                setWalletProviders(wallets);
-            } catch (err) {
-                console.error("❌ Error fetching DFSP data:", err);
-                setError(err instanceof Error ? err : new Error("Failed to fetch data"));
+                setWalletProviders(
+                    walletsRes?.response_body?.response_payload
+                        ?.wallet_service_providers || []
+                );
+            } catch (e) {
+                setError(e instanceof Error ? e : new Error("DFSP fetch failed"));
             } finally {
                 setLoading(false);
             }
         }
 
-        fetchData();
-    }, [baseUrl]);
+        load();
+    }, [sparUrl]);
 
     return { banks, walletProviders, loading, error };
 }
 
-export function useBranches(baseUrl: string, bankName: string, banks: Bank[]) {
+export function useBranches(bankName: string, banks: Bank[]) {
+    const sparUrl = useSparUrl();
     const [branches, setBranches] = useState<Branch[]>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        if (!sparUrl) return;
+
         if (!bankName) {
             setBranches([]);
             return;
@@ -58,19 +70,15 @@ export function useBranches(baseUrl: string, bankName: string, banks: Bank[]) {
         }
 
         setLoading(true);
-        getBranchesByBankId(baseUrl, selectedBank.id)
+        fetchBranchesByBankId(sparUrl, selectedBank.id)
             .then((res) => {
-                const branches = res?.response_body?.response_payload?.branches || [];
-                setBranches(branches);
+                setBranches(
+                    res?.response_body?.response_payload?.branches || []
+                );
             })
-            .catch((err) => {
-                console.error("❌ Branch fetch failed:", err);
-                setBranches([]);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, [bankName, banks, baseUrl]);
+            .catch(() => setBranches([]))
+            .finally(() => setLoading(false));
+    }, [bankName, banks, sparUrl]);
 
     return { branches, loading };
 }

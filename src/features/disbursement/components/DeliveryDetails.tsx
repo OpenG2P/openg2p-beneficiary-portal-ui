@@ -1,7 +1,8 @@
 "use client";
 
-import Modal from "@/components/ui/Modal";
 import Image from "next/image";
+
+import Modal from "@/components/ui/Modal";
 import { prefixBasePath } from "@/shared/utils/path";
 
 export interface Agent {

@@ -389,7 +389,7 @@ export default function ApplyProgramPage() {
         setProgram(selectedProgram);
     }, [programId]);
 
-    if (!program) return <Loading />
+    if (!program) return <Loading title={"Program Application"} height={"670px"} />
 
     return (
         <div className="px-10 py-8 bg-white min-h-screen">

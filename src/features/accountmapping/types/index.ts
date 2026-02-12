@@ -1,1 +1,1 @@
-export type { Bank, Branch, WalletProvider, FaData, AccountType, WalletType } from './types';
+export type { Bank, Branch, WalletProvider, FaData, AccountType, WalletType } from './faTypes';

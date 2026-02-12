@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
 import { useAuth } from "@/context/GlobalContext";
+
 import {
     AccountSuccessModal,
     AccountErrorModal,
@@ -14,24 +15,23 @@ import {
     AccountFormSection,
     InfoSidebar
 } from "@/features/accountmapping/components";
+
 import {
     useUpdateAccount,
     useLinkAccount,
     useAccountData,
-    useBranches
+    useBranches,
 } from "@/features/accountmapping/hooks";
 
 
 import { buildFaData, getAccountInformation } from "@/features/accountmapping/utils";
 import type { AccountType, WalletType } from "@/features/accountmapping/types";
 
-const BASE_URL = "http://localhost:8080";
-const BASE_URL_MAPPER = "http://localhost:8080/mapper";
-
 export default function AccountUpdatePage() {
     const lang = useLocale();
     AuthUtil({ failedRedirectUrl: `/${lang}/login` });
     const { profile } = useAuth();
+
     const params = useParams();
     const mapper = params.mapper;
 
@@ -53,16 +53,16 @@ export default function AccountUpdatePage() {
     const [accountInfo, setAccountInfo] = useState<any>(null);
 
     useEffect(() => {
-        getAccountInformation("ahuh2rqcqvv1wl7rysxfoblz")
+        getAccountInformation()
             .then((data) => setAccountInfo(data))
             .catch(console.error);
     }, []);
 
-    const { banks, walletProviders } = useAccountData(BASE_URL);
-    const { branches } = useBranches(BASE_URL, bank, banks);
+    const { banks, walletProviders } = useAccountData();
+    const { branches } = useBranches(bank, banks);
 
-    const { handleLink, linking, result: linkResult, error: linkError } = useLinkAccount(BASE_URL_MAPPER);
-    const { handleUpdate, updating, result: updateResult, error: updateError } = useUpdateAccount(BASE_URL_MAPPER);
+    const { handleLink, linking, result: linkResult, error: linkError } = useLinkAccount();
+    const { handleUpdate, updating, result: updateResult, error: updateError } = useUpdateAccount();
 
     useEffect(() => {
         setBranch("");

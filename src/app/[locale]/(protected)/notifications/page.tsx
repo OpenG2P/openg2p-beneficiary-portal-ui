@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import Image from "next/image";
 
 import { AuthUtil } from '@/features/auth/components';
-import { SearchInput } from "@/components/shared";
+import { Loading, SearchInput } from "@/components/shared";
 import { prefixBasePath } from "@/shared/utils/path";
 import { useNotification } from "@/context/GlobalContext";
 
@@ -23,9 +23,14 @@ export default function NotificationsPage() {
     // );
     const filteredNotifications = notifications
 
+
+    if (isLoading) {
+        return <Loading title={"Notifications"} height={"640px"} />
+    }
+
     return (
-        <div className="px-[50px] py-4 min-h-screen bg-white">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+        <div className="px-[50px] py-6 min-h-screen bg-white">
+            <h1 className="text-[18px] font-[600] text-black mb-2">
                 Notifications
             </h1>
 

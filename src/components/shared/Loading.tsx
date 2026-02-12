@@ -10,8 +10,8 @@ interface LoadingProps {
 
 export default function Loading({ title, height = "670px" }: LoadingProps) {
     return (
-        <div className="w-full min-h-screen bg-white px-[50px] py-4">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+        <div className="w-full min-h-screen bg-white px-[50px] py-6">
+            <h1 className="text-[18px] font-[600] text-black mb-2">
                 {title}
             </h1>
 

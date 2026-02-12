@@ -108,8 +108,8 @@ export default function AccountUpdatePage() {
     };
 
     return (
-        <div className="relative px-[50px] py-4 bg-white min-h-screen">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">Update Account</h1>
+        <div className="relative px-[50px] py-6 bg-white min-h-screen">
+            <h1 className="text-[18px] font-[600] text-black mb-2">Update Account</h1>
             <div className="flex flex-row gap-0 rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] overflow-hidden">
                 <div className="w-[70%] bg-white p-8">
                     <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-6">

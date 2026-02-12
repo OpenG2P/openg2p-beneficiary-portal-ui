@@ -15,7 +15,7 @@ export function useNovuNotifications(
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const [offset, setOffset] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const novuRef = useRef<Novu | null>(null);
 
@@ -56,7 +56,7 @@ export function useNovuNotifications(
     };
 
     const loadMore = async () => {
-        if (isLoading || !subscriberId || !applicationIdentifier) return;
+        if (!subscriberId || !applicationIdentifier) return;
 
         setIsLoading(true);
         const novu = initNovu();

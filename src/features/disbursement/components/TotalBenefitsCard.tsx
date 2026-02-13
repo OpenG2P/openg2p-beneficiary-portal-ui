@@ -11,6 +11,7 @@ interface TotalBenefitsCardProps {
 }
 
 export default function TotalBenefitsCard({ benefits, loading }: TotalBenefitsCardProps) {
+    const hasAnyBenefit = benefits.some(b => b.value > 0);
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
@@ -20,7 +21,7 @@ export default function TotalBenefitsCard({ benefits, loading }: TotalBenefitsCa
                     </h3>
                 </div>
 
-                <div className="relative bg-gradient-to-b from-[#ffbf00] to-[#ED7C22] pt-4  pb-[18px] overflow-hidden">
+                <div className="relative bg-gradient-to-b from-[#FCBE00] to-[#ED7C22] pt-4  pb-[18px] overflow-hidden">
                     <div className="absolute right-16 bottom-0 opacity-20 pointer-events-none select-none z-0">
                         <Image
                             src={prefixBasePath("/dollar.png")}
@@ -69,14 +70,19 @@ export default function TotalBenefitsCard({ benefits, loading }: TotalBenefitsCa
                     {loading ? (
                         <div className="mt-4 mx-[30px] h-[35px] w-[180px] rounded-[15px] bg-black/20 animate-pulse"></div>
                     ) : (
-                        <ViewAll
-                            href="/benefits"
-                            label="View All Benefits"
-                            bgColor="#FFFFFF66"
-                            textColor="#000000"
-                            hoverBgColor="#FFFFFF66"
-                            hoverTextColor="#ED7C22"
-                        />
+                        hasAnyBenefit ?
+                            (
+                                <ViewAll
+                                    href="/benefits"
+                                    label="View All Benefits"
+                                    bgColor="#FFFFFF80"
+                                    textColor="#000000"
+                                    hoverBgColor="#FFFFFF"
+                                    hoverTextColor="#ED7C22"
+                                />
+                            ) : (
+                                <div className="flex justify-start ml-[30px] mt-[25px] text-[16px] font-[400]">Not received any benefits</div>
+                            )
                     )}
                 </div>
             </div>

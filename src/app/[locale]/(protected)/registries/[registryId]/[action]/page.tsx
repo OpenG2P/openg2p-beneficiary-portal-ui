@@ -184,7 +184,7 @@ export default function RegistryActionPage() {
         <div className="px-[50px] py-6 min-h-screen bg-white">
             <h1 className="text-[18px] font-[600] text-black mb-2">Registries</h1>
 
-            <div className="flex flex-row gap-0 rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] overflow-hidden border border-gray-200">
+            <div className="flex flex-row gap-0 rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] overflow-hidden">
                 <div className="w-[70%] bg-white p-8">
                     <h2 className="text-[20px] font-[600] text-[#ED7C22] mb-4">{leftHeading}</h2>
 

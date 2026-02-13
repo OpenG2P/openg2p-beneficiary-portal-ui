@@ -40,7 +40,7 @@ export default function BankCard({ result, loading }: BankCardProps) {
     return (
         <div className="flex flex-col text-white rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
             <div className="rounded-xl shadow-xl overflow-hidden relative">
-                <div className="bg-[#ffcb30] px-8 pt-[30px] pb-[12px] flex justify-between items-end">
+                <div className="bg-[#FDCE40] px-8 pt-[30px] pb-[12px] flex justify-between items-end">
                     <div>
                         <h3 className="lg:text-[18px]/[21px] xl:text-[18px]/[21px] 2xl:text-[20px]/[23px] font-[600] text-black">
                             Account/Wallet
@@ -58,7 +58,7 @@ export default function BankCard({ result, loading }: BankCardProps) {
                     </div>
                 </div>
 
-                <div className="bg-gradient-to-b from-[#ffbf00] to-[#ED7C22]  pt-[32px] pb-[16px] relative">
+                <div className="bg-gradient-to-b from-[#FCBE00] to-[#FCBE00]  pt-[32px] pb-[16px] relative">
                     <div className=" px-[30px] lg:pb-[10px] xl:pb-[10px] 2xl:pb-[8px]">
                         {!loading && isLinked && (
                             <>
@@ -95,10 +95,10 @@ export default function BankCard({ result, loading }: BankCardProps) {
                     ) : (
                         <ViewAll
                             href={isLinked ? "/accounts" : "/accounts/link"}
-                            label={isLinked ? "View Account Details" : "Link Account"}
-                            bgColor="#FFFFFF66"
+                            label={isLinked ? "View Account Details" : "Add New Account"}
+                            bgColor="#FFFFFF80"
                             textColor="#000000"
-                            hoverBgColor="#FFFFFF66"
+                            hoverBgColor="#FFFFFF"
                             hoverTextColor="#ED7C22"
                         />
                     )}

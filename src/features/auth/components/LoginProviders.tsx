@@ -26,9 +26,9 @@ export default function LoginProviders() {
     }, []);
 
     return (
-        <div className="mt-1 w-full">
+        <div className="w-full">
             {loginProviders.map((x) => (
-                <div key={x.id} className="mb-2">
+                <div key={x.id} className="mb-3">
                     <a
                         href={prefixBaseApiPath(
                             `/auth/get_login_provider_redirect/${x.id}?redirect_uri=${encodeURIComponent(window.location.origin + prefixBasePath(`/${locale}/dashboard`))}`

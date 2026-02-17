@@ -1,28 +1,22 @@
-import { apiRequest } from "@/shared/utils/apiRequest";
-import { buildStandardPayload, PaginationParams } from "@/shared/utils/payloadBuilder";
+import { PaginationParams } from "@/shared/utils/payloadBuilder";
+import { portalApi } from "@/shared/utils/apiClient";
 
-export function getAllPrograms(baseUrl: string, params: PaginationParams = {}) {
-    return apiRequest(
-        baseUrl,
-        "/benefit_program/get_all_programs",
-        buildStandardPayload(params)
-    );
-}
+export const getAllPrograms = (pbmsUrl: string, params: PaginationParams = {}) =>
+    portalApi("/api/programs", {
+        pbmsUrl,
+        params
+    });
 
-export function getMyPrograms(baseUrl: string, params: PaginationParams = {}) {
-    return apiRequest(
-        baseUrl,
-        "/benefit_program/get_my_programs",
-        buildStandardPayload(params)
-    );
-}
+export const getMyPrograms = (pbmsUrl: string, params: PaginationParams = {}) =>
+    portalApi("/api/programs/enrolled", {
+        pbmsUrl,
+        params
+    });
 
-export function getProgramById(baseUrl: string, programId: string) {
-    return apiRequest(
-        baseUrl,
-        "/benefit_program/get_program",
-        buildStandardPayload({
-            extraPayload: { program_id: programId }
-        })
-    );
-}
+export const getProgramById = (pbmsUrl: string, programId: string) =>
+    portalApi("/api/programs/by-id", {
+        pbmsUrl,
+        extraPayload: {
+            program_id: programId,
+        },
+    });

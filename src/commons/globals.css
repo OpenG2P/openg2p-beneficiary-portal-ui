@@ -33,7 +33,7 @@ button {
 
 .custom-scroll::-webkit-scrollbar-track {
     background: #D9D9D9;
-    border-radius: 12px;
+    border-radius: 0;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
     margin: 10px;
@@ -42,7 +42,7 @@ button {
 
 .custom-scroll::-webkit-scrollbar-thumb {
     background-color: #B0B0AD;
-    border-radius: 12px; 
+    border-radius: 0; 
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
     background-clip: content-box;
@@ -60,7 +60,7 @@ button {
 
 .custom-scroll::-webkit-scrollbar-track:horizontal {
     background: #D9D9D9;
-    border-radius: 12px;
+    border-radius: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     margin: 10px;
@@ -69,7 +69,7 @@ button {
 
 .custom-scroll::-webkit-scrollbar-thumb:horizontal {
     background-color: #B0B0AD;
-    border-radius: 12px;
+    border-radius: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     background-clip: content-box;
@@ -82,5 +82,5 @@ button {
 
 .custom-scroll::-webkit-scrollbar-corner {
     background: transparent;
-    border-radius: 12px;
+    border-radius: 0;
 }

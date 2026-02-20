@@ -4,13 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import { Novu } from "@novu/js";
 import { Notification } from "@/features/notification/types";
 
-// const backendUrl = process.env.NOVU_BACKEND_URL;
-// const socketUrl = process.env.NOVU_SOCKET_URL;
-
 export function useNovuNotifications(
     subscriberId: string,
     applicationIdentifier: string,
-    limit: number = 5
+    limit: number = 5,
+    backendUrl: string,
+    socketUrl: string
 ) {
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [unreadCount, setUnreadCount] = useState(0);
@@ -19,16 +18,9 @@ export function useNovuNotifications(
 
     const novuRef = useRef<Novu | null>(null);
 
-    // const initNovu = () => {
-    //     if (!novuRef.current) {
-    //         novuRef.current = new Novu({ subscriberId, applicationIdentifier, backendUrl, socketUrl });
-    //     }
-    //     return novuRef.current;
-    // };
-
     const initNovu = () => {
         if (!novuRef.current) {
-            novuRef.current = new Novu({ subscriberId, applicationIdentifier });
+            novuRef.current = new Novu({ subscriberId, applicationIdentifier, backendUrl, socketUrl });
         }
         return novuRef.current;
     };

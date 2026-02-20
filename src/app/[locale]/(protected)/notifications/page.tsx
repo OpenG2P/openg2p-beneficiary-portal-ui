@@ -17,12 +17,7 @@ export default function NotificationsPage() {
 
     const { notifications, loadMore, isLoading, markAsRead } = useNotification()
 
-    // const filteredNotifications = notifications.filter(n =>
-    //     n.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //     n.body.toLowerCase().includes(searchQuery.toLowerCase())
-    // );
     const filteredNotifications = notifications
-
 
     if (isLoading) {
         return <Loading title={"Notifications"} height={"640px"} />

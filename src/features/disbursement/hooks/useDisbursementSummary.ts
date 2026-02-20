@@ -8,10 +8,17 @@ import {
 } from "@/features/disbursement/types";
 import { useBridgeUrl } from "@/features/disbursement/hooks/useBridgeUrl";
 
+const DEFAULT_BENEFITS: BenefitCardData[] = [
+    { icon: "/digital_cash.png", value: 0, label: "Digital Cash" },
+    { icon: "/physical_cash.png", value: 0, label: "Physical Cash" },
+    { icon: "/commodity.png", value: 0, label: "Commodity" },
+    { icon: "/service.png", value: 0, label: "Service" },
+];
+
 export function useDisbursementSummary() {
     const bridgeUrl = useBridgeUrl();
 
-    const [benefits, setBenefits] = useState<BenefitCardData[]>([]);
+    const [benefits, setBenefits] = useState<BenefitCardData[]>(DEFAULT_BENEFITS);
     const [loading, setLoading] = useState(true);
 
     async function fetchSummary(baseUrl: string) {

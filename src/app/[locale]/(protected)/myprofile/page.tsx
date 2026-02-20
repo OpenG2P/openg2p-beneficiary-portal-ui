@@ -5,6 +5,7 @@ import { useLocale } from "next-intl";
 import { prefixBasePath } from "@/shared/utils/path";
 import { AuthUtil } from "@/features/auth/components";
 import { useAuth } from "@/context/GlobalContext";
+import { Loading } from "@/components/shared";
 
 export default function MyProfile() {
     const lang = useLocale();
@@ -13,9 +14,14 @@ export default function MyProfile() {
     const { profile } = useAuth();
     const profileImage = profile?.picture || prefixBasePath("/user_image.png");
 
+
+    if (!profile) {
+        return <Loading title={"My Profile"} height={"634px"} />
+    }
+
     return (
-        <div className="px-[50px] py-4 min-h-screen bg-white">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+        <div className="px-[50px] py-6 min-h-screen bg-white">
+            <h1 className="text-[18px] font-[600] text-black mb-2">
                 My Profile
             </h1>
 

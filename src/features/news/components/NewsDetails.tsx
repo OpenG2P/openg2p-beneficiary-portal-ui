@@ -11,15 +11,19 @@ interface NewsDetailsProps {
 export default function NewsDetails({ news, onClose }: NewsDetailsProps) {
     return (
         <Modal
-            title={<span className="text-[#ED7C22] text-[24px] font-semibold">News Details</span>}
+            title={
+                <span className="text-[#ED7C22] text-[24px] font-semibold">
+                    News Details
+                </span>
+            }
             onClose={onClose}
             width="800px"
-            height="500px"
+            height="600px"
             sidebarWidth="25%"
             sidebarImage="/news_popup.png"
         >
-            <div className="space-y-6 px-10 py-4">
-                <div>
+            <div className="flex flex-col h-full">
+                <div className="px-10 py-4">
                     <div className="text-[18px] text-black font-semibold">
                         {news.title}
                     </div>
@@ -28,22 +32,22 @@ export default function NewsDetails({ news, onClose }: NewsDetailsProps) {
                     </div>
                 </div>
 
-                {news.description && (
-                    <div>
+                <div className="flex-1 overflow-y-auto px-10 py-4 custom-scroll">
+                    {news.description && (
                         <p className="text-[16px] text-black leading-relaxed">
                             {news.description}
                         </p>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
 
-            <div className="flex justify-start gap-4 w-full mt-4 px-10">
-                <button
-                    onClick={onClose}
-                    className="px-8 py-2 bg-gray-100 text-black rounded-[20px] hover:bg-gray-200 transition"
-                >
-                    CLOSE
-                </button>
+                <div className="px-10 py-4 mb-8">
+                    <button
+                        onClick={onClose}
+                        className="px-8 py-2 bg-gray-100 text-black rounded-[20px]"
+                    >
+                        CLOSE
+                    </button>
+                </div>
             </div>
         </Modal>
     );

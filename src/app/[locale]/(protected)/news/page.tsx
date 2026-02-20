@@ -25,13 +25,13 @@ export default function NewsPage() {
 
     const totalPages = Math.ceil(total / pageSize);
 
-    if (loading) {
-        return <Loading title={"Latest News"} height={"655px"} />
-    }
+    // if (loading) {
+    //     return <Loading title={"Latest News"} height={"655px"} />
+    // }
 
     return (
-        <div className="px-[50px] py-4 min-h-screen bg-white">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+        <div className="px-[50px] py-6 min-h-screen bg-white">
+            <h1 className="text-[18px] font-[600] text-black mb-2">
                 Latest News
             </h1>
 

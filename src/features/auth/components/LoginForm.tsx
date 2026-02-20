@@ -17,7 +17,7 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="w-[420px] h-[540px] bg-[linear-gradient(180deg,#FEF1C1_0%,#FCBE00_100%)] rounded-[20px] shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] flex flex-col items-center p-6">
+        <div className="w-[420px] h-auto bg-[linear-gradient(180deg,#FEF1C1_0%,#FCBE00_100%)] rounded-[20px] shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] flex flex-col items-center p-6">
             <Image
                 src={prefixBasePath("/openg2p_logo.png")}
                 alt={t("portalName")}
@@ -29,7 +29,7 @@ export default function LoginForm() {
 
             <p className="text-[30px] font-medium text-black mb-6">{t("portalName")}</p>
 
-            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 px-8">
+            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-3 px-8">
                 <div className="flex flex-col">
                     <label className="mb-1 text-[16px] font-medium text-black">
                         {t("emailOrPhone")}

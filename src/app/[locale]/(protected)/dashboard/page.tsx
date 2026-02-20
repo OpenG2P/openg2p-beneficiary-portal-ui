@@ -47,8 +47,8 @@ export default function Dashboard() {
     const { result, loading: accountLoading } = useResolveAccount();
 
     return (
-        <div className="pl-[50px] py-4 min-h-screen bg-white">
-            <h1 className="text-[18px] font-[600] text-gray-800 mb-4">
+        <div className="pl-[50px] py-6 min-h-screen bg-white">
+            <h1 className="text-[18px] font-[600] text-black mb-2">
                 Dashboard
             </h1>
 

@@ -68,7 +68,7 @@ export default function LanguageDropdown() {
                 `}
             >
                 <div className="flex justify-between items-center px-4 py-2">
-                    <span className="text-black font-semibold text-sm">Languages</span>
+                    <span className="text-black font-medium text-[16px]">Languages</span>
                     <button
                         onClick={toggleDropdown}
                         className="p-1 rounded-full transition-colors duration-200 hover:bg-gray-100"

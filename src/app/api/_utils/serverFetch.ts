@@ -22,7 +22,8 @@ export async function serverFetch(
     const data = await response.json().catch(() => null);
 
     if (!response.ok) {
-        throw new Error(data?.message || "Mapper API failed");
+        const error = data?.errors?.[0];
+        throw new Error(error.message || "API call failed");
     }
 
     return data;

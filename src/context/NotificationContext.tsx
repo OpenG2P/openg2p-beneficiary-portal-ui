@@ -19,12 +19,14 @@ export const NotificationContextProvider = ({ children }: { children: ReactNode 
     const { profile } = useAuth();
     const subscriberId = profile?.provider_unique_id ?? "";
     const { novu } = useRuntimeConfig();
-    const applicationIdentifier = novu.applicationIdentifier;
+    const { applicationIdentifier, backendUrl, socketUrl } = novu;
 
     const { notifications, unreadCount, loadMore, isLoading, markAsRead } = useNovuNotifications(
         subscriberId,
         applicationIdentifier,
-        5
+        5,
+        backendUrl,
+        socketUrl
     );
 
     return (

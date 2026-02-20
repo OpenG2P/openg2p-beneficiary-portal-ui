@@ -58,7 +58,7 @@ export default function AccountsPage() {
     };
 
     if (loading) {
-        return <Loading title={"Account / Wallet"} height={"670px"} />
+        return <Loading title={"Account / Wallet"} height={"671px"} />
     }
 
     if (result?.type === "unknown") {
@@ -70,8 +70,8 @@ export default function AccountsPage() {
 
     return (
         <>
-            <div className="px-[50px] py-4 min-h-screen bg-white">
-                <h1 className="text-[18px] font-[600] text-gray-800 mb-4">Account / Wallet</h1>
+            <div className="px-[50px] py-6 min-h-screen bg-white">
+                <h1 className="text-[18px] font-[600] text-black mb-2">Account / Wallet</h1>
 
                 <div className="flex flex-row rounded-[10px] drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)] overflow-hidden">
                     <AccountInfoSection
